@@ -11,3 +11,4 @@ greendelmother/log/production\.log
 greendelmother/log/server\.log
 greendelmother/log/test\.log
 greendelmother/db/development\.sqlite3
+greendelmother/\.idea
