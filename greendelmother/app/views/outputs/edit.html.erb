@@ -1,0 +1,24 @@
+<h1>Editing output</h1>
+
+<% form_for(@output) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :state %><br />
+    <%= f.check_box :state %>
+  </p>
+    <p>
+    <%= f.label :haschanged %><br />
+    <%= f.check_box :haschanged %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @output %> |
+<%= link_to 'Back', outputs_path %>

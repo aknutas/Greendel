@@ -1,0 +1,24 @@
+<h1>Editing sensor</h1>
+
+<% form_for(@sensor) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :vartype %><br />
+    <%= f.text_field :vartype %>
+  </p>
+  <p>
+    <%= f.label :latestreading %><br />
+    <%= f.text_field :latestreading %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @sensor %> |
+<%= link_to 'Back', sensors_path %>

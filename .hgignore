@@ -6,3 +6,8 @@ oldgreendelmother186/log/test\.log
 oldgreendelmother186/db/development\.sqlite3
 .DS_Store
 CloverMobile/CloverMobile/obj
+greendelmother/log/development\.log
+greendelmother/log/production\.log
+greendelmother/log/server\.log
+greendelmother/log/test\.log
+greendelmother/db/development\.sqlite3

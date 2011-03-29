@@ -1,0 +1,13 @@
+<p>
+  <b>Name:</b>
+  <%=h @output.name %>
+</p>
+
+<p>
+  <b>State:</b>
+  <%=h @output.state %>
+</p>
+
+
+<%= link_to 'Edit', edit_output_path(@output) %> |
+<%= link_to 'Back', outputs_path %>
