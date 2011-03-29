@@ -1,0 +1,19 @@
+Some useful links:
+
+Accessing web resource from windows phone 7:
+http://www.kotancode.com/2010/07/29/accessing-web-services-from-windows-phone-7/
+
+Parsing XML document:
+http://www.kotancode.com/2010/07/30/wp7-webservices-xml/
+
+Navigation in WP7 applications:
+http://helios.ca/2010/08/12/navigation-in-windows-phone-7-application/
+
+MVVM design pattern (Bishalin pyynnöstä):
+http://msdn.microsoft.com/en-us/magazine/dd419663.aspx#id0090016
+
+Ironruby on Rails on Azure:
+http://blogs.msdn.com/b/mcsuksoldev/archive/2010/02/26/9969876.aspx
+
+Rails XML:
+http://www.xml.com/lpt/a/1653

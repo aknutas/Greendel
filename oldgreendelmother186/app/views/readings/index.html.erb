@@ -1,0 +1,22 @@
+<h1>Listing readings</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Value</th>
+  </tr>
+
+<% @readings.each do |reading| %>
+  <tr>
+    <td><%=h reading.name %></td>
+    <td><%=h reading.value %></td>
+    <td><%= link_to 'Show', reading %></td>
+    <td><%= link_to 'Edit', edit_reading_path(reading) %></td>
+    <td><%= link_to 'Destroy', reading, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New reading', new_reading_path %>

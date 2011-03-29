@@ -1,0 +1,18 @@
+- name: GrayBox
+  id: 1
+  ip: 192.168.1.224
+  port: 502
+  slaveaddr: 255
+  sensors:
+   - id: 1
+     name: temp1
+     register: 34
+   - id: 2
+     name: temp2
+     register: 35
+   - id: 3
+     name: humi1
+     register: 36
+   - id: 4
+     name: humi2
+     register: 37
