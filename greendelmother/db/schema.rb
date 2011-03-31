@@ -81,8 +81,13 @@ ActiveRecord::Schema.define(:version => 20110331104212) do
   add_index "sensors", ["device_id"], :name => "index_sensors_on_device_id"
 
   create_table "socialmedias", :force => true do |t|
+    t.boolean  "status"
+    t.boolean  "facebookon"
+    t.boolean  "twitteron"
     t.string   "fbun"
     t.string   "twitterun"
+    t.string   "fbauth"
+    t.string   "twitterauth"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
