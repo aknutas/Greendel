@@ -1,0 +1,36 @@
+<h1>Editing location</h1>
+
+<% form_for(@location) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :address %><br />
+    <%= f.text_field :address %>
+  </p>
+  <p>
+    <%= f.label :town %><br />
+    <%= f.text_field :town %>
+  </p>
+  <p>
+    <%= f.label :extaddress %><br />
+    <%= f.text_field :extaddress %>
+  </p>
+  <p>
+    <%= f.label :xcoord %><br />
+    <%= f.text_field :xcoord %>
+  </p>
+  <p>
+    <%= f.label :ycoord %><br />
+    <%= f.text_field :ycoord %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @location %> |
+<%= link_to 'Back', locations_path %>

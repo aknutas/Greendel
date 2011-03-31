@@ -1,0 +1,33 @@
+<p>
+  <b>Name:</b>
+  <%=h @location.name %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%=h @location.address %>
+</p>
+
+<p>
+  <b>Town:</b>
+  <%=h @location.town %>
+</p>
+
+<p>
+  <b>Extaddress:</b>
+  <%=h @location.extaddress %>
+</p>
+
+<p>
+  <b>Xcoord:</b>
+  <%=h @location.xcoord %>
+</p>
+
+<p>
+  <b>Ycoord:</b>
+  <%=h @location.ycoord %>
+</p>
+
+
+<%= link_to 'Edit', edit_location_path(@location) %> |
+<%= link_to 'Back', locations_path %>
