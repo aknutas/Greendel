@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  status: 
+  facebook: 
+  twitter: 
+  fbun: MyString
+  twitterun: MyString
+
+two:
+  status: 
+  facebook: 
+  twitter: 
+  fbun: MyString
+  twitterun: MyString

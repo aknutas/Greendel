@@ -1,0 +1,28 @@
+<h1>Listing socialmedias</h1>
+
+<table>
+  <tr>
+    <th>Status</th>
+    <th>Facebook</th>
+    <th>Twitter</th>
+    <th>Fbun</th>
+    <th>Twitterun</th>
+  </tr>
+
+<% @socialmedias.each do |socialmedia| %>
+  <tr>
+    <td><%=h socialmedia.status %></td>
+    <td><%=h socialmedia.facebook %></td>
+    <td><%=h socialmedia.twitter %></td>
+    <td><%=h socialmedia.fbun %></td>
+    <td><%=h socialmedia.twitterun %></td>
+    <td><%= link_to 'Show', socialmedia %></td>
+    <td><%= link_to 'Edit', edit_socialmedia_path(socialmedia) %></td>
+    <td><%= link_to 'Destroy', socialmedia, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New socialmedia', new_socialmedia_path %>

@@ -1,0 +1,31 @@
+<h1>New socialmedia</h1>
+
+<% form_for(@socialmedia) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :status %><br />
+    <%= f.text_field :status %>
+  </p>
+  <p>
+    <%= f.label :facebook %><br />
+    <%= f.text_field :facebook %>
+  </p>
+  <p>
+    <%= f.label :twitter %><br />
+    <%= f.text_field :twitter %>
+  </p>
+  <p>
+    <%= f.label :fbun %><br />
+    <%= f.text_field :fbun %>
+  </p>
+  <p>
+    <%= f.label :twitterun %><br />
+    <%= f.text_field :twitterun %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', socialmedias_path %>
