@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  temp: 1.5
+  desc: MyString
+  source: MyString
+
+two:
+  temp: 1.5
+  desc: MyString
+  source: MyString

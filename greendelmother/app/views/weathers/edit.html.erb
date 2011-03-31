@@ -1,0 +1,24 @@
+<h1>Editing weather</h1>
+
+<% form_for(@weather) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :temp %><br />
+    <%= f.text_field :temp %>
+  </p>
+  <p>
+    <%= f.label :desc %><br />
+    <%= f.text_field :desc %>
+  </p>
+  <p>
+    <%= f.label :source %><br />
+    <%= f.text_field :source %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @weather %> |
+<%= link_to 'Back', weathers_path %>

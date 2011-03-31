@@ -1,0 +1,18 @@
+<p>
+  <b>Temp:</b>
+  <%=h @weather.temp %>
+</p>
+
+<p>
+  <b>Desc:</b>
+  <%=h @weather.desc %>
+</p>
+
+<p>
+  <b>Source:</b>
+  <%=h @weather.source %>
+</p>
+
+
+<%= link_to 'Edit', edit_weather_path(@weather) %> |
+<%= link_to 'Back', weathers_path %>

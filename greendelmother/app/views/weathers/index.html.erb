@@ -1,0 +1,24 @@
+<h1>Listing weathers</h1>
+
+<table>
+  <tr>
+    <th>Temp</th>
+    <th>Desc</th>
+    <th>Source</th>
+  </tr>
+
+<% @weathers.each do |weather| %>
+  <tr>
+    <td><%=h weather.temp %></td>
+    <td><%=h weather.desc %></td>
+    <td><%=h weather.source %></td>
+    <td><%= link_to 'Show', weather %></td>
+    <td><%= link_to 'Edit', edit_weather_path(weather) %></td>
+    <td><%= link_to 'Destroy', weather, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New weather', new_weather_path %>
