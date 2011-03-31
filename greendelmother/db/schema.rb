@@ -9,38 +9,69 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110126184141) do
+ActiveRecord::Schema.define(:version => 20110331102242) do
 
   create_table "devices", :force => true do |t|
-    t.string   "name",       :default => ""
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "locations", :force => true do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "town"
+    t.string   "extaddress"
+    t.float    "xcoord"
+    t.float    "ycoord"
+    t.integer  "device_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "outputs", :force => true do |t|
-    t.string   "name",       :default => ""
+    t.string   "name"
     t.boolean  "state"
     t.boolean  "haschanged"
-    t.integer  "device_id",  :default => 0
+    t.integer  "device_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "readings", :force => true do |t|
-    t.string   "name",       :default => ""
-    t.integer  "value",      :default => 0
-    t.integer  "sensor_id",  :default => 0
+    t.string   "name"
+    t.float    "value"
+    t.integer  "sensor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "sensors", :force => true do |t|
-    t.string   "name",          :default => ""
-    t.string   "vartype",       :default => ""
-    t.integer  "device_id",     :default => 0
+    t.string   "name"
+    t.string   "vartype"
+    t.integer  "device_id"
+    t.float    "latestreading"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "latestreading", :default => 0
+  end
+
+  create_table "socialmedias", :force => true do |t|
+    t.string   "fbun"
+    t.string   "twitterun"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "name"
+    t.string   "hashed_password"
+    t.string   "salt"
+    t.string   "email"
+    t.string   "realname"
+    t.datetime "lastlogin"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
