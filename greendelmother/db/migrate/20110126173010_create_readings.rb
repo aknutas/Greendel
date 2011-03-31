@@ -2,7 +2,7 @@ class CreateReadings < ActiveRecord::Migration
   def self.up
     create_table :readings do |t|
       t.string :name
-      t.integer :value
+      t.float :value
       t.integer :sensor_id
 
       t.timestamps

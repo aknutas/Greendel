@@ -4,6 +4,7 @@ class CreateSensors < ActiveRecord::Migration
       t.string :name
       t.string :vartype
       t.integer :device_id
+      t.float :latestreading
 
       t.timestamps
     end
