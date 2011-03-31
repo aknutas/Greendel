@@ -1,0 +1,58 @@
+IMPORTANT: THIS IS TO CERTIFY THE RIGHT TO USE THE JETBRAINS SOFTWARE PRODUCT, GRANTED BY JETBRAINS S.R.O. UNDER THE TERMS AND CONDITIONS OF THE LICENSE AGREEMENT INCLUDED WITH THE SOFTWARE. PLEASE SAVE A COPY OF THIS EMAIL FOR FUTURE REFERENCES.
+
+
+========LICENSE DETAILS========
+
+Type: Classroom License
+Reference No*: LC-402754-D364935453
+Date of Issue: 7 February 2011
+Expiration Date: 7 February 2012
+Number of Authorized Users: not limited
+
+* Please quote this reference when contacting JetBrains
+
+===========LICENSEE============
+
+Name: Lappeenranta University of Technology
+Customer ID: 402754
+Address: 
+
+=======SOFTWARE PRODUCT========
+
+Product Name: RubyMine
+Licensed Version: 2.0 and any new product release which is made generally available before 7 February 2012
+
+The software is shipped electronically and is available for download from:
+http://www.jetbrains.com/ruby/download/
+
+=========INSTALLATION==========
+
+Run RubyMine and follow the Installation Wizard's instructions. To register for use of the software or change your existing registration details, go to Help/Register menu of the software and enter the included below the User Name and License Key(s) into the registration dialog:
+
+User Name: Lappeenranta University of Technology
+
+===== LICENSE BEGIN =====
+402754-07022011
+00002pJ7M6ijCYU2GB29KcVEzhI7HB
+QrZMFRJwctJtiWkb1FVpHL9mlELn2H
+dJ2I!du2iURv2VY4aexrkgOOXYp2!j
+===== LICENSE END =====
+
+===DOCUMENTATION AND SUPPORT===
+
+RubyMine documentation:
+http://www.jetbrains.com/ruby/documentation/
+
+Available support resources:
+http://www.jetbrains.com/support/
+
+Technical support contact:
+support@jetbrains.com
+
+For questions, please contact:
+sales@jetbrains.com
+
+
+JetBrains Sales Team
+http://www.jetbrains.com
+"Develop with pleasure!"
