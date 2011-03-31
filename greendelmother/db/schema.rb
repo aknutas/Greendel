@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(:version => 20110331104212) do
     t.float    "temp"
     t.string   "desc"
     t.string   "source"
+    t.string   "woeid"
     t.binary   "yweather"
     t.integer  "location_id"
     t.datetime "created_at"
