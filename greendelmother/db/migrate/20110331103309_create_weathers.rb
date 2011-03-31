@@ -5,8 +5,13 @@ class CreateWeathers < ActiveRecord::Migration
       t.string :desc
       t.string :source
 
+      t.integer :location_id
+
       t.timestamps
     end
+
+    add_index :weathers, :location_id
+
   end
 
   def self.down

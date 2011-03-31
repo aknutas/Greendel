@@ -7,8 +7,13 @@ class CreateSocialmedias < ActiveRecord::Migration
       t.string :fbun
       t.string :twitterun
 
+      t.integer :user_id
+
       t.timestamps
     end
+
+    add_index :socialmedias, :user_id
+
   end
 
   def self.down

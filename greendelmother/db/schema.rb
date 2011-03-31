@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(:version => 20110331104212) do
     t.datetime "updated_at"
   end
 
+  add_index "devices", ["user_id"], :name => "index_devices_on_user_id"
+
   create_table "locations", :force => true do |t|
     t.string   "name"
     t.string   "address"
@@ -30,6 +32,8 @@ ActiveRecord::Schema.define(:version => 20110331104212) do
     t.datetime "updated_at"
   end
 
+  add_index "locations", ["device_id"], :name => "index_locations_on_device_id"
+
   create_table "outputs", :force => true do |t|
     t.string   "name"
     t.boolean  "state"
@@ -39,6 +43,8 @@ ActiveRecord::Schema.define(:version => 20110331104212) do
     t.datetime "updated_at"
   end
 
+  add_index "outputs", ["device_id"], :name => "index_outputs_on_device_id"
+
   create_table "readings", :force => true do |t|
     t.string   "name"
     t.float    "value"
@@ -46,6 +52,8 @@ ActiveRecord::Schema.define(:version => 20110331104212) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "readings", ["sensor_id"], :name => "index_readings_on_sensor_id"
 
   create_table "savingsgoals", :force => true do |t|
     t.float    "amount"
@@ -58,21 +66,29 @@ ActiveRecord::Schema.define(:version => 20110331104212) do
     t.datetime "updated_at"
   end
 
+  add_index "savingsgoals", ["device_id"], :name => "index_savingsgoals_on_device_id"
+  add_index "savingsgoals", ["sensor_id"], :name => "index_savingsgoals_on_sensor_id"
+
   create_table "sensors", :force => true do |t|
     t.string   "name"
     t.string   "vartype"
-    t.integer  "device_id"
     t.float    "latestreading"
+    t.integer  "device_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "sensors", ["device_id"], :name => "index_sensors_on_device_id"
+
   create_table "socialmedias", :force => true do |t|
     t.string   "fbun"
     t.string   "twitterun"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "socialmedias", ["user_id"], :name => "index_socialmedias_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"
@@ -89,8 +105,11 @@ ActiveRecord::Schema.define(:version => 20110331104212) do
     t.float    "temp"
     t.string   "desc"
     t.string   "source"
+    t.integer  "location_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "weathers", ["location_id"], :name => "index_weathers_on_location_id"
 
 end

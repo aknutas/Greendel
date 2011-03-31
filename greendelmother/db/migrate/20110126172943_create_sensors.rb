@@ -3,12 +3,17 @@ class CreateSensors < ActiveRecord::Migration
     create_table :sensors do |t|
       t.string :name
       t.string :vartype
-      t.integer :device_id
       t.float :latestreading
+
+      t.integer :device_id
 
       t.timestamps
     end
+
+    add_index :sensors, :device_id
+
   end
+
 
   def self.down
     drop_table :sensors
