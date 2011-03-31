@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110331103309) do
+ActiveRecord::Schema.define(:version => 20110331104212) do
 
   create_table "devices", :force => true do |t|
     t.string   "name"
@@ -42,6 +42,17 @@ ActiveRecord::Schema.define(:version => 20110331103309) do
   create_table "readings", :force => true do |t|
     t.string   "name"
     t.float    "value"
+    t.integer  "sensor_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "savingsgoals", :force => true do |t|
+    t.float    "amount"
+    t.string   "type"
+    t.date     "timestart"
+    t.date     "timeend"
+    t.integer  "device_id"
     t.integer  "sensor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
