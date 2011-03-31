@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :devices
+  has_one :device
   has_one :socialmedia
 
 end

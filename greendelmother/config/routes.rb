@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :savingsgoals
+
   map.resources :weathers
 
   map.resources :socialmedias

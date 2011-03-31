@@ -1,0 +1,30 @@
+<h1>Listing savingsgoals</h1>
+
+<table>
+  <tr>
+    <th>Amount</th>
+    <th>Type</th>
+    <th>Timestart</th>
+    <th>Timeend</th>
+    <th>Device</th>
+    <th>Sensor</th>
+  </tr>
+
+<% @savingsgoals.each do |savingsgoal| %>
+  <tr>
+    <td><%=h savingsgoal.amount %></td>
+    <td><%=h savingsgoal.type %></td>
+    <td><%=h savingsgoal.timestart %></td>
+    <td><%=h savingsgoal.timeend %></td>
+    <td><%=h savingsgoal.device_id %></td>
+    <td><%=h savingsgoal.sensor_id %></td>
+    <td><%= link_to 'Show', savingsgoal %></td>
+    <td><%= link_to 'Edit', edit_savingsgoal_path(savingsgoal) %></td>
+    <td><%= link_to 'Destroy', savingsgoal, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New savingsgoal', new_savingsgoal_path %>

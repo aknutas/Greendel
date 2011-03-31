@@ -1,0 +1,33 @@
+<p>
+  <b>Amount:</b>
+  <%=h @savingsgoal.amount %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%=h @savingsgoal.type %>
+</p>
+
+<p>
+  <b>Timestart:</b>
+  <%=h @savingsgoal.timestart %>
+</p>
+
+<p>
+  <b>Timeend:</b>
+  <%=h @savingsgoal.timeend %>
+</p>
+
+<p>
+  <b>Device:</b>
+  <%=h @savingsgoal.device_id %>
+</p>
+
+<p>
+  <b>Sensor:</b>
+  <%=h @savingsgoal.sensor_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_savingsgoal_path(@savingsgoal) %> |
+<%= link_to 'Back', savingsgoals_path %>

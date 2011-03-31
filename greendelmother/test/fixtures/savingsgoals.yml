@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  amount: 1.5
+  type: MyString
+  timestart: 2011-03-31
+  timeend: 2011-03-31
+  device_id: 1
+  sensor_id: 1
+
+two:
+  amount: 1.5
+  type: MyString
+  timestart: 2011-03-31
+  timeend: 2011-03-31
+  device_id: 1
+  sensor_id: 1

@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  savingsgoal_id: 1
+  sensor_id: 1
+
+two:
+  savingsgoal_id: 1
+  sensor_id: 1

@@ -1,0 +1,36 @@
+<h1>Editing savingsgoal</h1>
+
+<% form_for(@savingsgoal) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :amount %><br />
+    <%= f.text_field :amount %>
+  </p>
+  <p>
+    <%= f.label :type %><br />
+    <%= f.text_field :type %>
+  </p>
+  <p>
+    <%= f.label :timestart %><br />
+    <%= f.date_select :timestart %>
+  </p>
+  <p>
+    <%= f.label :timeend %><br />
+    <%= f.date_select :timeend %>
+  </p>
+  <p>
+    <%= f.label :device_id %><br />
+    <%= f.text_field :device_id %>
+  </p>
+  <p>
+    <%= f.label :sensor_id %><br />
+    <%= f.text_field :sensor_id %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @savingsgoal %> |
+<%= link_to 'Back', savingsgoals_path %>
