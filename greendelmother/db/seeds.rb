@@ -16,6 +16,8 @@ user.socialmedia = sm
 user.save
 
 testlocation = Location.create(:address => 'Nollakatu 0', :name => 'TestLocation', :town => 'Lappeenranta')
+cloverpower.location = testlocation
+cloverpower.save
 
 tweather = Weather.create(:source => 'yahoo', :woeid => '568782')
 testlocation.weather = tweather
