@@ -5,6 +5,8 @@
 #   
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Major.create(:name => 'Daley', :city => cities.first)
+
+#Creating first test user
 user = User.create(:name => 'testipaavo', :realname => 'Paavo Paavoke', :email => 'paavo@example.com', :password => 'testi')
 
 cloverpower = Device.create(:name => 'Cloverpower')
@@ -19,7 +21,7 @@ testlocation = Location.create(:address => 'Nollakatu 0', :name => 'TestLocation
 cloverpower.location = testlocation
 cloverpower.save
 
-tweather = Weather.create(:source => 'yahoo', :woeid => '568782')
+tweather = Weather.create(:source => 'yahoo')
 testlocation.weather = tweather
 testlocation.save
 
@@ -40,3 +42,13 @@ cloverpower.outputs << o
 o = Output.create(:name => 'wind')
 cloverpower.outputs << o
 cloverpower.save
+
+#Populating woeid db
+Woeid.create(:location => 'Lappeenranta', :woeid => '568782')
+
+#Populating woeids
+weathers = Weather.find(:all)
+weathers.each do |weather|
+  woeidobj = Woeid.find_by_location(weather.location.town)
+  weather.woeid = woeidobj.woeid
+end
