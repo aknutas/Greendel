@@ -45,6 +45,7 @@ cloverpower.save
 
 #Populating woeid db
 Woeid.create(:location => 'Lappeenranta', :woeid => '568782')
+Woeid.create(:location => 'Helsinki', :woeid => '565346')
 
 #Populating woeids
 weathers = Weather.find(:all)
