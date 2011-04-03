@@ -6,6 +6,7 @@ xml.device do
     xml.temp @device.location.weather.temp
     xml.unit "C"
     xml.desc @device.location.weather.desc
+    xml.updated_at @device.location.weather.updated_at
   end
   xml.sensors do
     @device.sensors.each do |sensor|
