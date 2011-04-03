@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
     @password = pwd
     return if pwd.blank?
     create_new_salt
-    self.hashed_password = Login.encrypted_password(self.password, self.salt)
+    self.hashed_password = User.encrypted_password(self.password, self.salt)
   end
 
   private

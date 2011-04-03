@@ -5,18 +5,36 @@
 #   
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Major.create(:name => 'Daley', :city => cities.first)
+user = User.create(:name => 'testipaavo', :realname => 'Paavo Paavoke', :email => 'paavo@example.com', :password => 'testi')
+
 cloverpower = Device.create(:name => 'Cloverpower')
+user.device = cloverpower
+user.save
 
-Sensor.create(:name => 'poweruse', :vartype => 'integer', :device_id => cloverpower.id)
+sm = Socialmedia.create(:twitteron => false, :facebookon => false)
+user.socialmedia = sm
+user.save
 
-Sensor.create(:name => 'insidetemp', :vartype => 'integer', :device_id => cloverpower.id)
+testlocation = Location.create(:address => 'Nollakatu 0', :name => 'TestLocation', :town => 'Lappeenranta')
 
-Sensor.create(:name => 'outsidetemp', :vartype => 'integer', :device_id => cloverpower.id)
+tweather = Weather.create(:source => 'yahoo', :woeid => '568782')
+testlocation.weather = tweather
+testlocation.save
 
-Output.create(:name => 'heating', :device_id => cloverpower.id)
+s = Sensor.create(:name => 'poweruse', :vartype => 'integer')
+cloverpower.sensors << s
+s = Sensor.create(:name => 'insidetemp', :vartype => 'integer')
+cloverpower.sensors << s
+s = Sensor.create(:name => 'outsidetemp', :vartype => 'integer')
+cloverpower.sensors << s
+cloverpower.save
 
-Output.create(:name => 'lights', :device_id => cloverpower.id)
-
-Output.create(:name => 'solar', :device_id => cloverpower.id)
-
-Output.create(:name => 'wind', :device_id => cloverpower.id)
+o = Output.create(:name => 'heating')
+cloverpower.outputs << o
+o = Output.create(:name => 'lights')
+cloverpower.outputs << o
+o = Output.create(:name => 'solar')
+cloverpower.outputs << o
+o = Output.create(:name => 'wind')
+cloverpower.outputs << o
+cloverpower.save
