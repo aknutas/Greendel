@@ -51,4 +51,5 @@ weathers = Weather.find(:all)
 weathers.each do |weather|
   woeidobj = Woeid.find_by_location(weather.location.town)
   weather.woeid = woeidobj.woeid
+  weather.save
 end
