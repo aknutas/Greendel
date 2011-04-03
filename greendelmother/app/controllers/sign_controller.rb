@@ -4,13 +4,14 @@ class SignController < ApplicationController
       user = User.authenticate(params[:name], params[:password])
       if user
         reset_session
-        session[:login_id] = login.id
-        session[:login_name] = login.name
-        session[:user_name] = login.user.name
-        session[:user_id] = login.user.id
-        session[:lastlogin] = login.lastlogin.ctime if login.lastlogin
-        login.lastlogin = Time.now
-        login.save
+        session[:login_id] = user.id
+        session[:login_name] = user.name
+        session[:user_name] = user.name
+        session[:user_id] = user.id
+        # Sparing the DB
+        # session[:lastlogin] = login.lastlogin.ctime if login.lastlogin
+        # login.lastlogin = Time.now
+        # login.save
         redirect_to(:controller => "users", :action => "index")
       else
         reset_session

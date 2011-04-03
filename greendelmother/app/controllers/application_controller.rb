@@ -7,23 +7,24 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   protected
-    def authorize
-    unless Login.find_by_id(session[:login_id])
-      if session[:login_id] != :logged_out
+  def authorize
+    unless User.find_by_id(session[:user_id])
+      if session[:user_id] != :logged_out
 
-        authenticate_or_request_with_http_basic('logiikkaweb') do |username, password|
-          login = Login.authenticate(username, password)
+        authenticate_or_request_with_http_basic('greendel') do |username, password|
+          user = User.authenticate(username, password)
 
-          unless login.is_device?
-            session[:user_name] = login.user.name
-            session[:user_id] = login.user.id
-            session[:lastlogin] = login.lastlogin.ctime if login.lastlogin
-            login.lastlogin = Time.now
-            login.save
-          end
-          if login
-            session[:login_id] = login.id
-            session[:login_name] = login.name
+          session[:user_name] = user.user.name
+          session[:user_id] = user.user.id
+
+          # Sparing the DB
+          # session[:lastlogin] = user.lastlogin.ctime if login.lastlogin
+          # user.lastlogin = Time.now
+          # user.save
+
+          if user
+            session[:user_id] = user.id
+            session[:user_name] = user.name
           end
         end
 
