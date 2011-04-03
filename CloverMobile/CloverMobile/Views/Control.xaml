@@ -84,13 +84,13 @@
         	</Grid.RenderTransform>
             <TextBlock Height="30" HorizontalAlignment="Left" Margin="47,212,0,0" Name="textBlockHeating" Text="Heating" VerticalAlignment="Top" Width="86" />
             <TextBlock Height="30" HorizontalAlignment="Left" Margin="47,298,0,0" Name="textBlock1" Text="Lightning" VerticalAlignment="Top" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="47,34,0,0" Name="textBlock2" Text="Temp inside" VerticalAlignment="Top" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="47,34,0,0" Name="textBlock2" Text="Temp Outside" VerticalAlignment="Top" />
             <TextBox Height="72" HorizontalAlignment="Left" Margin="47,65,0,0" Name="tempInsideTextBox" Text="" VerticalAlignment="Top" Width="108" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="244,34,0,0" Name="textBlock3" Text="Temp outside" VerticalAlignment="Top" />
+            <TextBlock Height="30" HorizontalAlignment="Right" Margin="0,34,93,0" Name="textBlock3" Text="Temp Inside" VerticalAlignment="Top" />
             <TextBox Height="72" HorizontalAlignment="Left" Margin="232,65,0,0" Name="tempOutsideTextBox" Text="" VerticalAlignment="Top" Width="133" />
             <RadioButton Content="On" Height="72" Margin="154,188,0,0" Name="radioButtonHeatingOn" VerticalAlignment="Top" GroupName="radioButtonGroupHeating" HorizontalAlignment="Left" Width="127" />
-            <RadioButton Content="Off" GroupName="radioButtonGroupHeating" Height="72" HorizontalAlignment="Left" Margin="262,188,0,0" Name="radioButtonHeatingOff" VerticalAlignment="Top" Width="127" />
-            <RadioButton Content="On" GroupName="radioButtonGroupLightning" Height="72" HorizontalAlignment="Left" Margin="154,274,0,0" Name="radioButtonLightsOn" VerticalAlignment="Top" Width="127" />
+            <RadioButton Content="Off" GroupName="radioButtonGroupHeating" Height="72" HorizontalAlignment="Right" Margin="0,188,69,0" Name="radioButtonHeatingOff" VerticalAlignment="Top" Width="127" />
+            <RadioButton Content="On" GroupName="radioButtonGroupLightning" Height="72" Margin="154,274,0,0" Name="radioButtonLightsOn" VerticalAlignment="Top" HorizontalAlignment="Left" Width="127" />
             <RadioButton Content="Off" GroupName="radioButtonGroupLightning" Height="72" HorizontalAlignment="Left" Margin="262,274,0,0" Name="radioButtonLightsOff" VerticalAlignment="Top" Width="127" />
             <Button Content="Commit" Height="72" HorizontalAlignment="Left" Margin="296,529,0,0" Name="sendChanges" VerticalAlignment="Top" Width="160" Click="sendChanges_Click" />
             <TextBlock Height="30" HorizontalAlignment="Left" Margin="88,499,0,0" Name="textBlockTest" Text="" VerticalAlignment="Top" />

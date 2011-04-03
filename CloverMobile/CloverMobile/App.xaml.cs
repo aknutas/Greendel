@@ -27,12 +27,10 @@ namespace CloverMobile
         /// Constructor for the Application object.
         /// </summary>
         /// 
-        public static GlobalData GB; // !!!
         public App()
         {
             // Global handler for uncaught exceptions. 
             UnhandledException += Application_UnhandledException;
-            GB = new GlobalData(); // !!!
             // Show graphics profiling information while debugging.
             if (System.Diagnostics.Debugger.IsAttached)
             {
