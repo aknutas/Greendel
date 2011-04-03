@@ -6,18 +6,27 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @users }
+      format.xml { render :xml => @users }
     end
   end
 
   # GET /users/1
   # GET /users/1.xml
   def show
-    @user = User.find(params[:id])
+    @user = User.find(params[:id], :include => [:sensors, :outputs])
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @user }
+      format.xml # show.xml.builder
+    end
+  end
+
+  #Custom for mobile
+  def datastatus
+    @user = User.find(session[:user_id], :include => [:device, {:device => [:sensors, :outputs, :location, {:location => :weather}]}])
+
+    respond_to do |format|
+      format.xml # datastatus.xml.builder
     end
   end
 

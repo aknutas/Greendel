@@ -14,9 +14,6 @@ class ApplicationController < ActionController::Base
         authenticate_or_request_with_http_basic('greendel') do |username, password|
           user = User.authenticate(username, password)
 
-          session[:user_name] = user.user.name
-          session[:user_id] = user.user.id
-
           # Sparing the DB
           # session[:lastlogin] = user.lastlogin.ctime if user.lastlogin
           # user.lastlogin = Time.now
