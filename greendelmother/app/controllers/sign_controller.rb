@@ -9,9 +9,9 @@ class SignController < ApplicationController
         session[:user_name] = user.name
         session[:user_id] = user.id
 
-        session[:lastlogin] = login.lastlogin.ctime if login.lastlogin
-        login.lastlogin = Time.now
-        login.save
+        session[:lastlogin] = user.lastlogin.ctime if user.lastlogin
+        user.lastlogin = Time.now
+        user.save
 
         redirect_to(:controller => "users", :action => "index")
       else

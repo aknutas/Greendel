@@ -106,6 +106,8 @@ ActiveRecord::Schema.define(:version => 20110403153416) do
     t.datetime "updated_at"
   end
 
+  add_index "users", ["name"], :name => "index_users_on_name"
+
   create_table "weathers", :force => true do |t|
     t.float    "temp"
     t.string   "desc"

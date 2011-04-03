@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
           session[:user_id] = user.user.id
 
           # Sparing the DB
-          # session[:lastlogin] = user.lastlogin.ctime if login.lastlogin
+          # session[:lastlogin] = user.lastlogin.ctime if user.lastlogin
           # user.lastlogin = Time.now
           # user.save
 
