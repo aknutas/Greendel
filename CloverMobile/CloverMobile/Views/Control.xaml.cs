@@ -18,11 +18,22 @@ namespace CloverMobile
 {
     public partial class Control : PhoneApplicationPage
     {
+        DispatcherTimer timer;
         Controller controller;
+        DataMaster model;
+        List<Output> outputs;
+        List<Sensor> sensors;
         public Control()
         {
             InitializeComponent();
-            controller = Controller.getInstance;
+            controller = Controller.getInstance;  
+            model = controller.getModel();
+            controller.setActivePage(this);
+            // ** after 10 seconds, ask the model for new information
+            timer = new DispatcherTimer();
+            timer.Interval = new TimeSpan(0, 0, 0, 10, 0);
+            timer.Tick += new EventHandler(Timer_tick);
+            timer.Start();
         }
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
@@ -56,5 +67,24 @@ namespace CloverMobile
             }
             controller.sendHeatingAndLightning(heating, lightning);
         }
+        private void Timer_tick(object sender, EventArgs e)
+        {
+            outputs = model.getOutputs();
+            sensors = model.getSensors();
+            UpdateView();
+        }
+        public void UpdateView()
+        {
+            foreach (Sensor s in sensors)
+            {
+                // get values to ui
+            }
+            foreach (Output o in outputs)
+            { 
+                // get values to ui
+            }
+        
+        }
+
     }
 }

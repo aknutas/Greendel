@@ -37,7 +37,7 @@ namespace CloverMobile
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            App.GB.serviceAddress = textBoxServiceAddress.Text;
+            //App.GB.serviceAddress = textBoxServiceAddress.Text;
         }
     }
 }
