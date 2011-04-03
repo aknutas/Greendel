@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage 
-    x:Class="CloverAnimation.MainPage"
+    x:Class="CloverMobile.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -143,7 +143,7 @@
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
             </TextBlock>
-            <TextBlock x:Name="PageTitle" Text="Main" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="48" RenderTransformOrigin="0.5,0.5" >
+            <TextBlock x:Name="PageTitle" Text="Main" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="72" RenderTransformOrigin="0.5,0.5" >
             	<TextBlock.RenderTransform>
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
@@ -152,7 +152,7 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <Image x:Name="image" Margin="122,65,140,308" Source="Clover.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+            <Image x:Name="image" Margin="122,65,140,278" Source="Clover.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <CompositeTransform />
                 </Image.RenderTransform>
