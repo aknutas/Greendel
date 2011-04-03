@@ -1,0 +1,7 @@
+To initialize and seed the database with initial values:
+hg db:drop
+hg db:setup
+
+To start up a test server:
+./script/server
+(or script\server)
