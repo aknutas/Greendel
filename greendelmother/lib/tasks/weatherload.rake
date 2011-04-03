@@ -1,4 +1,4 @@
-task :loadweathers => :environment do
+task :weatherload => :environment do
   puts "Starting to refresh weathers"
   client = YahooWeather::Client.new
 

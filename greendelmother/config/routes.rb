@@ -19,6 +19,8 @@ ActionController::Routing::Routes.draw do |map|
   
   #map.connect 'power/history', :controller => 'readings', :action => 'history', :format => 'xml'
 
+  map.connect 'mobiledata/userdata', :controller => 'users', :action => 'datastatus', :format => 'xml'
+
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
