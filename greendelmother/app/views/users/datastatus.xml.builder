@@ -1,5 +1,6 @@
 xml.instruct!
 xml.user do
+  xml.id @user.id
   xml.name @user.name
   xml.realname @user.realname
   xml.device do
@@ -17,15 +18,17 @@ xml.user do
     xml.sensors do
       @user.device.sensors.each do |sensor|
         xml.sensor do
+          xml.id sensor.id
           xml.name sensor.name
           xml.vartype sensor.vartype
           xml.latestreading sensor.latestreading
         end
       end
     end
-        xml.outputs do
+    xml.outputs do
       @user.device.outputs.each do |output|
         xml.output do
+          xml.id output.id
           xml.name output.name
           xml.state output.state
           xml.haschanged output.haschanged

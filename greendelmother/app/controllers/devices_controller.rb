@@ -21,6 +21,14 @@ class DevicesController < ApplicationController
     end
   end
 
+  def datastatus
+    @device = Device.find(params[:id], :include => [:sensors, :outputs, :location, {:location => :weather}])
+
+    respond_to do |format|
+      format.xml # datastatus.xml.builder
+    end
+  end
+
   # GET /devices/new
   # GET /devices/new.xml
   def new

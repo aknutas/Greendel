@@ -2,7 +2,7 @@ class SensorsController < ApplicationController
   # GET /sensors
   # GET /sensors.xml
   def index
-    @sensors = Sensor.
+    @sensors = Sensor.find(params[:id])
 
     respond_to do |format|
       format.html # index.html.erb
