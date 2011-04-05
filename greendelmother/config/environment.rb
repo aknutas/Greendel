@@ -3,6 +3,12 @@
 # Specifies gem version of Rails to use when vendor/rails is not present
 RAILS_GEM_VERSION = '2.3.8' unless defined? RAILS_GEM_VERSION
 
+# Load FB info
+FB_API_KEY = "***REMOVED***"
+FB_SECRET = "***REMOVED***"
+FB_APP_ID = "***REMOVED***"
+HOST = "http://localhost:3000/"
+
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
@@ -21,6 +27,7 @@ Rails::Initializer.run do |config|
   config.gem "sqlite3-ruby", :lib => "sqlite3"
   config.gem "mini_fb"
   config.gem "twitter"
+  config.gem "yahoo-weather"
   # config.gem "httparty"
 
   # Only load the plugins named here, in the order given (default is alphabetical).

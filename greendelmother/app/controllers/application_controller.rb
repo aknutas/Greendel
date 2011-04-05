@@ -30,6 +30,12 @@ class ApplicationController < ActionController::Base
         redirect_to :controller => 'sign', :action => 'login'
       end
     end
+    @current_user ||= User.find_by_id(session[:user_id])
+  end
+
+  def current_user
+    @current_user ||= User.find_by_id(session[:user_id])
+    return @current_user
   end
 
   # Scrub sensitive parameters from your log
