@@ -97,35 +97,34 @@ namespace CloverMobile
             {
                 System.Diagnostics.Debug.WriteLine("WEATHER:" + " " + w.temp.ToString() + " " + w.unit + " " + w.description);
             }
-            //currentWeather = (Weather)weather; 
-            
             allSensors.Clear();
-            var sensorOutputs = from sensor in dataDoc.Descendants("sensor")
+            var sensorOutputs = from sensors in dataDoc.Descendants("sensor")
             select new Sensor
             {
-               sensorId = int.Parse(sensor.Element("id").Value),
-               sensorName = sensor.Element("name").Value.ToString(),
-               latestReading = int.Parse(sensor.Element("latestreading").Value),                                            
+               sensorId = int.Parse(sensors.Element("id").Value),
+               sensorName = sensors.Element("name").Value.ToString(),
+               latestReading = int.Parse(sensors.Element("latestreading").Value),                                            
             };
             foreach (Sensor s in sensorOutputs)
             {
-               System.Diagnostics.Debug.WriteLine(s.sensorId.ToString(), s.sensorName, s.sensorVarType);
+               System.Diagnostics.Debug.WriteLine(s.sensorId.ToString() + " " + s.sensorName + " " + s.sensorVarType);
                allSensors.Add(s);
             }
             allOutputs.Clear();
-            var dataUnitoutputs = from output in dataDoc.Descendants("output")
+            var dataUnitoutputs = from outputs in dataDoc.Descendants("outputs")
             select new Output
             {
-                id = int.Parse(output.Element("id").Value),
-                name = output.Element("name").Value.ToString(),
-                state = bool.Parse(output.Element("state").Value),
-                hasChanged = bool.Parse(output.Element("haschanged").Value),
+                id = int.Parse(outputs.Element("id").Value),
+                name = outputs.Element("name").Value.ToString(),
+                state = bool.Parse(outputs.Element("state").Value),
+                hasChanged = bool.Parse(outputs.Element("haschanged").Value),
             };
             foreach (Output o in dataUnitoutputs)
             {
+                System.Diagnostics.Debug.WriteLine(o.id.ToString() + " " + o.name + " " + o.state.ToString() + " " + o.hasChanged.ToString());
                 allOutputs.Add(o);
             }
-            System.Diagnostics.Debug.WriteLine("Data from xml: ");
+            //System.Diagnostics.Debug.WriteLine("Data from xml: ");
 
         }
         public void WriteHistory(XDocument xmlDoc)
