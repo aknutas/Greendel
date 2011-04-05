@@ -56,6 +56,12 @@
     <Reference Include="System.Net" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="WP7_CTP_Fix_System.Windows.Controls">
+      <HintPath>..\..\..\Users\Hartsa\Documents\Visual Studio 2010\Projects\WindowsPhoneApplication2\WindowsPhoneApplication2\WP7_CTP_Fix_System.Windows.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="WP7_CTP_Fix_System.Windows.Controls.DataVisualization.Toolkit">
+      <HintPath>..\..\..\Users\Hartsa\Documents\Visual Studio 2010\Projects\WindowsPhoneApplication2\WindowsPhoneApplication2\WP7_CTP_Fix_System.Windows.Controls.DataVisualization.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
