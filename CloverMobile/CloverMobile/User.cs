@@ -11,16 +11,11 @@ using System.Windows.Shapes;
 
 namespace CloverMobile
 {
-    public class Output
+    public class User
     {
         public int id { get; set; }
         public string name { get; set; }
-        public bool? state { get; set; }
-        public bool? hasChanged { get; set; }
-
-        //public DateTime created { get; set; }
-        //public string name { get; set; }
-        //public bool state { get; set; }
-        //public DateTime updatedAt { get; set; }
+        public string realName { get; set; }
+        public Device myDevice { get; set; }
     }
 }

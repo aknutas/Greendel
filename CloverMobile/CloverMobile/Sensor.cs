@@ -13,12 +13,15 @@ namespace CloverMobile
 {
     public class Sensor
     {
-        public DateTime createdAt { get; set; }
-        public int deviceId { get; set; }
-        public int id { get; set; }
+        
+        public int sensorId { get; set; }
+        public string sensorName { get; set; }
+        public string sensorVarType { get; set; }
         public int latestReading { get; set; }
-        public int latestValue { get; set; }
-        public string name { get; set; }
-        public DateTime updatedAt { get; set; }
+
+        //public DateTime createdAt { get; set; }
+        //public int latestReading { get; set; }
+        //public string name { get; set; }
+        //public DateTime updatedAt { get; set; }
     }
 }

@@ -38,17 +38,17 @@ namespace CloverMobile
 
         private void ApplicationBarIconButtonSettings_Click(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Views/Settings.xaml", UriKind.RelativeOrAbsolute));
+            NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void ApplicationBarIconButtonHistory_Click(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Views/History.xaml", UriKind.RelativeOrAbsolute));
+            NavigationService.Navigate(new Uri("/History.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void ApplicationBarControlIconButtonControl_Click(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Views/Control.xaml", UriKind.RelativeOrAbsolute));
+            NavigationService.Navigate(new Uri("/Control.xaml", UriKind.RelativeOrAbsolute));
         }
     }
 }

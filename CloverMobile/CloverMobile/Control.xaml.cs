@@ -42,6 +42,10 @@ namespace CloverMobile
 
         private void sendChanges_Click(object sender, RoutedEventArgs e)
         {
+
+            controller.getXML();
+            System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER");
+            /*
             bool heating = false;
             bool lightning = false;
             // ** get values from radiobuttons
@@ -66,6 +70,7 @@ namespace CloverMobile
 
             }
             controller.sendHeatingAndLightning(heating, lightning);
+             */ 
         }
         private void Timer_tick(object sender, EventArgs e)
         {

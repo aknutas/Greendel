@@ -25,10 +25,13 @@ namespace CloverMobile
         private bool xmlRetrieved = false;
         private string xmlDocumentName;
         private string xmlMessage;
+        private string username = "testipaavo";
+        private string password = "testi";
 
         public void setDataMaster(DataMaster mstr)
         {
             master = mstr;
+            serviceAddress = "http://localhost:3000";
         }
         public void setMasterController(Controller ctrl)
         {
@@ -38,6 +41,23 @@ namespace CloverMobile
         {
             wcDown = new WebClient();
             wcUp = new WebClient();
+        }
+        public void authenticate(string username,string password)
+        {
+            
+            //WebClient req = new WebClient();
+            //req.Credentials = new NetworkCredential(username, password);
+
+        
+        }
+
+
+        public void getXML(string serviceAddress)
+        {
+            wcDown.Credentials = new NetworkCredential(username, password);
+            wcDown.DownloadStringAsync(new Uri(serviceAddress + "/users/datastatus/1"));
+            wcDown.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted);
+
         }
         public void sendValues(bool lightning, bool heating)
         {
@@ -72,9 +92,10 @@ namespace CloverMobile
                 wcUp.UploadStringCompleted += new UploadStringCompletedEventHandler(wcUpload_UploadStringCompleted);
             }
         }
+
         public void GetSensorsXML(string serviceAddress)
         {
-            wcDown.DownloadStringAsync(new Uri(serviceAddress + "outputs.xml"));
+            wcDown.DownloadStringAsync(new Uri(serviceAddress + "/users/datastatus.xml"));
             wcDown.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted);   
         }
         public void GetOutputsXML(string serviceAddress)
@@ -90,21 +111,24 @@ namespace CloverMobile
         }
         void wc_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
-            // ** xml document received fully
+            // ** xml document received fully, give it to the master
             dataDoc = XDocument.Load(new StringReader(e.Result));
+            master.parseXML(dataDoc);
+
+            //master.WriteHistory(dataDoc);
+            
+            
             if (xmlDocumentName == "hash")
             {
-                master.WriteHistory(dataDoc);
                 // kerro controllerille että uutta dataa tuli
             }
             if (xmlDocumentName == "output")
             {
-                master.WriteOutputs(dataDoc);
+                //master.WriteOutputs(dataDoc);
             }
             if (xmlDocumentName == "sensor")
             {
-                master.WriteSensors(dataDoc);
-
+                //master.WriteSensors(dataDoc);
             }
         }
         void wc_DownloadOutputsCompleted(object sender, DownloadStringCompletedEventArgs e)

@@ -17,6 +17,7 @@ namespace CloverMobile
         // ** controller is singleton
         static Controller instance=null;
         static readonly object padlock = new object();
+        string address = "http://localhost:3000";
 
         // ** references to network controller, model (datamaster) and current ui page 
         private NetworkController nwc;
@@ -51,6 +52,10 @@ namespace CloverMobile
                     return instance;
                 }
             }
+        }
+        public void getXML()
+        {
+            nwc.getXML(address);
         }
         public void sendHeatingAndLightning(bool heating, bool lightning)
         { 
