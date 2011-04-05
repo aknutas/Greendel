@@ -2,8 +2,8 @@ class CreateSocialmedias < ActiveRecord::Migration
   def self.up
     create_table :socialmedias do |t|
       t.boolean :status
-      t.boolean :facebookon
-      t.boolean :twitteron
+      t.boolean :facebookon, :default => false
+      t.boolean :twitteron, :default => false
       t.string :fbun
       t.string :twitterun
       t.string :fbauth
