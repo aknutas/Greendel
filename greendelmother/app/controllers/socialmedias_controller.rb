@@ -24,7 +24,7 @@ class SocialmediasController < ApplicationController
     end
   end
 
-  def post
+  def fbpost
     @socialmedia = Socialmedia.find(params[:id])
     @id = "me"
     @type = "post"
