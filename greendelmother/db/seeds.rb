@@ -25,21 +25,21 @@ tweather = Weather.create(:source => 'yahoo')
 testlocation.weather = tweather
 testlocation.save
 
-s = Sensor.create(:name => 'poweruse', :vartype => 'integer')
+s = Sensor.create(:name => 'poweruse', :longname => 'Power Consumption', :vartype => 'integer')
 cloverpower.sensors << s
-s = Sensor.create(:name => 'insidetemp', :vartype => 'integer')
+s = Sensor.create(:name => 'insidetemp', :longname => 'Inside Temperature', :vartype => 'integer')
 cloverpower.sensors << s
-s = Sensor.create(:name => 'outsidetemp', :vartype => 'integer')
+s = Sensor.create(:name => 'outsidetemp', :longname => 'Outside Temperature', :vartype => 'integer')
 cloverpower.sensors << s
 cloverpower.save
 
-o = Output.create(:name => 'heating')
+o = Output.create(:name => 'heating', :longname => 'Heating')
 cloverpower.outputs << o
-o = Output.create(:name => 'lights')
+o = Output.create(:name => 'lights', :longname => 'Lights')
 cloverpower.outputs << o
-o = Output.create(:name => 'solar')
+o = Output.create(:name => 'solar', :longname => 'Solar')
 cloverpower.outputs << o
-o = Output.create(:name => 'wind')
+o = Output.create(:name => 'wind', :longname => 'Wind')
 cloverpower.outputs << o
 cloverpower.save
 
