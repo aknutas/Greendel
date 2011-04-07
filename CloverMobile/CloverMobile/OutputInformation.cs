@@ -12,14 +12,13 @@ using System.Collections.Generic;
 
 namespace CloverMobile
 {
-    public class Sensor
-    {        
-        public int sensorId { get; set; }
-        public string sensorName { get; set; }
-        public string  longName { get; set; }
-        public string sensorVarType { get; set; }
-        public string latestReading { get; set; }
+    public class OutputInformation
+    {
+        public List<Output> mySensors { get; set; }
 
+        public OutputInformation()
+        {
+            mySensors = new List<Output>();
+        }
     }
-
 }

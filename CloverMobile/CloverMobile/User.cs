@@ -27,15 +27,4 @@ namespace CloverMobile
         
         }
     }
-    public class OutputInformation
-    {
-
-        public List<Output> myOutputs { get; set; }
-        public OutputInformation()
-        {
-
-            myOutputs = new List<Output>();
-        }
-    
-    }
 }

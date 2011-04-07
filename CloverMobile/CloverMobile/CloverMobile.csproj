@@ -70,6 +70,7 @@
     <Compile Include="Device.cs" />
     <Compile Include="DtoSerializer.cs" />
     <Compile Include="Location.cs" />
+    <Compile Include="OutputInformation.cs" />
     <Compile Include="SensorInformation.cs" />
     <Compile Include="Sensors.cs" />
     <Compile Include="User.cs" />
