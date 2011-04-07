@@ -19,7 +19,6 @@ namespace CloverMobile
     {
         private bool isUpdated;
         private XDocument dataDoc;
-
         private User currentUser;
         private Device currentDevice;
         private Location currentLocation;

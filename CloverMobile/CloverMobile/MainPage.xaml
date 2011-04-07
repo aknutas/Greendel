@@ -177,7 +177,7 @@
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
             </TextBlock>
-            <Image Height="90" HorizontalAlignment="Left" Margin="315,399,0,0" Name="windImage" Stretch="Fill" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.5,0.5" >
+            <Image Height="90" HorizontalAlignment="Left" Margin="315,399,0,0" Name="windImage" Stretch="Fill" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.5,0.5" ImageFailed="windImage_ImageFailed">
                 <Image.OpacityMask>
                     <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
                         <GradientStop Color="Black" Offset="0" />
