@@ -13,7 +13,7 @@ class SignController < ApplicationController
         user.lastlogin = Time.now
         user.save
 
-        redirect_to(:controller => "users", :action => "index")
+        redirect_to(user)
       else
         reset_session
         session[:user_id] = :logged_out

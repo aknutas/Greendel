@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.xml
   def show
-    @user = User.find(params[:id], :include => [:sensors, :outputs])
+    @user = User.find(params[:id], :include => [:device, {:device => [:sensors, :outputs, :location, {:location => :weather}]}])
 
     respond_to do |format|
       format.html # show.html.erb
