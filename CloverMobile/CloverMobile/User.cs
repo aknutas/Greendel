@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using System.Collections.Generic;
 
 namespace CloverMobile
 {
@@ -17,5 +18,24 @@ namespace CloverMobile
         public string name { get; set; }
         public string realName { get; set; }
         public Device myDevice { get; set; }
+        
+       
+        public User()
+        {
+            
+            
+        
+        }
+    }
+    public class OutputInformation
+    {
+
+        public List<Output> myOutputs { get; set; }
+        public OutputInformation()
+        {
+
+            myOutputs = new List<Output>();
+        }
+    
     }
 }
