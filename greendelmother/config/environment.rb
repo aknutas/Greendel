@@ -9,6 +9,11 @@ FB_SECRET = "***REMOVED***"
 FB_APP_ID = "***REMOVED***"
 HOST = "http://localhost:3000/"
 
+# Load Twitter info
+CONSMER_SECRET = "***REMOVED***"
+CONSUMER_TOKEN= "***REMOVED***"
+DEVELOPMENT_URL = "http://dev.twipler.com:3000/twitter/auth"
+
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 

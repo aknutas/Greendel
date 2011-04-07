@@ -1,4 +1,7 @@
 class SocialmediasController < ApplicationController
+
+  before_filter :twitter_wrapper
+
   # GET /socialmedias
   # GET /socialmedias.xml
   def index
