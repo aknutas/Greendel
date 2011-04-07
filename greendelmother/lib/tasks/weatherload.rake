@@ -1,10 +1,14 @@
 task :weatherload => :environment do
+
+  #Enabling logger
+  log_to STDOUT
+
   puts "Starting to refresh weathers"
   client = YahooWeather::Client.new
   fc = nil
 
   puts "Loading weather objects"
-  weathers = Weather.find(:all, 'c')
+  weathers = Weather.find(:all, :include => [:histories, :location, {:location => :device}])
 
   puts "Refreshing objects"
   weathers.each do |weather|
