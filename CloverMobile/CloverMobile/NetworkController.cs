@@ -11,6 +11,7 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using System.Linq;
 using System.IO;
+using System.Collections.Generic;
 
 namespace CloverMobile
 {
@@ -28,6 +29,8 @@ namespace CloverMobile
         private string username = "testipaavo";
         private string password = "testi";
 
+        private List<SensorInformation> allSensors;
+
         public void setDataMaster(DataMaster mstr)
         {
             master = mstr;
@@ -35,12 +38,13 @@ namespace CloverMobile
         }
         public void setMasterController(Controller ctrl)
         {
-            controller = ctrl; 
+            controller = ctrl;
         }
         public NetworkController()
         {
             wcDown = new WebClient();
             wcUp = new WebClient();
+            allSensors = new List<SensorInformation>();
         }
         public void authenticate(string username,string password)
         {
@@ -54,10 +58,16 @@ namespace CloverMobile
 
         public void getXML(string serviceAddress)
         {
-            wcDown.Credentials = new NetworkCredential(username, password);
-            wcDown.DownloadStringAsync(new Uri(serviceAddress + "/users/datastatus/1"));
-            wcDown.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted);
-
+            try
+            {
+                wcDown.Credentials = new NetworkCredential(username, password);
+                wcDown.DownloadStringAsync(new Uri(serviceAddress + "/users/datastatus/1"));
+                wcDown.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted);
+            }
+            catch (WebException we)
+            { 
+                // print message
+            }
         }
         public void sendValues(bool lightning, bool heating)
         {
@@ -111,29 +121,41 @@ namespace CloverMobile
         }
         void wc_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
-            // ** xml document received fully, give it to the master
-            dataDoc = XDocument.Load(new StringReader(e.Result));
-            master.parseXML(dataDoc);
+            try
+            {
 
-            //master.WriteHistory(dataDoc);
-            
-            
-            if (xmlDocumentName == "hash")
-            {
-                // kerro controllerille että uutta dataa tuli
+                // ** xml document received fully, give it to the master
+                dataDoc = XDocument.Load(new StringReader(e.Result));
+                //master.parseXML(dataDoc);
+
+                master.parseSensors(dataDoc);
+
+                //master.WriteHistory(dataDoc);
+
+
+                if (xmlDocumentName == "hash")
+                {
+                    // kerro controllerille että uutta dataa tuli
+                }
+                if (xmlDocumentName == "output")
+                {
+                    //master.WriteOutputs(dataDoc);
+                }
+                if (xmlDocumentName == "sensor")
+                {
+                    //master.WriteSensors(dataDoc);
+                }
             }
-            if (xmlDocumentName == "output")
-            {
-                //master.WriteOutputs(dataDoc);
-            }
-            if (xmlDocumentName == "sensor")
-            {
-                //master.WriteSensors(dataDoc);
+            catch (WebException we)
+            { 
+                // print message to somewhere
             }
         }
         void wc_DownloadOutputsCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
             // ** when downloaded, this happens
+
+
         }
         void wcUpload_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
         {

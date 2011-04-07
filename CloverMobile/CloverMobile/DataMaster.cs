@@ -52,81 +52,137 @@ namespace CloverMobile
         {
             System.Diagnostics.Debug.WriteLine("Parsing XML...");
             var user = from userValue in xmlDoc.Descendants("user")
-            select new User
-            {
-                id = int.Parse(userValue.Element("id").Value),
-                name = userValue.Element("name").Value.ToString(),
-                realName = userValue.Element("realname").Value.ToString(),
-            };
+                       select new User
+                       {
+                           id = int.Parse(userValue.Element("id").Value),
+                           name = userValue.Element("name").Value.ToString(),
+                           realName = userValue.Element("realname").Value.ToString(),
+                       };
             foreach (User u in user)
             {
-                System.Diagnostics.Debug.WriteLine("USER:" + " " + u.id.ToString() + " " + u.name + " " + u.realName); 
+                System.Diagnostics.Debug.WriteLine("USER:" + " " + u.id.ToString() + " " + u.name + " " + u.realName);
             }
-           
+
             var device = from deviceValue in xmlDoc.Descendants("device")
-            select new Device
-            {
-                deviceId = int.Parse(deviceValue.Element("id").Value),
-                deviceName = deviceValue.Element("name").Value.ToString(),
-            };
+                         select new Device
+                         {
+                             deviceId = int.Parse(deviceValue.Element("id").Value),
+                             deviceName = deviceValue.Element("name").Value.ToString(),
+                         };
             foreach (Device d in device)
             {
                 System.Diagnostics.Debug.WriteLine("DEVICE:" + " " + d.deviceId.ToString() + " " + d.deviceName);
             }
-         
+
             var location = from locationValue in xmlDoc.Descendants("location")
-            select new Location
-            {
-                address = locationValue.Element("address").Value.ToString(),
-                town = locationValue.Element("town").Value.ToString(),
-                                        
-            };
+                           select new Location
+                           {
+                               address = locationValue.Element("address").Value.ToString(),
+                               town = locationValue.Element("town").Value.ToString(),
+
+                           };
             foreach (Location l in location)
             {
                 System.Diagnostics.Debug.WriteLine("LOCATION:" + " " + l.address + " " + l.town);
             }
 
             var weather = from weatherValue in xmlDoc.Descendants("weather")
-            select new Weather
-            {
-                temp = float.Parse(weatherValue.Element("temp").Value),
-                unit = weatherValue.Element("unit").Value.ToString(),
-                description = weatherValue.Element("desc").Value.ToString(),
-            };
+                          select new Weather
+                          {
+                              temp = float.Parse(weatherValue.Element("temp").Value),
+                              unit = weatherValue.Element("unit").Value.ToString(),
+                              description = weatherValue.Element("desc").Value.ToString(),
+                          };
             foreach (Weather w in weather)
             {
                 System.Diagnostics.Debug.WriteLine("WEATHER:" + " " + w.temp.ToString() + " " + w.unit + " " + w.description);
             }
-            allSensors.Clear();
-            var sensorOutputs = from sensors in dataDoc.Descendants("sensor")
-            select new Sensor
-            {
-               sensorId = int.Parse(sensors.Element("id").Value),
-               sensorName = sensors.Element("name").Value.ToString(),
-               latestReading = int.Parse(sensors.Element("latestreading").Value),                                            
-            };
-            foreach (Sensor s in sensorOutputs)
-            {
-               System.Diagnostics.Debug.WriteLine(s.sensorId.ToString() + " " + s.sensorName + " " + s.sensorVarType);
-               allSensors.Add(s);
-            }
-            allOutputs.Clear();
-            var dataUnitoutputs = from outputs in dataDoc.Descendants("outputs")
-            select new Output
-            {
-                id = int.Parse(outputs.Element("id").Value),
-                name = outputs.Element("name").Value.ToString(),
-                state = bool.Parse(outputs.Element("state").Value),
-                hasChanged = bool.Parse(outputs.Element("haschanged").Value),
-            };
-            foreach (Output o in dataUnitoutputs)
-            {
-                System.Diagnostics.Debug.WriteLine(o.id.ToString() + " " + o.name + " " + o.state.ToString() + " " + o.hasChanged.ToString());
-                allOutputs.Add(o);
-            }
-            //System.Diagnostics.Debug.WriteLine("Data from xml: ");
-
         }
+            //allSensors.Clear();
+            public SensorInformation parseSensors(XDocument xmlDoc)
+            {
+                
+                var allSensors = new SensorInformation();
+
+                XElement generalElement = xmlDoc
+                        .Element("user")
+                        .Element("device")
+                        .Element("location")
+                        .Element("sensors")                     
+                        ;
+                //students.School = generalElement.Element("School").Value;
+                //students.Department = generalElement.Element("Department").Value;
+                try
+                {
+                    allSensors.mySensors = (from s in xmlDoc.Descendants("sensor")
+                                            select new Sensor()
+                                            {
+                                                sensorId = Convert.ToInt16(s.Element("id").Value),
+                                                sensorName = s.Element("name").Value.ToString(),
+                                                sensorVarType = s.Element("vartype").Value.ToString(),
+                                                latestReading = int.Parse(s.Element("latestreading").Value)
+                                            }).ToList<Sensor>();
+
+
+                }
+                catch (FormatException f)
+                {
+                    System.Diagnostics.Debug.WriteLine(f.Message.ToString());
+                }
+                foreach (Sensor si in allSensors.mySensors)
+               {
+                   System.Diagnostics.Debug.WriteLine("SENSORS: " + si.sensorId.ToString() + " " + si.sensorName + " " + si.sensorVarType.ToString()); 
+               }
+
+                return allSensors;
+            }
+                /*
+                System.Diagnostics.Debug.WriteLine("Parsing outputs and sensors: ");
+
+
+
+                var sensorOutputs = from sensors in dataDoc.Descendants("sensors")
+                //select new Sensor
+                select new Sensor
+                {
+             
+                   sensorId = int.Parse(sensors.Element("id").Value),
+                   sensorName = sensors.Element("name").Value.ToString(),
+                   sensorVarType = sensors.Element("vartype").Value,
+                   latestReading = int.Parse(sensors.Element("latestreading").Value), 
+                    
+                    
+                                              
+                };
+            
+                foreach (Sensor s in sensorOutputs)
+                {
+                   System.Diagnostics.Debug.WriteLine(s.sensorId.ToString() + " " + s.sensorName + " " + s.sensorVarType);
+                   allSensors.Add(s);
+                   System.Diagnostics.Debug.WriteLine("FOR EACH ");
+                }
+         
+                //allOutputs.Clear();
+                var dataUnitoutputs = from outputs in dataDoc.Descendants("output")
+                select new Output
+                {
+                    id = int.Parse(outputs.Element("id").Value),
+                    name = outputs.Element("name").Value.ToString(),
+                    state = bool.Parse(outputs.Element("state").Value),
+                    hasChanged = bool.Parse(outputs.Element("haschanged").Value),
+                };
+                
+                foreach (Output o in dataUnitoutputs)
+                {
+                    System.Diagnostics.Debug.WriteLine(o.id.ToString() + " " + o.name + " " + o.state.ToString() + " " + o.hasChanged.ToString());
+                    allOutputs.Add(o);
+                    System.Diagnostics.Debug.WriteLine("FOR EACH ");
+                    
+                }
+
+              */  
+
+        
         public void WriteHistory(XDocument xmlDoc)
         {
             /*
