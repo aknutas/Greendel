@@ -1,7 +1,7 @@
 task :weatherload => :environment do
 
   #Enabling logger
-  log_to STDOUT
+  #log_to STDOUT
 
   puts "Starting to refresh weathers"
   client = YahooWeather::Client.new
@@ -34,6 +34,7 @@ task :weatherload => :environment do
         his.high = fc.high
         his.low = fc.low
         his.temp = (his.high + his.low) / 2
+        his.yweather = weather.yweather
         weather.histories << his
         his.save
         puts "Recording new weather history from day " + his.fday.to_s

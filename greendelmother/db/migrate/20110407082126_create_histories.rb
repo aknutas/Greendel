@@ -6,7 +6,7 @@ class CreateHistories < ActiveRecord::Migration
       t.float :low
       t.float :high
       t.date :fday
-      t.blob :yweather
+      t.binary :yweather
       t.integer :weather_id
 
       t.timestamps

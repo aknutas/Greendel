@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20110407082126) do
     t.float    "low"
     t.float    "high"
     t.date     "fday"
+    t.binary   "yweather"
     t.integer  "weather_id"
     t.datetime "created_at"
     t.datetime "updated_at"
