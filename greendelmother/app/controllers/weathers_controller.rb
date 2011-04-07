@@ -23,7 +23,7 @@ class WeathersController < ApplicationController
 
   def histories
     @weather = Weather.find(params[:id], :include => :histories)
-    @histories = @weather.histories
+    @histories = @weather.histories.sort_by &:fday
 
     respond_to do |format|
       format.xml # datastatus.xml.builder
