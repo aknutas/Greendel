@@ -2,6 +2,7 @@ class CreateSensors < ActiveRecord::Migration
   def self.up
     create_table :sensors do |t|
       t.string :name
+      t.string :longname
       t.string :vartype
       t.float :latestreading
 

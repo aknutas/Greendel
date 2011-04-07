@@ -20,6 +20,7 @@ xml.user do
         xml.sensor do
           xml.id sensor.id
           xml.name sensor.name
+          xml.longname sensor.longname
           xml.vartype sensor.vartype
           xml.latestreading sensor.latestreading
         end
@@ -30,6 +31,7 @@ xml.user do
         xml.output do
           xml.id output.id
           xml.name output.name
+          xml.longname output.longname
           xml.state output.state
           xml.haschanged output.haschanged
         end

@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20110407082126) do
 
   create_table "outputs", :force => true do |t|
     t.string   "name"
+    t.string   "longname"
     t.boolean  "state"
     t.boolean  "haschanged"
     t.integer  "device_id"
@@ -86,6 +87,7 @@ ActiveRecord::Schema.define(:version => 20110407082126) do
 
   create_table "sensors", :force => true do |t|
     t.string   "name"
+    t.string   "longname"
     t.string   "vartype"
     t.float    "latestreading"
     t.integer  "device_id"
