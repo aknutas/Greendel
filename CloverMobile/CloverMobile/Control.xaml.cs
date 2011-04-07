@@ -92,11 +92,10 @@ namespace CloverMobile
             */
         
         }
-
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER FOR USER INFO");
-            controller.getUserXML();
+            controller.getUserXML();               
         }
 
         private void button2_Click(object sender, RoutedEventArgs e)

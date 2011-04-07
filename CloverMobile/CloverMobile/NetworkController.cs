@@ -12,6 +12,7 @@ using System.Xml.Linq;
 using System.Linq;
 using System.IO;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace CloverMobile
 {
@@ -28,6 +29,11 @@ namespace CloverMobile
         private string xmlMessage;
         private string username = "testipaavo";
         private string password = "testi";
+        private Thread downloader;
+        private Thread uploader;
+
+
+
         public void setDataMaster(DataMaster mstr)
         {
             master = mstr;
@@ -49,7 +55,27 @@ namespace CloverMobile
             //WebClient req = new WebClient();
             //req.Credentials = new NetworkCredential(username, password);
         }
-        public void getUserInformationXML(string serviceAddress)
+        public void downloadXML(string documentName)
+        {
+            if (documentName == "userInfo")
+            {
+                downloader = new Thread(getUserInformationXML); // Kick off a new thread
+                downloader.Start();
+            }
+            else if (documentName == "sensors")
+            {
+                downloader = new Thread(getSensorsXML); // Kick off a new thread
+                downloader.Start();
+            }
+            else if (documentName == "outputs")
+            {
+                downloader = new Thread(getOutputsXML); // Kick off a new thread
+                downloader.Start();
+            }
+        }
+
+
+        public void getUserInformationXML()
         {
             documentType = "userInfo";
             try
@@ -63,7 +89,7 @@ namespace CloverMobile
                 // print message
             }
         }
-        public void getSensorsXML(string serviceAddress)
+        public void getSensorsXML()
         {
             documentType = "sensors";
             try
@@ -77,7 +103,7 @@ namespace CloverMobile
     
             }
         }
-        public void getOutputsXML(string serviceAddress)
+        public void getOutputsXML()
         {
             documentType = "outputs";
             try
@@ -94,7 +120,7 @@ namespace CloverMobile
 
         public void sendValues(bool lightning, bool heating)
         {
-            // ** send values
+            // ** this is old function
             wcUp.Headers[HttpRequestHeader.ContentType] = "application/xml";
             xmlMessage = "";
             
