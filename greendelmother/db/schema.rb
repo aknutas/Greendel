@@ -62,14 +62,15 @@ ActiveRecord::Schema.define(:version => 20110407082126) do
   add_index "outputs", ["device_id"], :name => "index_outputs_on_device_id"
 
   create_table "readings", :force => true do |t|
-    t.string   "name"
     t.float    "value"
+    t.datetime "time"
     t.integer  "sensor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "readings", ["sensor_id"], :name => "index_readings_on_sensor_id"
+  add_index "readings", ["time"], :name => "index_readings_on_time"
 
   create_table "savingsgoals", :force => true do |t|
     t.float    "amount"
@@ -98,13 +99,14 @@ ActiveRecord::Schema.define(:version => 20110407082126) do
   add_index "sensors", ["device_id"], :name => "index_sensors_on_device_id"
 
   create_table "socialmedias", :force => true do |t|
-    t.boolean  "status"
-    t.boolean  "facebookon",  :default => false
-    t.boolean  "twitteron",   :default => false
-    t.string   "fbun"
-    t.string   "twitterun"
+    t.boolean  "status",        :default => false
+    t.boolean  "facebookon",    :default => false
+    t.boolean  "twitteron",     :default => false
+    t.string   "fb_un"
+    t.string   "twitter_un"
     t.string   "fbauth"
-    t.string   "twitterauth"
+    t.string   "access_token"
+    t.string   "access_secret"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

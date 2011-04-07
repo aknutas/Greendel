@@ -17,8 +17,25 @@ class SensorsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @sensor }
+      format.xml { render :xml => @sensor }
     end
+  end
+
+  def history
+
+    @startdate = Time.zone.today - 1.days
+    @enddate = Time.zone.today + 1.days
+
+    @startdate = params[:startdate].to_date if params[:startdate]
+    @enddate = params[:enddate].to_date if params[:enddate]
+
+    @sensor = Sensor.find(params[:id], :include => [:device])
+    @readings = @sensor.readings.find(:all, :order => "time ASC", :conditions => {:time => @startdate..@enddate})
+
+    respond_to do |format|
+      format.xml # datastatus.xml.builder
+    end
+
   end
 
   # GET /sensors/new
@@ -28,7 +45,7 @@ class SensorsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @sensor }
+      format.xml { render :xml => @sensor }
     end
   end
 
@@ -46,10 +63,10 @@ class SensorsController < ApplicationController
       if @sensor.save
         flash[:notice] = 'Sensor was successfully created.'
         format.html { redirect_to(@sensor) }
-        format.xml  { render :xml => @sensor, :status => :created, :location => @sensor }
+        format.xml { render :xml => @sensor, :status => :created, :location => @sensor }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @sensor.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @sensor.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -63,10 +80,10 @@ class SensorsController < ApplicationController
       if @sensor.update_attributes(params[:sensor])
         flash[:notice] = 'Sensor was successfully updated.'
         format.html { redirect_to(@sensor) }
-        format.xml  { head :ok }
+        format.xml { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @sensor.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @sensor.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -79,7 +96,7 @@ class SensorsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(sensors_url) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
 end
