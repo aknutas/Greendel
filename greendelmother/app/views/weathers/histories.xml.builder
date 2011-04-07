@@ -1,8 +1,10 @@
 xml.instruct!
 xml.weather do
   xml.id @weather.id
+  xml.updated_at @weather.updated_at
   xml.desc @weather.desc
   xml.source @weather.source
+  xml.temp @weather.temp
   xml.low @weather.low
   xml.high @weather.high
   xml.histories do
