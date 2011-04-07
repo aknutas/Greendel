@@ -1,7 +1,0 @@
-\.orig$
-\.orig\..*$
-\.chg\..*$
-\.rej$
-\.conflict\~$
-^lib/connection\.log$
-^lib/database\.sqlite3$

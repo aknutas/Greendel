@@ -12,3 +12,5 @@ greendelmother/log/server\.log
 greendelmother/log/test\.log
 greendelmother/db/development\.sqlite3
 greendelmother/\.idea
+modbusmaster/\.idea
+modbusmaster/database\.sqlite3

@@ -27,7 +27,8 @@ class Resourcer
   def submitreading(sensorid, reading, time)
     RemoteSensorReading.create(
       :sensor_id => sensorid,
-      :value => reading
+      :value => reading,
+      :time => time
     )
     remotesensor = RemoteSensor.find(sensorid)
     remotesensor.latestreading = reading
