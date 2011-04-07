@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110403153416) do
+ActiveRecord::Schema.define(:version => 20110407082126) do
 
   create_table "devices", :force => true do |t|
     t.string   "name"
@@ -19,6 +19,20 @@ ActiveRecord::Schema.define(:version => 20110403153416) do
   end
 
   add_index "devices", ["user_id"], :name => "index_devices_on_user_id"
+
+  create_table "histories", :force => true do |t|
+    t.string   "desc"
+    t.float    "temp"
+    t.float    "low"
+    t.float    "high"
+    t.date     "fday"
+    t.integer  "weather_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "histories", ["fday"], :name => "index_histories_on_fday"
+  add_index "histories", ["weather_id"], :name => "index_histories_on_weather_id"
 
   create_table "locations", :force => true do |t|
     t.string   "name"
@@ -82,8 +96,8 @@ ActiveRecord::Schema.define(:version => 20110403153416) do
 
   create_table "socialmedias", :force => true do |t|
     t.boolean  "status"
-    t.boolean  "facebookon"
-    t.boolean  "twitteron"
+    t.boolean  "facebookon",  :default => false
+    t.boolean  "twitteron",   :default => false
     t.string   "fbun"
     t.string   "twitterun"
     t.string   "fbauth"
@@ -110,6 +124,8 @@ ActiveRecord::Schema.define(:version => 20110403153416) do
 
   create_table "weathers", :force => true do |t|
     t.float    "temp"
+    t.float    "high"
+    t.float    "low"
     t.string   "desc"
     t.string   "source"
     t.string   "woeid"

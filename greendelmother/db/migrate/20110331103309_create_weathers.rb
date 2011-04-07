@@ -2,6 +2,8 @@ class CreateWeathers < ActiveRecord::Migration
   def self.up
     create_table :weathers do |t|
       t.float :temp
+      t.float :high
+      t.float :low
       t.string :desc
       t.string :source
       t.string :woeid

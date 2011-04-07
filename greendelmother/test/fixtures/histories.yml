@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  desc: MyString
+  temp: 1.5
+  low: 1.5
+  high: 1.5
+  fday: 2011-04-07
+  yweather: 
+  weather_id: 1
+
+two:
+  desc: MyString
+  temp: 1.5
+  low: 1.5
+  high: 1.5
+  fday: 2011-04-07
+  yweather: 
+  weather_id: 1

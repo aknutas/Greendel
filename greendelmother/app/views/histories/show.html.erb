@@ -1,0 +1,38 @@
+<p>
+  <b>Desc:</b>
+  <%=h @history.desc %>
+</p>
+
+<p>
+  <b>Temp:</b>
+  <%=h @history.temp %>
+</p>
+
+<p>
+  <b>Low:</b>
+  <%=h @history.low %>
+</p>
+
+<p>
+  <b>High:</b>
+  <%=h @history.high %>
+</p>
+
+<p>
+  <b>Fday:</b>
+  <%=h @history.fday %>
+</p>
+
+<p>
+  <b>Yweather:</b>
+  <%=h @history.yweather %>
+</p>
+
+<p>
+  <b>Weather:</b>
+  <%=h @history.weather_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_history_path(@history) %> |
+<%= link_to 'Back', histories_path %>

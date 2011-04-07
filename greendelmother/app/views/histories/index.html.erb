@@ -1,0 +1,32 @@
+<h1>Listing histories</h1>
+
+<table>
+  <tr>
+    <th>Desc</th>
+    <th>Temp</th>
+    <th>Low</th>
+    <th>High</th>
+    <th>Fday</th>
+    <th>Yweather</th>
+    <th>Weather</th>
+  </tr>
+
+<% @histories.each do |history| %>
+  <tr>
+    <td><%=h history.desc %></td>
+    <td><%=h history.temp %></td>
+    <td><%=h history.low %></td>
+    <td><%=h history.high %></td>
+    <td><%=h history.fday %></td>
+    <td><%=h history.yweather %></td>
+    <td><%=h history.weather_id %></td>
+    <td><%= link_to 'Show', history %></td>
+    <td><%= link_to 'Edit', edit_history_path(history) %></td>
+    <td><%= link_to 'Destroy', history, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New history', new_history_path %>
