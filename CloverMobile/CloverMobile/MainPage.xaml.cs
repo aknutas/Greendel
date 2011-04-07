@@ -50,5 +50,10 @@ namespace CloverMobile
         {
             NavigationService.Navigate(new Uri("/Control.xaml", UriKind.RelativeOrAbsolute));
         }
+
+        private void windImage_ImageFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+
+        }
     }
 }

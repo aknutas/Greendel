@@ -40,6 +40,7 @@ namespace CloverMobile
         public NetworkController()
         {
             wcDown = new WebClient();
+            wcDown.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted);
             wcUp = new WebClient();
         }
         public void authenticate(string username,string password)
@@ -55,7 +56,7 @@ namespace CloverMobile
             {
                 wcDown.Credentials = new NetworkCredential(username, password);
                 wcDown.DownloadStringAsync(new Uri(serviceAddress + "/users/datastatus/1"));
-                wcDown.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted);
+                //wcDown.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted);
             }
             catch (WebException we)
             { 
@@ -69,11 +70,11 @@ namespace CloverMobile
             {
                 wcDown.Credentials = new NetworkCredential(username, password);
                 wcDown.DownloadStringAsync(new Uri(serviceAddress + "/users/datastatus/1"));
-                wcDown.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted);
+                //wcDown.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted);
             }
             catch (WebException we)
             {
-                // print message
+    
             }
         }
         public void getOutputsXML(string serviceAddress)
@@ -83,7 +84,7 @@ namespace CloverMobile
             {
                 wcDown.Credentials = new NetworkCredential(username, password);
                 wcDown.DownloadStringAsync(new Uri(serviceAddress + "/users/datastatus/1"));
-                wcDown.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted);
+                //wcDown.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted);
             }
             catch (WebException we)
             {
