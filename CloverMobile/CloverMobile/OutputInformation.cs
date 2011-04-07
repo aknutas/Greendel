@@ -14,11 +14,11 @@ namespace CloverMobile
 {
     public class OutputInformation
     {
-        public List<Output> mySensors { get; set; }
+        public List<Output> myOutputs { get; set; }
 
         public OutputInformation()
         {
-            mySensors = new List<Output>();
+            myOutputs = new List<Output>();
         }
     }
 }

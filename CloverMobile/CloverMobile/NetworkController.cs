@@ -24,13 +24,10 @@ namespace CloverMobile
         private WebClient wcUp = null;
         private XDocument dataDoc;
         private bool xmlRetrieved = false;
-        private string xmlDocumentName;
+        private string documentType;
         private string xmlMessage;
         private string username = "testipaavo";
         private string password = "testi";
-
-        private List<SensorInformation> allSensors;
-
         public void setDataMaster(DataMaster mstr)
         {
             master = mstr;
@@ -44,20 +41,16 @@ namespace CloverMobile
         {
             wcDown = new WebClient();
             wcUp = new WebClient();
-            allSensors = new List<SensorInformation>();
         }
         public void authenticate(string username,string password)
         {
             
             //WebClient req = new WebClient();
             //req.Credentials = new NetworkCredential(username, password);
-
-        
         }
-
-
-        public void getXML(string serviceAddress)
+        public void getUserInformationXML(string serviceAddress)
         {
+            documentType = "userInfo";
             try
             {
                 wcDown.Credentials = new NetworkCredential(username, password);
@@ -69,6 +62,35 @@ namespace CloverMobile
                 // print message
             }
         }
+        public void getSensorsXML(string serviceAddress)
+        {
+            documentType = "sensors";
+            try
+            {
+                wcDown.Credentials = new NetworkCredential(username, password);
+                wcDown.DownloadStringAsync(new Uri(serviceAddress + "/users/datastatus/1"));
+                wcDown.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted);
+            }
+            catch (WebException we)
+            {
+                // print message
+            }
+        }
+        public void getOutputsXML(string serviceAddress)
+        {
+            documentType = "outputs";
+            try
+            {
+                wcDown.Credentials = new NetworkCredential(username, password);
+                wcDown.DownloadStringAsync(new Uri(serviceAddress + "/users/datastatus/1"));
+                wcDown.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted);
+            }
+            catch (WebException we)
+            {
+                // print message
+            }
+        }
+
         public void sendValues(bool lightning, bool heating)
         {
             // ** send values
@@ -103,59 +125,55 @@ namespace CloverMobile
             }
         }
 
-        public void GetSensorsXML(string serviceAddress)
-        {
-            wcDown.DownloadStringAsync(new Uri(serviceAddress + "/users/datastatus.xml"));
-            wcDown.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted);   
-        }
-        public void GetOutputsXML(string serviceAddress)
-        {
-            wcDown.DownloadStringAsync(new Uri(serviceAddress + "sensors.xml"));
-            wcDown.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted);
-        }
-        public void getHistory(string serviceAddress)
-        {
-            wcDown.DownloadStringAsync(new Uri(serviceAddress + "hash.xml"));
-            wcDown.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted);
-        
-        }
         void wc_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
-            try
+            System.Diagnostics.Debug.WriteLine("CALLING EVENT HANDLER");
+            if (documentType == "userInfo")
             {
 
-                // ** xml document received fully, give it to the master
-                dataDoc = XDocument.Load(new StringReader(e.Result));
-                //master.parseXML(dataDoc);
-
-                master.parseSensors(dataDoc);
-
-                //master.WriteHistory(dataDoc);
-
-
-                if (xmlDocumentName == "hash")
+                System.Diagnostics.Debug.WriteLine("EVENT HANDLER FOR USER INFO");
+                try
                 {
-                    // kerro controllerille että uutta dataa tuli
+                    // ** xml document received fully, give it to the master
+                    dataDoc = XDocument.Load(new StringReader(e.Result));
+                    master.parseUserInformation(dataDoc);
                 }
-                if (xmlDocumentName == "output")
+                catch (WebException we)
                 {
-                    //master.WriteOutputs(dataDoc);
+                    // print message to somewhere
                 }
-                if (xmlDocumentName == "sensor")
-                {
-                    //master.WriteSensors(dataDoc);
-                }
+                documentType = "";
             }
-            catch (WebException we)
-            { 
-                // print message to somewhere
+            else if (documentType == "sensors")
+            {
+                System.Diagnostics.Debug.WriteLine("EVENT HANDLER FOR SENSORS");
+                try
+                {
+                    // ** xml document received fully, give it to the master
+                    dataDoc = XDocument.Load(new StringReader(e.Result));
+                    master.parseSensors(dataDoc);
+                }
+                catch (WebException we)
+                {
+                    // print message to somewhere
+                }
+                documentType = "";
             }
-        }
-        void wc_DownloadOutputsCompleted(object sender, DownloadStringCompletedEventArgs e)
-        {
-            // ** when downloaded, this happens
-
-
+            else if (documentType == "outputs")
+            {
+                System.Diagnostics.Debug.WriteLine("EVENT HANDLER FOR OUTPUTS");
+                try
+                {
+                    // ** xml document received fully, give it to the master
+                    dataDoc = XDocument.Load(new StringReader(e.Result));
+                    master.parseOutpus(dataDoc);
+                }
+                catch (WebException we)
+                {
+                    // print message to somewhere
+                }
+                documentType = "";
+            }
         }
         void wcUpload_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
         {

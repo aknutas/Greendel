@@ -16,7 +16,7 @@ namespace CloverMobile
     {        
         public int sensorId { get; set; }
         public string sensorName { get; set; }
-        public string  longName { get; set; }
+        public string longName { get; set; }
         public string sensorVarType { get; set; }
         public string latestReading { get; set; }
 

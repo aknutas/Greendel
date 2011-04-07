@@ -48,7 +48,7 @@ namespace CloverMobile
         {
             return allOutputs;
         }
-        public void parseXML(XDocument xmlDoc)
+        public void parseUserInformation(XDocument xmlDoc)
         {
 
             System.Diagnostics.Debug.WriteLine("Parsing XML...");
@@ -102,6 +102,7 @@ namespace CloverMobile
             //allSensors.Clear();
         public SensorInformation parseSensors(XDocument xmlDoc)
         {
+            System.Diagnostics.Debug.WriteLine("PARSING SENSORS");
                 //System.Diagnostics.Debug.WriteLine(xmlDoc.ToString());
 
                 var allSensors = new SensorInformation();
@@ -138,13 +139,38 @@ namespace CloverMobile
 
                 return allSensors;
         }
-        /*
+        
         public OutputInformation parseOutpus(XDocument xmlDoc)
         {
-        
+            System.Diagnostics.Debug.WriteLine("PARSING OUTPUTS");
+            //System.Diagnostics.Debug.WriteLine(xmlDoc.ToString());
+            var allOutputs = new OutputInformation();
+            try
+            {
+                allOutputs.myOutputs = (from o in xmlDoc.Descendants("output")
+                                        select new Output()
+                                        {
+                                            id = Convert.ToInt16(o.Element("id").Value),
+                                            name = o.Element("name").Value.ToString(),
+                                            // add long name
+                                            state = o.Element("state") != null ? o.Element("state").Value : string.Empty
+                                            //state = o.Element("state").Value.ToString(),
+                                            //hasChanged = o.Element("haschanged") != null ? o.Element("latestreading").Value : string.Empty
+                                        }).ToList<Output>();
+            }
+            catch 
+            {
+                
+            }
+            foreach (Output o in allOutputs.myOutputs)
+            {
+                System.Diagnostics.Debug.WriteLine("OUTPUTS: " + o.id.ToString() + " " + o.name + " " + o.state + " " + o.hasChanged);
+            }
+
+            return allOutputs;
         
         }
-         */ 
+        
                 /*
                 System.Diagnostics.Debug.WriteLine("Parsing outputs and sensors: ");
 
@@ -215,8 +241,8 @@ namespace CloverMobile
             {
                 id = int.Parse(output.Element("id").Value),
                 name = output.Element("name").Value.ToString(),
-                state = bool.Parse(output.Element("state").Value),
-                hasChanged = bool.Parse(output.Element("haschanged").Value),
+                //state = bool.Parse(output.Element("state").Value),
+                //hasChanged = bool.Parse(output.Element("haschanged").Value),
             };
             foreach (Output o in dataUnitoutputs)
             {

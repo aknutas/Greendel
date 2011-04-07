@@ -15,8 +15,8 @@ namespace CloverMobile
     {
         public int id { get; set; }
         public string name { get; set; }
-        public bool? state { get; set; }
-        public bool? hasChanged { get; set; }
+        public string state { get; set; }
+        public string hasChanged { get; set; }
 
         //public DateTime created { get; set; }
         //public string name { get; set; }

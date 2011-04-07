@@ -43,7 +43,7 @@ namespace CloverMobile
         private void sendChanges_Click(object sender, RoutedEventArgs e)
         {
 
-            controller.getXML();
+            //controller.getXML();
             System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER");
             /*
             bool heating = false;
@@ -74,12 +74,13 @@ namespace CloverMobile
         }
         private void Timer_tick(object sender, EventArgs e)
         {
-            outputs = model.getOutputs();
-            sensors = model.getSensors();
+            //outputs = model.getOutputs();
+            //sensors = model.getSensors();
             UpdateView();
         }
         public void UpdateView()
         {
+            /*
             foreach (Sensor s in sensors)
             {
                 // get values to ui
@@ -88,8 +89,28 @@ namespace CloverMobile
             { 
                 // get values to ui
             }
+            */
         
         }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER FOR USER INFO");
+            controller.getUserXML();
+        }
+
+        private void button2_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER FOR OUTPUTS");
+            controller.getOutputsXML();
+        }
+
+        private void button3_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER FOR SENSORS");
+            controller.getSensorsXML();
+        }
+
 
     }
 }
