@@ -18,6 +18,7 @@ namespace CloverMobile
         static Controller instance=null;
         static readonly object padlock = new object();
         string address = "http://localhost:3000";
+        string xmlType;
 
         // ** references to network controller, model (datamaster) and current ui page 
         private NetworkController nwc;
@@ -55,15 +56,18 @@ namespace CloverMobile
         }
         public void getUserXML()
         {
-            nwc.getUserInformationXML(address);
+
+            nwc.downloadXML("userInfo");
         }
         public void getSensorsXML()
-        { 
-            nwc.getSensorsXML(address);
+        {
+            nwc.downloadXML("sensors");
+            //nwc.getSensorsXML(address);
         }
         public void getOutputsXML()
         {
-            nwc.getOutputsXML(address);
+            nwc.downloadXML("outputs");
+            //nwc.getOutputsXML(address);
         }
         public void sendHeatingAndLightning(bool heating, bool lightning)
         { 
