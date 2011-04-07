@@ -48,8 +48,9 @@ namespace CloverMobile
         {
             return allOutputs;
         }
-        public void parseXML(XDocument xmlDoc)
+        public void parseUserInformation(XDocument xmlDoc)
         {
+
             System.Diagnostics.Debug.WriteLine("Parsing XML...");
             var user = from userValue in xmlDoc.Descendants("user")
                        select new User
@@ -99,17 +100,20 @@ namespace CloverMobile
             }
         }
             //allSensors.Clear();
-            public SensorInformation parseSensors(XDocument xmlDoc)
-            {
-                
-                var allSensors = new SensorInformation();
+        public SensorInformation parseSensors(XDocument xmlDoc)
+        {
+            System.Diagnostics.Debug.WriteLine("PARSING SENSORS");
+                //System.Diagnostics.Debug.WriteLine(xmlDoc.ToString());
 
+                var allSensors = new SensorInformation();
+                /*
                 XElement generalElement = xmlDoc
                         .Element("user")
                         .Element("device")
                         .Element("location")
                         .Element("sensors")                     
                         ;
+                */
                 //students.School = generalElement.Element("School").Value;
                 //students.Department = generalElement.Element("Department").Value;
                 try
@@ -119,23 +123,54 @@ namespace CloverMobile
                                             {
                                                 sensorId = Convert.ToInt16(s.Element("id").Value),
                                                 sensorName = s.Element("name").Value.ToString(),
+                                                // add long name
                                                 sensorVarType = s.Element("vartype").Value.ToString(),
-                                                latestReading = int.Parse(s.Element("latestreading").Value)
+                                                latestReading = s.Element("latestreading") != null ? s.Element("latestreading").Value : string.Empty
                                             }).ToList<Sensor>();
-
-
                 }
                 catch (FormatException f)
                 {
                     System.Diagnostics.Debug.WriteLine(f.Message.ToString());
                 }
                 foreach (Sensor si in allSensors.mySensors)
-               {
-                   System.Diagnostics.Debug.WriteLine("SENSORS: " + si.sensorId.ToString() + " " + si.sensorName + " " + si.sensorVarType.ToString()); 
-               }
+                {
+                   System.Diagnostics.Debug.WriteLine("SENSORS: " + si.sensorId.ToString() + " " + si.sensorName + " " + si.sensorVarType.ToString()  ); 
+                }
 
                 return allSensors;
+        }
+        
+        public OutputInformation parseOutpus(XDocument xmlDoc)
+        {
+            System.Diagnostics.Debug.WriteLine("PARSING OUTPUTS");
+            //System.Diagnostics.Debug.WriteLine(xmlDoc.ToString());
+            var allOutputs = new OutputInformation();
+            try
+            {
+                allOutputs.myOutputs = (from o in xmlDoc.Descendants("output")
+                                        select new Output()
+                                        {
+                                            id = Convert.ToInt16(o.Element("id").Value),
+                                            name = o.Element("name").Value.ToString(),
+                                            // add long name
+                                            state = o.Element("state") != null ? o.Element("state").Value : string.Empty
+                                            //state = o.Element("state").Value.ToString(),
+                                            //hasChanged = o.Element("haschanged") != null ? o.Element("latestreading").Value : string.Empty
+                                        }).ToList<Output>();
             }
+            catch 
+            {
+                
+            }
+            foreach (Output o in allOutputs.myOutputs)
+            {
+                System.Diagnostics.Debug.WriteLine("OUTPUTS: " + o.id.ToString() + " " + o.name + " " + o.state + " " + o.hasChanged);
+            }
+
+            return allOutputs;
+        
+        }
+        
                 /*
                 System.Diagnostics.Debug.WriteLine("Parsing outputs and sensors: ");
 
@@ -179,10 +214,6 @@ namespace CloverMobile
                     System.Diagnostics.Debug.WriteLine("FOR EACH ");
                     
                 }
-
-              */  
-
-        
         public void WriteHistory(XDocument xmlDoc)
         {
             /*
@@ -201,7 +232,7 @@ namespace CloverMobile
             }
             isUpdated = true;
            */
-        }
+        //}
         public void WriteOutputs(XDocument xmlDoc)
         {
             allOutputs.Clear();
@@ -210,8 +241,8 @@ namespace CloverMobile
             {
                 id = int.Parse(output.Element("id").Value),
                 name = output.Element("name").Value.ToString(),
-                state = bool.Parse(output.Element("state").Value),
-                hasChanged = bool.Parse(output.Element("haschanged").Value),
+                //state = bool.Parse(output.Element("state").Value),
+                //hasChanged = bool.Parse(output.Element("haschanged").Value),
             };
             foreach (Output o in dataUnitoutputs)
             {
@@ -228,7 +259,7 @@ namespace CloverMobile
                 sensorId = int.Parse(sensor.Element("id").Value),
                 sensorName = sensor.Element("name").Value.ToString(),
                 sensorVarType = sensor.Element("name").Value.ToString(),
-                latestReading = int.Parse(sensor.Element("latestreading").Value),
+                //latestReading = int.Parse(sensor.Element("latestreading").Value),
                 //updatedAt = DateTime.Parse(sensor.Element("updated-at").Value),
             };
             foreach (Sensor s in sensorOutputs)

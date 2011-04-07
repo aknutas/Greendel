@@ -53,9 +53,17 @@ namespace CloverMobile
                 }
             }
         }
-        public void getXML()
+        public void getUserXML()
         {
-            nwc.getXML(address);
+            nwc.getUserInformationXML(address);
+        }
+        public void getSensorsXML()
+        { 
+            nwc.getSensorsXML(address);
+        }
+        public void getOutputsXML()
+        {
+            nwc.getOutputsXML(address);
         }
         public void sendHeatingAndLightning(bool heating, bool lightning)
         { 

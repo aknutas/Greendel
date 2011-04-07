@@ -12,19 +12,13 @@ using System.Collections.Generic;
 
 namespace CloverMobile
 {
-    public class User
+    public class OutputInformation
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string realName { get; set; }
-        public Device myDevice { get; set; }
-        
-       
-        public User()
+        public List<Output> myOutputs { get; set; }
+
+        public OutputInformation()
         {
-            
-            
-        
+            myOutputs = new List<Output>();
         }
     }
 }
