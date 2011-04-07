@@ -21,6 +21,15 @@ class WeathersController < ApplicationController
     end
   end
 
+  def histories
+    @weather = Weather.find(params[:id], :include => :histories)
+    @histories = @weather.histories
+
+    respond_to do |format|
+      format.xml # datastatus.xml.builder
+    end
+  end
+
   # GET /weathers/new
   # GET /weathers/new.xml
   def new
