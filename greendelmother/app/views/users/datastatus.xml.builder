@@ -23,6 +23,7 @@ xml.user do
           xml.longname sensor.longname
           xml.vartype sensor.vartype
           xml.latestreading sensor.latestreading
+          xml.updated_at sensor.updated_at
         end
       end
     end
