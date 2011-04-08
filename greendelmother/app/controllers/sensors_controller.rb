@@ -23,14 +23,46 @@ class SensorsController < ApplicationController
 
   def history
 
-    @startdate = Time.zone.today - 1.days
-    @enddate = Time.zone.today + 1.days
+    @startdate = Time.zone.today.to_time - 1.days
+    @enddate = Time.zone.today.to_time + 1.days
 
-    @startdate = params[:startdate].to_date if params[:startdate]
-    @enddate = params[:enddate].to_date if params[:enddate]
+    @startdate = params[:startdate].to_date.to_time if params[:startdate]
+    @enddate = params[:enddate].to_date.to_time if params[:enddate]
 
     @sensor = Sensor.find(params[:id], :include => [:device])
-    @readings = @sensor.readings.find(:all, :order => "time ASC", :conditions => {:time => @startdate..@enddate})
+
+    avgreadings = nil
+
+    if (params[:hourlyavg] || params[:dailyavg])
+      avgreadings = Array.new
+      if (params[:hourlyavg])
+        interval = 1.hours
+      elsif (params[:dailyavg])
+        interval = 1.days
+      end
+      avgstart = @startdate
+      avgend = @startdate + interval
+
+      while (avgend <= @enddate) do
+        avgpart = @sensor.readings.find(:all, :order => "time ASC", :conditions => {:time => avgstart..avgend})
+        count = avgpart.size
+        sum = 0
+
+        if (count > 0)
+          avgpart.each do |reading|
+            sum = reading.value + sum
+          end
+          avg = sum / count
+          avgreadings << Reading.new(:value => avg, :time => avgpart.first.time)
+        end
+
+        avgstart = avgstart + interval
+        avgend = avgend + interval
+      end
+      @readings = avgreadings
+    else
+      @readings = @sensor.readings.find(:all, :order => "time ASC", :conditions => {:time => @startdate..@enddate})
+    end
 
     respond_to do |format|
       format.xml # datastatus.xml.builder
