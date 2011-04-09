@@ -84,6 +84,11 @@ namespace CloverMobile
 
             //nwc.    
         }
+        public void printErrorMessage(string message)
+        { 
+            //activePage.
+      
+        }
 
 
     }

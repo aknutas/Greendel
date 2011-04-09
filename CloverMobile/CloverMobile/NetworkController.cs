@@ -29,7 +29,7 @@ namespace CloverMobile
         private string documentType = "";
         private string xmlMessage;
         private string username = "testipaavo";
-        private string password = "testi";
+        private string password = "testi2";
         private Thread downloader;
         private Thread uploader;
         private List<WorkItem> downloadWorkQueue;
@@ -81,7 +81,6 @@ namespace CloverMobile
                                 try
                                 {
                                     wcDown.Credentials = new NetworkCredential(username, password);
-                                    System.Diagnostics.Debug.WriteLine("!!!");
                                     wcDown.DownloadStringAsync(new Uri(serviceAddress + "/users/datastatus/1"));
                                 }
                                 catch
@@ -274,6 +273,15 @@ namespace CloverMobile
         void wc_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
             downloading = false;
+
+            if (e.Error != null) // ** connection error
+            {
+
+                System.Diagnostics.Debug.WriteLine("CONNECTION ERROR! " + e.Error.ToString());
+                sendErrorMessage(e.Error.ToString());
+                // stop threads
+                
+            }
             System.Diagnostics.Debug.WriteLine("CALLING EVENT HANDLER");
             if (documentType == "userInfo")
             {
@@ -324,6 +332,11 @@ namespace CloverMobile
         void wcUpload_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
         {
             uploading = false;
+        }
+        public void sendErrorMessage(string errorMessage)
+        {
+            controller.printErrorMessage(errorMessage);
+           
         }
     }
 }
