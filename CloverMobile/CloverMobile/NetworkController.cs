@@ -32,7 +32,8 @@ namespace CloverMobile
         private string password = "testi";
         private Thread downloader;
         private Thread uploader;
-        private List<WorkItem> workQueue;
+        private List<WorkItem> downloadWorkQueue;
+        private List<WorkItem> uploadWorkQueue;
         private WorkItem currentWorkItem;
 
         public void setDataMaster(DataMaster mstr)
@@ -46,15 +47,17 @@ namespace CloverMobile
         }
         public NetworkController()
         {
+            downloadWorkQueue = new List<WorkItem>();
             wcDown = new WebClient();
             wcDown.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted);
             wcUp = new WebClient();
+
             downloader = new Thread(doDownloading);
             downloader.Name = "Downloader";
             downloader.Start();       
-            uploader = new Thread(doUploading);
-            uploader.Name = "Uploader";
-            uploader.Start();
+            //uploader = new Thread(doUploading);
+            //uploader.Name = "Uploader";
+            //uploader.Start();
             
         }
         public void doDownloading()
@@ -62,15 +65,17 @@ namespace CloverMobile
             while (true)
             {
                 // ** there is some downloading to do
-                if (workQueue.Count > 0)
+                if (downloadWorkQueue.Count > 0 && !downloading)
                 {
-                    lock (workQueue)
+                    downloading = true;
+                    lock (downloadWorkQueue)
                     {
-                        currentWorkItem = workQueue[workQueue.Count - 1];
+                        currentWorkItem = downloadWorkQueue[downloadWorkQueue.Count - 1];
                     }
                     switch (currentWorkItem.documentName)
                     { 
                         case "userInfo":
+                                documentType = "userInfo";
                                 try
                                 {
                                     wcDown.Credentials = new NetworkCredential(username, password);
@@ -82,7 +87,7 @@ namespace CloverMobile
                                 }
                                 break;
                         case "sensors":
-
+                                documentType = "sensors";
                                 try
                                 {
                                     wcDown.Credentials = new NetworkCredential(username, password);
@@ -94,6 +99,7 @@ namespace CloverMobile
                                 }
                                 break;
                         case "outputs":
+                                documentType = "outputs";
                                 try
                                 {
                                     wcDown.Credentials = new NetworkCredential(username, password);
@@ -108,9 +114,9 @@ namespace CloverMobile
                         break;                                    
                     }
                     // ** delete workunit from the list
-                    lock (workQueue)
+                    lock (downloadWorkQueue)
                     {
-                        workQueue.RemoveAt(workQueue.Count - 1);
+                        downloadWorkQueue.RemoveAt(downloadWorkQueue.Count - 1);
                     }
                 }
                 // ** work queue is empty
@@ -118,11 +124,43 @@ namespace CloverMobile
                 {
                     Thread.Sleep(50);               
                 }           
-            }
-        
+            }       
         }
         public void doUploading()
-        { 
+        {
+            // ** there is some downloading to do
+            if (uploadWorkQueue.Count > 0 && !uploading)
+            {
+             uploading = true;
+                    lock (uploadWorkQueue)
+                    {
+                        currentWorkItem = uploadWorkQueue[uploadWorkQueue.Count - 1];
+                    }
+                    switch (currentWorkItem.documentName)
+                    { 
+                        case "userInfo":
+
+                                break;
+                        case "sensors":
+
+                                break;
+                        case "outputs":
+
+                                break;
+                        default:
+                        break;                                    
+                    }
+                    // ** delete workunit from the list
+                    lock (uploadWorkQueue)
+                    {
+                        uploadWorkQueue.RemoveAt(uploadWorkQueue.Count - 1);
+                    }
+                }
+                // ** work queue is empty
+                else
+                {
+                    Thread.Sleep(50);               
+                }           
         }
 
         // ** authorize the user
@@ -133,11 +171,19 @@ namespace CloverMobile
         }
 
         // ** Safely add new work unit to the list !
-        public void addNewWorkUnit(WorkItem newItem)
+        public void addNewDownloadWorkUnit(WorkItem newItem)
         {
-            lock (workQueue)
+            lock (downloadWorkQueue)
             {        
-                workQueue.Add(newItem);           
+                downloadWorkQueue.Add(newItem);           
+            }
+        }
+        // ** Safely add new work unit to the list !
+        public void addNewUploadWorkUnit(WorkItem newItem)
+        {
+            lock (uploadWorkQueue)
+            {
+                uploadWorkQueue.Add(newItem);
             }
         }
         public void getUserInformationXML()
@@ -223,6 +269,7 @@ namespace CloverMobile
 
         void wc_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
+            downloading = false;
             System.Diagnostics.Debug.WriteLine("CALLING EVENT HANDLER");
             if (documentType == "userInfo")
             {
@@ -272,7 +319,7 @@ namespace CloverMobile
         }
         void wcUpload_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
         {
-            // ** when uploaded, this happens
+            uploading = false;
         }
     }
 }
