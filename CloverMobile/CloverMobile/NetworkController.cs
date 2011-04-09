@@ -36,15 +36,7 @@ namespace CloverMobile
         private List<WorkItem> uploadWorkQueue;
         private WorkItem currentWorkItem;
 
-        public void setDataMaster(DataMaster mstr)
-        {
-            master = mstr;
-            serviceAddress = "http://localhost:3000";
-        }
-        public void setMasterController(Controller ctrl)
-        {
-            controller = ctrl;
-        }
+
         public NetworkController()
         {
             downloadWorkQueue = new List<WorkItem>();
@@ -60,6 +52,15 @@ namespace CloverMobile
             //uploader.Start();
             
         }
+        public void setDataMaster(DataMaster mstr)
+        {
+            master = mstr;
+            serviceAddress = "http://localhost:3000";
+        }
+        public void setMasterController(Controller ctrl)
+        {
+            controller = ctrl;
+        }
         public void doDownloading()
         {
             while (true)
@@ -68,25 +69,28 @@ namespace CloverMobile
                 if (downloadWorkQueue.Count > 0 && !downloading)
                 {
                     downloading = true;
-                    lock (downloadWorkQueue)
-                    {
-                        currentWorkItem = downloadWorkQueue[downloadWorkQueue.Count - 1];
-                    }
-                    switch (currentWorkItem.documentName)
-                    { 
-                        case "userInfo":
+
+                        lock (downloadWorkQueue)
+                        {
+                            currentWorkItem = downloadWorkQueue[downloadWorkQueue.Count - 1];
+                        }
+                        switch (currentWorkItem.documentName)
+                        {
+                            case "userInfo":
                                 documentType = "userInfo";
                                 try
                                 {
                                     wcDown.Credentials = new NetworkCredential(username, password);
-                                    wcDown.DownloadStringAsync(new Uri(serviceAddress + "/users/datastatus/1"));                                   
+                                    System.Diagnostics.Debug.WriteLine("!!!");
+                                    wcDown.DownloadStringAsync(new Uri(serviceAddress + "/users/datastatus/1"));
                                 }
-                                catch (WebException we)
-                                { 
-                                    
+                                catch
+                                {
+                                    System.Diagnostics.Debug.WriteLine("!!!");
                                 }
                                 break;
-                        case "sensors":
+
+                            case "sensors":
                                 documentType = "sensors";
                                 try
                                 {
@@ -95,10 +99,10 @@ namespace CloverMobile
                                 }
                                 catch (WebException we)
                                 {
-
+                                    System.Diagnostics.Debug.WriteLine("!!!" + we.Message.ToString());
                                 }
                                 break;
-                        case "outputs":
+                            case "outputs":
                                 documentType = "outputs";
                                 try
                                 {
@@ -107,17 +111,17 @@ namespace CloverMobile
                                 }
                                 catch (WebException we)
                                 {
-                                    
+                                    System.Diagnostics.Debug.WriteLine("!!!" + we.Message.ToString());
                                 }
                                 break;
-                        default:
-                        break;                                    
-                    }
-                    // ** delete workunit from the list
-                    lock (downloadWorkQueue)
-                    {
-                        downloadWorkQueue.RemoveAt(downloadWorkQueue.Count - 1);
-                    }
+                            default:
+                                break;
+                        }
+                        // ** delete workunit from the list
+                        lock (downloadWorkQueue)
+                        {
+                            downloadWorkQueue.RemoveAt(downloadWorkQueue.Count - 1);
+                        }
                 }
                 // ** work queue is empty
                 else
@@ -165,7 +169,7 @@ namespace CloverMobile
 
         // ** authorize the user
         public void authenticate(string username,string password)
-        {            
+        {   
             wcDown.Credentials = new NetworkCredential(username, password);
             wcUp.Credentials = new NetworkCredential(username, password);
         }
@@ -215,7 +219,7 @@ namespace CloverMobile
             }
             catch (WebException we)
             {
-    
+                System.Diagnostics.Debug.WriteLine("!!!");
             }
         }
         public void getOutputsXML()

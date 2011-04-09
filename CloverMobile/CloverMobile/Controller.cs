@@ -56,6 +56,11 @@ namespace CloverMobile
                 }
             }
         }
+        public bool authenticate(string userName, string password)
+        {
+            nwc.authenticate(userName, password);
+            return true;       
+        }
         public void getUserXML()
         {
             WorkItem newItem = new WorkItem("userInfo", 0);
