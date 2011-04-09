@@ -59,20 +59,20 @@ namespace CloverMobile
         public void getUserXML()
         {
             WorkItem newItem = new WorkItem("userInfo", 0);
-            nwc.addNewWorkUnit(newItem);      
+            nwc.addNewDownloadWorkUnit(newItem);      
         }
         public void getSensorsXML()
         {
             
             device = model.getDevice();
             WorkItem newItem = new WorkItem("sensors", device.deviceId);
-            nwc.addNewWorkUnit(newItem);
+            nwc.addNewDownloadWorkUnit(newItem);
         }
         public void getOutputsXML()
         {
             device = model.getDevice();
             WorkItem newItem = new WorkItem("outputs", device.deviceId);
-            nwc.addNewWorkUnit(newItem);
+            nwc.addNewDownloadWorkUnit(newItem);
         }
         public void sendHeatingAndLightning(bool heating, bool lightning)
         { 
