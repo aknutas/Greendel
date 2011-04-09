@@ -95,8 +95,12 @@ namespace CloverMobile
             try
             {
                 wcDown.Credentials = new NetworkCredential(username, password);
+                
+                /*
+                wcDown.Credentials = new NetworkCredential(username, password);
                 wcDown.DownloadStringAsync(new Uri(serviceAddress + "/users/datastatus/1"));
                 //wcDown.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted);
+                 * */
             }
             catch (WebException we)
             {
