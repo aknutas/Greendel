@@ -24,16 +24,34 @@ namespace CloverMobile
         private WebClient wcDown = null;
         private WebClient wcUp = null;
         private XDocument dataDoc;
-        private bool xmlRetrieved = false;
-        private string documentType;
+        private bool downloading = false;
+        private bool uploading = false;
+        private string documentType = "";
         private string xmlMessage;
         private string username = "testipaavo";
-        private string password = "testi";
+        private string password = "testi2";
         private Thread downloader;
         private Thread uploader;
+        private List<WorkItem> downloadWorkQueue;
+        private List<WorkItem> uploadWorkQueue;
+        private WorkItem currentWorkItem;
 
 
+        public NetworkController()
+        {
+            downloadWorkQueue = new List<WorkItem>();
+            wcDown = new WebClient();
+            wcDown.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted);
+            wcUp = new WebClient();
 
+            downloader = new Thread(doDownloading);
+            downloader.Name = "Downloader";
+            downloader.Start();       
+            //uploader = new Thread(doUploading);
+            //uploader.Name = "Uploader";
+            //uploader.Start();
+            
+        }
         public void setDataMaster(DataMaster mstr)
         {
             master = mstr;
@@ -43,38 +61,134 @@ namespace CloverMobile
         {
             controller = ctrl;
         }
-        public NetworkController()
+        public void doDownloading()
         {
-            wcDown = new WebClient();
-            wcDown.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted);
-            wcUp = new WebClient();
+            while (true)
+            {
+                // ** there is some downloading to do
+                if (downloadWorkQueue.Count > 0 && !downloading)
+                {
+                    downloading = true;
+
+                        lock (downloadWorkQueue)
+                        {
+                            currentWorkItem = downloadWorkQueue[downloadWorkQueue.Count - 1];
+                        }
+                        switch (currentWorkItem.documentName)
+                        {
+                            case "userInfo":
+                                documentType = "userInfo";
+                                try
+                                {
+                                    wcDown.Credentials = new NetworkCredential(username, password);
+                                    wcDown.DownloadStringAsync(new Uri(serviceAddress + "/users/datastatus/1"));
+                                }
+                                catch
+                                {
+                                    System.Diagnostics.Debug.WriteLine("!!!");
+                                }
+                                break;
+
+                            case "sensors":
+                                documentType = "sensors";
+                                try
+                                {
+                                    wcDown.Credentials = new NetworkCredential(username, password);
+                                    wcDown.DownloadStringAsync(new Uri(serviceAddress + "/devices/datastatus/" + currentWorkItem.deviceId.ToString()));
+                                }
+                                catch (WebException we)
+                                {
+                                    System.Diagnostics.Debug.WriteLine("!!!" + we.Message.ToString());
+                                }
+                                break;
+                            case "outputs":
+                                documentType = "outputs";
+                                try
+                                {
+                                    wcDown.Credentials = new NetworkCredential(username, password);
+                                    wcDown.DownloadStringAsync(new Uri(serviceAddress + "/devices/datastatus/" + currentWorkItem.deviceId.ToString()));
+                                }
+                                catch (WebException we)
+                                {
+                                    System.Diagnostics.Debug.WriteLine("!!!" + we.Message.ToString());
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                        // ** delete workunit from the list
+                        lock (downloadWorkQueue)
+                        {
+                            downloadWorkQueue.RemoveAt(downloadWorkQueue.Count - 1);
+                        }
+                }
+                // ** work queue is empty
+                else
+                {
+                    Thread.Sleep(50);               
+                }           
+            }       
         }
+        public void doUploading()
+        {
+            // ** there is some downloading to do
+            if (uploadWorkQueue.Count > 0 && !uploading)
+            {
+             uploading = true;
+                    lock (uploadWorkQueue)
+                    {
+                        currentWorkItem = uploadWorkQueue[uploadWorkQueue.Count - 1];
+                    }
+                    switch (currentWorkItem.documentName)
+                    { 
+                        case "userInfo":
+
+                                break;
+                        case "sensors":
+
+                                break;
+                        case "outputs":
+
+                                break;
+                        default:
+                        break;                                    
+                    }
+                    // ** delete workunit from the list
+                    lock (uploadWorkQueue)
+                    {
+                        uploadWorkQueue.RemoveAt(uploadWorkQueue.Count - 1);
+                    }
+                }
+                // ** work queue is empty
+                else
+                {
+                    Thread.Sleep(50);               
+                }           
+        }
+
+        // ** authorize the user
         public void authenticate(string username,string password)
-        {
-            
-            //WebClient req = new WebClient();
-            //req.Credentials = new NetworkCredential(username, password);
-        }
-        public void downloadXML(string documentName)
-        {
-            if (documentName == "userInfo")
-            {
-                downloader = new Thread(getUserInformationXML); // Kick off a new thread
-                downloader.Start();
-            }
-            else if (documentName == "sensors")
-            {
-                downloader = new Thread(getSensorsXML); // Kick off a new thread
-                downloader.Start();
-            }
-            else if (documentName == "outputs")
-            {
-                downloader = new Thread(getOutputsXML); // Kick off a new thread
-                downloader.Start();
-            }
+        {   
+            wcDown.Credentials = new NetworkCredential(username, password);
+            wcUp.Credentials = new NetworkCredential(username, password);
         }
 
-
+        // ** Safely add new work unit to the list !
+        public void addNewDownloadWorkUnit(WorkItem newItem)
+        {
+            lock (downloadWorkQueue)
+            {        
+                downloadWorkQueue.Add(newItem);           
+            }
+        }
+        // ** Safely add new work unit to the list !
+        public void addNewUploadWorkUnit(WorkItem newItem)
+        {
+            lock (uploadWorkQueue)
+            {
+                uploadWorkQueue.Add(newItem);
+            }
+        }
         public void getUserInformationXML()
         {
             documentType = "userInfo";
@@ -95,12 +209,16 @@ namespace CloverMobile
             try
             {
                 wcDown.Credentials = new NetworkCredential(username, password);
+                
+                /*
+                wcDown.Credentials = new NetworkCredential(username, password);
                 wcDown.DownloadStringAsync(new Uri(serviceAddress + "/users/datastatus/1"));
                 //wcDown.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted);
+                 * */
             }
             catch (WebException we)
             {
-    
+                System.Diagnostics.Debug.WriteLine("!!!");
             }
         }
         public void getOutputsXML()
@@ -154,10 +272,19 @@ namespace CloverMobile
 
         void wc_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
+            downloading = false;
+
+            if (e.Error != null) // ** connection error
+            {
+
+                System.Diagnostics.Debug.WriteLine("CONNECTION ERROR! " + e.Error.ToString());
+                sendErrorMessage(e.Error.ToString());
+                // stop threads
+                
+            }
             System.Diagnostics.Debug.WriteLine("CALLING EVENT HANDLER");
             if (documentType == "userInfo")
             {
-
                 System.Diagnostics.Debug.WriteLine("EVENT HANDLER FOR USER INFO");
                 try
                 {
@@ -204,7 +331,12 @@ namespace CloverMobile
         }
         void wcUpload_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
         {
-            // ** when uploaded, this happens
+            uploading = false;
+        }
+        public void sendErrorMessage(string errorMessage)
+        {
+            controller.printErrorMessage(errorMessage);
+           
         }
     }
 }

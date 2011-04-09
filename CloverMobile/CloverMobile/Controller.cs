@@ -16,6 +16,7 @@ namespace CloverMobile
     {
         // ** controller is singleton
         static Controller instance=null;
+        Device device;
         static readonly object padlock = new object();
         string address = "http://localhost:3000";
         string xmlType;
@@ -35,6 +36,7 @@ namespace CloverMobile
         }
         private Controller()
         {
+            device = new Device();
             nwc = new NetworkController();
             model = new DataMaster();
             nwc.setDataMaster(model);
@@ -54,25 +56,38 @@ namespace CloverMobile
                 }
             }
         }
+        public bool authenticate(string userName, string password)
+        {
+            nwc.authenticate(userName, password);
+            return true;       
+        }
         public void getUserXML()
         {
-
-            nwc.downloadXML("userInfo");
+            WorkItem newItem = new WorkItem("userInfo", 0);
+            nwc.addNewDownloadWorkUnit(newItem);      
         }
         public void getSensorsXML()
         {
-            nwc.downloadXML("sensors");
-            //nwc.getSensorsXML(address);
+            
+            device = model.getDevice();
+            WorkItem newItem = new WorkItem("sensors", device.deviceId);
+            nwc.addNewDownloadWorkUnit(newItem);
         }
         public void getOutputsXML()
         {
-            nwc.downloadXML("outputs");
-            //nwc.getOutputsXML(address);
+            device = model.getDevice();
+            WorkItem newItem = new WorkItem("outputs", device.deviceId);
+            nwc.addNewDownloadWorkUnit(newItem);
         }
         public void sendHeatingAndLightning(bool heating, bool lightning)
         { 
 
             //nwc.    
+        }
+        public void printErrorMessage(string message)
+        { 
+            //activePage.
+      
         }
 
 

@@ -151,7 +151,7 @@
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,0,0">
             <Image x:Name="image" Margin="122,65,140,278" Source="Graphics/Clover.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <CompositeTransform />
@@ -193,7 +193,15 @@
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
             </TextBlock>
-            <!--
+            <Canvas Height="529" HorizontalAlignment="Left" Margin="6,0,0,0" Name="splashScreen" VerticalAlignment="Top" Width="444" Visibility="Visible" Background="Black">
+            <TextBox Height="72" HorizontalAlignment="Left" Margin="23,138,0,0" Name="userNameTextBox" Text="TextBox" VerticalAlignment="Top" Width="421" TextChanged="userNameTextBox_TextChanged" />
+            <TextBox Height="72" HorizontalAlignment="Left" Margin="23,278,0,0" Name="passwordTextBox" Text="TextBox" VerticalAlignment="Top" Width="421" TextChanged="passwordTextBox_TextChanged" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="34,102,0,0" Name="userName" Text="User Name" VerticalAlignment="Top" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="34,242,0,0" Name="textBlock5" Text="Password" VerticalAlignment="Top" />
+                <Button Canvas.Left="143" Canvas.Top="393" Content="Button" Height="71" Name="loginButton" Width="160" Click="loginButton_Click" />
+            </Canvas>
+
+                <!--
             <HyperlinkButton Content="Settings" Height="30" HorizontalAlignment="Left" Margin="18,531,0,0" Name="hyperlinkButton1" VerticalAlignment="Top" Width="200" NavigateUri="/CloverMobile;component/Settings.xaml" />
             <HyperlinkButton Content="History" Height="30" HorizontalAlignment="Left" Margin="250,531,0,0" Name="hyperlinkButton2" VerticalAlignment="Top" Width="200" NavigateUri="/CloverMobile;component/History.xaml" />
             -->

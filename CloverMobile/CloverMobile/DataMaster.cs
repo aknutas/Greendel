@@ -39,6 +39,15 @@ namespace CloverMobile
             dataDoc = new XDocument();
             //allHistoryData = new List<HistoryData>();
         }
+        public Device getDevice()
+        {
+            return currentDevice;
+        
+        }
+        public Weather getWeather()
+        {
+            return currentWeather;
+        }
         public List<Sensor> getSensors()
         {
             return allSensors;
@@ -60,6 +69,8 @@ namespace CloverMobile
                        };
             foreach (User u in user)
             {
+                currentUser.name = u.name;
+                currentUser.realName = u.realName;
                 System.Diagnostics.Debug.WriteLine("USER:" + " " + u.id.ToString() + " " + u.name + " " + u.realName);
             }
 
@@ -69,8 +80,11 @@ namespace CloverMobile
                              deviceId = int.Parse(deviceValue.Element("id").Value),
                              deviceName = deviceValue.Element("name").Value.ToString(),
                          };
+            
             foreach (Device d in device)
             {
+                currentDevice.deviceId = d.deviceId;
+                currentDevice.deviceName = d.deviceName;
                 System.Diagnostics.Debug.WriteLine("DEVICE:" + " " + d.deviceId.ToString() + " " + d.deviceName);
             }
 
