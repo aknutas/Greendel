@@ -4,6 +4,7 @@ class CreateSavingsgoals < ActiveRecord::Migration
       t.float :amount
       t.string :type
       t.bool :completed
+      t.bool :successful
       t.date :timestart
       t.date :timeend
 
