@@ -82,15 +82,15 @@ namespace CloverMobile
                                 }
                                 break;
                         case "sensors":
-                                
+
                                 try
-                                {      
+                                {
                                     wcDown.Credentials = new NetworkCredential(username, password);
-                                    wcDown.DownloadStringAsync(new Uri(serviceAddress + "/devices/datastatus/" + currentWorkItem.deviceId.ToString()));                                   
-                                
+                                    wcDown.DownloadStringAsync(new Uri(serviceAddress + "/devices/datastatus/" + currentWorkItem.deviceId.ToString()));
+                                }
                                 catch (WebException we)
                                 {
-    
+
                                 }
                                 break;
                         case "outputs":
@@ -118,11 +118,11 @@ namespace CloverMobile
                 {
                     Thread.Sleep(50);               
                 }           
-            }        
+            }
+        
         }
         public void doUploading()
         { 
-             
         }
 
         // ** authorize the user
