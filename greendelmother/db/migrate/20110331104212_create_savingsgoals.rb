@@ -3,6 +3,7 @@ class CreateSavingsgoals < ActiveRecord::Migration
     create_table :savingsgoals do |t|
       t.float :amount
       t.string :type
+      t.bool :completed
       t.date :timestart
       t.date :timeend
 

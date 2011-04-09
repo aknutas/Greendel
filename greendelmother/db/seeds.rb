@@ -27,6 +27,8 @@ testlocation.save
 
 s = Sensor.create(:name => 'poweruse', :longname => 'Power Consumption', :vartype => 'integer')
 cloverpower.sensors << s
+s = Sensor.create(:name => 'powerconsumed', :longname => 'Consumed Power', :vartype => 'integer')
+cloverpower.sensors << s
 s = Sensor.create(:name => 'insidetemp', :longname => 'Inside Temperature', :vartype => 'integer')
 cloverpower.sensors << s
 s = Sensor.create(:name => 'outsidetemp', :longname => 'Outside Temperature', :vartype => 'integer')
