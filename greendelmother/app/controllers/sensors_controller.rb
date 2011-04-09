@@ -30,38 +30,12 @@ class SensorsController < ApplicationController
     @enddate = params[:enddate].to_date.to_time if params[:enddate]
 
     @sensor = Sensor.find(params[:id], :include => [:device])
+    avgscale = params[:avgscale]
 
-    avgreadings = nil
-
-    if (params[:hourlyavg] || params[:dailyavg])
-      avgreadings = Array.new
-      if (params[:hourlyavg])
-        interval = 1.hours
-      elsif (params[:dailyavg])
-        interval = 1.days
-      end
-      avgstart = @startdate
-      avgend = @startdate + interval
-
-      while (avgend <= @enddate) do
-        avgpart = @sensor.readings.find(:all, :order => "time ASC", :conditions => {:time => avgstart..avgend})
-        count = avgpart.size
-        sum = 0
-
-        if (count > 0)
-          avgpart.each do |reading|
-            sum = reading.value + sum
-          end
-          avg = sum / count
-          avgreadings << Reading.new(:value => avg, :time => avgpart.first.time)
-        end
-
-        avgstart = avgstart + interval
-        avgend = avgend + interval
-      end
-      @readings = avgreadings
+    if (avgscale == "hourly" || avgscale == "daily")
+      @readings = @sensor.get_avg_readings(@startdate, @enddate, avgscale)
     else
-      @readings = @sensor.readings.find(:all, :order => "time ASC", :conditions => {:time => @startdate..@enddate})
+      @readings = @sensor.get_readings(@startdate, @enddate)
     end
 
     respond_to do |format|
