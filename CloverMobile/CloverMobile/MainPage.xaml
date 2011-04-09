@@ -194,12 +194,12 @@
             	</TextBlock.RenderTransform>
             </TextBlock>
             <Canvas Height="529" HorizontalAlignment="Left" Margin="6,0,0,0" Name="splashScreen" VerticalAlignment="Top" Width="444" Visibility="Visible" Background="Black">
-            <TextBox Height="72" HorizontalAlignment="Left" Margin="23,138,0,0" Name="userNameTextBox" Text="TextBox" VerticalAlignment="Top" Width="421" TextChanged="userNameTextBox_TextChanged" />
-            <TextBox Height="72" HorizontalAlignment="Left" Margin="23,278,0,0" Name="passwordTextBox" Text="TextBox" VerticalAlignment="Top" Width="421" TextChanged="passwordTextBox_TextChanged" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="34,102,0,0" Name="userNameTextBlock" Text="User Name" VerticalAlignment="Top" />
+            <TextBox Height="72" HorizontalAlignment="Left" Margin="23,138,0,0" Name="userNameTextBox" Text="" VerticalAlignment="Top" Width="421" TextChanged="userNameTextBox_TextChanged" />
+                <TextBlock Height="30" HorizontalAlignment="Left" Margin="34,102,0,0" Name="userNameTextBlock" Text="User Name" VerticalAlignment="Top" />
             <TextBlock Height="30" HorizontalAlignment="Left" Margin="34,242,0,0" Name="passwordTextBlock" Text="Password" VerticalAlignment="Top" />
-                <Button Canvas.Left="143" Canvas.Top="393" Content="Button" Height="71" Name="loginButton" Width="160" Click="loginButton_Click" />
-                <TextBlock Canvas.Left="37" Canvas.Top="356" Height="30" Name="errorMessageTextBlock" Text="" Width="380" />
+                <Button Canvas.Left="143" Canvas.Top="393" Content="Log In" Height="71" Name="loginButton" Width="160" Click="loginButton_Click" />
+                <TextBlock Canvas.Left="37" Canvas.Top="356" Height="30" Name="errorMessageTextBlock" Text="" Width="380" Foreground="Red" />
+                <PasswordBox Canvas.Left="33" Canvas.Top="286" Height="71" Name="passwordTextBox" Width="405" />
             </Canvas>
 
                 <!--
