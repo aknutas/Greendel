@@ -181,8 +181,10 @@ namespace CloverMobile
         }
 
         // ** authorize the user
-        public void authenticate(string username,string password)
-        {   
+        public void authenticate(string name,string pass)
+        {
+            username = name;
+            password = pass;
             wcDown.Credentials = new NetworkCredential(username, password);
             wcUp.Credentials = new NetworkCredential(username, password);
         }
@@ -294,6 +296,7 @@ namespace CloverMobile
 
                 System.Diagnostics.Debug.WriteLine("CONNECTION ERROR! " + e.Error.ToString());
                 sendErrorMessage(e.Error.ToString());
+                //downloader.Abort();
                 // stop threads
                 
             }
@@ -306,12 +309,13 @@ namespace CloverMobile
                     // ** xml document received fully, give it to the master
                     dataDoc = XDocument.Load(new StringReader(e.Result));
                     master.parseUserInformation(dataDoc);
+                    documentType = "";
+                    sendAuthenticationOk();
                 }
                 catch (WebException we)
                 {
                     // print message to somewhere
                 }
-                documentType = "";
             }
             else if (documentType == "sensors")
             {
@@ -358,6 +362,10 @@ namespace CloverMobile
         {
             controller.printErrorMessage(errorMessage);
            
+        }
+        public void sendAuthenticationOk()
+        {
+            controller.authenticationOk();
         }
     }
 }

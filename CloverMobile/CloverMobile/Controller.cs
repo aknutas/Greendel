@@ -20,6 +20,7 @@ namespace CloverMobile
         static readonly object padlock = new object();
         string address = "http://localhost:3000";
         string xmlType;
+        private CloverMobile.MainPage mainPageRef;
 
         // ** references to network controller, model (datamaster) and current ui page 
         private NetworkController nwc;
@@ -33,8 +34,7 @@ namespace CloverMobile
             System.Diagnostics.Debug.WriteLine("ACTIVE PAGE IS: " + activePage.GetType().ToString() );
             if (activePage.GetType().ToString() == "CloverMobile.MainPage")
             {
-                CloverMobile.MainPage mainPageRef = (CloverMobile.MainPage)currentPage;
-                mainPageRef.printError();                
+                mainPageRef = (CloverMobile.MainPage)currentPage;            
             }
             //activePage = 
         }
@@ -64,10 +64,10 @@ namespace CloverMobile
                 }
             }
         }
-        public bool authenticate(string userName, string password)
+        public void authenticate(string userName, string password)
         {
+
             nwc.authenticate(userName, password);
-            return true;       
         }
         public void getUserXML()
         {
@@ -89,15 +89,16 @@ namespace CloverMobile
         }
         public void sendHeatingAndLightning(bool heating, bool lightning)
         { 
-
-            //nwc.    
+    
         }
         public void printErrorMessage(string message)
-        { 
-            
-            //activePage
+        {
+            mainPageRef.printError();
         }
-
-
+        public void authenticationOk()
+        {
+            mainPageRef.authenticationOk();
+        
+        }
     }
 }

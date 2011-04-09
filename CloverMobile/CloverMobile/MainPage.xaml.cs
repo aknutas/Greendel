@@ -12,7 +12,6 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-
 using System.IO;
 using CloverMobile;
 using System.IO.IsolatedStorage;
@@ -21,8 +20,8 @@ namespace CloverMobile
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        Controller controller;
-        string fileName = "settings.txt";
+        private Controller controller;
+        private string fileName = "settings.txt";
         // ** Constructor
         public MainPage()
         {
@@ -31,9 +30,10 @@ namespace CloverMobile
             controller.setActivePage(this);
             // ** Check the setting here, if the setting file exists, don't display the splashscreen, otherwise, display it
             var appStorage = IsolatedStorageFile.GetUserStoreForApplication();
-            if (appStorage.FileExists(fileName) == false)
+            if (appStorage.FileExists(fileName) == true)
             {
                 splashScreen.Visibility = System.Windows.Visibility.Collapsed;
+  
                 //logIn("testipaavo", "testi2");
                 // ** dont display the splashscreen
             }
@@ -41,31 +41,17 @@ namespace CloverMobile
             {
                 PageTitle.Text = "Log In";
                 splashScreen.Visibility = System.Windows.Visibility.Visible;
-                // ** authenticate first, if successfull, then create the file
-                if (controller.authenticate(userNameTextBox.Text, passwordTextBox.Text) == true)
-                {                    
-                    if (appStorage.FileExists("settings.txt") == false)
-                    { 
-
-                        // create a new file
-                        using (var file = appStorage.OpenFile(fileName, System.IO.FileMode.Create, System.IO.FileAccess.Write))
-                        {   
-                            using (var writer = new StreamWriter(file))
-                            {
-                                writer.Write(userNameTextBox.Text + " " + passwordTextBox.Text);
-                            }
-                        }
-                    }     
-                }    
+                errorMessageTextBlock.Text = "";
             }
             // splashScreen.visibility = System.Windows.Visibility.Visible/Collabsed
             // get the username and password from memory card          
-            rotateClover.Begin();
-            rotateClover.Pause();
+            //rotateClover.Begin();
+            //rotateClover.Pause();
 
         }
         public void printError()
         {
+            splashScreen.Visibility = System.Windows.Visibility.Visible;
             errorMessageTextBlock.Text = "Connection Error.";
         }
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
@@ -94,9 +80,35 @@ namespace CloverMobile
         }
         private void loginButton_Click(object sender, RoutedEventArgs e)
         {
-            // check the 
+                // ** if splashscreen is displayed, user has not logged in 
+                controller.authenticate(userNameTextBox.Text, passwordTextBox.Password);
+                System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER FOR USER INFO");
+                controller.getUserXML();
+                
+                   
         }
+        public void authenticationOk()
+        {
+            // save the username and password to phone's flash memory to keep the user logged in
+            splashScreen.Visibility = System.Windows.Visibility.Collapsed;
+            PageTitle.Text = "Main Page";
+            var appStorage = IsolatedStorageFile.GetUserStoreForApplication();
+            // ** authenticate first, if successfull, then create the file
 
+            if (appStorage.FileExists("settings.txt") == false)
+            {
+
+                // create a new file
+                using (var file = appStorage.OpenFile(fileName, System.IO.FileMode.Create, System.IO.FileAccess.Write))
+                {
+                    using (var writer = new StreamWriter(file))
+                    {
+                        writer.Write(userNameTextBox.Text + " " + passwordTextBox.Password);
+                    }
+                }
+            }  
+        
+        }
         private void passwordTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             // delete this
