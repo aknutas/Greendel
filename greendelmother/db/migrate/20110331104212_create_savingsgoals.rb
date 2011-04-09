@@ -3,8 +3,8 @@ class CreateSavingsgoals < ActiveRecord::Migration
     create_table :savingsgoals do |t|
       t.float :amount
       t.string :type
-      t.bool :completed
-      t.bool :successful
+      t.boolean :completed, :default => false
+      t.boolean :successful
       t.date :timestart
       t.date :timeend
 
@@ -16,6 +16,7 @@ class CreateSavingsgoals < ActiveRecord::Migration
 
     add_index :savingsgoals, :device_id
     add_index :savingsgoals, :sensor_id
+    add_index :savingsgoals, :completed
 
   end
 

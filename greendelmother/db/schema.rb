@@ -75,6 +75,8 @@ ActiveRecord::Schema.define(:version => 20110407082126) do
   create_table "savingsgoals", :force => true do |t|
     t.float    "amount"
     t.string   "type"
+    t.boolean  "completed",  :default => false
+    t.boolean  "successful"
     t.date     "timestart"
     t.date     "timeend"
     t.integer  "device_id"
@@ -83,6 +85,7 @@ ActiveRecord::Schema.define(:version => 20110407082126) do
     t.datetime "updated_at"
   end
 
+  add_index "savingsgoals", ["completed"], :name => "index_savingsgoals_on_completed"
   add_index "savingsgoals", ["device_id"], :name => "index_savingsgoals_on_device_id"
   add_index "savingsgoals", ["sensor_id"], :name => "index_savingsgoals_on_sensor_id"
 
