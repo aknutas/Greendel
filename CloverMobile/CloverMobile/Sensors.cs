@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace CloverMobile
 {
@@ -19,5 +20,6 @@ namespace CloverMobile
         public string longName { get; set; }
         public string sensorVarType { get; set; }
         public string latestReading { get; set; }
+        private ObservableCollection<Point> historyValuePoints = new ObservableCollection<Point>();
     }
 }

@@ -28,6 +28,7 @@ namespace CloverMobile
         {
             InitializeComponent();
             controller = Controller.getInstance;
+            controller.setActivePage(this);
             // ** Check the setting here, if the setting file exists, don't display the splashscreen, otherwise, display it
             var appStorage = IsolatedStorageFile.GetUserStoreForApplication();
             if (appStorage.FileExists(fileName) == false)
@@ -62,6 +63,10 @@ namespace CloverMobile
             rotateClover.Begin();
             rotateClover.Pause();
 
+        }
+        public void printError()
+        {
+            errorMessageTextBlock.Text = "Connection Error.";
         }
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {

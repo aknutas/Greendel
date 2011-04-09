@@ -28,7 +28,15 @@ namespace CloverMobile
 
         public void setActivePage(PhoneApplicationPage currentPage)
         {
-            activePage = currentPage;        
+            activePage = currentPage;
+            activePage.GetType().ToString();
+            System.Diagnostics.Debug.WriteLine("ACTIVE PAGE IS: " + activePage.GetType().ToString() );
+            if (activePage.GetType().ToString() == "CloverMobile.MainPage")
+            {
+                CloverMobile.MainPage mainPageRef = (CloverMobile.MainPage)currentPage;
+                mainPageRef.printError();                
+            }
+            //activePage = 
         }
         public DataMaster getModel()
         {
@@ -86,8 +94,8 @@ namespace CloverMobile
         }
         public void printErrorMessage(string message)
         { 
-            //activePage.
-      
+            
+            //activePage
         }
 
 

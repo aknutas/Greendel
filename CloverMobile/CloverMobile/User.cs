@@ -18,13 +18,10 @@ namespace CloverMobile
         public string name { get; set; }
         public string realName { get; set; }
         public Device myDevice { get; set; }
-        
        
         public User()
         {
-            
-            
-        
+             
         }
     }
 }
