@@ -32,7 +32,7 @@ class SensorsController < ApplicationController
     @sensor = Sensor.find(params[:id], :include => [:device])
     avgscale = params[:avgscale]
 
-    if (avgscale == "hourly" || avgscale == "daily")
+    if (avgscale == "hourly" || avgscale == "daily" || avgscale == "monthly" || avgscale == "yearly")
       @readings = @sensor.get_avg_readings(@startdate, @enddate, avgscale)
     else
       @readings = @sensor.get_readings(@startdate, @enddate)
