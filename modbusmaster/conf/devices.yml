@@ -11,11 +11,16 @@
      ntype: short
      scalefactor: 1
    - id: 2
+     name: powerconsumed
+     register: 38
+     ntype: short
+     scalefactor: 1
+   - id: 3
      name: insidetemp
      register: 37
      ntype: short
      scalefactor: 1
-   - id: 3
+   - id: 4
      name: outsidetemp
      register: 35
      ntype: short
@@ -33,4 +38,3 @@
     - id: 4
       name: wind
       register: 33
-

@@ -27,6 +27,7 @@ class Sensor < ActiveRecord::Base
             sum = reading.value + sum
           end
           avg = sum / count
+          avgreading = 
           avgreadings << Reading.new(:value => avg, :time => avgpart.first.time)
         end
 

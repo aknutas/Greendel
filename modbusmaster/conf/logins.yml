@@ -1,4 +1,4 @@
 user: testipaavo
 passwd: testi
-caddress: 127.0.0.1
+caddress: localhost
 port: 3000
