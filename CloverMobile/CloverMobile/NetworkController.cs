@@ -113,6 +113,20 @@ namespace CloverMobile
                                     System.Diagnostics.Debug.WriteLine("!!!" + we.Message.ToString());
                                 }
                                 break;
+                            case "sensor":
+                                documentType = "sensor";
+                                                                
+                                try
+                                {
+                                    wcDown.Credentials = new NetworkCredential(username, password);
+                                    wcDown.DownloadStringAsync(new Uri(serviceAddress + "/sensors/" + currentWorkItem.sensorId.ToString()));
+                                }
+                                catch (WebException we)
+                                {
+                                    System.Diagnostics.Debug.WriteLine("!!!" + we.Message.ToString());
+                                }
+
+                                break;
                             default:
                                 break;
                         }
@@ -236,6 +250,7 @@ namespace CloverMobile
             }
         }
 
+
         public void sendValues(bool lightning, bool heating)
         {
             // ** this is old function
@@ -316,17 +331,23 @@ namespace CloverMobile
             else if (documentType == "outputs")
             {
                 System.Diagnostics.Debug.WriteLine("EVENT HANDLER FOR OUTPUTS");
-                try
-                {
-                    // ** xml document received fully, give it to the master
-                    dataDoc = XDocument.Load(new StringReader(e.Result));
-                    master.parseOutpus(dataDoc);
-                }
-                catch (WebException we)
-                {
-                    // print message to somewhere
-                }
+            
+                 // ** xml document received fully, give it to the master
+                 dataDoc = XDocument.Load(new StringReader(e.Result));
+                 master.parseOutpus(dataDoc);
                 documentType = "";
+            }
+            else if (documentType == "sensor")
+            {
+                System.Diagnostics.Debug.WriteLine("EVENT HANDLER FOR ONE SENSOR");
+                // ** xml document received fully, give it to the master
+                dataDoc = XDocument.Load(new StringReader(e.Result));
+                master.parseOutpus(dataDoc);
+          
+                // print message to somewhere
+              
+                documentType = ""; 
+            
             }
         }
         void wcUpload_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
