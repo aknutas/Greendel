@@ -29,8 +29,4 @@ class SignController < ApplicationController
     redirect_to(:action => "login")
   end
 
-  def index
-    render :layout => 'application'
-  end
-
 end

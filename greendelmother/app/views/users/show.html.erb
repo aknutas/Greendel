@@ -1,28 +1,7 @@
-<p>
-  <b>Name:</b>
-  <%=h @user.name %>
-</p>
+<p>Welcome <%= @user.name %></p>
 
-<p>
-  <b>Hashed password:</b>
-  <%=h @user.hashed_password %>
-</p>
+<p>It is <%= Time.zone.now.asctime %> and the weather is <%= @user.device.location.weather.desc.downcase %> and <%= @user.device.location.weather.temp.to_s + "C" %> at <%= @user.device.location.town %>.</p>
 
-<p>
-  <b>Salt:</b>
-  <%=h @user.salt %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%=h @user.email %>
-</p>
-
-<p>
-  <b>Realname:</b>
-  <%=h @user.realname %>
-</p>
-
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<% @user.device.sensors.each do |sensor| %>
+<p><%= sensor.longname %> was at <%= if sensor.latestreading then h(sensor.latestreading) else h("-") end %> when measured at <%= if sensor.updated_at.asctime then h(sensor.updated_at.asctime) else h("-") end %></p>
+<% end %>

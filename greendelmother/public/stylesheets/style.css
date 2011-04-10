@@ -1300,4 +1300,29 @@ input, select
 }
 /* end LayoutCell */
 
+/* @group Flash messages */
 
+.flash .message {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  text-align:center;
+  margin: 0 auto 15px;
+}
+
+.flash .message p {
+  margin:8px;
+}
+.flash .error {
+  border: 1px solid #fbb;
+  background-color: #fdd;
+}
+.flash .warning {
+  border: 1px solid #e0d300;
+  background-color: #ffffcc;
+}
+.flash .notice {
+  border: 1px solid #8ec4df;
+  background-color: #dffaff;
+}
+
+/* @end */
