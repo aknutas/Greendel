@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20110407082126) do
     t.string   "address"
     t.string   "town"
     t.string   "extaddress"
+    t.float    "powerprice"
     t.float    "xcoord"
     t.float    "ycoord"
     t.integer  "device_id"
