@@ -7,12 +7,15 @@ class CreateUsers < ActiveRecord::Migration
       t.string :email
       t.string :realname
 
+      t.integer :device_id
+
       t.timestamp :lastlogin
 
       t.timestamps
     end
 
     add_index :users, :name
+    add_index :users, :device_id
 
   end
 

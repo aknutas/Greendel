@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_one :device
+  belongs_to :device
   has_one :socialmedia
 
   validates_presence_of     :name

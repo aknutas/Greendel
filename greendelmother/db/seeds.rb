@@ -17,7 +17,7 @@ sm = Socialmedia.create(:twitteron => false, :facebookon => false)
 user.socialmedia = sm
 user.save
 
-testlocation = Location.create(:address => 'Nollakatu 0', :name => 'TestLocation', :town => 'Lappeenranta')
+testlocation = Location.create(:address => 'Nollakatu 0', :name => 'TestLocation', :town => 'Lappeenranta', :powerprice => 0.07)
 cloverpower.location = testlocation
 cloverpower.save
 

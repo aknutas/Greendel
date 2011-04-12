@@ -13,12 +13,9 @@ ActiveRecord::Schema.define(:version => 20110407082126) do
 
   create_table "devices", :force => true do |t|
     t.string   "name"
-    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "devices", ["user_id"], :name => "index_devices_on_user_id"
 
   create_table "histories", :force => true do |t|
     t.string   "desc"
@@ -40,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20110407082126) do
     t.string   "address"
     t.string   "town"
     t.string   "extaddress"
+    t.float    "powerprice"
     t.float    "xcoord"
     t.float    "ycoord"
     t.integer  "device_id"
@@ -123,11 +121,13 @@ ActiveRecord::Schema.define(:version => 20110407082126) do
     t.string   "salt"
     t.string   "email"
     t.string   "realname"
+    t.integer  "device_id"
     t.datetime "lastlogin"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "users", ["device_id"], :name => "index_users_on_device_id"
   add_index "users", ["name"], :name => "index_users_on_name"
 
   create_table "weathers", :force => true do |t|
