@@ -1,0 +1,34 @@
+Available Web Service APIs:
+
+General information and for populating the object graph after login:
+/users/datastatus/1.xml
+
+All device information:
+/devices/datastatus/<deviceid>.xml
+
+Individual sensor status:
+/sensors/<sensorid>.xml
+
+Individual output status:
+/outputs/<outputid>.xml
+Options:
+Update values with HTTP PUT verb
+
+Sensors history:
+/sensors/history/<sensorid>.xml
+Options:
+/sensors/history/<sensorid>.xml?avgscale=<hourly|daily|monthly>
+
+Weather histories:
+/histories/datastatus/<weatherid>.xml
+
+---
+
+Missing APIs:
+-Social media
+-Savings goals
+
+---
+
+Model Object Graph:
+See RubyMine Object Dependency Diagram

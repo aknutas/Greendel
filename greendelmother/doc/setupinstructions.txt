@@ -1,6 +1,7 @@
 To initialize and seed the database with initial values:
-hg db:drop
-hg db:setup
+rake db:drop
+rake db:setup
+rake weatherload
 
 To start up a test server:
 ./script/server
