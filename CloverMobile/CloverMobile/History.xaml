@@ -125,7 +125,7 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0" Background="#FF060606">
-            <chartingToolkit:Chart x:Name="chartSample" Background="Black" BorderBrush="Black" BorderThickness="3" Margin="0,4,0,0"  LegendStyle="{StaticResource LegendStyle1}" Foreground="#FD000000" >
+            <chartingToolkit:Chart x:Name="chartSample" Background="Black" BorderBrush="Black" BorderThickness="3" Margin="0,-16,0,20"  LegendStyle="{StaticResource LegendStyle1}" Foreground="#FD000000" >
             	<chartingToolkit:LineSeries  Margin="0" BorderBrush="Black" Foreground="Black" Background="Black" Opacity="0
 				" Visibility="Collapsed"/>
             </chartingToolkit:Chart>
