@@ -17,7 +17,7 @@ Update values with HTTP PUT verb
 Sensors history:
 /sensors/history/<sensorid>.xml
 Options:
-/sensors/history/<sensorid>.xml?avgscale=<hourly|daily|monthly>
+/sensors/history/<sensorid>.xml?avgscale=<hourly|daily|monthly>&startdate=<yyyy-mm-dd>&enddate=<yyyy-mm-dd>
 
 Weather histories:
 /histories/datastatus/<weatherid>.xml
