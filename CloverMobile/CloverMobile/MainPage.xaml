@@ -177,7 +177,7 @@
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
             </TextBlock>
-            <Image Height="90" HorizontalAlignment="Left" Margin="315,399,0,0" Name="windImage" Stretch="Fill" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.5,0.5" ImageFailed="windImage_ImageFailed">
+            <Image Height="90" HorizontalAlignment="Left" Margin="315,399,0,0" Name="windImage" Stretch="Fill" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.5,0.5">
                 <Image.OpacityMask>
                     <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
                         <GradientStop Color="Black" Offset="0" />
@@ -194,9 +194,9 @@
             	</TextBlock.RenderTransform>
             </TextBlock>
             <Canvas Height="529" HorizontalAlignment="Left" Margin="6,0,0,0" Name="splashScreen" VerticalAlignment="Top" Width="444" Visibility="Visible" Background="Black">
-            <TextBox Height="72" HorizontalAlignment="Left" Margin="23,138,0,0" Name="userNameTextBox" Text="" VerticalAlignment="Top" Width="421" TextChanged="userNameTextBox_TextChanged" />
+                 <TextBox Height="72" HorizontalAlignment="Left" Margin="23,138,0,0" Name="userNameTextBox" Text="" VerticalAlignment="Top" Width="421"  />
                 <TextBlock Height="30" HorizontalAlignment="Left" Margin="34,102,0,0" Name="userNameTextBlock" Text="User Name" VerticalAlignment="Top" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="34,242,0,0" Name="passwordTextBlock" Text="Password" VerticalAlignment="Top" />
+                <TextBlock Height="30" HorizontalAlignment="Left" Margin="34,242,0,0" Name="passwordTextBlock" Text="Password" VerticalAlignment="Top" />
                 <Button Canvas.Left="143" Canvas.Top="393" Content="Log In" Height="71" Name="loginButton" Width="160" Click="loginButton_Click" />
                 <TextBlock Canvas.Left="37" Canvas.Top="356" Height="30" Name="errorMessageTextBlock" Text="" Width="380" Foreground="Red" />
                 <PasswordBox Canvas.Left="33" Canvas.Top="286" Height="71" Name="passwordTextBox" Width="405" />

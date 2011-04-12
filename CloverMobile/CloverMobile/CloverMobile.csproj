@@ -70,8 +70,6 @@
     </Compile>
     <Compile Include="Device.cs" />
     <Compile Include="Location.cs" />
-    <Compile Include="OutputInformation.cs" />
-    <Compile Include="SensorInformation.cs" />
     <Compile Include="Sensors.cs" />
     <Compile Include="SettingsFile.cs" />
     <Compile Include="User.cs" />

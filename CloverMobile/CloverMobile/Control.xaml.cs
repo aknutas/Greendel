@@ -21,8 +21,6 @@ namespace CloverMobile
         DispatcherTimer timer;
         Controller controller;
         DataMaster model;
-        List<Output> outputs;
-        List<Sensor> sensors;
         public Control()
         {
             InitializeComponent();

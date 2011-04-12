@@ -18,8 +18,6 @@ namespace CloverMobile
         static Controller instance=null;
         Device device;
         static readonly object padlock = new object();
-        string address = "http://localhost:3000";
-        string xmlType;
         private CloverMobile.MainPage mainPageRef;
 
         // ** references to network controller, model (datamaster) and current ui page 
@@ -27,6 +25,28 @@ namespace CloverMobile
         private DataMaster model;
         private PhoneApplicationPage activePage;
 
+        private Controller()
+        {
+            device = new Device();
+            nwc = new NetworkController();
+            model = new DataMaster();
+            nwc.setDataMaster(model);
+            nwc.setMasterController(this);
+        }
+        public static Controller getInstance
+        {
+            get
+            {
+                lock (padlock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new Controller();
+                    }
+                    return instance;
+                }
+            }
+        }
         public void setActivePage(PhoneApplicationPage currentPage)
         {
             activePage = currentPage;
@@ -42,51 +62,36 @@ namespace CloverMobile
         {
             return model;
         }
-        private Controller()
-        {
-            device = new Device();
-            nwc = new NetworkController();
-            model = new DataMaster();
-            nwc.setDataMaster(model);
-            nwc.setMasterController(this);
-        }
-        public static Controller getInstance
-        {
-            get
-            {
-                lock (padlock)
-                {
-                    if (instance==null)
-                    {
-                        instance = new Controller();
-                    }
-                    return instance;
-                }
-            }
-        }
+
         public void authenticate(string userName, string password)
         {
-
+            // ** pass the autentication request from UI to NWC
             nwc.authenticate(userName, password);
         }
         public void getUserXML()
         {
-            WorkItem newItem = new WorkItem("userInfo", 0);
+            WorkItem newItem = new WorkItem("userInfo");
             nwc.addNewDownloadWorkUnit(newItem);      
         }
         public void getSensorsXML()
         {
-            
-            device = model.getDevice();
+            device = model.currentDevice;
             WorkItem newItem = new WorkItem("sensors", device.deviceId);
             nwc.addNewDownloadWorkUnit(newItem);
         }
         public void getOutputsXML()
         {
-            device = model.getDevice();
+            device = model.currentDevice;
             WorkItem newItem = new WorkItem("outputs", device.deviceId);
             nwc.addNewDownloadWorkUnit(newItem);
         }
+        public void getSensorHisroty(int sensorId)
+        {
+            sensorId = 1;
+            WorkItem newItem = new WorkItem("sensor", 0, sensorId);
+            nwc.addNewDownloadWorkUnit(newItem);
+        }
+
         public void sendHeatingAndLightning(bool heating, bool lightning)
         { 
     
@@ -97,8 +102,7 @@ namespace CloverMobile
         }
         public void authenticationOk()
         {
-            mainPageRef.authenticationOk();
-        
+            mainPageRef.authenticationOk();       
         }
     }
 }

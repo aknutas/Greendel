@@ -21,30 +21,44 @@ namespace CloverMobile
     public partial class MainPage : PhoneApplicationPage
     {
         private Controller controller;
+        bool settingsFileExists = false;
         private string fileName = "settings";
-        // ** Constructor
+
         public MainPage()
         {
+            // ** get the controller instance and give the reference of current page to it
             InitializeComponent();
             controller = Controller.getInstance;
             controller.setActivePage(this);
-            // ** Check the setting here, if the setting file exists, don't display the splashscreen, otherwise, display it
+
+            // ** check if the settings file exists
             var appStorage = IsolatedStorageFile.GetUserStoreForApplication();
-            if (appStorage.FileExists(fileName) == true)
+            if (appStorage.FileExists(fileName) == true) // file is found
             {
+                settingsFileExists = true;
+                // ** no need for splashscreen (user settings exist)
                 splashScreen.Visibility = System.Windows.Visibility.Collapsed;
-  
-                //logIn("testipaavo", "testi2");
-                // ** dont display the splashscreen
+                  
+                // ** get the serialized settings file
+                var settingsData = XmlSerilizierHelper.Deserialize(fileName, typeof(SettingsFile));
+                SettingsFile mySerSettings = new SettingsFile();
+                mySerSettings = (SettingsFile)settingsData;
+             
+                // ** autheticate
+                controller.authenticate(mySerSettings.username.ToString(), mySerSettings.password.ToString());
+                System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER FOR USER INFO");
+                
+                // ** get basic information
+                controller.getUserXML();
+
+
             }
-            else
+            else // ** there are no file, user has not logged in yet, display the splash screen
             {
                 PageTitle.Text = "Log In";
                 splashScreen.Visibility = System.Windows.Visibility.Visible;
                 errorMessageTextBlock.Text = "";
-            }
-            // splashScreen.visibility = System.Windows.Visibility.Visible/Collabsed
-            // get the username and password from memory card          
+            }       
             //rotateClover.Begin();
             //rotateClover.Pause();
 
@@ -56,6 +70,7 @@ namespace CloverMobile
         }
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
+            // ** this loads the animation
             MainScreenLoad.Begin();
         }
 
@@ -74,74 +89,31 @@ namespace CloverMobile
             NavigationService.Navigate(new Uri("/Control.xaml", UriKind.RelativeOrAbsolute));
         }
 
-        private void windImage_ImageFailed(object sender, ExceptionRoutedEventArgs e)
-        {
-
-        }
         private void loginButton_Click(object sender, RoutedEventArgs e)
         {
-                // ** if splashscreen is displayed, user has not logged in 
+                // ** try to authenticate
                 controller.authenticate(userNameTextBox.Text, passwordTextBox.Password);
                 System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER FOR USER INFO");
                 controller.getUserXML();
                 
                    
         }
-        public void authenticationOk()
+        public void authenticationOk() // ** this function is called  if the autentication is successfull
         {
-           
+            // ** remove the splashscreen
             splashScreen.Visibility = System.Windows.Visibility.Collapsed;
             PageTitle.Text = "Main Page";
-            //var appStorage = IsolatedStorageFile.GetUserStoreForApplication();
 
+            if (settingsFileExists == false) // ** if autentication was successfull and this is the first time when logging in, create new file
+            {               
                 // ** create the settings object, serialize it and write it to phone's memory
                 SettingsFile mySettings = new SettingsFile();
                 mySettings.username = userNameTextBox.Text;
                 mySettings.password = passwordTextBox.Password;
                 mySettings.serviceAddress = "http://localhost:3000";
                 XmlSerilizierHelper.Serialize(fileName, mySettings);
-
-
-                var settingsData = XmlSerilizierHelper.Deserialize(fileName, typeof(SettingsFile));
-
-                SettingsFile mySerSettings = new SettingsFile();
-                mySerSettings = (SettingsFile)settingsData;
-
-                userNameTextBlock.Text = mySerSettings.username.ToString();
-                passwordTextBlock.Text = mySerSettings.password.ToString();
-                
-                // ** create a new file
-                /*
-                using (var file = appStorage.OpenFile(fileName, System.IO.FileMode.Create, System.IO.FileAccess.Write))
-                {
-                    using (var writer = new StreamWriter(file))
-                    {
-                        // ** write the stream to the file
-                        writer.Write("");
-                        
-                    }
-                }
-                */
-                /*
-                // ** open the file,read contents to a stream and deserialize
-                using (IsolatedStorageFile storage = IsolatedStorageFile.GetUserStoreForApplication())
-                { 
-                    using (StreamReader sr = new StreamReader(storage.OpenFile(fileName, FileMode.Open, FileAccess.Read)))
-                    {
-                        ms2 =sr.ReadToEnd();
-                    }
-                }
-                var settingsData = XmlSerilizierHelper.Deserialize(ms, typeof(SettingsFile));
-                */
-        }
-        private void passwordTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            // delete this
-        }
-
-        private void userNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            // delete this
+                settingsFileExists = true;
+            }
         }
     }
 }

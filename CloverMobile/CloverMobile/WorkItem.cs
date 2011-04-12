@@ -13,25 +13,27 @@ namespace CloverMobile
 {
     public class WorkItem
     {
+        public string documentName { get; set; }
         public int deviceId { get; set; }
-        public string documentName { get; set;}
-        public string payLoad { get; set; }
         public int sensorId { get; set; }
 
         public WorkItem(string workName)
         {
             documentName = workName;
+            deviceId = 0;
+            sensorId = 0;
         }
         public WorkItem(string workName, int deviceID)
         {
             documentName = workName;
             deviceId = deviceID;
+            sensorId = 0;
         }
         public WorkItem(string workName, int deviceID, int sensorID)
         {
             documentName = workName;
-            deviceId = deviceID;
             sensorId = sensorID;
+            deviceId = deviceID;
         }
     }
 }
