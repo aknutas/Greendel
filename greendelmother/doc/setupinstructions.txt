@@ -3,6 +3,9 @@ rake db:drop
 rake db:setup
 rake weatherload
 
+Optionally to generate fake history from 2011-01-01 to current time:
+rake genhistory
+
 To start up a test server:
 ./script/server
 (or script\server)

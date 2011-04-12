@@ -20,31 +20,6 @@ class ReadingsController < ApplicationController
       format.xml  { render :xml => @reading }
     end
   end
-  
-  def history
-    @readings = Reading.find(:all, :conditions => { :sensor_id => 1 })
-    
-    @pastresults = Hash.new()
-    @pastresults['today'] = 0
-    @pastresults['yesterday'] = 500
-    @pastresults['daysago2'] = 1000
-    @pastresults['daysago3'] = -500
-    
-    count = 0
-    total = 0
-    
-    @readings.each { |reading|
-      total = total + reading.value
-      count += 1
-    }
-    
-    @pastresults['today'] = total / count
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @pastresults }
-    end
-  end
 
   # GET /readings/new
   # GET /readings/new.xml
