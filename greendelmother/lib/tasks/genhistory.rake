@@ -25,6 +25,8 @@ task :genhistory => :environment do
       sensor.readings << reading
       timenow = timenow + 1.hours
     end
+    sensor.latestreading = sensor.readings.last.value
+    sensor.save
   end
 
 end
