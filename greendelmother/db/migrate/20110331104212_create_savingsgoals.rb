@@ -5,6 +5,7 @@ class CreateSavingsgoals < ActiveRecord::Migration
       t.string :type
       t.boolean :completed, :default => false
       t.boolean :successful
+      t.boolean :publishsocial
       t.date :timestart
       t.date :timeend
 

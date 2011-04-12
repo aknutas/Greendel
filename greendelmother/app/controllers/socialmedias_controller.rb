@@ -1,7 +1,5 @@
 class SocialmediasController < ApplicationController
 
-  before_filter :twitter_wrapper
-
   # GET /socialmedias
   # GET /socialmedias.xml
   def index
@@ -99,6 +97,10 @@ class SocialmediasController < ApplicationController
       format.html { redirect_to(socialmedias_url) }
       format.xml { head :ok }
     end
+  end
+
+  def twitter_wrapper
+    @wrapper = TwitterWrapper.new(current_user)
   end
 
 end

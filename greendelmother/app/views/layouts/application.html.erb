@@ -35,7 +35,7 @@
             <li>
               <a href="<%= url_for(@current_user.socialmedia) %>"><span class="l"></span><span class="r"></span><span class="t">Social Media</span></a>
             </li>
-            <li><a href="#"><span class="l"></span><span class="r"></span><span class="t">Solutions</span></a>
+            <li><a href="<%= url_for(:action => 'index', :controller => 'savingsgoals') %>"><span class="l"></span><span class="r"></span><span class="t">Savings Goals</span></a>
             </li>
             <li>
               <a href="<%= url_for(:action => 'logout', :controller => 'sign') %>"><span class="l"></span><span class="r"></span><span class="t">Log out</span></a>

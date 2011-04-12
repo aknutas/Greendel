@@ -10,9 +10,9 @@ FB_APP_ID = "***REMOVED***"
 HOST = "http://localhost:3000/"
 
 # Load Twitter info
-CONSMER_SECRET = "***REMOVED***"
-CONSUMER_TOKEN= "***REMOVED***"
-DEVELOPMENT_URL = "http://dev.twipler.com:3000/twitter/auth"
+#CONSUMER_SECRET = "***REMOVED***"
+#CONSUMER_TOKEN = "***REMOVED***"
+#DEVELOPMENT_URL = "http://dev.twipler.com:3000/twitter/auth"
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -26,14 +26,9 @@ Rails::Initializer.run do |config|
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
 
   # Specify gems that this application depends on and have them installed with rake gems:install
-  # config.gem "bj"
-  # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
-  # config.gem "aws-s3", :lib => "aws/s3"
   config.gem "sqlite3-ruby", :lib => "sqlite3"
   config.gem "mini_fb"
-  config.gem "twitter"
   config.gem "yahoo-weather"
-  # config.gem "httparty"
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named

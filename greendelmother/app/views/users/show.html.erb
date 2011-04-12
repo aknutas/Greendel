@@ -1,7 +1,7 @@
 <p>Welcome <%= @user.name %></p>
 
-<p>It is <%= Time.zone.now.asctime %> and the weather is <%= @user.device.location.weather.desc.downcase %> and <%= @user.device.location.weather.temp.to_s + "C" %> at <%= @user.device.location.town %>.</p>
+<p>It is <%= Time.zone.now.asctime %> and the weather is <%= if @user.device.location.weather.desc then h(@user.device.location.weather.desc.downcase) else h("-") end %> and <%= if @user.device.location.weather.temp then h(@user.device.location.weather.temp) else h("-") end %>C at <%= @user.device.location.town %>.</p>
 
 <% @user.device.sensors.each do |sensor| %>
-<p><%= sensor.longname %> was at <%= if sensor.latestreading then h(sensor.latestreading) else h("-") end %> when measured at <%= if sensor.updated_at.asctime then h(sensor.updated_at.asctime) else h("-") end %></p>
+<p><%= link_to(sensor.longname, sensor_path(sensor)) %> was at <%= if sensor.latestreading then h(sensor.latestreading) else h("-") end %> when measured at <%= if sensor.updated_at.asctime then h(sensor.updated_at.asctime) else h("-") end %></p>
 <% end %>

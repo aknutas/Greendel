@@ -1,13 +1,4 @@
 <p>
-  <b>Name:</b>
-  <%=h @sensor.name %>
+  <b><%= @sensor.longname %></b> showed <%= @sensor.latestreading %> at <%= @sensor.updated_at %>
 </p>
-
-<p>
-  <b>Type:</b>
-  <%=h @sensor.type %>
-</p>
-
-
-<%= link_to 'Edit', edit_sensor_path(@sensor) %> |
-<%= link_to 'Back', sensors_path %>
+<p>Imagine an awesome chart here</p>
