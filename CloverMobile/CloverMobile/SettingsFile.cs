@@ -8,11 +8,22 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
 
 namespace CloverMobile
 {
-    public class DtoSerializer
+  
+    public class SettingsFile 
     {
+        [XmlElement]
+        public string username { get; set; }
+        [XmlElement]
+        public string password { get; set; }
+        [XmlElement]
+        public string serviceAddress { get; set; }
+        
 
     }
+
 }
+
