@@ -21,7 +21,7 @@ namespace CloverMobile
     public partial class MainPage : PhoneApplicationPage
     {
         private Controller controller;
-        private string fileName = "settings.txt";
+        private string fileName = "settings";
         // ** Constructor
         public MainPage()
         {
@@ -89,25 +89,50 @@ namespace CloverMobile
         }
         public void authenticationOk()
         {
-            // save the username and password to phone's flash memory to keep the user logged in
+           
             splashScreen.Visibility = System.Windows.Visibility.Collapsed;
             PageTitle.Text = "Main Page";
-            var appStorage = IsolatedStorageFile.GetUserStoreForApplication();
-            // ** authenticate first, if successfull, then create the file
+            //var appStorage = IsolatedStorageFile.GetUserStoreForApplication();
 
-            if (appStorage.FileExists("settings.txt") == false)
-            {
+                // ** create the settings object, serialize it and write it to phone's memory
+                SettingsFile mySettings = new SettingsFile();
+                mySettings.username = userNameTextBox.Text;
+                mySettings.password = passwordTextBox.Password;
+                mySettings.serviceAddress = "http://localhost:3000";
+                XmlSerilizierHelper.Serialize(fileName, mySettings);
 
-                // create a new file
+
+                var settingsData = XmlSerilizierHelper.Deserialize(fileName, typeof(SettingsFile));
+
+                SettingsFile mySerSettings = new SettingsFile();
+                mySerSettings = (SettingsFile)settingsData;
+
+                userNameTextBlock.Text = mySerSettings.username.ToString();
+                passwordTextBlock.Text = mySerSettings.password.ToString();
+                
+                // ** create a new file
+                /*
                 using (var file = appStorage.OpenFile(fileName, System.IO.FileMode.Create, System.IO.FileAccess.Write))
                 {
                     using (var writer = new StreamWriter(file))
                     {
-                        writer.Write(userNameTextBox.Text + " " + passwordTextBox.Password);
+                        // ** write the stream to the file
+                        writer.Write("");
+                        
                     }
                 }
-            }  
-        
+                */
+                /*
+                // ** open the file,read contents to a stream and deserialize
+                using (IsolatedStorageFile storage = IsolatedStorageFile.GetUserStoreForApplication())
+                { 
+                    using (StreamReader sr = new StreamReader(storage.OpenFile(fileName, FileMode.Open, FileAccess.Read)))
+                    {
+                        ms2 =sr.ReadToEnd();
+                    }
+                }
+                var settingsData = XmlSerilizierHelper.Deserialize(ms, typeof(SettingsFile));
+                */
         }
         private void passwordTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {

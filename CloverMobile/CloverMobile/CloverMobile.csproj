@@ -56,6 +56,7 @@
     <Reference Include="System.Net" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml.Serialization" />
     <Reference Include="WP7_CTP_Fix_System.Windows.Controls">
       <HintPath>..\..\..\Users\Hartsa\Documents\Visual Studio 2010\Projects\WindowsPhoneApplication2\WindowsPhoneApplication2\WP7_CTP_Fix_System.Windows.Controls.dll</HintPath>
     </Reference>
@@ -68,18 +69,17 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Device.cs" />
-    <Compile Include="DtoSerializer.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="OutputInformation.cs" />
     <Compile Include="SensorInformation.cs" />
     <Compile Include="Sensors.cs" />
+    <Compile Include="SettingsFile.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Control.xaml.cs">
       <DependentUpon>Control.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controller.cs" />
     <Compile Include="DataMaster.cs" />
-    <Compile Include="GlobalData.cs" />
     <Compile Include="History.xaml.cs">
       <DependentUpon>History.xaml</DependentUpon>
     </Compile>
@@ -95,6 +95,7 @@
     </Compile>
     <Compile Include="Weather.cs" />
     <Compile Include="WorkItem.cs" />
+    <Compile Include="XmlSerilizierHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
