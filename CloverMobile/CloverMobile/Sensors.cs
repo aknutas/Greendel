@@ -20,6 +20,9 @@ namespace CloverMobile
         public string longName { get; set; }
         public string sensorVarType { get; set; }
         public string latestReading { get; set; }
-        private ObservableCollection<Point> historyValuePoints = new ObservableCollection<Point>();
+        public ObservableCollection<Point> historyValuePoints = new ObservableCollection<Point>();
+
+
     }
 }
+
