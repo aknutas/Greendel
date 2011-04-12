@@ -48,6 +48,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AmCharts.Windows.QuickCharts.WP">
+      <HintPath>.\AmCharts.Windows.QuickCharts.WP.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Interop" />
     <Reference Include="System.Windows" />
@@ -58,10 +61,10 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml.Serialization" />
     <Reference Include="WP7_CTP_Fix_System.Windows.Controls">
-      <HintPath>..\..\..\Users\Hartsa\Documents\Visual Studio 2010\Projects\WindowsPhoneApplication2\WindowsPhoneApplication2\WP7_CTP_Fix_System.Windows.Controls.dll</HintPath>
+      <HintPath>.\WP7_CTP_Fix_System.Windows.Controls.dll</HintPath>
     </Reference>
     <Reference Include="WP7_CTP_Fix_System.Windows.Controls.DataVisualization.Toolkit">
-      <HintPath>..\..\..\Users\Hartsa\Documents\Visual Studio 2010\Projects\WindowsPhoneApplication2\WindowsPhoneApplication2\WP7_CTP_Fix_System.Windows.Controls.DataVisualization.Toolkit.dll</HintPath>
+      <HintPath>.\WP7_CTP_Fix_System.Windows.Controls.DataVisualization.Toolkit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
