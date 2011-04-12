@@ -10,33 +10,41 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
-using System.IO;
-using System.Diagnostics;
-using System.Xml.Linq;
+using System.Collections.ObjectModel;
 
 namespace CloverMobile
 {
-
     public partial class History : PhoneApplicationPage
     {
-        Controller controller; 
-
         public History()
         {
+
             InitializeComponent();
-            controller = Controller.getInstance;
-            // ** connect the web service here   
         }
+
+        private ObservableCollection<PData> _data = new ObservableCollection<PData>()
+        {
+            new PData() { title = "slice #1", value = 30 },
+            new PData() { title = "slice #2", value = 60 },
+            new PData() { title = "slice #3", value = 40 },
+        };
+
+        public ObservableCollection<PData> Data { get { return _data; } }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            historyScreenLoad.Begin();
-
-        }   
-
-        void wc_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
-        {
-
+            this.DataContext = this;
         }
+
+        private void ShowSerialChartButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+        }
+    }
+
+    public class PData
+    {
+        public string title { get; set; }
+        public double value { get; set; }
     }
 }
