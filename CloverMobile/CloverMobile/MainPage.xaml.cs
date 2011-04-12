@@ -98,6 +98,7 @@ namespace CloverMobile
                 
                    
         }
+
         public void authenticationOk() // ** this function is called  if the autentication is successfull
         {
             // ** remove the splashscreen
