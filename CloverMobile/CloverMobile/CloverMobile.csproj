@@ -49,7 +49,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AmCharts.Windows.QuickCharts.WP">
-      <HintPath>..\..\..\Users\Hartsa\Downloads\test\QuickChartsDemoWP7\AmCharts.Windows.QuickCharts.WP.dll</HintPath>
+      <HintPath>.\AmCharts.Windows.QuickCharts.WP.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Interop" />
@@ -60,15 +60,18 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml.Serialization" />
+    <Reference Include="WP7_CTP_Fix_System.Windows.Controls">
+      <HintPath>.\WP7_CTP_Fix_System.Windows.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="WP7_CTP_Fix_System.Windows.Controls.DataVisualization.Toolkit">
+      <HintPath>.\WP7_CTP_Fix_System.Windows.Controls.DataVisualization.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Device.cs" />
-    <Compile Include="History.xaml.cs">
-      <DependentUpon>History.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Location.cs" />
     <Compile Include="Sensors.cs" />
     <Compile Include="SettingsFile.cs" />
@@ -78,6 +81,9 @@
     </Compile>
     <Compile Include="Controller.cs" />
     <Compile Include="DataMaster.cs" />
+    <Compile Include="History.xaml.cs">
+      <DependentUpon>History.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HistoryData.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

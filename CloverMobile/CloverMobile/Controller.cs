@@ -47,6 +47,10 @@ namespace CloverMobile
                 }
             }
         }
+        public DataMaster getModelInstance()
+        {
+           return model.getReference();        
+        }
         public void setActivePage(PhoneApplicationPage currentPage)
         {
             activePage = currentPage;

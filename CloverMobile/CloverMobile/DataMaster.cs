@@ -12,11 +12,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.Linq;
 using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace CloverMobile
 {
     public class DataMaster
-    {
+    {   
         private XDocument dataDoc;
         public User currentUser { get; set; }
         public Device currentDevice { get; set; }
@@ -34,6 +35,10 @@ namespace CloverMobile
             currentOutputs = new List<Output>();
             currentSensors = new List<Sensor>();
             dataDoc = new XDocument();
+        }
+        public DataMaster getReference()
+        {
+            return this;
         }
 
         public void parseUserInformation(XDocument xmlDoc)
@@ -155,7 +160,36 @@ namespace CloverMobile
             }
             //return allOutputs;
         }
+        static Random _r = new Random();
+        public void addNewDataUnit()
+        {
+            DateTime time = DateTime.Now;             // Use current time
+            string format = "h:mm:ss";            // Use this format
+            time.ToString(format); // Write to console
+            double f = (_r.NextDouble() * 15.0) - 1.0;
+            _data.Add(new SensorData() { time = time.ToString(format), value = f });
+        }
 
+
+        private ObservableCollection<SensorData> _data = new ObservableCollection<SensorData>()
+        {
+            //new SensorData() { time = "cat", value=5, /*val2=15, val3=12*/},
+            //new SensorData() { time = "cat2", value=15.2, /*val2=1.5, val3=2.1*/},
+            //new SensorData() { time = "cat3", value=25, /*val2=5, val3=2*/},
+            //new SensorData() { time = "cat4", value=8.1, /*val2=1, val3=22*/},
+        };
+
+        //public ReadOnlyObservableCollection<SensorData> DataUnit { get; set; }
+        public ObservableCollection<SensorData> DataUnit { get { return _data; } }
+
+
+        public class SensorData
+        {
+            public string time { get; set; }
+            public double value { get; set; }
+            //public double val2 { get; set; }
+            //public double val3 { get; set; }
+        }
         /*
         System.Diagnostics.Debug.WriteLine("Parsing outputs and sensors: ");
 
