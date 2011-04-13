@@ -6,43 +6,74 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:amq="clr-namespace:AmCharts.Windows.QuickCharts;assembly=AmCharts.Windows.QuickCharts.WP"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
-    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True"
-    Loaded="PhoneApplicationPage_Loaded"
-    >
+    SupportedOrientations="Landscape" Orientation="Landscape"
+    mc:Ignorable="d" d:DesignHeight="480" d:DesignWidth="728"
+    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded" xmlns:my="clr-namespace:AmCharts.Windows.QuickCharts;assembly=AmCharts.Windows.QuickCharts.WP" DataContext="{Binding}">
+	<phone:PhoneApplicationPage.Resources>
+		
+	</phone:PhoneApplicationPage.Resources>
 
-    <!--LayoutRoot contains the root grid where all other page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent" RenderTransformOrigin="0.5,0.5">
+    	<Grid.RenderTransform>
+    		<CompositeTransform/>
+    	</Grid.RenderTransform>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="24,24,0,12">
-            <TextBlock x:Name="ApplicationTitle" Text="amCharts Quick Charts for Windows Phone" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="pie chart" Margin="-3,-8,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28" DataContext="{Binding}">
+            <TextBlock x:Name="ApplicationTitle" Text="GREENDEL MOBILE" Style="{StaticResource PhoneTextNormalStyle}" RenderTransformOrigin="0.5,0.5">
+            	<TextBlock.RenderTransform>
+            		<CompositeTransform/>
+            	</TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock x:Name="PageTitle" Text="History" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" RenderTransformOrigin="0.5,0.5">
+            	<TextBlock.RenderTransform>
+            		<CompositeTransform/>
+            	</TextBlock.RenderTransform>
+            </TextBlock>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentGrid" Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <amq:PieChart x:Name="pie1" 
-                          DataSource="{Binding Data}"
-                          TitleMemberPath="title" 
-                          ValueMemberPath="value"
-                          >
-            </amq:PieChart>
-            <Button Content="Show Serial Chart" Grid.Row="1" Name="ShowSerialChartButton" Click="ShowSerialChartButton_Click" />
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <!-- <HyperlinkButton Content="Back" Height="30" HorizontalAlignment="Left" Margin="131,551,0,0" Name="hyperlinkButton1" VerticalAlignment="Top" Width="200" NavigateUri="/CloverMobile;component/MainPage.xaml" />-->
+            <!--<ListBox Height="186" HorizontalAlignment="Left" Margin="12,47,0,0" Name="listBox1" VerticalAlignment="Top" Width="684" FontSize="36" /> -->
+            <!--<TextBlock Height="35" HorizontalAlignment="Left" Margin="12,8,0,0" Name="fromInternet" Text="" VerticalAlignment="Top" Width="684" TextWrapping="Wrap" /> -->
+            <my:SerialChart x:Name="chart1" DataSource="{Binding DataUnit}" CategoryValueMemberPath="time"
+                         AxisForeground="White"
+                         PlotAreaBackground="Black"
+                         GridStroke="DarkGray" Margin="0,-112,0,56">
+                <my:SerialChart.Graphs>
+                    <my:LineGraph ValueMemberPath="value" Title="Line #1" Brush="Blue" />
+                    <!--<my:ColumnGraph ValueMemberPath="val2" Title="Column #2" Brush="#8000FF00" ColumnWidthAllocation="0.4" />-->
+                    <!--<my:AreaGraph ValueMemberPath="val3" Title="Area #1" Brush="#80FF0000" />-->
+                </my:SerialChart.Graphs>
+            </my:SerialChart>
+            <Button Content="Button" Height="77" HorizontalAlignment="Left" Margin="-2,245,0,0" Name="button1" VerticalAlignment="Top" Width="160" Click="button1_Click" />
         </Grid>
     </Grid>
-
+ 
+    <!--Sample code showing usage of ApplicationBar-->
+    <!--
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Icons/appbar.back.rest.png" Text="Back" Click="ApplicationBarIconButtonBack_Click" />
+            <shell:ApplicationBarIconButton IconUri="/Icons/appbar.feature.settings.rest.png" Text="Settings" Click="ApplicationBarIconButtonSettings_Click" />
+            <shell:ApplicationBarIconButton IconUri="/Icons/appbar.edit.rest.png" Text="Control" Click="ApplicationBarIconButtonControl_Click" />
+            <shell:ApplicationBarIconButton IconUri="/Icons/appbar.folder.rest.png" Text="History" />
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
+                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
+            </shell:ApplicationBar.MenuItems>
+           
+        </shell:ApplicationBar>
+            
+    </phone:PhoneApplicationPage.ApplicationBar>
+    -->
 </phone:PhoneApplicationPage>
