@@ -5,7 +5,6 @@ class CreateLocations < ActiveRecord::Migration
       t.string :address
       t.string :town
       t.string :extaddress
-      t.float :powerprice # eur / kWh
       t.float :xcoord
       t.float :ycoord
 

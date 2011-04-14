@@ -17,7 +17,7 @@ sm = Socialmedia.create(:twitteron => false, :facebookon => false)
 user.socialmedia = sm
 user.save
 
-testlocation = Location.create(:address => 'Nollakatu 0', :name => 'TestLocation', :town => 'Lappeenranta', :powerprice => 0.07)
+testlocation = Location.create(:address => 'Nollakatu 0', :name => 'TestLocation', :town => 'Lappeenranta')
 cloverpower.location = testlocation
 cloverpower.save
 
@@ -31,17 +31,17 @@ s = Sensor.create(:name => 'powerconsumed', :longname => 'Consumed Power', :vart
 cloverpower.sensors << s
 s = Sensor.create(:name => 'insidetemp', :longname => 'Inside Temperature', :vartype => 'integer')
 cloverpower.sensors << s
-s = Sensor.create(:name => 'outsidetemp', :longname => 'Outside Temperature', :vartype => 'integer')
+s = Sensor.create(:name => 'powerprice', :longname => 'Price of Electricity', :vartype => 'float')
 cloverpower.sensors << s
 cloverpower.save
 
-o = Output.create(:name => 'heating', :longname => 'Heating')
+o = Output.create(:name => 'heating', :longname => 'Heating', :cost => true)
 cloverpower.outputs << o
-o = Output.create(:name => 'lights', :longname => 'Lights')
+o = Output.create(:name => 'lights', :longname => 'Lights', :cost => true)
 cloverpower.outputs << o
-o = Output.create(:name => 'solar', :longname => 'Solar')
+o = Output.create(:name => 'solar', :longname => 'Solar', :cost => false)
 cloverpower.outputs << o
-o = Output.create(:name => 'wind', :longname => 'Wind')
+o = Output.create(:name => 'wind', :longname => 'Wind', :cost => false)
 cloverpower.outputs << o
 cloverpower.save
 

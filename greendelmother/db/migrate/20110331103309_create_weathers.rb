@@ -4,6 +4,7 @@ class CreateWeathers < ActiveRecord::Migration
       t.float :temp
       t.float :high
       t.float :low
+      t.integer :code
       t.string :desc
       t.string :source
       t.string :woeid

@@ -5,6 +5,10 @@ class CreateOutputs < ActiveRecord::Migration
       t.string :longname
       t.boolean :state
       t.boolean :haschanged
+      t.integer :priority, :default => 0 # Power adjustment priority (zero to five)
+      t.integer :estcost, :default => 0 # Estimated power cost/benefit
+      t.boolean :cost # True for cost, false for benefit
+      t.boolean :autoswitchable, :default => false # Machine switchable?
 
       t.integer :device_id
 

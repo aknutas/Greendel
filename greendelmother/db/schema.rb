@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20110407082126) do
     t.float    "temp"
     t.float    "low"
     t.float    "high"
+    t.integer  "code"
     t.date     "fday"
     t.binary   "yweather"
     t.integer  "weather_id"
@@ -37,7 +38,6 @@ ActiveRecord::Schema.define(:version => 20110407082126) do
     t.string   "address"
     t.string   "town"
     t.string   "extaddress"
-    t.float    "powerprice"
     t.float    "xcoord"
     t.float    "ycoord"
     t.integer  "device_id"
@@ -52,6 +52,10 @@ ActiveRecord::Schema.define(:version => 20110407082126) do
     t.string   "longname"
     t.boolean  "state"
     t.boolean  "haschanged"
+    t.integer  "priority",       :default => 0
+    t.integer  "estcost",        :default => 0
+    t.boolean  "cost"
+    t.boolean  "autoswitchable", :default => false
     t.integer  "device_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -135,6 +139,7 @@ ActiveRecord::Schema.define(:version => 20110407082126) do
     t.float    "temp"
     t.float    "high"
     t.float    "low"
+    t.integer  "code"
     t.string   "desc"
     t.string   "source"
     t.string   "woeid"

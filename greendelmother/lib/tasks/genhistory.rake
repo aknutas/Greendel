@@ -19,6 +19,8 @@ task :genhistory => :environment do
         reading = Reading.create(:value => (sensor.readings.last.value + random.rand(11)), :time => timenow)
       elsif (sensor.name == "powerconsumed" && sensor.readings.last == nil)
         reading = Reading.create(:value => (random.rand(11)), :time => timenow)
+      elsif(sensor.name == "powerprice")
+        reading = Reading.create(:value => ((random.rand(21) + random.rand(21) + random.rand(21) + random.rand(21))*0.00018), :time => timenow)
       else
         reading = Reading.create(:value => (random.rand(11) + random.rand(11) + random.rand(11)), :time => timenow)
       end
