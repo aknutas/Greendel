@@ -1,4 +1,4 @@
-<p>Welcome <%= @user.name %></p>
+<p>Welcome <%= @user.realname %></p>
 
 <p>It is <%= Time.zone.now.asctime %> and the weather is <%= try_print(@user.device.location.weather.desc).downcase %> <img src="<%= begin @wnow.get_image_link end%>"> and <%= try_print(@user.device.location.weather.temp) %>C at <%= @user.device.location.town %>.</p>
 <p>Tomorrow is <%= @wtomorrow.text %> <img src="<%= begin @wnow.get_forecast_link(:tomorrow) end%>"> with high of <%= @wtomorrow.high %>C and low of <%= @wtomorrow.low %>C.</p>

@@ -17,13 +17,13 @@ class Weather < ActiveRecord::Base
   end
 
   def get_image_link
-    return "http://l.yimg.com/a/i/us/we/52/" + self.code.to_s + ".gif"
+    return "http://l.yimg.com/a/i/us/nws/weather/gr/" + self.code.to_s + "d.png"
   end
 
   def get_forecast_link(fcSymbol)
     fcs = get_forecasts
     fc = fcs[fcSymbol]
-    return "http://l.yimg.com/a/i/us/we/52/" + fc.code.to_s + ".gif"
+    return "http://l.yimg.com/a/i/us/nws/weather/gr/" + fc.code.to_s + "d.png"
   end
 
 end

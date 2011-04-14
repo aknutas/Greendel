@@ -4,8 +4,11 @@ xml.device do
   xml.name @device.name
   xml.weather do
     xml.temp @device.location.weather.temp
+    xml.high @device.location.weather.high
+    xml.low @device.location.weather.low
     xml.unit "C"
     xml.desc @device.location.weather.desc
+    xml.code @device.location.weather.code
     xml.updated_at @device.location.weather.updated_at
   end
   xml.sensors do
@@ -28,6 +31,11 @@ xml.device do
         xml.longname output.longname
         xml.state output.state
         xml.haschanged output.haschanged
+        xml.updated_at output.updated_at
+        xml.priority output.priority
+        xml.estcost output.estcost
+        xml.cost output.cost
+        xml.machineswitchable output.autoswitchable
       end
     end
   end

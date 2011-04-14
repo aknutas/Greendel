@@ -6,7 +6,7 @@ class WeathersController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @weathers }
+      format.xml { render :xml => @weathers }
     end
   end
 
@@ -17,13 +17,20 @@ class WeathersController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @weather }
+      format.xml { render :xml => @weather }
     end
   end
 
   def histories
     @weather = Weather.find(params[:id], :include => :histories)
     @histories = @weather.histories.sort_by &:fday
+
+    begin
+      fcs = @weather.get_forecasts
+      @wtomorrow = fcs[:tomorrow]
+    rescue
+      @wtomorrow = nil
+    end
 
     respond_to do |format|
       format.xml # datastatus.xml.builder
@@ -37,7 +44,7 @@ class WeathersController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @weather }
+      format.xml { render :xml => @weather }
     end
   end
 
@@ -54,10 +61,10 @@ class WeathersController < ApplicationController
     respond_to do |format|
       if @weather.save
         format.html { redirect_to(@weather, :notice => 'Weather was successfully created.') }
-        format.xml  { render :xml => @weather, :status => :created, :location => @weather }
+        format.xml { render :xml => @weather, :status => :created, :location => @weather }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @weather.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @weather.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -70,10 +77,10 @@ class WeathersController < ApplicationController
     respond_to do |format|
       if @weather.update_attributes(params[:weather])
         format.html { redirect_to(@weather, :notice => 'Weather was successfully updated.') }
-        format.xml  { head :ok }
+        format.xml { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @weather.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @weather.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -86,7 +93,7 @@ class WeathersController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(weathers_url) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
 end
