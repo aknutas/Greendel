@@ -60,18 +60,13 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml.Serialization" />
-    <Reference Include="WP7_CTP_Fix_System.Windows.Controls">
-      <HintPath>.\WP7_CTP_Fix_System.Windows.Controls.dll</HintPath>
-    </Reference>
-    <Reference Include="WP7_CTP_Fix_System.Windows.Controls.DataVisualization.Toolkit">
-      <HintPath>.\WP7_CTP_Fix_System.Windows.Controls.DataVisualization.Toolkit.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Device.cs" />
+    <Compile Include="HistoryData.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Sensors.cs" />
     <Compile Include="SettingsFile.cs" />
@@ -84,7 +79,6 @@
     <Compile Include="History.xaml.cs">
       <DependentUpon>History.xaml</DependentUpon>
     </Compile>
-    <Compile Include="HistoryData.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
