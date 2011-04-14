@@ -25,7 +25,7 @@ namespace CloverMobile
         public Weather currentWeather { get; set; }
         public List<Sensor> currentSensors { get; set; }
         public List<Output> currentOutputs { get; set; }
-
+        public List<HistoryData> currentReadings { get; set; }
         public DataMaster()
         {
             currentUser = new User();
@@ -34,6 +34,7 @@ namespace CloverMobile
             currentWeather = new Weather();
             currentOutputs = new List<Output>();
             currentSensors = new List<Sensor>();
+            currentReadings = new List<HistoryData>();
             dataDoc = new XDocument();
         }
         public DataMaster getReference()
@@ -55,8 +56,7 @@ namespace CloverMobile
             foreach (User u in user)
             {
                 currentUser.name = u.name;
-                currentUser.realName = u.realName;
-                
+                currentUser.realName = u.realName;     
             }
             System.Diagnostics.Debug.WriteLine("USER:" + " " + currentUser.id.ToString() + " " + currentUser.name + " " + currentUser.realName);
             
@@ -160,36 +160,65 @@ namespace CloverMobile
             }
             //return allOutputs;
         }
-        static Random _r = new Random();
-        public void addNewDataUnit()
+        // gets the history values for a specific sensor
+        public void parseSensorHistory(int sensorId, XDocument xmlDoc)
+        { 
+            System.Diagnostics.Debug.WriteLine("PARSING HISTORY VALUES FOR A SINGLE SENSOR");
+            //System.Diagnostics.Debug.WriteLine(xmlDoc.ToString());
+            var allReadings = new List<HistoryData>();
+
+            allReadings = (from r in xmlDoc.Descendants("reading")
+            select new HistoryData()
+            {
+                time =  r.Element("time").Value,
+                value = Convert.ToDouble(r.Element("value").Value),
+
+            }).ToList<HistoryData>();
+
+
+            //currentReadings = allReadings;
+
+            // ** find the right sensor from the list of sensors!
+            foreach (Sensor s in currentSensors)
+            {
+                if (s.sensorId == sensorId) // found it
+                {
+                    foreach (HistoryData hd in allReadings)
+                    {
+                        s.addNewHistoryValue(hd.time, hd.value);
+                        System.Diagnostics.Debug.WriteLine("Current Readings: " + hd.time.ToString() + " " + hd.value.ToString());
+                    }
+                }
+            }
+        }
+        public void parseSingleSensorForNewHistoryDatapoint(int sensorId, XDocument xmlDoc)
         {
-            DateTime time = DateTime.Now;             // Use current time
-            string format = "h:mm:ss";            // Use this format
-            time.ToString(format); // Write to console
-            double f = (_r.NextDouble() * 15.0) - 1.0;
-            _data.Add(new SensorData() { time = time.ToString(format), value = f });
+            // ** USER
+            System.Diagnostics.Debug.WriteLine("Getting current value for a sensor...");
+            var sensor = from sensorValue in xmlDoc.Descendants("sensor")
+            select new Sensor
+            {     
+                // ** get latestreading and updated-at values from xml
+                latestReading = sensorValue.Element("latestreading").Value,
+                updatedAt = Convert.ToDateTime(sensorValue.Element("updated-at").Value),
+            };
+            lock (currentSensors) // ** lock the list of sensors before updating!
+            {
+                foreach (Sensor s in currentSensors) // ** this is our sensors list
+                {
+                    if (s.sensorId == sensorId) // ** find a sensor with given id
+                    {
+                        foreach (Sensor sens in sensor) // ** this is the temp "list" of 1 sensors
+                        {
+                            s.latestReading = sens.latestReading; // ** update the current values
+                            s.updatedAt = sens.updatedAt;
+                            s.addNewHistoryValue(sens.updatedAt.ToString(), double.Parse(sens.latestReading)); // also
+                        }
+                    }
+                }
+            }
         }
 
-
-        private ObservableCollection<SensorData> _data = new ObservableCollection<SensorData>()
-        {
-            //new SensorData() { time = "cat", value=5, /*val2=15, val3=12*/},
-            //new SensorData() { time = "cat2", value=15.2, /*val2=1.5, val3=2.1*/},
-            //new SensorData() { time = "cat3", value=25, /*val2=5, val3=2*/},
-            //new SensorData() { time = "cat4", value=8.1, /*val2=1, val3=22*/},
-        };
-
-        //public ReadOnlyObservableCollection<SensorData> DataUnit { get; set; }
-        public ObservableCollection<SensorData> DataUnit { get { return _data; } }
-
-
-        public class SensorData
-        {
-            public string time { get; set; }
-            public double value { get; set; }
-            //public double val2 { get; set; }
-            //public double val3 { get; set; }
-        }
         /*
         System.Diagnostics.Debug.WriteLine("Parsing outputs and sensors: ");
 

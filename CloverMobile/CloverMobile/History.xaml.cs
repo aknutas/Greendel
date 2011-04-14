@@ -20,27 +20,48 @@ namespace CloverMobile
 
     public partial class History : PhoneApplicationPage
     {
-        Controller controller;
+        private Controller controller;
         DataMaster model;
+        public int currentSensorId { get; set; }
         public History()
         {
+            currentSensorId = 1;
             InitializeComponent();
             controller = Controller.getInstance;
             
             model = controller.getModel();
-            this.DataContext = model;
+            //this.DataContext = model;
+            //
+            foreach (Sensor s in model.currentSensors)
+            {
+                if (currentSensorId == s.sensorId)
+                {
+                    this.DataContext = s;
+                }
+            
+            }
+            //this.DataContext = model.currentSensors[currenSensorId - 1];
+
             // ** connect the web service here   
         }
-    
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
             //historyScreenLoad.Begin();
-
         }
-
+        
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            model.addNewDataUnit();
-        }  
+            System.Diagnostics.Debug.WriteLine("SENSOR UPDATE");
+            controller.updateValueOfThisSensor(currentSensorId);
+            //model.currentSensors[currenSensorId - 1].addNewDataUnit();
+        }
+
+        private void button1_Click_1(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("SENSOR UPDATE");
+            controller.updateValueOfThisSensor(currentSensorId);
+        }
+        
+        
     }
 }

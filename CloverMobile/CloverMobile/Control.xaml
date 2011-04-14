@@ -92,11 +92,12 @@
             <RadioButton Content="Off" GroupName="radioButtonGroupHeating" Height="72" HorizontalAlignment="Right" Margin="0,188,69,0" Name="radioButtonHeatingOff" VerticalAlignment="Top" Width="127" />
             <RadioButton Content="On" GroupName="radioButtonGroupLightning" Height="72" Margin="154,274,0,0" Name="radioButtonLightsOn" VerticalAlignment="Top" HorizontalAlignment="Left" Width="127" />
             <RadioButton Content="Off" GroupName="radioButtonGroupLightning" Height="72" HorizontalAlignment="Left" Margin="262,274,0,0" Name="radioButtonLightsOff" VerticalAlignment="Top" Width="127" />
-            <Button Content="Commit" Height="72" HorizontalAlignment="Left" Margin="296,529,0,0" Name="sendChanges" VerticalAlignment="Top" Width="160" Click="sendChanges_Click" />
+            <Button Content="Get S Hist" Height="72" HorizontalAlignment="Left" Margin="237,501,0,0" Name="sendChanges" VerticalAlignment="Top" Width="181" Click="sendChanges_Click" />
             <TextBlock Height="30" HorizontalAlignment="Left" Margin="88,499,0,0" Name="textBlockTest" Text="" VerticalAlignment="Top" />
-            <Button Content="1" Height="72" Margin="21,398,0,0" Name="button1" VerticalAlignment="Top" HorizontalAlignment="Left" Width="99" Click="button1_Click" />
-            <Button Content="2" Height="72" HorizontalAlignment="Left" Margin="134,397,0,0" Name="button2" VerticalAlignment="Top" Width="76" Click="button2_Click" />
-            <Button Content="3" Height="72" HorizontalAlignment="Left" Margin="250,407,0,0" Name="button3" VerticalAlignment="Top" Width="87" Click="button3_Click" />
+            <Button Content="1" Height="72" Margin="37,358,0,0" Name="button1" VerticalAlignment="Top" HorizontalAlignment="Left" Width="99" Click="button1_Click" />
+            <Button Content="2" Height="72" HorizontalAlignment="Left" Margin="161,357,0,0" Name="button2" VerticalAlignment="Top" Width="76" Click="button2_Click" />
+            <Button Content="3" Height="72" HorizontalAlignment="Left" Margin="256,354,0,0" Name="button3" VerticalAlignment="Top" Width="87" Click="button3_Click" />
+            <Button Content="Get Sens" Height="72" HorizontalAlignment="Left" Margin="20,499,0,0" Name="getSensors" VerticalAlignment="Top" Width="160" Click="getSensors_Click" />
         </Grid>
     </Grid>
  

@@ -38,38 +38,7 @@ namespace CloverMobile
             controlScreenAnimation.Begin();
         }
 
-        private void sendChanges_Click(object sender, RoutedEventArgs e)
-        {
-
-            //controller.getXML();
-            System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER");
-            /*
-            bool heating = false;
-            bool lightning = false;
-            // ** get values from radiobuttons
-            if (radioButtonHeatingOn.IsChecked == true)
-            {
-                heating = true;
-
-            }
-            else if (radioButtonHeatingOff.IsChecked == true)
-            {
-                heating = false;
-            }
-
-            else if (radioButtonLightsOn.IsChecked == true)
-            {
-                lightning = true;
-            }
-
-            else if (radioButtonLightsOff.IsChecked == true)
-            {
-                lightning = false;
-
-            }
-            controller.sendHeatingAndLightning(heating, lightning);
-             */ 
-        }
+ 
         private void Timer_tick(object sender, EventArgs e)
         {
             //outputs = model.getOutputs();
@@ -103,6 +72,45 @@ namespace CloverMobile
         }
 
         private void button3_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER FOR SENSORS");
+            controller.getSensorsXML();
+        }
+        private void sendChanges_Click(object sender, RoutedEventArgs e)
+        {
+
+            //controller.getXML();
+            System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER FOR SENSOR");
+            controller.getSensorHistory(1);
+            /*
+            bool heating = false;
+            bool lightning = false;
+            // ** get values from radiobuttons
+            if (radioButtonHeatingOn.IsChecked == true)
+            {
+                heating = true;
+
+            }
+            else if (radioButtonHeatingOff.IsChecked == true)
+            {
+                heating = false;
+            }
+
+            else if (radioButtonLightsOn.IsChecked == true)
+            {
+                lightning = true;
+            }
+
+            else if (radioButtonLightsOff.IsChecked == true)
+            {
+                lightning = false;
+
+            }
+            controller.sendHeatingAndLightning(heating, lightning);
+             */
+        }
+
+        private void getSensors_Click(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER FOR SENSORS");
             controller.getSensorsXML();

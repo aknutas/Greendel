@@ -89,13 +89,17 @@ namespace CloverMobile
             WorkItem newItem = new WorkItem("outputs", device.deviceId);
             nwc.addNewDownloadWorkUnit(newItem);
         }
-        public void getSensorHisroty(int sensorId)
+        public void getSensorHistory(int sensorId)
         {
             sensorId = 1;
             WorkItem newItem = new WorkItem("sensor", 0, sensorId);
             nwc.addNewDownloadWorkUnit(newItem);
         }
-
+        public void updateValueOfThisSensor(int sensorId)
+        {
+            WorkItem newItem = new WorkItem("sensorUpdate", 0, sensorId);
+            nwc.addNewDownloadWorkUnit(newItem);      
+        }
         public void sendHeatingAndLightning(bool heating, bool lightning)
         { 
     

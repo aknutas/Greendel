@@ -13,9 +13,9 @@ namespace CloverMobile
 {
     public class HistoryData
     {
-        public int powerConsumption0 { get; set; }
-        public int powerConsumption1 { get; set; }
-        public int powerConsumption2 { get; set; }
-        public int powerConsumption3 { get; set; }
+            public string time { get; set; }
+            public double value { get; set; }
+            //public double val2 { get; set; }
+            //public double val3 { get; set; }
     }
 }

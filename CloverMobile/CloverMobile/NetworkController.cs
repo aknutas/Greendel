@@ -35,6 +35,7 @@ namespace CloverMobile
         private List<WorkItem> downloadWorkQueue;
         //private List<WorkItem> uploadWorkQueue;
         private WorkItem currentWorkItem;
+        private int currentSensorId;
 
 
         public NetworkController()
@@ -78,28 +79,35 @@ namespace CloverMobile
                     {
                         case "userInfo":
                             documentType = "userInfo";
-                            wcDown.Credentials = new NetworkCredential(username, password);
+                            //wcDown.Credentials = new NetworkCredential(username, password);
                             wcDown.DownloadStringAsync(new Uri(serviceAddress + "/users/datastatus/1"));
                             break;
 
                         case "sensors":
                             documentType = "sensors";
-                            wcDown.Credentials = new NetworkCredential(username, password);
+                            //wcDown.Credentials = new NetworkCredential(username, password);
                             wcDown.DownloadStringAsync(new Uri(serviceAddress + "/devices/datastatus/" + currentWorkItem.deviceId.ToString()));                 
                             break;
 
                         case "outputs":
                             documentType = "outputs";
-                            wcDown.Credentials = new NetworkCredential(username, password);
+                            //wcDown.Credentials = new NetworkCredential(username, password);
                             wcDown.DownloadStringAsync(new Uri(serviceAddress + "/devices/datastatus/" + currentWorkItem.deviceId.ToString()));                    
                             break;
 
                         case "sensor":
                             documentType = "sensor";
-                            wcDown.Credentials = new NetworkCredential(username, password);
-                            wcDown.DownloadStringAsync(new Uri(serviceAddress + "/sensors/history/" + currentWorkItem.sensorId.ToString()));                   
+                            //wcDown.Credentials = new NetworkCredential(username, password);
+                            currentSensorId = currentWorkItem.sensorId;
+                            wcDown.DownloadStringAsync(new Uri(serviceAddress + "/sensors/history/" + currentSensorId.ToString()));                   
                             break;
-
+                        case "sensorUpdate":
+                            System.Diagnostics.Debug.WriteLine("!!!");
+                            documentType = "sensorUpdate";
+                            //wcDown.Credentials = new NetworkCredential(username, password);
+                            currentSensorId = currentWorkItem.sensorId;
+                            wcDown.DownloadStringAsync(new Uri(serviceAddress + "/sensors/" + currentSensorId.ToString() + ".xml"));
+                            break;
                         default:
                             break;
                     }
@@ -252,9 +260,16 @@ namespace CloverMobile
             {
                 System.Diagnostics.Debug.WriteLine("EVENT HANDLER FOR ONE SENSOR");
                 dataDoc = XDocument.Load(new StringReader(e.Result));
-                master.parseOutpus(dataDoc);
+                master.parseSensorHistory(currentSensorId, dataDoc);
                 documentType = "";
-
+            }
+            else if (documentType == "sensorUpdate")
+            {
+                System.Diagnostics.Debug.WriteLine("EVENT HANDLER FOR SENSOR UPDATE");
+                dataDoc = XDocument.Load(new StringReader(e.Result));
+                master.parseSingleSensorForNewHistoryDatapoint(currentSensorId, dataDoc);
+                documentType = "";
+            
             }
         }
         void wcUpload_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)

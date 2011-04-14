@@ -13,8 +13,65 @@
     mc:Ignorable="d" d:DesignHeight="480" d:DesignWidth="728"
     shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded" xmlns:my="clr-namespace:AmCharts.Windows.QuickCharts;assembly=AmCharts.Windows.QuickCharts.WP" DataContext="{Binding}">
 	<phone:PhoneApplicationPage.Resources>
-		
-	</phone:PhoneApplicationPage.Resources>
+        
+        <!--<Storyboard x:Name="historyScreenLoad">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="LayoutRoot">
+                <EasingDoubleKeyFrame KeyTime="0" Value="2.146"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.248" Value="1.32875"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.98" Value="0.970308"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.069" Value="0.402"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.197" Value="0.402"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.262" Value="0.402"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.346" Value="0.402"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.43" Value="0.133"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.526" Value="0.993"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="LayoutRoot">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-165.904"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.248" Value="-164.019"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.98" Value="-163.192"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.069" Value="-161.882"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.197" Value="-128.124"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.262" Value="-79.624"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.346" Value="-161.882"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.348" Value="-194.382"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.43" Value="-259.811"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.526" Value="53.181"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.652" Value="17.181"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="LayoutRoot">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-90.363"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.248" Value="-90.363"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.98" Value="-90.363"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.069" Value="-90.363"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.346" Value="-359.718"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="LayoutRoot">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.833"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.248" Value="0.833"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.98" Value="0.833"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.069" Value="0.833"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.197" Value="1.171"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.262" Value="1.369"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.346" Value="0.833"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.43" Value="0.833"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.526" Value="0.833"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="LayoutRoot">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-619.197"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.248" Value="-321.677"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.98" Value="-191.186"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.069" Value="15.707"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.197" Value="89.359"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.262" Value="106.959"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.346" Value="15.707"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.348" Value="-4.305"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.43" Value="15.225"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.526" Value="16.766"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.652" Value="0.766"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>-->
+    </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent" RenderTransformOrigin="0.5,0.5">
@@ -42,20 +99,20 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <!-- <HyperlinkButton Content="Back" Height="30" HorizontalAlignment="Left" Margin="131,551,0,0" Name="hyperlinkButton1" VerticalAlignment="Top" Width="200" NavigateUri="/CloverMobile;component/MainPage.xaml" />-->
+            <!--<HyperlinkButton Content="Back" Height="30" HorizontalAlignment="Left" Margin="131,551,0,0" Name="hyperlinkButton1" VerticalAlignment="Top" Width="200" NavigateUri="/CloverMobile;component/MainPage.xaml" />-->
             <!--<ListBox Height="186" HorizontalAlignment="Left" Margin="12,47,0,0" Name="listBox1" VerticalAlignment="Top" Width="684" FontSize="36" /> -->
             <!--<TextBlock Height="35" HorizontalAlignment="Left" Margin="12,8,0,0" Name="fromInternet" Text="" VerticalAlignment="Top" Width="684" TextWrapping="Wrap" /> -->
             <my:SerialChart x:Name="chart1" DataSource="{Binding DataUnit}" CategoryValueMemberPath="time"
                          AxisForeground="White"
                          PlotAreaBackground="Black"
-                         GridStroke="DarkGray" Margin="0,-112,0,56">
+                         GridStroke="DarkGray" Margin="0,-40,0,56">
                 <my:SerialChart.Graphs>
                     <my:LineGraph ValueMemberPath="value" Title="Line #1" Brush="Blue" />
                     <!--<my:ColumnGraph ValueMemberPath="val2" Title="Column #2" Brush="#8000FF00" ColumnWidthAllocation="0.4" />-->
                     <!--<my:AreaGraph ValueMemberPath="val3" Title="Area #1" Brush="#80FF0000" />-->
                 </my:SerialChart.Graphs>
             </my:SerialChart>
-            <Button Content="Button" Height="77" HorizontalAlignment="Left" Margin="-2,245,0,0" Name="button1" VerticalAlignment="Top" Width="160" Click="button1_Click" />
+            <Button Content="Button" Height="77" HorizontalAlignment="Left" Margin="-2,245,0,0" Name="button1" VerticalAlignment="Top" Width="160" Click="button1_Click_1" />
         </Grid>
     </Grid>
  
