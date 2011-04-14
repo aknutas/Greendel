@@ -5,13 +5,13 @@ task :weatherload => :environment do
 
   puts "Starting to refresh weathers"
   client = YahooWeather::Client.new
-  fc = nil
 
   puts "Loading weather objects"
   weathers = Weather.find(:all, :include => [:histories, :location, {:location => :device}])
 
   puts "Refreshing objects"
   weathers.each do |weather|
+    fc = nil
     if weather.woeid
       puts Time.now.asctime + ":" + " Refreshing the weather of " + weather.location.device.name + " at " + weather.location.town
       response = client.lookup_by_woeid(weather.woeid, YahooWeather::Units::CELSIUS)
@@ -27,12 +27,14 @@ task :weatherload => :environment do
       weather.low = fc.low
       weather.temp = response.condition.temp
       weather.desc = response.condition.text
-      unless (weather.histories.last.try(:fday) == Date.today)
+      weather.code = response.condition.code
+      if (weather.histories.last.try(:fday) != Date.today && fc != nil)
         his = History.new
         his.fday = fc.date
         his.desc = fc.text
         his.high = fc.high
         his.low = fc.low
+        his.code = fc.code
         his.temp = (his.high + his.low) / 2
         his.yweather = weather.yweather
         weather.histories << his
@@ -48,6 +50,9 @@ task :weatherload => :environment do
       weather.temp = nil
       weather.desc = nil
       weather.yweather = nil
+      weather.code = nil
+      weather.high = nil
+      weather.low = nil
     end
     weather.save
   end
