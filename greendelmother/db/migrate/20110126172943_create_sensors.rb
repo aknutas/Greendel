@@ -13,6 +13,7 @@ class CreateSensors < ActiveRecord::Migration
     end
 
     add_index :sensors, :device_id
+    add_index :sensors, :name
 
   end
 

@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(:version => 20110407082126) do
   end
 
   add_index "sensors", ["device_id"], :name => "index_sensors_on_device_id"
+  add_index "sensors", ["name"], :name => "index_sensors_on_name"
 
   create_table "socialmedias", :force => true do |t|
     t.boolean  "status",        :default => false
