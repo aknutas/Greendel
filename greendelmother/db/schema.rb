@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(:version => 20110407082126) do
     t.string   "name"
     t.string   "longname"
     t.string   "vartype"
+    t.string   "unit"
     t.float    "latestreading"
     t.integer  "device_id"
     t.datetime "created_at"

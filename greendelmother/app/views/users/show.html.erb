@@ -1,8 +1,16 @@
+<script>Event.observe(window, 'load', function() {
+    <%= visual_effect(:fade, 'curr_cons', :delay => 8, :queue => { :position => 'end', :scope => 'cc', :limit => 2 }) %>
+}); </script>
+
+<%= periodically_call_remote(:url => {:action => 'current_consumption', :id => @user.id}, :frequency => 10, :update => 'curr_cons', :complete => "new Effect.Appear('curr_cons', {duration: 0.9, queue: {scope: 'cc', position: 'end', limit: 2}}); new Effect.Fade('curr_cons', {duration: 0.9, delay: 8, queue: {scope: 'cc', position: 'end', limit: 2}})") %>
 <p>Welcome <%= @user.realname %></p>
+<p>Current power consumption: <b><span id='curr_cons'><%= @csensor.try(:latestreading).to_s + @csensor.try(:unit) %></span></b></p>
 
 <p>It is <%= Time.zone.now.asctime %> and the weather is <%= try_print(@user.device.location.weather.desc).downcase %> <img src="<%= begin @wnow.get_image_link end%>"> and <%= try_print(@user.device.location.weather.temp) %>C at <%= @user.device.location.town %>.</p>
+<% if @wtomorrow %>
 <p>Tomorrow is <%= @wtomorrow.text %> <img src="<%= begin @wnow.get_forecast_link(:tomorrow) end%>"> with high of <%= @wtomorrow.high %>C and low of <%= @wtomorrow.low %>C.</p>
+<% end %>
 <br/>
 <% @user.device.sensors.each do |sensor| %>
-<p><%= link_to(sensor.longname, sensor_path(sensor)) %> was at <%= if sensor.latestreading then h(sensor.latestreading) else h("-") end %> when measured at <%= if sensor.updated_at.asctime then h(sensor.updated_at.asctime) else h("-") end %></p>
+<p><%= link_to(sensor.longname, sensor_path(sensor)) %> was at <%= if sensor.latestreading then h(sensor.latestreading.to_s + sensor.unit) else h("-") end %> when measured at <%= if sensor.updated_at.asctime then h(sensor.updated_at.asctime) else h("-") end %></p>
 <% end %>

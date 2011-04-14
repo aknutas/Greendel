@@ -15,6 +15,8 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id], :include => [:device, {:device => [:sensors, :outputs, :location, {:location => :weather}]}])
 
+    @csensor = @user.device.sensors.find(:first, :conditions => {:name => "poweruse"})
+
     begin
       @wnow = @user.device.location.weather
       fcs = @wnow.get_forecasts
@@ -30,6 +32,12 @@ class UsersController < ApplicationController
       format.html # show.html.erb
       format.xml # show.xml.builder
     end
+  end
+
+  # AJAX update method
+  def current_consumption
+    @user = User.find(params[:id])
+    @csensor = @user.device.sensors.find(:first, :conditions => {:name => "poweruse"})
   end
 
   #Custom for mobile
