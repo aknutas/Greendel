@@ -2,7 +2,10 @@
   <b>Name:</b>
   <%=h @device.name %>
 </p>
-
-
-<%= link_to 'Edit', edit_device_path(@device) %> |
-<%= link_to 'Back', devices_path %>
+<% @device.sensors.each do |sensor| %>
+<p><%= link_to(sensor.longname, sensor_path(sensor)) %> was at <%= if sensor.latestreading then h(sensor.latestreading.to_s + sensor.unit) else h("-") end %> on <%= try_print(sensor.updated_at.asctime) %></p>
+<% end %>
+<br/>
+<% @device.outputs.each do |output| %>
+<p><%= link_to(output.longname, sensor_path(output)) %> was turned <%= if output.try(:state) == true then h("on") else h("off") end %> at <%= try_print(output.updated_at) %></p>
+<% end %>

@@ -13,7 +13,7 @@ class DevicesController < ApplicationController
   # GET /devices/1
   # GET /devices/1.xml
   def show
-    @device = Device.find(params[:id])
+    @device = Device.find(params[:id], :include => [:sensors, :outputs, :location])
 
     respond_to do |format|
       format.html # show.html.erb

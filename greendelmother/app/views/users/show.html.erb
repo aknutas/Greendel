@@ -12,7 +12,7 @@
 <% end %>
 <br/>
 <% @user.device.sensors.each do |sensor| %>
-<p><%= link_to(sensor.longname, sensor_path(sensor)) %> was at <%= if sensor.latestreading then h(sensor.latestreading.to_s + sensor.unit) else h("-") end %> when measured at <%= if sensor.updated_at.asctime then h(sensor.updated_at.asctime) else h("-") end %></p>
+<p><%= link_to(sensor.longname, sensor_path(sensor)) %> was at <%= if sensor.latestreading then h(sensor.latestreading.to_s + sensor.unit) else h("-") end %> on <%= try_print(sensor.updated_at.asctime) %></p>
 <% end %>
 <div id="readings_chart" style="width: 50%; height: 300px;"></div>
 
