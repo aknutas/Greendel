@@ -22,11 +22,13 @@ Options:
 Weather histories:
 /histories/datastatus/<weatherid>.xml
 
+Savings Goals:
+/savingsgoals/datastatus/<userid>.xml
+
 ---
 
 Missing APIs:
 -Social media
--Savings goals
 
 ---
 

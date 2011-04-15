@@ -37,7 +37,7 @@ class UsersController < ApplicationController
 
   # AJAX update method
   def current_consumption
-    @user = User.find(params[:id], :include => :device)
+    @user = current_user()
     @csensor = @user.device.sensors.find(:first, :conditions => {:name => "poweruse"})
   end
 

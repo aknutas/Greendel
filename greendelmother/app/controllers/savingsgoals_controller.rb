@@ -6,7 +6,7 @@ class SavingsgoalsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @savingsgoals }
+      format.xml { render :xml => @savingsgoals }
     end
   end
 
@@ -17,7 +17,16 @@ class SavingsgoalsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @savingsgoal }
+      format.xml { render :xml => @savingsgoal }
+    end
+  end
+
+  def datastatus
+    @user = current_user()
+    @savingsgoals = @user.device.savingsgoals.find(:all, :order => "timestart ASC", :include => [:device, :sensor])
+
+    respond_to do |format|
+      format.xml # datastatus.xml.builder
     end
   end
 
@@ -28,7 +37,7 @@ class SavingsgoalsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @savingsgoal }
+      format.xml { render :xml => @savingsgoal }
     end
   end
 
@@ -45,10 +54,10 @@ class SavingsgoalsController < ApplicationController
     respond_to do |format|
       if @savingsgoal.save
         format.html { redirect_to(@savingsgoal, :notice => 'Savingsgoal was successfully created.') }
-        format.xml  { render :xml => @savingsgoal, :status => :created, :location => @savingsgoal }
+        format.xml { render :xml => @savingsgoal, :status => :created, :location => @savingsgoal }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @savingsgoal.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @savingsgoal.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -61,10 +70,10 @@ class SavingsgoalsController < ApplicationController
     respond_to do |format|
       if @savingsgoal.update_attributes(params[:savingsgoal])
         format.html { redirect_to(@savingsgoal, :notice => 'Savingsgoal was successfully updated.') }
-        format.xml  { head :ok }
+        format.xml { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @savingsgoal.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @savingsgoal.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -77,7 +86,7 @@ class SavingsgoalsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(savingsgoals_url) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
 end
