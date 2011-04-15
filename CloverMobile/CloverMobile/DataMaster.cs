@@ -119,7 +119,7 @@ namespace CloverMobile
                     {
                         sensorId = Convert.ToInt16(s.Element("id").Value),
                         sensorName = s.Element("name").Value.ToString(),
-                        // add long name
+                        longName = s.Element("longname").Value.ToString(),
                         sensorVarType = s.Element("vartype").Value.ToString(),
                         latestReading = s.Element("latestreading") != null ? s.Element("latestreading").Value : string.Empty
                     }).ToList<Sensor>();
@@ -185,7 +185,7 @@ namespace CloverMobile
                 {
                     foreach (HistoryData hd in allReadings)
                     {
-                        s.addNewHistoryValue(hd.time, hd.value);
+                        s.addNewHistoryValue(Convert.ToDateTime(hd.time), hd.value);
                         System.Diagnostics.Debug.WriteLine("Current Readings: " + hd.time.ToString() + " " + hd.value.ToString());
                     }
                 }
@@ -212,7 +212,7 @@ namespace CloverMobile
                         {
                             s.latestReading = sens.latestReading; // ** update the current values
                             s.updatedAt = sens.updatedAt;
-                            s.addNewHistoryValue(sens.updatedAt.ToString(), double.Parse(sens.latestReading)); // also
+                            s.addNewHistoryValue(sens.updatedAt, double.Parse(sens.latestReading)); // also
                         }
                     }
                 }

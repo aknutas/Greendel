@@ -15,7 +15,19 @@ namespace CloverMobile
     {
             public string time { get; set; }
             public double value { get; set; }
+            private string format;
             //public double val2 { get; set; }
             //public double val3 { get; set; }
+            public HistoryData()
+            { 
+            
+            }
+            public HistoryData(DateTime timevalue, double number)
+            {   
+                // ** convert the datetime to proper form!
+                format = "yy:mm:dd:hh:mm:ss";
+                time = timevalue.ToString(format);
+                value = number;
+            }
     }
 }
