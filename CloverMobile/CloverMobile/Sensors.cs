@@ -23,7 +23,7 @@ namespace CloverMobile
         public DateTime updatedAt { get; set; }
         
         static Random _r = new Random();
-        public void addNewHistoryValue(string time, double value)
+        public void addNewHistoryValue(DateTime time, double value)
         {
             //DateTime time = DateTime.Now;
             //string format = "h:mm:ss";
@@ -43,19 +43,5 @@ namespace CloverMobile
 
         //public ReadOnlyObservableCollection<SensorData> DataUnit { get; set; }
         public ObservableCollection<HistoryData> DataUnit { get { return _data; } }
-
-
-        public class HistoryData
-        {
-            public HistoryData(string timevalue, double number)
-            {
-                time = timevalue;
-                value = number;
-            }
-            public string time { get; set; }
-            public double value { get; set; }
-            //public double val2 { get; set; }
-            //public double val3 { get; set; }
-        }
     }
 }

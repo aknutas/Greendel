@@ -90,7 +90,7 @@
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
             </TextBlock>
-            <TextBlock x:Name="PageTitle" Text="History" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="PageTitle" Text="History" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" RenderTransformOrigin="0.5,0.5" Height="19" Width="712">
             	<TextBlock.RenderTransform>
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
@@ -105,14 +105,18 @@
             <my:SerialChart x:Name="chart1" DataSource="{Binding DataUnit}" CategoryValueMemberPath="time"
                          AxisForeground="White"
                          PlotAreaBackground="Black"
-                         GridStroke="DarkGray" Margin="0,-40,0,56">
+                         GridStroke="DarkGray" Margin="0,4,0,159">
                 <my:SerialChart.Graphs>
-                    <my:LineGraph ValueMemberPath="value" Title="Line #1" Brush="Blue" />
+                    <my:ColumnGraph ValueMemberPath="value" Title="Power Consumption" Brush="Blue" />
                     <!--<my:ColumnGraph ValueMemberPath="val2" Title="Column #2" Brush="#8000FF00" ColumnWidthAllocation="0.4" />-->
                     <!--<my:AreaGraph ValueMemberPath="val3" Title="Area #1" Brush="#80FF0000" />-->
                 </my:SerialChart.Graphs>
             </my:SerialChart>
-            <Button Content="Button" Height="77" HorizontalAlignment="Left" Margin="-2,245,0,0" Name="button1" VerticalAlignment="Top" Width="160" Click="button1_Click_1" />
+            <Button Content="Apply" Height="77" HorizontalAlignment="Left" Margin="515,285,0,0" Name="button1" VerticalAlignment="Top" Width="160" Click="button1_Click_1" />
+            <ListBox Height="98" HorizontalAlignment="Left" Margin="14,281,0,0" Name="sensorsListBox" VerticalAlignment="Top" Width="199" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="67,244,0,0" Name="sensorsTextBlock" Text="Sensors" VerticalAlignment="Top" />
+            <TextBlock Height="30" HorizontalAlignment="Right" Margin="0,243,350,0" Name="updateTimeSpansTextBlock" Text="Frequency" VerticalAlignment="Top" />
+            <ListBox Height="100" HorizontalAlignment="Right" Margin="0,281,282,0" Name="frequencyListBox" VerticalAlignment="Top" Width="194" />
         </Grid>
     </Grid>
  
