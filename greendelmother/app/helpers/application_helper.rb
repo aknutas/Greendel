@@ -9,4 +9,12 @@ module ApplicationHelper
     end
   end
 
+  def plot_helper(readings)
+    string = ""
+    readings.each do |reading|
+      string = string + "[Date.UTC(" + reading.time.strftime("%Y,%m,%d,%H,%M,%S") + "), " + reading.value.to_s + "],"
+    end
+    return string
+  end
+
 end

@@ -1,4 +1,4 @@
-<script>Event.observe(window, 'load', function() {
+<script type="text/javascript">Event.observe(window, 'load', function() {
     <%= visual_effect(:fade, 'curr_cons', :delay => 8, :queue => { :position => 'end', :scope => 'cc', :limit => 2 }) %>
 }); </script>
 
@@ -14,3 +14,48 @@
 <% @user.device.sensors.each do |sensor| %>
 <p><%= link_to(sensor.longname, sensor_path(sensor)) %> was at <%= if sensor.latestreading then h(sensor.latestreading.to_s + sensor.unit) else h("-") end %> when measured at <%= if sensor.updated_at.asctime then h(sensor.updated_at.asctime) else h("-") end %></p>
 <% end %>
+<div id="readings_chart" style="width: 50%; height: 300px;"></div>
+
+      <script type="text/javascript" charset="utf-8">
+        Event.observe(window, 'load', function() {
+          new Highcharts.Chart({
+            chart: { renderTo: 'readings_chart', zoomType: 'x', defaultSeriesType: 'spline' },
+            subtitle: {
+              text: document.ontouchstart === undefined ?
+                'Click and drag in the plot area to zoom in' :
+                'Drag your finger over the plot to zoom in'
+            },
+            title: { text: '<%= h(@csensor.name) %> Readings History' },
+            xAxis: { type: 'datetime' },
+            yAxis: {
+              title: { text: 'Measured Reading' }
+            },
+            plotOptions: {
+              spline: {
+                lineWidth: 4,
+                states: {
+                  hover: {
+                    lineWidth: 5
+                  }
+                },
+                marker: {
+                  enabled: false,
+                  states: {
+                    hover: {
+                      enabled: true,
+                      symbol: 'circle',
+                      radius: 5,
+                      lineWidth: 1
+                    }
+                  }
+                }
+              }
+            },
+            series: [{
+                name: '<%= h(@csensor.try(:longname)) + " " + @csensor.try(:unit) %>)',
+                data: [ <%= plot_helper(@readings) %>
+          ]
+        }]
+    });
+  });
+  </script>
