@@ -1,4 +1,4 @@
-rake db:drop
-rake db:setup
-rake weatherload
-rake genhistory
+call rake db:drop
+call rake db:setup
+call rake weatherload
+call rake genhistory
