@@ -108,6 +108,13 @@ namespace CloverMobile
                             currentSensorId = currentWorkItem.sensorId;
                             wcDown.DownloadStringAsync(new Uri(serviceAddress + "/sensors/" + currentSensorId.ToString() + ".xml"));
                             break;
+                        case "historyFromTimeScale":
+                            documentType = "historyFromTimeScale";
+                            currentSensorId = currentWorkItem.sensorId;
+                            wcDown.DownloadStringAsync(new Uri(serviceAddress + "/sensors/history/" + currentWorkItem.sensorId.ToString() + ".xml?avgscale="  + currentWorkItem.frequency + "&startdate=" + currentWorkItem.start + "&enddate=" + currentWorkItem.end));
+                            // view-source/sensors/history/1.xml?avgscale=daily&startdate=2011-03-01&enddate=2011-04-01
+                            break;
+
                         default:
                             break;
                     }
@@ -269,7 +276,13 @@ namespace CloverMobile
                 dataDoc = XDocument.Load(new StringReader(e.Result));
                 master.parseSingleSensorForNewHistoryDatapoint(currentSensorId, dataDoc);
                 documentType = "";
-            
+            }
+            else if (documentType == "historyFromTimeScale")
+            {
+                System.Diagnostics.Debug.WriteLine("EVENT HANDLER FOR TIMESCALE HISTORY");
+                dataDoc = XDocument.Load(new StringReader(e.Result));
+                master.parseSingleSensorForNewHistoryDatapoint(currentSensorId, dataDoc);
+                documentType = "";    
             }
         }
         void wcUpload_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)

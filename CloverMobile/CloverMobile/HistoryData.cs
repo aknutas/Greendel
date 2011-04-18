@@ -25,7 +25,8 @@ namespace CloverMobile
             public HistoryData(DateTime timevalue, double number)
             {   
                 // ** convert the datetime to proper form!
-                format = "yy:mm:dd:hh:mm:ss";
+                //format = "yy:mm:dd:hh:mm:ss";
+                format = "hh:mm";
                 time = timevalue.ToString(format);
                 value = number;
             }

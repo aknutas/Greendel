@@ -27,28 +27,11 @@ namespace CloverMobile
         public int currentSensorId { get; set; }
         public History()
         {
-            currentSensorId = 1;
-            currentFrequency = "Hourly";
+            System.Diagnostics.Debug.WriteLine("CALLING HISTORY CONTROLLER!");
             InitializeComponent();
-            controller = Controller.getInstance;
-            
-            model = controller.getModel();
+            currentSensorId = 1;
             //this.DataContext = model;
-
-            frequencyListBox.Items.Add("Hourly");
-            frequencyListBox.Items.Add("Daily");
-            frequencyListBox.Items.Add("Monthly");
-            frequencyListBox.SelectedItem = currentFrequency;
-            foreach (Sensor s in model.currentSensors)
-            {
-                sensorsListBox.Items.Add(s.longName);
-                if (currentSensorId == s.sensorId)
-                {
-                    sensorsListBox.SelectedItem = s.longName;
-                    this.DataContext = s;
-                }
-            
-            }
+            // ** write stuff to check boxes
             //sensorsListBox.SelectedItem = ""
             //this.DataContext = model.currentSensors[currenSensorId - 1];
 
@@ -56,8 +39,33 @@ namespace CloverMobile
         }
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            chart1.FontSize = 10;
+            System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER FOR SENSORS");
+            // ** ask the controller to get all sensors
+            controller = Controller.getInstance;
+
+            controller.getSensorHistory(currentSensorId);
+            // ** get a reference to model's sensorlist
+            model = controller.getModel();
+
+            // ** set some default values
+            //currentSensorId = 1;
+            currentFrequency = "Hourly";
+
             //historyScreenLoad.Begin();
+            frequencyListBox.Items.Add("Hourly");
+            frequencyListBox.Items.Add("Daily");
+            frequencyListBox.Items.Add("Monthly");
+            frequencyListBox.SelectedItem = currentFrequency;
+            foreach (Sensor s in model.currentSensors)
+            {               
+                sensorsListBox.Items.Add(s.longName);
+                controller.getSensorHistory(s.sensorId);
+                if (currentSensorId == s.sensorId)
+                {     
+                    sensorsListBox.SelectedItem = s.longName;
+                    this.DataContext = s;
+                }
+            }
         }
         /*
         private void button1_Click(object sender, RoutedEventArgs e)
@@ -67,6 +75,8 @@ namespace CloverMobile
             //model.currentSensors[currenSensorId - 1].addNewDataUnit();
         }
         */
+
+        // ** this buttone is for testing
         private void button1_Click_1(object sender, RoutedEventArgs e)
         {
             // check if selected new sensor is same than the current
@@ -77,7 +87,54 @@ namespace CloverMobile
             System.Diagnostics.Debug.WriteLine("SENSOR UPDATE");
             controller.updateValueOfThisSensor(currentSensorId);
         }
+
+        private void nextChart_Click(object sender, RoutedEventArgs e)
+        {
+            currentSensorId++;
+            if (currentSensorId > 4) // ** check if going outside the list
+            {
+                currentSensorId = 4;
+                nextChartButton.IsEnabled = false;
+                prevChartButton.IsEnabled = true;
+            }
+            else
+            {
+                SetGraphDataContext(currentSensorId);
+                nextChartButton.IsEnabled = true;
+                prevChartButton.IsEnabled = true;
+                //controller.getSensorHistory(currentSensorId);
+            }
+        }
+
+        private void prevChart_Click(object sender, RoutedEventArgs e)
+        {
+            currentSensorId--;
+            if (currentSensorId < 1)
+            {
+                currentSensorId = 1;
+                prevChartButton.IsEnabled = false;
+                nextChartButton.IsEnabled = true;
+            }
+            else
+            {
+                SetGraphDataContext(currentSensorId);
+                prevChartButton.IsEnabled = true;
+                nextChartButton.IsEnabled = true;
+                //controller.getSensorHistory(currentSensorId);
+            }
+        }
+        private void SetGraphDataContext(int currentSensorId)
+        {
+            // ** set the datacontext
+            foreach (Sensor s in model.currentSensors)
+            {
+                if (currentSensorId == s.sensorId)
+                {
+                    sensorsListBox.SelectedItem = s.longName;
+                    this.DataContext = s;
+                }
+            }
         
-        
+        }
     }
 }
