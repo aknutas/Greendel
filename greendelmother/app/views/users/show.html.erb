@@ -1,6 +1,25 @@
-<script type="text/javascript">Event.observe(window, 'load', function() {
+<script type="text/javascript">
+    Event.observe(window, 'load', function() {
     <%= visual_effect(:fade, 'curr_cons', :delay => 8, :queue => { :position => 'end', :scope => 'cc', :limit => 2 }) %>
-}); </script>
+        setInterval(requestData, 5000);
+});
+var chart;
+
+function requestData() {
+    jQuery.ajax({
+        url: '<%= url_for(:controller => 'users', :action => 'current_consumption_chart', :id => @user.id) %>',
+        success: function(point) {
+            //var series = chart.series[0],
+            //    shift = series.data.length > 20;
+
+            // add the point
+            chart.series[0].addPoint(point, true, true);
+        },
+        cache: false
+    });
+}
+
+</script>
 
 <%= periodically_call_remote(:url => {:action => 'current_consumption', :id => @user.id}, :frequency => 10, :update => 'curr_cons', :complete => "new Effect.Appear('curr_cons', {duration: 0.9, queue: {scope: 'cc', position: 'end', limit: 2}}); new Effect.Fade('curr_cons', {duration: 0.9, delay: 8, queue: {scope: 'cc', position: 'end', limit: 2}})") %>
 <p>Welcome <%= @user.realname %></p>
@@ -18,8 +37,8 @@
 
       <script type="text/javascript" charset="utf-8">
         Event.observe(window, 'load', function() {
-          new Highcharts.Chart({
-            chart: { renderTo: 'readings_chart', zoomType: 'x', defaultSeriesType: 'spline' },
+          chart = new Highcharts.Chart({
+            chart: { renderTo: 'readings_chart', zoomType: 'x', defaultSeriesType: 'spline'},
             subtitle: {
               text: document.ontouchstart === undefined ?
                 'Click and drag in the plot area to zoom in' :
