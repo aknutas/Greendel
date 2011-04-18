@@ -30,6 +30,7 @@ namespace CloverMobile
             InitializeComponent();
             controller = Controller.getInstance;
             controller.setActivePage(this);
+            
 
             // ** check if the settings file exists
             var appStorage = IsolatedStorageFile.GetUserStoreForApplication();
@@ -72,6 +73,7 @@ namespace CloverMobile
         {
             // ** this loads the animation
             MainScreenLoad.Begin();
+            
         }
 
         private void ApplicationBarIconButtonSettings_Click(object sender, EventArgs e)
@@ -104,6 +106,7 @@ namespace CloverMobile
             // ** remove the splashscreen
             splashScreen.Visibility = System.Windows.Visibility.Collapsed;
             PageTitle.Text = "Main Page";
+            controller.getSensorsXML();
 
             if (settingsFileExists == false) // ** if autentication was successfull and this is the first time when logging in, create new file
             {               

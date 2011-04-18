@@ -91,7 +91,7 @@ namespace CloverMobile
         }
         public void getSensorHistory(int sensorId)
         {
-            sensorId = 1;
+            //sensorId = 1;
             WorkItem newItem = new WorkItem("sensor", 0, sensorId);
             nwc.addNewDownloadWorkUnit(newItem);
         }
@@ -99,6 +99,12 @@ namespace CloverMobile
         {
             WorkItem newItem = new WorkItem("sensorUpdate", 0, sensorId);
             nwc.addNewDownloadWorkUnit(newItem);      
+        }
+        public void getSensorHistoryFromSpecifiedTimeScale(int sensorId, string frequency, string start, string end)
+        {
+            WorkItem newItem = new WorkItem("historyFromTimeScale", 0, sensorId, frequency, start, end);
+            nwc.addNewDownloadWorkUnit(newItem);    
+            //view-source:sensors/history/1.xml?avgscale=daily&startdate=2011-03-01&enddate=2011-04-01
         }
         public void sendHeatingAndLightning(bool heating, bool lightning)
         { 

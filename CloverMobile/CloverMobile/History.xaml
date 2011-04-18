@@ -105,18 +105,31 @@
             <my:SerialChart x:Name="chart1" DataSource="{Binding DataUnit}" CategoryValueMemberPath="time"
                          AxisForeground="White"
                          PlotAreaBackground="Black"
-                         GridStroke="DarkGray" Margin="0,4,0,159">
+                         GridStroke="DarkGray" Margin="53,4,0,159" HorizontalAlignment="Left" Width="597" FontSize="10" LegendVisibility="Collapsed">
                 <my:SerialChart.Graphs>
                     <my:ColumnGraph ValueMemberPath="value" Title="Power Consumption" Brush="Blue" />
                     <!--<my:ColumnGraph ValueMemberPath="val2" Title="Column #2" Brush="#8000FF00" ColumnWidthAllocation="0.4" />-->
                     <!--<my:AreaGraph ValueMemberPath="val3" Title="Area #1" Brush="#80FF0000" />-->
                 </my:SerialChart.Graphs>
             </my:SerialChart>
+
+            <!--
+            <my:SerialChart x:Name="chart2" DataSource="{Binding DataUnit}" CategoryValueMemberPath="time"
+                         AxisForeground="White"
+                         PlotAreaBackground="Black"
+                         GridStroke="DarkGray" Margin="53,4,0,159" HorizontalAlignment="Left" Width="597" FontSize="10">
+                <my:SerialChart.Graphs>
+                    <my:ColumnGraph ValueMemberPath="value" Title="Outside Temperature" Brush="Red" />
+                </my:SerialChart.Graphs>
+            </my:SerialChart>-->
+
             <Button Content="Apply" Height="77" HorizontalAlignment="Left" Margin="515,285,0,0" Name="button1" VerticalAlignment="Top" Width="160" Click="button1_Click_1" />
             <ListBox Height="98" HorizontalAlignment="Left" Margin="14,281,0,0" Name="sensorsListBox" VerticalAlignment="Top" Width="199" />
             <TextBlock Height="30" HorizontalAlignment="Left" Margin="67,244,0,0" Name="sensorsTextBlock" Text="Sensors" VerticalAlignment="Top" />
             <TextBlock Height="30" HorizontalAlignment="Right" Margin="0,243,350,0" Name="updateTimeSpansTextBlock" Text="Frequency" VerticalAlignment="Top" />
             <ListBox Height="100" HorizontalAlignment="Right" Margin="0,281,282,0" Name="frequencyListBox" VerticalAlignment="Top" Width="194" />
+            <Button Content="&lt;" Height="72" HorizontalAlignment="Left" Margin="-7,78,0,0" Name="prevChartButton" VerticalAlignment="Top" Width="67" Click="prevChart_Click" />
+            <Button Content="&gt;" Height="72" HorizontalAlignment="Left" Margin="641,90,0,0" Name="nextChartButton" VerticalAlignment="Top" Width="66" Click="nextChart_Click" />
         </Grid>
     </Grid>
  

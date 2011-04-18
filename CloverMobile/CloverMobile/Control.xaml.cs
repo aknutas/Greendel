@@ -59,6 +59,7 @@ namespace CloverMobile
             */
         
         }
+        // ** THESE BUTTONS ARE FOR TESTING ONLY!
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER FOR USER INFO");

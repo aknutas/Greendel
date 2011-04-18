@@ -177,23 +177,25 @@ namespace CloverMobile
 
 
             //currentReadings = allReadings;
-
-            // ** find the right sensor from the list of sensors!
-            foreach (Sensor s in currentSensors)
+            lock (currentSensors)
             {
-                if (s.sensorId == sensorId) // found it
+                // ** find the right sensor from the list of sensors!
+                foreach (Sensor s in currentSensors)
                 {
-                    foreach (HistoryData hd in allReadings)
+                    if (s.sensorId == sensorId) // found it
                     {
-                        s.addNewHistoryValue(Convert.ToDateTime(hd.time), hd.value);
-                        System.Diagnostics.Debug.WriteLine("Current Readings: " + hd.time.ToString() + " " + hd.value.ToString());
+                        foreach (HistoryData hd in allReadings)
+                        {
+                            s.addNewHistoryValue(Convert.ToDateTime(hd.time), hd.value);
+                            //System.Diagnostics.Debug.WriteLine("Current Readings: " + hd.time.ToString() + " " + hd.value.ToString());
+                        }
                     }
                 }
             }
         }
+        // gets the lates values for a sensor
         public void parseSingleSensorForNewHistoryDatapoint(int sensorId, XDocument xmlDoc)
         {
-            // ** USER
             System.Diagnostics.Debug.WriteLine("Getting current value for a sensor...");
             var sensor = from sensorValue in xmlDoc.Descendants("sensor")
             select new Sensor
@@ -212,13 +214,46 @@ namespace CloverMobile
                         {
                             s.latestReading = sens.latestReading; // ** update the current values
                             s.updatedAt = sens.updatedAt;
-                            s.addNewHistoryValue(sens.updatedAt, double.Parse(sens.latestReading)); // also
+                            s.addNewHistoryValue(sens.updatedAt, double.Parse(sens.latestReading));
                         }
                     }
                 }
             }
         }
+        // this function gets the sensor history from specified timescale, historydatalist is cleared and new values are added
+        public void parseSensorTimeScaleHistory(int sensorId, XDocument xmlDoc)
+        {
+            System.Diagnostics.Debug.WriteLine("PARSING TIMESCALE HISTORY VALUES FOR A SINGLE SENSOR");
+            //System.Diagnostics.Debug.WriteLine(xmlDoc.ToString());
+            var allReadings = new List<HistoryData>();
 
+            allReadings = (from r in xmlDoc.Descendants("reading")
+                           select new HistoryData()
+                           {
+                               time = r.Element("time").Value,
+                               value = Convert.ToDouble(r.Element("value").Value),
+
+                           }).ToList<HistoryData>();
+
+
+            //currentReadings = allReadings;
+            lock (currentSensors)
+            {
+                // ** find the right sensor from the list of sensors!
+                foreach (Sensor s in currentSensors)
+                {
+                    if (s.sensorId == sensorId) // found it
+                    {
+                        s.DataUnit.Clear();
+                        foreach (HistoryData hd in allReadings)
+                        {
+                            s.addNewHistoryValue(Convert.ToDateTime(hd.time), hd.value);
+                            //System.Diagnostics.Debug.WriteLine("Current Readings: " + hd.time.ToString() + " " + hd.value.ToString());
+                        }
+                    }
+                }
+            }
+        }
         /*
         System.Diagnostics.Debug.WriteLine("Parsing outputs and sensors: ");
 
