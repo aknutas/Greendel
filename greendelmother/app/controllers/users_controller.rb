@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id], :include => [:device, {:device => [:sensors, :outputs, :location, {:location => :weather}]}])
 
     @csensor = @user.device.sensors.find(:first, :conditions => {:name => "poweruse"})
-    @readings = @csensor.readings.find(:all, :order => "time DESC", :limit => 100)
+    @readings = @csensor.readings.find(:all, :order => "time DESC", :limit => 60)
 
     begin
       @wnow = @user.device.location.weather
@@ -39,6 +39,20 @@ class UsersController < ApplicationController
   def current_consumption
     @user = current_user()
     @csensor = @user.device.sensors.find(:first, :conditions => {:name => "poweruse"})
+  end
+
+    # AJAX update method for Highcharts
+  def current_consumption_chart
+    @user = current_user()
+    @csensor = @user.device.sensors.find(:first, :conditions => {:name => "poweruse"})
+
+    reading = @csensor.try(:latestreading)
+    returnarray = Array.new
+    returnarray[0] = (@csensor.updated_at.to_i + 3.hours) * 1000
+    returnarray[1] = reading
+
+    response.headers['Content-Type'] = 'text/json'
+    render :json => returnarray
   end
 
   #Custom for mobile
