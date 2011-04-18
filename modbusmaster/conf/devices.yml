@@ -7,22 +7,12 @@
   sensors:
    - id: 1
      name: poweruse
-     register: 5
+     register: 10
      ntype: short
      scalefactor: 1
    - id: 2
      name: powerconsumed
-     register: 38
-     ntype: short
-     scalefactor: 1
-   - id: 3
-     name: insidetemp
-     register: 37
-     ntype: short
-     scalefactor: 1
-   - id: 4
-     name: outsidetemp
-     register: 35
+     register: 5
      ntype: short
      scalefactor: 1
   outputs:
@@ -30,11 +20,8 @@
       name: heating
       register: 30
     - id: 2
-      name: lights
-      register: 31
-    - id: 3
       name: solar
       register: 32
-    - id: 4
+    - id: 3
       name: wind
       register: 33

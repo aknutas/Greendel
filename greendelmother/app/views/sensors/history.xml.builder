@@ -6,6 +6,7 @@ xml.sensor do
   xml.vartype @sensor.vartype
   xml.latestreading @sensor.latestreading
   xml.updated_at @sensor.updated_at
+  xml.unit @sensor.unit
   xml.readings do
     @readings.each do |reading|
       xml.reading do
