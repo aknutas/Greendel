@@ -31,19 +31,11 @@ namespace CloverMobile
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 0, 10, 0);
             timer.Tick += new EventHandler(Timer_tick);
-            timer.Start();
+            //timer.Start();
         }
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
             controlScreenAnimation.Begin();
-        }
-
- 
-        private void Timer_tick(object sender, EventArgs e)
-        {
-            //outputs = model.getOutputs();
-            //sensors = model.getSensors();
-            UpdateView();
         }
         public void UpdateView()
         {
@@ -110,13 +102,18 @@ namespace CloverMobile
             controller.sendHeatingAndLightning(heating, lightning);
              */
         }
+        private void Timer_tick(object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER FOR SENSORS");
+            //controller.getSensorsXML();
+            //outputs = model.getOutputs();
+            //sensors = model.getSensors();
+            UpdateView();
+        }
 
         private void getSensors_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER FOR SENSORS");
-            controller.getSensorsXML();
+
         }
-
-
     }
 }

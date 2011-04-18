@@ -22,11 +22,12 @@ namespace CloverMobile
             { 
             
             }
+            // ** add specific constructors for formatting datetime differently !!
             public HistoryData(DateTime timevalue, double number)
             {   
                 // ** convert the datetime to proper form!
                 //format = "yy:mm:dd:hh:mm:ss";
-                format = "hh:mm";
+                format = "yyyy:MM:dd:hh:mm";
                 time = timevalue.ToString(format);
                 value = number;
             }

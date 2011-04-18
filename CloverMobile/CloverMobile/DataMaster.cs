@@ -45,7 +45,7 @@ namespace CloverMobile
         public void parseUserInformation(XDocument xmlDoc)
         {
             // ** USER
-            System.Diagnostics.Debug.WriteLine("Parsing User Info XML...");
+            System.Diagnostics.Debug.WriteLine("Model: Parsing User Info XML...");
             var user = from userValue in xmlDoc.Descendants("user")
             select new User
             {
@@ -110,7 +110,7 @@ namespace CloverMobile
         // ** get all sensors only
         public void parseSensors(XDocument xmlDoc)
         {
-            System.Diagnostics.Debug.WriteLine("PARSING SENSORS");
+            System.Diagnostics.Debug.WriteLine("Model: parsing sensors.");
             var allSensors = new List<Sensor>();
             try
             {
@@ -138,7 +138,7 @@ namespace CloverMobile
 
         public void parseOutpus(XDocument xmlDoc)
         {
-            System.Diagnostics.Debug.WriteLine("PARSING OUTPUTS");
+            System.Diagnostics.Debug.WriteLine("Model: parsing outputs");
             //System.Diagnostics.Debug.WriteLine(xmlDoc.ToString());
             var allOutputs = new List<Output>();
 
@@ -163,7 +163,7 @@ namespace CloverMobile
         // gets the history values for a specific sensor
         public void parseSensorHistory(int sensorId, XDocument xmlDoc)
         { 
-            System.Diagnostics.Debug.WriteLine("PARSING HISTORY VALUES FOR A SINGLE SENSOR");
+            System.Diagnostics.Debug.WriteLine("Model: parsing history values for a single sensor");
             //System.Diagnostics.Debug.WriteLine(xmlDoc.ToString());
             var allReadings = new List<HistoryData>();
 
@@ -196,7 +196,7 @@ namespace CloverMobile
         // gets the lates values for a sensor
         public void parseSingleSensorForNewHistoryDatapoint(int sensorId, XDocument xmlDoc)
         {
-            System.Diagnostics.Debug.WriteLine("Getting current value for a sensor...");
+            System.Diagnostics.Debug.WriteLine("Model: getting current value for a sensor.");
             var sensor = from sensorValue in xmlDoc.Descendants("sensor")
             select new Sensor
             {     
@@ -223,7 +223,7 @@ namespace CloverMobile
         // this function gets the sensor history from specified timescale, historydatalist is cleared and new values are added
         public void parseSensorTimeScaleHistory(int sensorId, XDocument xmlDoc)
         {
-            System.Diagnostics.Debug.WriteLine("PARSING TIMESCALE HISTORY VALUES FOR A SINGLE SENSOR");
+            System.Diagnostics.Debug.WriteLine("Model: parsing timescale history values for a single sensor.");
             //System.Diagnostics.Debug.WriteLine(xmlDoc.ToString());
             var allReadings = new List<HistoryData>();
 
@@ -235,7 +235,6 @@ namespace CloverMobile
 
                            }).ToList<HistoryData>();
 
-
             //currentReadings = allReadings;
             lock (currentSensors)
             {
@@ -245,10 +244,11 @@ namespace CloverMobile
                     if (s.sensorId == sensorId) // found it
                     {
                         s.DataUnit.Clear();
+                        
                         foreach (HistoryData hd in allReadings)
                         {
                             s.addNewHistoryValue(Convert.ToDateTime(hd.time), hd.value);
-                            //System.Diagnostics.Debug.WriteLine("Current Readings: " + hd.time.ToString() + " " + hd.value.ToString());
+                            System.Diagnostics.Debug.WriteLine("Current Readings: " + hd.time.ToString() + " " + hd.value.ToString());
                         }
                     }
                 }
@@ -270,7 +270,7 @@ namespace CloverMobile
            latestReading = int.Parse(sensors.Element("latestreading").Value), 
                     
                     
-                                              
+                                          
         };
             
         foreach (Sensor s in sensorOutputs)
