@@ -38,11 +38,12 @@ namespace CloverMobile
             sensorId = sensorID;
             deviceId = deviceID;
         }
-        public WorkItem(string workName, int deviceID, int sensorID, string frequency, string startDate, string endDate)
+        public WorkItem(string workName, int deviceID, int sensorID, string freq, string startDate, string endDate)
         {
             documentName = workName;
             deviceId = deviceID;
             sensorId = sensorID;
+            frequency = freq;
             start = startDate;
             end = endDate;     
         }

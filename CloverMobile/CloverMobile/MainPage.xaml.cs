@@ -96,9 +96,7 @@ namespace CloverMobile
                 // ** try to authenticate
                 controller.authenticate(userNameTextBox.Text, passwordTextBox.Password);
                 System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER FOR USER INFO");
-                controller.getUserXML();
-                
-                   
+                controller.getUserXML();             
         }
 
         public void authenticationOk() // ** this function is called  if the autentication is successfull
@@ -106,8 +104,8 @@ namespace CloverMobile
             // ** remove the splashscreen
             splashScreen.Visibility = System.Windows.Visibility.Collapsed;
             PageTitle.Text = "Main Page";
+            //controller.getSensorsXML();
             controller.getSensorsXML();
-
             if (settingsFileExists == false) // ** if autentication was successfull and this is the first time when logging in, create new file
             {               
                 // ** create the settings object, serialize it and write it to phone's memory

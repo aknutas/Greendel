@@ -56,7 +56,7 @@ namespace CloverMobile
         public void setDataMaster(DataMaster mstr)
         {
             master = mstr;
-            serviceAddress = "http://anttitek.net:3000";
+            serviceAddress = "http://localhost:3000";
         }
         public void setMasterController(Controller ctrl)
         {
@@ -102,7 +102,6 @@ namespace CloverMobile
                             wcDown.DownloadStringAsync(new Uri(serviceAddress + "/sensors/history/" + currentSensorId.ToString()));                   
                             break;
                         case "sensorUpdate":
-                            System.Diagnostics.Debug.WriteLine("!!!");
                             documentType = "sensorUpdate";
                             //wcDown.Credentials = new NetworkCredential(username, password);
                             currentSensorId = currentWorkItem.sensorId;
@@ -238,10 +237,10 @@ namespace CloverMobile
                 System.Diagnostics.Debug.WriteLine("CONNECTION ERROR! " + e.Error.ToString());
                 controller.printErrorMessage(e.Error.ToString());
             }
-            System.Diagnostics.Debug.WriteLine("FINISHED DOWNLOADING...");
+            System.Diagnostics.Debug.WriteLine("nwc: finished downloading xml.");
             if (documentType == "userInfo")
             {
-                System.Diagnostics.Debug.WriteLine("EVENT HANDLER FOR USER INFO");
+                System.Diagnostics.Debug.WriteLine("nwc: asking model for userinfo..");
                 // ** xml document received fully, give it to the master for parsing
                 dataDoc = XDocument.Load(new StringReader(e.Result));
                 master.parseUserInformation(dataDoc);
@@ -251,37 +250,37 @@ namespace CloverMobile
             }
             else if (documentType == "sensors")
             {
-                System.Diagnostics.Debug.WriteLine("EVENT HANDLER FOR SENSORS");
+                System.Diagnostics.Debug.WriteLine("nwc: asking model for sensors..");
                 dataDoc = XDocument.Load(new StringReader(e.Result));
                 master.parseSensors(dataDoc);
                 documentType = "";
             }
             else if (documentType == "outputs")
             {
-                System.Diagnostics.Debug.WriteLine("EVENT HANDLER FOR OUTPUTS");
+                System.Diagnostics.Debug.WriteLine("nwc: asking model for outputs..");
                 dataDoc = XDocument.Load(new StringReader(e.Result));
                 master.parseOutpus(dataDoc);
                 documentType = "";
             }
             else if (documentType == "sensor")
             {
-                System.Diagnostics.Debug.WriteLine("EVENT HANDLER FOR ONE SENSOR");
+                System.Diagnostics.Debug.WriteLine("nwc: asking model for sensor history..");
                 dataDoc = XDocument.Load(new StringReader(e.Result));
                 master.parseSensorHistory(currentSensorId, dataDoc);
                 documentType = "";
             }
             else if (documentType == "sensorUpdate")
             {
-                System.Diagnostics.Debug.WriteLine("EVENT HANDLER FOR SENSOR UPDATE");
+                System.Diagnostics.Debug.WriteLine("nwc: asking model for sensor update..");
                 dataDoc = XDocument.Load(new StringReader(e.Result));
                 master.parseSingleSensorForNewHistoryDatapoint(currentSensorId, dataDoc);
                 documentType = "";
             }
             else if (documentType == "historyFromTimeScale")
             {
-                System.Diagnostics.Debug.WriteLine("EVENT HANDLER FOR TIMESCALE HISTORY");
+                System.Diagnostics.Debug.WriteLine("nwc: asking model for sensor timescale history information..");
                 dataDoc = XDocument.Load(new StringReader(e.Result));
-                master.parseSingleSensorForNewHistoryDatapoint(currentSensorId, dataDoc);
+                master.parseSensorTimeScaleHistory(currentSensorId, dataDoc);
                 documentType = "";    
             }
         }

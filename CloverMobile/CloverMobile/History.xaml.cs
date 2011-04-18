@@ -14,12 +14,14 @@ using System.IO;
 using System.Diagnostics;
 using System.Xml.Linq;
 using System.Collections.ObjectModel;
+using System.Windows.Threading;
 
 namespace CloverMobile
 {
 
     public partial class History : PhoneApplicationPage
     {
+        private DispatcherTimer timer;
         private Controller controller;
         DataMaster model;
         public string currentFrequency { get; set; }
@@ -27,67 +29,68 @@ namespace CloverMobile
         public int currentSensorId { get; set; }
         public History()
         {
-            System.Diagnostics.Debug.WriteLine("CALLING HISTORY CONTROLLER!");
             InitializeComponent();
-            currentSensorId = 1;
-            //this.DataContext = model;
-            // ** write stuff to check boxes
-            //sensorsListBox.SelectedItem = ""
-            //this.DataContext = model.currentSensors[currenSensorId - 1];
-
-            // ** connect the web service here   
+  
         }
+
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER FOR SENSORS");
-            // ** ask the controller to get all sensors
+            System.Diagnostics.Debug.WriteLine("UI: History page constructor called");
+
+            // ** get sensors
             controller = Controller.getInstance;
 
-            controller.getSensorHistory(currentSensorId);
-            // ** get a reference to model's sensorlist
-            model = controller.getModel();
 
             // ** set some default values
-            //currentSensorId = 1;
-            currentFrequency = "Hourly";
+            currentSensorId = 1;
+            currentFrequency = "hourly";
 
-            //historyScreenLoad.Begin();
-            frequencyListBox.Items.Add("Hourly");
-            frequencyListBox.Items.Add("Daily");
-            frequencyListBox.Items.Add("Monthly");
-            frequencyListBox.SelectedItem = currentFrequency;
+            timer = new DispatcherTimer();
+            timer.Interval = new TimeSpan(0, 0, 0, 10, 0);
+            timer.Tick += new EventHandler(Timer_tick);
+            timer.Start();
+
+            frequencyListBox.Items.Add("hourly");
+            frequencyListBox.Items.Add("daily");
+            frequencyListBox.Items.Add("monthly");
+            frequencyListBox.SelectedItem = currentFrequency;  
+
+
+            System.Diagnostics.Debug.WriteLine("UI: History page loaded.");
+            model = controller.getModel();
             foreach (Sensor s in model.currentSensors)
-            {               
+            {
                 sensorsListBox.Items.Add(s.longName);
                 controller.getSensorHistory(s.sensorId);
                 if (currentSensorId == s.sensorId)
-                {     
+                {
+                    currentSensorName.Text = s.longName;
                     sensorsListBox.SelectedItem = s.longName;
                     this.DataContext = s;
                 }
             }
-        }
-        /*
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("SENSOR UPDATE");
-            controller.updateValueOfThisSensor(currentSensorId);
-            //model.currentSensors[currenSensorId - 1].addNewDataUnit();
-        }
-        */
+            //controller.getSensorHistory(currentSensorId);
+            // ** ask the controller to get all sensors
 
-        // ** this buttone is for testing
+            
+
+        }
+        // ** this button is for testing
         private void button1_Click_1(object sender, RoutedEventArgs e)
         {
             // check if selected new sensor is same than the current
             // check if newFrequency is the same than the frequency already displayed
             
-            sensorsListBox.SelectedItem.ToString();
-            frequencyListBox.SelectedItem.ToString();
-            System.Diagnostics.Debug.WriteLine("SENSOR UPDATE");
-            controller.updateValueOfThisSensor(currentSensorId);
-        }
+            //sensorsListBox.SelectedItem.ToString();
+            //frequencyListBox.SelectedItem.ToString();
+            //System.Diagnostics.Debug.WriteLine("UI: getting history time scale for a single sensor");
+            //controller.getSensorHistoryFromSpecifiedTimeScale(currentSensorId, "daily", "2011-03-01", "2011-04-01");
+            //string format = "yyyy:MM:dd:hh:mm";
+            //time = timevalue.ToString(format);
+            textBlock1.Text = startDatePicker.Value.ToString();
+            //startDatePicker.DataContext.ToString();
 
+        }
         private void nextChart_Click(object sender, RoutedEventArgs e)
         {
             currentSensorId++;
@@ -105,7 +108,6 @@ namespace CloverMobile
                 //controller.getSensorHistory(currentSensorId);
             }
         }
-
         private void prevChart_Click(object sender, RoutedEventArgs e)
         {
             currentSensorId--;
@@ -130,11 +132,18 @@ namespace CloverMobile
             {
                 if (currentSensorId == s.sensorId)
                 {
+                    currentSensorName.Text = s.longName;
                     sensorsListBox.SelectedItem = s.longName;
                     this.DataContext = s;
                 }
             }
-        
+        }
+        private void Timer_tick(object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("UI: timer.");
+            controller.updateValueOfThisSensor(currentSensorId);
+            
+            //controller.getSensorsXML();
         }
     }
 }
