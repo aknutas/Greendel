@@ -56,7 +56,7 @@ namespace CloverMobile
         public void setDataMaster(DataMaster mstr)
         {
             master = mstr;
-            serviceAddress = "http://localhost:3000";
+            serviceAddress = "http://anttitek.net:3000";
         }
         public void setMasterController(Controller ctrl)
         {
