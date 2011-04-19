@@ -39,6 +39,7 @@ class UsersController < ApplicationController
   def current_consumption
     @user = current_user()
     @csensor = @user.device.sensors.find(:first, :conditions => {:name => "poweruse"})
+    @reading = @csensor.readings.last
   end
 
     # AJAX update method for Highcharts
@@ -46,10 +47,10 @@ class UsersController < ApplicationController
     @user = current_user()
     @csensor = @user.device.sensors.find(:first, :conditions => {:name => "poweruse"})
 
-    reading = @csensor.try(:latestreading)
+    value = @csensor.readings.last.value
     returnarray = Array.new
-    returnarray[0] = (@csensor.updated_at.to_i + 3.hours) * 1000
-    returnarray[1] = reading
+    returnarray[0] = (@csensor.readings.last.time.to_i + 3.hours) * 1000
+    returnarray[1] = value
 
     response.headers['Content-Type'] = 'text/json'
     render :json => returnarray

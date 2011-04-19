@@ -31,6 +31,8 @@ s = Sensor.create(:name => 'powerconsumed', :longname => 'Consumed Power', :vart
 cloverpower.sensors << s
 s = Sensor.create(:name => 'powerprice', :longname => 'Price of Electricity', :vartype => 'float', :unit => 'e/kWh')
 cloverpower.sensors << s
+s = Sensor.create(:name => 'insidetemp', :longname => 'Inside Temperature', :vartype => 'float', :unit => 'C')
+cloverpower.sensors << s
 cloverpower.save
 
 o = Output.create(:name => 'heating', :longname => 'Heating', :cost => true)

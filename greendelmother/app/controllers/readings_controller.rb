@@ -44,6 +44,8 @@ class ReadingsController < ApplicationController
 
     respond_to do |format|
       if @reading.save
+        @reading.sensor.latestreading = @reading.value
+        @reading.sensor.save
         flash[:notice] = 'Reading was successfully created.'
         format.html { redirect_to(@reading) }
         format.xml  { render :xml => @reading, :status => :created, :location => @reading }
