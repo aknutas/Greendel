@@ -140,8 +140,7 @@ namespace CloverMobile
         public void GetPowerUsage()
         {
             currentPowerConsumptionTextBlock.Text = myMaster.currentSensors[1].latestReading.ToString();
-
-        
+            controller.getLatestNpoints(1, 20);
         }
     }
 }

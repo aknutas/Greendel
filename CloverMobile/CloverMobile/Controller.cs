@@ -104,6 +104,12 @@ namespace CloverMobile
             WorkItem newItem = new WorkItem("historyFromTimeScale", 0, sensorId, frequency, start, end);
             nwc.addNewDownloadWorkUnit(newItem);         
         }
+        public void getLatestNpoints(int sensorId, int points)
+        {
+            WorkItem newItem = new WorkItem("latestSensorValues", 0, sensorId, points);
+            nwc.addNewDownloadWorkUnit(newItem); 
+        }
+
         public void sendHeatingAndLightning(bool heating, bool lightning)
         { 
     
