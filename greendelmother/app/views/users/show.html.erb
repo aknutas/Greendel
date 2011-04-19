@@ -1,54 +1,69 @@
 <script type="text/javascript">
     Event.observe(window, 'load', function() {
-    <%= visual_effect(:fade, 'curr_cons', :delay => 8, :queue => { :position => 'end', :scope => 'cc', :limit => 2 }) %>
+        <%= visual_effect(:fade, 'curr_cons', :delay => 8, :queue => { :position => 'end', :scope => 'cc', :limit => 2 }) %>
         setInterval(requestData, 5000);
-});
-var chart;
-
-function requestData() {
-    jQuery.ajax({
-        url: '<%= url_for(:controller => 'users', :action => 'current_consumption_chart', :id => @user.id) %>',
-        success: function(point) {
-            var series = chart.series[0];
-
-            if(series.data.length > 40) {
-                trim = true;
-            }
-            else {
-                trim = false;
-            }
-
-            // add the point
-            chart.series[0].addPoint(point, true, trim);
-        },
-        cache: false
     });
-}
+    var chart;
+
+    function requestData() {
+        jQuery.ajax({
+            url: '<%= url_for(:controller => 'users', :action => 'current_consumption_chart', :id => @user.id) %>',
+            success: function(point) {
+                var series = chart.series[0];
+
+                if (series.data.length > 40) {
+                    trim = true;
+                }
+                else {
+                    trim = false;
+                }
+
+                // add the point
+                chart.series[0].addPoint(point, true, trim);
+            },
+            cache: false
+        });
+    }
 
 </script>
 
 <%= periodically_call_remote(:url => {:action => 'current_consumption', :id => @user.id}, :frequency => 10, :update => 'curr_cons', :complete => "new Effect.Appear('curr_cons', {duration: 0.9, queue: {scope: 'cc', position: 'end', limit: 2}}); new Effect.Fade('curr_cons', {duration: 0.9, delay: 8, queue: {scope: 'cc', position: 'end', limit: 2}})") %>
-<link href="/../../public/stylesheets/style.css" rel="stylesheet" type="text/css" />
 
-<%=image_tag("kuva1.png")  %></p>
+<p><%= image_tag("kuva1.png") %></p>
 <table width="95%" border="0" align="center">
   <tr>
     <td align="LEFT" valign="TOP" width="53%">
-	Welcome <%= @user.realname %></p>
-	<p>Current power consumption: <b><span id='curr_cons'><%= @csensor.try(:latestreading).to_s + @csensor.try(:unit) %></span></b></p>  
-	<div id="readings_chart" style="width: 90%; height: 300px;"></div>
-	
-	<% @user.device.sensors.each do |sensor| %>
-<p><%= link_to(sensor.longname, sensor_path(sensor)) %> was at <%= if sensor.latestreading then h(sensor.latestreading.to_s + sensor.unit) else h("-") end %> on <%= try_print(sensor.updated_at.asctime) %><p></p>
-<% end %>
-	</td>
-    <td align="CENTER" valign="TOP" width="47%"><p>It is <%= Time.zone.now.asctime %> and the weather is <%= try_print(@user.device.location.weather.desc).downcase %> and <%= try_print(@user.device.location.weather.temp) %>C at <%= @user.device.location.town %>.	  </p>
-      <p><img src="<%= begin @wnow.get_image_link end%>" align="center"></p>
-<% if @wtomorrow %>
-<p>Tomorrow is <%= @wtomorrow.text %> with high of <%= @wtomorrow.high %>C and low of <%= @wtomorrow.low %>C. <img src="<%= begin @wnow.get_forecast_link(:tomorrow) end%>" align="center"></p>
-<% end %>
+      <p>Welcome <%= @user.realname %></p>
 
-	</td>
+      <p>Current power consumption:
+        <b><span id='curr_cons'><%= @csensor.try(:latestreading).to_s + @csensor.try(:unit) %></span></b></p>
+
+      <div id="readings_chart" style="width: 90%; height: 300px;"></div>
+
+      <% @user.device.sensors.each do |sensor| %>
+          <p><%= link_to(sensor.longname, sensor_path(sensor)) %> was at <%= if sensor.latestreading then
+                                                                                 h(number_with_precision(sensor.latestreading).to_f.to_s + sensor.unit)
+                                                                             else
+                                                                                 h("-")
+                                                                             end %>
+            on <%= try_print(sensor.updated_at.asctime) %>
+      <% end %>
+    </td>
+    <td align="CENTER" valign="TOP" width="47%"><p>It is <%= Time.zone.now.asctime %> and the weather
+      is <%= try_print(@user.device.location.weather.desc).downcase %>
+      and <%= try_print(@user.device.location.weather.temp) %>C at <%= @user.device.location.town %>. </p>
+
+      <p><img src="<%= begin
+                           @wnow.get_image_link
+                       end %>" align="center"></p>
+      <% if @wtomorrow %>
+          <p>Tomorrow is <%= @wtomorrow.text %> with high of <%= @wtomorrow.high %>C and low of <%= @wtomorrow.low %>C.
+            <img src="<%= begin
+                              @wnow.get_forecast_link(:tomorrow)
+                          end %>" align="center"></p>
+      <% end %>
+
+    </td>
   </tr>
 </table>
 
@@ -59,45 +74,47 @@ function requestData() {
 
 
 <script type="text/javascript" charset="utf-8">
-        Event.observe(window, 'load', function() {
-          chart = new Highcharts.Chart({
+    Event.observe(window, 'load', function() {
+        chart = new Highcharts.Chart({
             chart: { renderTo: 'readings_chart', zoomType: 'x', defaultSeriesType: 'spline'},
             subtitle: {
-              text: document.ontouchstart === undefined ?
-                'Click and drag in the plot area to zoom in' :
-                'Drag your finger over the plot to zoom in'
+                text: document.ontouchstart === undefined ?
+                        'Click and drag in the plot area to zoom in' :
+                        'Drag your finger over the plot to zoom in'
             },
             title: { text: '<%= h(@csensor.longname) %> Readings History' },
             xAxis: { type: 'datetime' },
             yAxis: {
-              title: { text: 'Measured Reading' }
+                title: { text: 'Measured Reading' }
             },
             plotOptions: {
-              spline: {
-                lineWidth: 4,
-                states: {
-                  hover: {
-                    lineWidth: 5
-                  }
-                },
-                marker: {
-                  enabled: false,
-                  states: {
-                    hover: {
-                      enabled: true,
-                      symbol: 'circle',
-                      radius: 5,
-                      lineWidth: 1
+                spline: {
+                    lineWidth: 4,
+                    states: {
+                        hover: {
+                            lineWidth: 5
+                        }
+                    },
+                    marker: {
+                        enabled: false,
+                        states: {
+                            hover: {
+                                enabled: true,
+                                symbol: 'circle',
+                                radius: 5,
+                                lineWidth: 1
+                            }
+                        }
                     }
-                  }
                 }
-              }
             },
-            series: [{
-                name: '<%= h(@csensor.try(:longname)) + " " + @csensor.try(:unit) %>)',
-                data: [ <%= plot_helper(@readings) %>
-          ]
-        }]
+            series: [
+                {
+                    name: '<%= h(@csensor.try(:longname)) + " " + @csensor.try(:unit) %>)',
+                    data: [ <%= plot_helper(@readings) %>
+                    ]
+                }
+            ]
+        });
     });
-  });
-  </script>
+</script>
