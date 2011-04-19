@@ -8,13 +8,15 @@ xml.weather do
   xml.low @weather.low
   xml.high @weather.high
   xml.code @weather.code
-  xml.forecast do
-    xml.date @wtomorrow.date
-    xml.day @wtomorrow.day
-    xml.high @wtomorrow.high
-    xml.low @wtomorrow.low
-    xml.desc @wtomorrow.text
-    xml.code @wtomorrow.code
+  if @wtomorrow
+    xml.forecast do
+      xml.date @wtomorrow.date
+      xml.day @wtomorrow.day
+      xml.high @wtomorrow.high
+      xml.low @wtomorrow.low
+      xml.desc @wtomorrow.text
+      xml.code @wtomorrow.code
+    end
   end
   xml.histories do
     @weather.histories.each do |history|
