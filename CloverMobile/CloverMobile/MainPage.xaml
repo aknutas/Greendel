@@ -18,25 +18,25 @@
         </Storyboard>
         <Storyboard x:Name="MainScreenLoad">
         	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ApplicationTitle">
-        		<EasingDoubleKeyFrame KeyTime="0" Value="-257"/>
+        		<EasingDoubleKeyFrame KeyTime="0" Value="241"/>
         		<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-13"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="-1"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="-1.084"/>
         		<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-13"/>
         	</DoubleAnimationUsingKeyFrames>
         	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="ApplicationTitle">
-        		<EasingDoubleKeyFrame KeyTime="0" Value="-7"/>
+        		<EasingDoubleKeyFrame KeyTime="0" Value="-1"/>
         		<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-1"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-3"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="-0.666"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-0.999"/>
         	</DoubleAnimationUsingKeyFrames>
         	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PageTitle">
-        		<EasingDoubleKeyFrame KeyTime="0" Value="509"/>
+        		<EasingDoubleKeyFrame KeyTime="0" Value="71"/>
         		<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-9"/>
         		<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1"/>
         		<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-13"/>
         	</DoubleAnimationUsingKeyFrames>
         	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="PageTitle">
-        		<EasingDoubleKeyFrame KeyTime="0" Value="-6"/>
+        		<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
         		<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="2"/>
         	</DoubleAnimationUsingKeyFrames>
         	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="image">
@@ -126,6 +126,18 @@
         			</DiscreteObjectKeyFrame.Value>
         		</DiscreteObjectKeyFrame>
         	</ObjectAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PageTitle">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ApplicationTitle">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="image1">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="-370"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+        	</DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </phone:PhoneApplicationPage.Resources>
 
@@ -137,6 +149,17 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
+
+        <!--TitlePanel contains the name of the application and page title-->
+
+        <!--TitlePanel contains the name of the application and page title-->
+    <!--TitlePanel contains the name of the application and page title-->
+        <Image x:Name="image1" Margin="0,-530,-1903,-362" Grid.RowSpan="2" Source="/Image5.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+        	<Image.RenderTransform>
+        		<CompositeTransform/>
+        	</Image.RenderTransform>
+        </Image>
+    <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="GREENDEL MOBILE" Style="{StaticResource PhoneTextNormalStyle}" RenderTransformOrigin="0.5,0.5">
             	<TextBlock.RenderTransform>
@@ -157,27 +180,27 @@
                     <CompositeTransform />
                 </Image.RenderTransform>
             </Image>
-            <TextBlock Height="35" HorizontalAlignment="Left" Margin="104,291,0,0" Name="textBlock1" Text="Current power consumption:" VerticalAlignment="Top" Width="266" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" >
+            <TextBlock Height="35" HorizontalAlignment="Left" Margin="104,291,0,0" x:Name="textBlock1" Text="Current power consumption:" VerticalAlignment="Top" Width="266" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" >
             	<TextBlock.RenderTransform>
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
             </TextBlock>
-            <TextBlock Height="58" HorizontalAlignment="Left" Margin="138,326,0,0" Name="textBlock2" Text="power in kW" VerticalAlignment="Top" FontSize="32" RenderTransformOrigin="0.5,0.5" >
+            <TextBlock Height="58" HorizontalAlignment="Left" Margin="138,326,0,0" x:Name="textBlock2" Text="power in kW" VerticalAlignment="Top" FontSize="32" RenderTransformOrigin="0.5,0.5" >
             	<TextBlock.RenderTransform>
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
             </TextBlock>
-            <Image Height="90" HorizontalAlignment="Left" Margin="55,399,0,0" Name="solarImage" Stretch="Fill" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.5,0.5" >
+            <Image Height="90" HorizontalAlignment="Left" Margin="55,399,0,0" x:Name="solarImage" Stretch="Fill" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.5,0.5" >
             	<Image.RenderTransform>
             		<CompositeTransform/>
             	</Image.RenderTransform>
             </Image>
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="55,495,0,0" Name="textBlockSolarTitle" Text="Solar Power" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" >
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="55,495,0,0" x:Name="textBlockSolarTitle" Text="Solar Power" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" >
             	<TextBlock.RenderTransform>
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
             </TextBlock>
-            <Image Height="90" HorizontalAlignment="Left" Margin="315,399,0,0" Name="windImage" Stretch="Fill" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.5,0.5">
+            <Image Height="90" HorizontalAlignment="Left" Margin="315,399,0,0" x:Name="windImage" Stretch="Fill" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.5,0.5">
                 <Image.OpacityMask>
                     <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
                         <GradientStop Color="Black" Offset="0" />
@@ -188,18 +211,21 @@
             		<CompositeTransform/>
             	</Image.RenderTransform>
             </Image>
-            <TextBlock Height="30" HorizontalAlignment="Right" Margin="0,495,34,0" Name="textBlock4" Text="Wind Power" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" >
+            <TextBlock Height="30" HorizontalAlignment="Right" Margin="0,495,34,0" x:Name="textBlock4" Text="Wind Power" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" >
             	<TextBlock.RenderTransform>
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
             </TextBlock>
-            <Canvas Height="529" HorizontalAlignment="Left" Margin="6,0,0,0" Name="splashScreen" VerticalAlignment="Top" Width="444" Visibility="Visible" Background="Black">
-                 <TextBox Height="72" HorizontalAlignment="Left" Margin="23,138,0,0" Name="userNameTextBox" Text="" VerticalAlignment="Top" Width="421"  />
-                <TextBlock Height="30" HorizontalAlignment="Left" Margin="34,102,0,0" Name="userNameTextBlock" Text="User Name" VerticalAlignment="Top" />
-                <TextBlock Height="30" HorizontalAlignment="Left" Margin="34,242,0,0" Name="passwordTextBlock" Text="Password" VerticalAlignment="Top" />
-                <Button Canvas.Left="143" Canvas.Top="393" Content="Log In" Height="71" Name="loginButton" Width="160" Click="loginButton_Click" />
-                <TextBlock Canvas.Left="37" Canvas.Top="356" Height="30" Name="errorMessageTextBlock" Text="" Width="380" Foreground="Red" />
-                <PasswordBox Canvas.Left="33" Canvas.Top="286" Height="71" Name="passwordTextBox" Width="405" />
+            <Canvas Height="529" HorizontalAlignment="Left" Margin="0,-2,0,0" x:Name="splashScreen" VerticalAlignment="Top" Width="444" Visibility="Collapsed" Background="Black" RenderTransformOrigin="0.5,0.5">
+            	<Canvas.RenderTransform>
+            		<CompositeTransform/>
+            	</Canvas.RenderTransform>
+            	<TextBox Height="72" HorizontalAlignment="Left" Margin="23,138,0,0" x:Name="userNameTextBox" Text="" VerticalAlignment="Top" Width="421"  />
+            	<TextBlock Height="30" HorizontalAlignment="Left" Margin="34,102,0,0" x:Name="userNameTextBlock" Text="User Name" VerticalAlignment="Top" />
+            	<TextBlock Height="30" HorizontalAlignment="Left" Margin="34,242,0,0" x:Name="passwordTextBlock" Text="Password" VerticalAlignment="Top" />
+            	<Button Canvas.Left="143" Canvas.Top="393" Content="Log In" Height="71" x:Name="loginButton" Width="160" Click="loginButton_Click" />
+            	<TextBlock Canvas.Left="37" Canvas.Top="356" Height="30" x:Name="errorMessageTextBlock" Text="" Width="380" Foreground="Red" />
+            	<PasswordBox Canvas.Left="33" Canvas.Top="286" Height="71" x:Name="passwordTextBox" Width="405" />
             </Canvas>
 
                 <!--
@@ -211,11 +237,11 @@
  
     <!--Sample code showing usage of ApplicationBar-->
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" d:IsHidden="True">
             <!--<shell:ApplicationBarIconButton IconUri="/Icons/appbar.back.rest.png" Text="Back" />-->
-            <shell:ApplicationBarIconButton IconUri="/Icons/appbar.feature.settings.rest.png" Text="Settings" Click="ApplicationBarIconButtonSettings_Click" />
-            <shell:ApplicationBarIconButton IconUri="/Icons/appbar.edit.rest.png" Text="Control" Click="ApplicationBarControlIconButtonControl_Click" />
-            <shell:ApplicationBarIconButton IconUri="/Icons/appbar.folder.rest.png" Text="History" Click="ApplicationBarIconButtonHistory_Click" />        
+            <shell:ApplicationBarIconButton IconUri="/Icons/appbar.feature.settings.rest.png" Text="Settings" Click="ApplicationBarIconButtonSettings_Click" d:IsHidden="True" />
+            <shell:ApplicationBarIconButton IconUri="/Icons/appbar.edit.rest.png" Text="Control" Click="ApplicationBarControlIconButtonControl_Click" d:IsHidden="True" />
+            <shell:ApplicationBarIconButton IconUri="/Icons/appbar.folder.rest.png" Text="History" Click="ApplicationBarIconButtonHistory_Click" d:IsHidden="True" />        
             <!--
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text=""/>

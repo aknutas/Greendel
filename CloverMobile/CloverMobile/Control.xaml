@@ -20,38 +20,50 @@
 				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-10"/>
 			</DoubleAnimationUsingKeyFrames>
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="ApplicationTitle">
-				<EasingDoubleKeyFrame KeyTime="0" Value="-5"/>
+				<EasingDoubleKeyFrame KeyTime="0" Value="7"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-4"/>
 			</DoubleAnimationUsingKeyFrames>
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PageTitle">
-				<EasingDoubleKeyFrame KeyTime="0" Value="-308"/>
+				<EasingDoubleKeyFrame KeyTime="0" Value="350"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="23"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-8"/>
 			</DoubleAnimationUsingKeyFrames>
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="PageTitle">
-				<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-1"/>
 			</DoubleAnimationUsingKeyFrames>
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ContentPanel">
 				<EasingDoubleKeyFrame KeyTime="0" Value="315.5"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.266" Value="-56.833"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="-4"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.332" Value="-56.833"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-4"/>
 			</DoubleAnimationUsingKeyFrames>
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="ContentPanel">
 				<EasingDoubleKeyFrame KeyTime="0" Value="349.5"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.266" Value="-42.316"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="-0.5"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.332" Value="-42.316"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-0.5"/>
 			</DoubleAnimationUsingKeyFrames>
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="ContentPanel">
 				<EasingDoubleKeyFrame KeyTime="0" Value="-0.379"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.266" Value="1.254"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1.022"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.332" Value="1.254"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.022"/>
 			</DoubleAnimationUsingKeyFrames>
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="ContentPanel">
 				<EasingDoubleKeyFrame KeyTime="0" Value="-0.161"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.266" Value="1.13"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0.993"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.332" Value="1.13"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.993"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PageTitle">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ApplicationTitle">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="image1">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-680"/>
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
 	</phone:PhoneApplicationPage.Resources>
@@ -64,6 +76,15 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
+
+        <!--TitlePanel contains the name of the application and page title-->
+    <!--TitlePanel contains the name of the application and page title-->
+        <Image x:Name="image1" Margin="0,-530,-1903,-290" Grid.RowSpan="2" Source="/Image5.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+        	<Image.RenderTransform>
+        		<CompositeTransform/>
+        	</Image.RenderTransform>
+        </Image>
+    <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="GREENDEL MOBILE" Style="{StaticResource PhoneTextNormalStyle}" RenderTransformOrigin="0.5,0.5">
             	<TextBlock.RenderTransform>
@@ -76,28 +97,29 @@
             	</TextBlock.RenderTransform>
             </TextBlock>
         </StackPanel>
+        <Rectangle Fill="Black" Height="156" Margin="40,8,40,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Opacity="0.625"/>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="10,-2,12,0" RenderTransformOrigin="0.5,0.5">
         	<Grid.RenderTransform>
         		<CompositeTransform/>
         	</Grid.RenderTransform>
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="47,212,0,0" Name="textBlockHeating" Text="Heating" VerticalAlignment="Top" Width="86" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="47,298,0,0" Name="textBlock1" Text="Lightning" VerticalAlignment="Top" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="47,34,0,0" Name="textBlock2" Text="Temp Outside" VerticalAlignment="Top" />
-            <TextBox Height="72" HorizontalAlignment="Left" Margin="47,65,0,0" Name="tempInsideTextBox" Text="" VerticalAlignment="Top" Width="108" />
-            <TextBlock Height="30" HorizontalAlignment="Right" Margin="0,34,93,0" Name="textBlock3" Text="Temp Inside" VerticalAlignment="Top" />
-            <TextBox Height="72" HorizontalAlignment="Left" Margin="232,65,0,0" Name="tempOutsideTextBox" Text="" VerticalAlignment="Top" Width="133" />
-            <RadioButton Content="On" Height="72" Margin="154,188,0,0" Name="radioButtonHeatingOn" VerticalAlignment="Top" GroupName="radioButtonGroupHeating" HorizontalAlignment="Left" Width="127" />
-            <RadioButton Content="Off" GroupName="radioButtonGroupHeating" Height="72" HorizontalAlignment="Right" Margin="0,188,69,0" Name="radioButtonHeatingOff" VerticalAlignment="Top" Width="127" />
-            <RadioButton Content="On" GroupName="radioButtonGroupLightning" Height="72" Margin="154,274,0,0" Name="radioButtonLightsOn" VerticalAlignment="Top" HorizontalAlignment="Left" Width="127" />
-            <RadioButton Content="Off" GroupName="radioButtonGroupLightning" Height="72" HorizontalAlignment="Left" Margin="262,274,0,0" Name="radioButtonLightsOff" VerticalAlignment="Top" Width="127" />
-            <Button Content="Get S Hist" Height="72" HorizontalAlignment="Left" Margin="237,501,0,0" Name="sendChanges" VerticalAlignment="Top" Width="181" Click="sendChanges_Click" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="88,499,0,0" Name="textBlockTest" Text="" VerticalAlignment="Top" />
-            <Button Content="1" Height="72" Margin="37,358,0,0" Name="button1" VerticalAlignment="Top" HorizontalAlignment="Left" Width="99" Click="button1_Click" />
-            <Button Content="2" Height="72" HorizontalAlignment="Left" Margin="161,357,0,0" Name="button2" VerticalAlignment="Top" Width="76" Click="button2_Click" />
-            <Button Content="3" Height="72" HorizontalAlignment="Left" Margin="256,354,0,0" Name="button3" VerticalAlignment="Top" Width="87" Click="button3_Click" />
-            <Button Content="Get Sens" Height="72" HorizontalAlignment="Left" Margin="20,499,0,0" Name="getSensors" VerticalAlignment="Top" Width="160" Click="getSensors_Click" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="47,212,0,0" x:Name="textBlockHeating" Text="Heating" VerticalAlignment="Top" Width="86" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="47,298,0,0" x:Name="textBlock1" Text="Lightning" VerticalAlignment="Top" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="69,46,0,0" x:Name="textBlock2" Text="Temp Outside" VerticalAlignment="Top" />
+            <TextBox Height="70" HorizontalAlignment="Left" Margin="63,68,0,0" x:Name="tempInsideTextBox" Text="" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.093,0.597" />
+            <TextBlock Height="30" HorizontalAlignment="Right" Margin="0,46,79,0" x:Name="textBlock3" Text="Temp Inside" VerticalAlignment="Top" />
+            <TextBox Height="70" HorizontalAlignment="Left" Margin="262,68,0,0" x:Name="tempOutsideTextBox" Text="" VerticalAlignment="Top" Width="130" />
+            <RadioButton Content="On" Height="72" Margin="154,188,0,0" x:Name="radioButtonHeatingOn" VerticalAlignment="Top" GroupName="radioButtonGroupHeating" HorizontalAlignment="Left" Width="127" />
+            <RadioButton Content="Off" GroupName="radioButtonGroupHeating" Height="72" HorizontalAlignment="Right" Margin="0,188,69,0" x:Name="radioButtonHeatingOff" VerticalAlignment="Top" Width="127" />
+            <RadioButton Content="On" GroupName="radioButtonGroupLightning" Height="72" Margin="154,274,0,0" x:Name="radioButtonLightsOn" VerticalAlignment="Top" HorizontalAlignment="Left" Width="127" />
+            <RadioButton Content="Off" GroupName="radioButtonGroupLightning" Height="72" HorizontalAlignment="Left" Margin="262,274,0,0" x:Name="radioButtonLightsOff" VerticalAlignment="Top" Width="127" />
+            <Button Content="Get S Hist" Height="72" HorizontalAlignment="Left" Margin="237,501,0,0" x:Name="sendChanges" VerticalAlignment="Top" Width="181" Click="sendChanges_Click" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="88,499,0,0" x:Name="textBlockTest" Text="" VerticalAlignment="Top" />
+            <Button Content="1" Height="72" Margin="37,358,0,0" x:Name="button1" VerticalAlignment="Top" HorizontalAlignment="Left" Width="99" Click="button1_Click" />
+            <Button Content="2" Height="72" HorizontalAlignment="Left" Margin="161,357,0,0" x:Name="button2" VerticalAlignment="Top" Width="76" Click="button2_Click" />
+            <Button Content="3" Height="72" HorizontalAlignment="Left" Margin="256,354,0,0" x:Name="button3" VerticalAlignment="Top" Width="87" Click="button3_Click" />
+            <Button Content="Get Sens" Height="72" HorizontalAlignment="Left" Margin="20,499,0,0" x:Name="getSensors" VerticalAlignment="Top" Width="160" Click="getSensors_Click" />
         </Grid>
     </Grid>
  

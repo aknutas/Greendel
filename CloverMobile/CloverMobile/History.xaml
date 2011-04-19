@@ -71,6 +71,38 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:1.652" Value="0.766"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>-->
+		<Style x:Key="SerialChartStyle1" TargetType="my:SerialChart">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="my:SerialChart">
+						<Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+							<Grid>
+								<Grid.RowDefinitions>
+									<RowDefinition/>
+									<RowDefinition Height="Auto"/>
+								</Grid.RowDefinitions>
+								<my:ValueAxis x:Name="PART_ValueAxis" Foreground="{TemplateBinding AxisForeground}" HorizontalAlignment="Right" Margin="0,0,0,-2" Grid.Row="0" Canvas.ZIndex="100"/>
+								<my:CategoryAxis x:Name="PART_CategoryAxis" Foreground="{TemplateBinding AxisForeground}" Grid.Row="1" RenderTransformOrigin="0.5,0.5">
+									<my:CategoryAxis.RenderTransform>
+										<CompositeTransform ScaleX="0.7"/>
+									</my:CategoryAxis.RenderTransform>
+								</my:CategoryAxis>
+								<Border Background="{TemplateBinding PlotAreaBackground}" Grid.Row="0">
+									<my:ValueGrid x:Name="PART_ValueGrid" Foreground="{TemplateBinding GridStroke}"/>
+								</Border>
+								<Border x:Name="PART_GraphCanvasDecorator" Grid.Row="0">
+									<Canvas x:Name="PART_GraphCanvas" Background="Transparent"/>
+								</Border>
+								<my:Legend x:Name="PART_Legend" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="0" Visibility="{TemplateBinding LegendVisibility}" VerticalAlignment="Top"/>
+								<Canvas Grid.Row="0">
+									<my:Balloon x:Name="PART_Balloon" BorderBrush="{TemplateBinding AxisForeground}" BorderThickness="2" Visibility="Collapsed"/>
+								</Canvas>
+							</Grid>
+						</Border>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
     </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
@@ -104,8 +136,13 @@
             <!--<TextBlock Height="35" HorizontalAlignment="Left" Margin="12,8,0,0" Name="fromInternet" Text="" VerticalAlignment="Top" Width="684" TextWrapping="Wrap" /> -->
             <my:SerialChart x:Name="chart1" DataSource="{Binding DataUnit}" CategoryValueMemberPath="time"
                          AxisForeground="White"
-                         PlotAreaBackground="Black"
-                         GridStroke="DarkGray" Margin="0,4,0,159">
+                         GridStroke="#FF5E1E1E" Margin="0,4,0,159" Style="{StaticResource SerialChartStyle1}">
+            	<my:SerialChart.PlotAreaBackground>
+            		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            			<GradientStop Color="Black" Offset="0"/>
+            			<GradientStop Color="White" Offset="1"/>
+            		</LinearGradientBrush>
+            	</my:SerialChart.PlotAreaBackground>
                 <my:SerialChart.Graphs>
                     <my:ColumnGraph ValueMemberPath="value" Title="Power Consumption" Brush="Blue" />
                     <!--<my:ColumnGraph ValueMemberPath="val2" Title="Column #2" Brush="#8000FF00" ColumnWidthAllocation="0.4" />-->

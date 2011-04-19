@@ -15,36 +15,46 @@
 	<phone:PhoneApplicationPage.Resources>
 		<Storyboard x:Name="settingsScreenLoad">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ApplicationTitle">
-				<EasingDoubleKeyFrame KeyTime="0" Value="491"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.32" Value="-23"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.398" Value="4"/>
+				<EasingDoubleKeyFrame KeyTime="0" Value="471.667"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="7"/>
 			</DoubleAnimationUsingKeyFrames>
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="ApplicationTitle">
-				<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.32" Value="8"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.398" Value="9"/>
+				<EasingDoubleKeyFrame KeyTime="0" Value="-0.333"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-0.333"/>
 			</DoubleAnimationUsingKeyFrames>
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PageTitle">
-				<EasingDoubleKeyFrame KeyTime="0" Value="-423"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.319" Value="35"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.398" Value="4"/>
+				<EasingDoubleKeyFrame KeyTime="0" Value="469"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="4"/>
 			</DoubleAnimationUsingKeyFrames>
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="PageTitle">
-				<EasingDoubleKeyFrame KeyTime="0" Value="-1"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.319" Value="1"/>
-			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimation Duration="0" To="-0.999" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="PageTitle" d:IsOptimized="True"/>
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="ContentPanel">
-				<EasingDoubleKeyFrame KeyTime="0" Value="0.975"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.402" Value="0.975"/>
+				<EasingDoubleKeyFrame KeyTime="0" Value="0.557"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.975"/>
 			</DoubleAnimationUsingKeyFrames>
-			<DoubleAnimation Duration="0" To="7.5" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="ContentPanel" d:IsOptimized="True"/>
+			<DoubleAnimation Duration="0" To="2.5" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="ContentPanel" d:IsOptimized="True"/>
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="ContentPanel">
-				<EasingDoubleKeyFrame KeyTime="0" Value="-0.753"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.402" Value="0.923"/>
+				<EasingDoubleKeyFrame KeyTime="0" Value="-0.054"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.923"/>
 			</DoubleAnimationUsingKeyFrames>
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ContentPanel">
-				<EasingDoubleKeyFrame KeyTime="0" Value="-399.5"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.402" Value="-17.5"/>
+				<EasingDoubleKeyFrame KeyTime="0" Value="10.204"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-17.5"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.SkewX)" Storyboard.TargetName="ContentPanel">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="ContentPanel">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ContentPanel">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="image">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-370"/>
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
 	</phone:PhoneApplicationPage.Resources>
@@ -57,6 +67,16 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
+
+        <!--TitlePanel contains the name of the application and page title-->
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <Image x:Name="image" Margin="0,-530,-1903,-290" Grid.RowSpan="2" Source="/Image5.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+        	<Image.RenderTransform>
+        		<CompositeTransform/>
+        	</Image.RenderTransform>
+        </Image>
+    <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="GREENDEL MOBILE" Style="{StaticResource PhoneTextNormalStyle}" RenderTransformOrigin="0.5,0.5">
             	<TextBlock.RenderTransform>
@@ -75,14 +95,15 @@
         	<Grid.RenderTransform>
         		<CompositeTransform/>
         	</Grid.RenderTransform>
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="18,18,0,0" Name="textBlock1" Text="Settings can be changed from here..." VerticalAlignment="Top" />
-            <TextBox Height="72" HorizontalAlignment="Left" Margin="20,130,0,0" Name="textBoxServiceAddress" Text="" VerticalAlignment="Top" Width="391" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="32,104,0,0" Name="textBlock2" Text="Service Address" VerticalAlignment="Top" Width="224" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="32,225,0,0" Name="textBlock3" Text="User Name" VerticalAlignment="Top" Width="96" />
-            <TextBox Height="72" HorizontalAlignment="Left" Margin="22,247,0,0" Name="textBox2" Text="" VerticalAlignment="Top" Width="188" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="236,225,0,0" Name="textBlock4" Text="Password" VerticalAlignment="Top" Width="106" />
-            <TextBox Height="72" Margin="223,247,45,0" Name="textBox3" Text="" VerticalAlignment="Top" />
-            <Button Content="Commit" Height="72" HorizontalAlignment="Left" Margin="296,457,0,0" Name="button1" VerticalAlignment="Top" Width="160" Click="button1_Click" />
+            <Rectangle Fill="Black" Margin="18,88,23,243" Stroke="Black" Opacity="0.58"/>
+            <TextBox Height="72" HorizontalAlignment="Left" Margin="20,130,0,0" x:Name="textBoxServiceAddress" Text="" VerticalAlignment="Top" Width="391" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="32,104,0,0" x:Name="textBlock2" Text="Service Address" VerticalAlignment="Top" Width="224" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="32,225,0,0" x:Name="textBlock3" Text="User Name" VerticalAlignment="Top" Width="96" />
+            <TextBox Height="72" HorizontalAlignment="Left" Margin="22,247,0,0" x:Name="textBox2" Text="" VerticalAlignment="Top" Width="188" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="236,225,0,0" x:Name="textBlock4" Text="Password" VerticalAlignment="Top" Width="106" />
+            <TextBox Height="72" Margin="223,247,45,0" x:Name="textBox3" Text="" VerticalAlignment="Top" />
+            <Button Content="Commit" Height="72" HorizontalAlignment="Left" Margin="273,379,0,0" x:Name="button1" VerticalAlignment="Top" Width="160" Click="button1_Click" />
+            <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="5" Margin="55,112,0,0" Stroke="Black" VerticalAlignment="Top" Width="5"/>
         </Grid>
     </Grid>
  
