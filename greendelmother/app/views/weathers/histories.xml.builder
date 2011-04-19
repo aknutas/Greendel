@@ -7,6 +7,7 @@ xml.weather do
   xml.temp @weather.temp
   xml.low @weather.low
   xml.high @weather.high
+  xml.code @weather.code
   xml.forecast do
     xml.date @wtomorrow.date
     xml.day @wtomorrow.day
