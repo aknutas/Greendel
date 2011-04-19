@@ -11,7 +11,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Landscape" Orientation="Landscape"
     mc:Ignorable="d" d:DesignHeight="480" d:DesignWidth="728"
-    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded" xmlns:my="clr-namespace:AmCharts.Windows.QuickCharts;assembly=AmCharts.Windows.QuickCharts.WP" DataContext="{Binding}">
+    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded" xmlns:my="clr-namespace:AmCharts.Windows.QuickCharts;assembly=AmCharts.Windows.QuickCharts.WP" DataContext="{Binding}" xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit">
 	<phone:PhoneApplicationPage.Resources>
         
         <!--<Storyboard x:Name="historyScreenLoad">
@@ -149,11 +149,16 @@
                     <!--<my:AreaGraph ValueMemberPath="val3" Title="Area #1" Brush="#80FF0000" />-->
                 </my:SerialChart.Graphs>
             </my:SerialChart>
-            <Button Content="Apply" Height="77" HorizontalAlignment="Left" Margin="515,285,0,0" Name="button1" VerticalAlignment="Top" Width="160" Click="button1_Click_1" />
-            <ListBox Height="98" HorizontalAlignment="Left" Margin="14,281,0,0" Name="sensorsListBox" VerticalAlignment="Top" Width="199" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="67,244,0,0" Name="sensorsTextBlock" Text="Sensors" VerticalAlignment="Top" />
-            <TextBlock Height="30" HorizontalAlignment="Right" Margin="0,243,350,0" Name="updateTimeSpansTextBlock" Text="Frequency" VerticalAlignment="Top" />
-            <ListBox Height="100" HorizontalAlignment="Right" Margin="0,281,282,0" Name="frequencyListBox" VerticalAlignment="Top" Width="194" />
+            <Button Content="Apply" Height="77" HorizontalAlignment="Left" Margin="512,305,0,0" Name="button1" VerticalAlignment="Top" Width="160" Click="button1_Click_1" />
+            <ListBox Height="64" HorizontalAlignment="Left" Margin="14,315,0,0" Name="sensorsListBox" VerticalAlignment="Top" Width="199" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="67,270,0,0" Name="sensorsTextBlock" Text="Sensors" VerticalAlignment="Top" />
+            <TextBlock Height="30" HorizontalAlignment="Right" Margin="0,273,343,0" Name="updateTimeSpansTextBlock" Text="Frequency" VerticalAlignment="Top" />
+            <ListBox Height="64" HorizontalAlignment="Right" Margin="0,317,282,0" Name="frequencyListBox" VerticalAlignment="Top" Width="194" />
+            <Button Content="Button" Height="59" HorizontalAlignment="Left" Margin="28,217,0,0" Name="prevChartButton" VerticalAlignment="Top" Width="63"  />
+            <Button Content="Button" Height="57" HorizontalAlignment="Left" Margin="111,218,0,0" Name="nextChartButton" VerticalAlignment="Top" Width="61" />
+            <toolkit:DatePicker HorizontalAlignment="Left" Margin="394,229,0,0" Name="datePicker1" VerticalAlignment="Top" />
+            <toolkit:DatePicker HorizontalAlignment="Left" Margin="546,232,0,0" Name="datePicker2" VerticalAlignment="Top" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="16,228,0,0" Name="currentSensorName" Text="" VerticalAlignment="Top" />
         </Grid>
     </Grid>
  

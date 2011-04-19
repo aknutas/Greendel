@@ -30,7 +30,6 @@ namespace CloverMobile
         public History()
         {
             InitializeComponent();
-  
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
@@ -87,7 +86,7 @@ namespace CloverMobile
             //controller.getSensorHistoryFromSpecifiedTimeScale(currentSensorId, "daily", "2011-03-01", "2011-04-01");
             //string format = "yyyy:MM:dd:hh:mm";
             //time = timevalue.ToString(format);
-            textBlock1.Text = startDatePicker.Value.ToString();
+            //textBlock1.Text = startDatePicker.Value.ToString();
             //startDatePicker.DataContext.ToString();
 
         }
