@@ -139,6 +139,34 @@
         		<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
         	</DoubleAnimationUsingKeyFrames>
         </Storyboard>
+        <Style x:Key="SerialChartStyle1" TargetType="my:SerialChart">
+        	<Setter Property="Template">
+        		<Setter.Value>
+        			<ControlTemplate TargetType="my:SerialChart">
+        				<Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+        					<Grid>
+        						<Grid.RowDefinitions>
+        							<RowDefinition/>
+        							<RowDefinition Height="Auto"/>
+        						</Grid.RowDefinitions>
+        						<my:ValueAxis x:Name="PART_ValueAxis" Foreground="{TemplateBinding AxisForeground}" HorizontalAlignment="Right" Margin="0,0,0,-2" Grid.Row="0" Canvas.ZIndex="100" Opacity="0"/>
+        						<my:CategoryAxis x:Name="PART_CategoryAxis" Foreground="{TemplateBinding AxisForeground}" Grid.Row="1" Opacity="0"/>
+        						<Border Background="{TemplateBinding PlotAreaBackground}" Grid.Row="0">
+        							<my:ValueGrid x:Name="PART_ValueGrid" Foreground="{TemplateBinding GridStroke}"/>
+        						</Border>
+        						<Border x:Name="PART_GraphCanvasDecorator" Grid.Row="0">
+        							<Canvas x:Name="PART_GraphCanvas" Background="Transparent"/>
+        						</Border>
+        						<my:Legend x:Name="PART_Legend" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="0" Visibility="{TemplateBinding LegendVisibility}" VerticalAlignment="Top"/>
+        						<Canvas Grid.Row="0">
+        							<my:Balloon x:Name="PART_Balloon" BorderBrush="{TemplateBinding AxisForeground}" BorderThickness="2" Visibility="Collapsed"/>
+        						</Canvas>
+        					</Grid>
+        				</Border>
+        			</ControlTemplate>
+        		</Setter.Value>
+        	</Setter>
+        </Style>
     </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
@@ -179,9 +207,9 @@
                 <Image.RenderTransform>
                     <CompositeTransform />
                 </Image.RenderTransform>
-            </Image>
+                         GridStroke="{x:Null}" Margin="100,92,100,320" FontSize="10" LegendVisibility="Collapsed" HorizontalAlignment="Center" Style="{StaticResource SerialChartStyle1}">
             <TextBlock Height="35" HorizontalAlignment="Left" Margin="104,291,0,0" x:Name="textBlock1" Text="Current power consumption:" VerticalAlignment="Top" Width="266" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" >
-            	<TextBlock.RenderTransform>
+                    <my:LineGraph ValueMemberPath="value" Title="Power Consumption" Brush="#FF54EF00" />
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
             </TextBlock>

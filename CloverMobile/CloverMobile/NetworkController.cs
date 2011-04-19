@@ -73,7 +73,7 @@ namespace CloverMobile
 
                     lock (downloadWorkQueue)
                     {
-                        currentWorkItem = downloadWorkQueue[downloadWorkQueue.Count - 1];
+                        currentWorkItem = downloadWorkQueue.First(); //(downloadWorkQueue.Count - downloadWorkQueue.Count-1)
                     }
                     switch (currentWorkItem.documentName)
                     {
@@ -125,7 +125,7 @@ namespace CloverMobile
                     // ** delete workunit from the list
                     lock (downloadWorkQueue)
                     {
-                        downloadWorkQueue.RemoveAt(downloadWorkQueue.Count - 1);
+                        downloadWorkQueue.RemoveAt(0);
                     }
                 }
                 // ** work queue is empty
@@ -259,6 +259,7 @@ namespace CloverMobile
                 dataDoc = XDocument.Load(new StringReader(e.Result));
                 master.parseSensors(dataDoc);
                 documentType = "";
+                controller.parseSensorsOk();
             }
             else if (documentType == "outputs")
             {

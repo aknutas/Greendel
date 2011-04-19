@@ -74,6 +74,7 @@ namespace CloverMobile
         }
         public void getUserXML()
         {
+            System.Diagnostics.Debug.WriteLine("controller: getting user xml");
             WorkItem newItem = new WorkItem("userInfo");
             nwc.addNewDownloadWorkUnit(newItem);      
         }
@@ -121,6 +122,10 @@ namespace CloverMobile
         public void authenticationOk()
         {
             mainPageRef.authenticationOk();       
+        }
+        public void parseSensorsOk()
+        {
+            mainPageRef.GetPowerUsage();
         }
     }
 }
