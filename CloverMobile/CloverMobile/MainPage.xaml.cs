@@ -47,14 +47,14 @@ namespace CloverMobile
                 mySerSettings = (SettingsFile)settingsData;
              
                 // ** autheticate
+                System.Diagnostics.Debug.WriteLine("ui: authenticating, file exists.");
                 controller.authenticate(mySerSettings.username.ToString(), mySerSettings.password.ToString());
-                System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER FOR USER INFO");
+                //System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER FOR USER INFO");
                 
                 // ** get basic information
                 controller.getUserXML();
                 //controller.getSensorsXML();
-                //myMaster = controller.getModel();
-                //SetCurrentWeather(myMaster.currentWeather.code);
+
             }
             else // ** there are no file, user has not logged in yet, display the splash screen
             {
@@ -96,21 +96,22 @@ namespace CloverMobile
         private void loginButton_Click(object sender, RoutedEventArgs e)
         {
                 // ** try to authenticate
+                System.Diagnostics.Debug.WriteLine("ui: authenticating.");
                 controller.authenticate(userNameTextBox.Text, passwordTextBox.Password);
-                System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER FOR USER INFO");
-                controller.getUserXML();             
+                controller.getUserXML();        
         }
 
         public void authenticationOk() // ** this function is called  if the autentication is successfull
         {
+            //controller.getUserXML();
+            controller.getSensorsXML();
+
             // ** remove the splashscreen
+            System.Diagnostics.Debug.WriteLine("UI: authentication OK.");
             splashScreen.Visibility = System.Windows.Visibility.Collapsed;
             PageTitle.Text = "Main Page";
             myMaster = controller.getModel();
-            SetCurrentWeather(myMaster.currentWeather.code);
-            controller.getSensorsXML();
-            GetPowerUsage();
-
+            SetCurrentWeather(myMaster.currentWeather.code);  
 
             if (settingsFileExists == false) // ** if autentication was successfull and this is the first time when logging in, create new file
             {               
@@ -137,8 +138,20 @@ namespace CloverMobile
         }
         public void GetPowerUsage()
         {
-            //currentPowerConsumptionTextBlock.Text = myMaster.currentSensors[1].latestReading.ToString();
+            
             controller.getLatestNpoints(1, 20);
+            System.Diagnostics.Debug.WriteLine("ui: plaa plaa");
+            // Set the data context
+            foreach (Sensor s in myMaster.currentSensors)
+            {
+                if (s.sensorId == 1)
+                {
+                    System.Diagnostics.Debug.WriteLine("ui: binding datacontext");
+                    this.DataContext = s;
+                    currentPowerConsumptionTextBlock.Text = s.latestReading.ToString();
+                }
+            }
+            
         }
     }
 }

@@ -228,6 +228,7 @@ namespace CloverMobile
         public void parseSensorTimeScaleHistory(int sensorId, XDocument xmlDoc)
         {
             System.Diagnostics.Debug.WriteLine("Model: parsing timescale history values for a single sensor.");
+            //System.Diagnostics.Debug.WriteLine(xmlDoc);
             //System.Diagnostics.Debug.WriteLine(xmlDoc.ToString());
             var allReadings = new List<HistoryData>();
 
