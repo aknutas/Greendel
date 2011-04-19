@@ -10,7 +10,7 @@ function requestData() {
         url: '<%= url_for(:controller => 'users', :action => 'current_consumption_chart', :id => @user.id) %>',
         success: function(point) {
             var series = chart.series[0],
-                shift = series.data.length > 60;
+                shift = series.data.length > 40;
 
             // add the point
             chart.series[0].addPoint(point, true, shift);

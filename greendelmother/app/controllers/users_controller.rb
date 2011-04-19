@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id], :include => [:device, {:device => [:sensors, :outputs, :location, {:location => :weather}]}])
 
     @csensor = @user.device.sensors.find(:first, :conditions => {:name => "poweruse"})
-    @readings = @csensor.readings.find(:all, :order => "time DESC", :limit => 60)
+    @readings = @csensor.readings.find(:all, :order => "time DESC", :limit => 40)
 
     begin
       @wnow = @user.device.location.weather
