@@ -57,7 +57,7 @@
                            @wnow.get_image_link
                        end %>" align="center"></p>
       <% if @wtomorrow %>
-          <p>Tomorrow is <%= @wtomorrow.text %> with high of <%= @wtomorrow.high %>C and low of <%= @wtomorrow.low %>C.
+          <p>Tomorrow is <%= @wtomorrow.text.downcase %> with high of <%= @wtomorrow.high %>C and low of <%= @wtomorrow.low %>C.
             <img src="<%= begin
                               @wnow.get_forecast_link(:tomorrow)
                           end %>" align="center"></p>

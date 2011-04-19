@@ -7,7 +7,7 @@
 #   Major.create(:name => 'Daley', :city => cities.first)
 
 #Creating first test user
-user = User.create(:name => 'testipaavo', :realname => 'Paavo Paavoke', :email => 'paavo@example.com', :password => 'testi')
+user = User.create(:name => 'testipaavo', :realname => 'Veli-Ensiö Järvinen', :email => 'velipoika@example.com', :password => 'testi')
 
 cloverpower = Device.create(:name => 'Cloverpower')
 user.device = cloverpower
@@ -17,7 +17,7 @@ sm = Socialmedia.create(:twitteron => false, :facebookon => false)
 user.socialmedia = sm
 user.save
 
-testlocation = Location.create(:address => 'Nollakatu 0', :name => 'TestLocation', :town => 'Lappeenranta')
+testlocation = Location.create(:address => 'Nollakatu 2', :name => 'Oma Koti', :town => 'Lappeenranta')
 cloverpower.location = testlocation
 cloverpower.save
 
