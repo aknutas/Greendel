@@ -166,7 +166,7 @@ namespace CloverMobile
             {
                 System.Diagnostics.Debug.WriteLine("UI: timer.");
                 controller.updateValueOfThisSensor(1);
-                //currentPowerConsumptionTextBlock.Text = myMaster.currentSensors[0].latestReading.ToString();
+                currentPowerConsumptionTextBlock.Text = myMaster.currentSensors[0].latestReading.ToString();
             }
         }
     }
