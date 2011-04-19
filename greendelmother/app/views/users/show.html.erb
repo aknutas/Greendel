@@ -9,11 +9,11 @@ function requestData() {
     jQuery.ajax({
         url: '<%= url_for(:controller => 'users', :action => 'current_consumption_chart', :id => @user.id) %>',
         success: function(point) {
-            //var series = chart.series[0],
-            //    shift = series.data.length > 20;
+            var series = chart.series[0],
+                shift = series.data.length > 60;
 
             // add the point
-            chart.series[0].addPoint(point, true, true);
+            chart.series[0].addPoint(point, true, shift);
         },
         cache: false
     });

@@ -12,7 +12,7 @@ module ApplicationHelper
   def plot_helper(readings)
     string = ""
     readings.each do |reading|
-      string = string + "[Date.UTC(" + reading.time.strftime("%Y,%m,%d,%H,%M,%S") + "), " + reading.value.to_s + "],"
+      string = string + "[" + ((reading.time.to_i + 3.hours) * 1000).to_s + ", " + reading.value.to_s + "],"
     end
     return string
   end
