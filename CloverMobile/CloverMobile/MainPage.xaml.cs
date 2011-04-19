@@ -20,6 +20,8 @@ namespace CloverMobile
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        private bool sensorsReceived = false;
+        private DispatcherTimer timer;
         private Controller controller;
         private DataMaster myMaster;
         bool settingsFileExists = false;
@@ -61,7 +63,12 @@ namespace CloverMobile
                 PageTitle.Text = "Log In";
                 splashScreen.Visibility = System.Windows.Visibility.Visible;
                 errorMessageTextBlock.Text = "";
-            }       
+            }
+
+            timer = new DispatcherTimer();
+            timer.Interval = new TimeSpan(0, 0, 0, 3, 0);
+            timer.Tick += new EventHandler(Timer_tick);
+            timer.Start();
             //rotateClover.Begin();
             //rotateClover.Pause();
 
@@ -105,7 +112,7 @@ namespace CloverMobile
         {
             //controller.getUserXML();
             controller.getSensorsXML();
-
+            sensorsReceived = true;
             // ** remove the splashscreen
             System.Diagnostics.Debug.WriteLine("UI: authentication OK.");
             splashScreen.Visibility = System.Windows.Visibility.Collapsed;
@@ -119,7 +126,7 @@ namespace CloverMobile
                 SettingsFile mySettings = new SettingsFile();
                 mySettings.username = userNameTextBox.Text;
                 mySettings.password = passwordTextBox.Password;
-                mySettings.serviceAddress = "http://localhost:3000";
+                mySettings.serviceAddress = "http://anttitek.net:3000";
                 XmlSerilizierHelper.Serialize(fileName, mySettings);
                 settingsFileExists = true;
             }
@@ -152,6 +159,15 @@ namespace CloverMobile
                 }
             }
             
+        }
+        private void Timer_tick(object sender, EventArgs e)
+        {
+            if (sensorsReceived == true)
+            {
+                System.Diagnostics.Debug.WriteLine("UI: timer.");
+                controller.updateValueOfThisSensor(1);
+                //currentPowerConsumptionTextBlock.Text = myMaster.currentSensors[0].latestReading.ToString();
+            }
         }
     }
 }

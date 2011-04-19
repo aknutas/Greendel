@@ -139,7 +139,7 @@ namespace CloverMobile
             }
             //return allSensors;
         }
-
+        // ** parse all outputs only
         public void parseOutpus(XDocument xmlDoc)
         {
             System.Diagnostics.Debug.WriteLine("Model: parsing outputs");
@@ -164,7 +164,7 @@ namespace CloverMobile
             }
             //return allOutputs;
         }
-        // gets the history values for a specific sensor
+        // ** gets the history values for a specific sensor
         public void parseSensorHistory(int sensorId, XDocument xmlDoc)
         { 
             System.Diagnostics.Debug.WriteLine("Model: parsing history values for a single sensor");
@@ -197,7 +197,7 @@ namespace CloverMobile
                 }
             }
         }
-        // gets the lates values for a sensor
+        // gets the latest value for a sensor
         public void parseSingleSensorForNewHistoryDatapoint(int sensorId, XDocument xmlDoc)
         {
             System.Diagnostics.Debug.WriteLine("Model: getting current value for a sensor.");
@@ -218,6 +218,8 @@ namespace CloverMobile
                         {
                             s.latestReading = sens.latestReading; // ** update the current values
                             s.updatedAt = sens.updatedAt;
+                            // ** remove the first value and add a new value
+                            s.DataUnit.RemoveAt(0);
                             s.addNewHistoryValue(sens.updatedAt, double.Parse(sens.latestReading));
                         }
                     }
