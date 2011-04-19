@@ -74,46 +74,6 @@
         		<EasingDoubleKeyFrame KeyTime="0:0:0.296" Value="2"/>
         		<EasingDoubleKeyFrame KeyTime="0:0:0.492" Value="-3"/>
         	</DoubleAnimationUsingKeyFrames>
-        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="solarImage">
-        		<EasingDoubleKeyFrame KeyTime="0" Value="-274"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.312" Value="42"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.496" Value="14"/>
-        	</DoubleAnimationUsingKeyFrames>
-        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="textBlockSolarTitle">
-        		<EasingDoubleKeyFrame KeyTime="0" Value="-202"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.312" Value="42"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.532" Value="14"/>
-        	</DoubleAnimationUsingKeyFrames>
-        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="solarImage">
-        		<EasingDoubleKeyFrame KeyTime="0" Value="-16"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.312" Value="-7"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.496" Value="-9"/>
-        	</DoubleAnimationUsingKeyFrames>
-        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="textBlockSolarTitle">
-        		<EasingDoubleKeyFrame KeyTime="0" Value="94"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.312" Value="-5"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.532" Value="-2"/>
-        	</DoubleAnimationUsingKeyFrames>
-        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="windImage">
-        		<EasingDoubleKeyFrame KeyTime="0" Value="203"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.312" Value="-45"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.496" Value="-16"/>
-        	</DoubleAnimationUsingKeyFrames>
-        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="windImage">
-        		<EasingDoubleKeyFrame KeyTime="0" Value="10"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.312" Value="-8"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.496" Value="-7"/>
-        	</DoubleAnimationUsingKeyFrames>
-        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="textBlock4">
-        		<EasingDoubleKeyFrame KeyTime="0" Value="185"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.312" Value="-47"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.532" Value="-15"/>
-        	</DoubleAnimationUsingKeyFrames>
-        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="textBlock4">
-        		<EasingDoubleKeyFrame KeyTime="0" Value="84"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.312" Value="-4"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.532" Value="-3"/>
-        	</DoubleAnimationUsingKeyFrames>
         	<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.HorizontalAlignment)" Storyboard.TargetName="image">
         		<DiscreteObjectKeyFrame KeyTime="0:0:0.5">
         			<DiscreteObjectKeyFrame.Value>
@@ -151,12 +111,7 @@
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,0,0">
-            <Image x:Name="image" Margin="122,65,140,278" Source="Graphics/Clover.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
-                <Image.RenderTransform>
-                    <CompositeTransform />
-                </Image.RenderTransform>
-            </Image>
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,0,-369">
             <TextBlock Height="35" HorizontalAlignment="Left" Margin="104,291,0,0" Name="textBlock1" Text="Current power consumption:" VerticalAlignment="Top" Width="266" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" >
             	<TextBlock.RenderTransform>
             		<CompositeTransform/>
@@ -167,33 +122,7 @@
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
             </TextBlock>
-            <Image Height="90" HorizontalAlignment="Left" Margin="55,399,0,0" Name="solarImage" Stretch="Fill" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.5,0.5" >
-            	<Image.RenderTransform>
-            		<CompositeTransform/>
-            	</Image.RenderTransform>
-            </Image>
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="55,495,0,0" Name="textBlockSolarTitle" Text="Solar Power" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" >
-            	<TextBlock.RenderTransform>
-            		<CompositeTransform/>
-            	</TextBlock.RenderTransform>
-            </TextBlock>
-            <Image Height="90" HorizontalAlignment="Left" Margin="315,399,0,0" Name="windImage" Stretch="Fill" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.5,0.5">
-                <Image.OpacityMask>
-                    <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
-                        <GradientStop Color="Black" Offset="0" />
-                        <GradientStop Color="White" Offset="1" />
-                    </LinearGradientBrush>
-                </Image.OpacityMask>
-                <Image.RenderTransform>
-            		<CompositeTransform/>
-            	</Image.RenderTransform>
-            </Image>
-            <TextBlock Height="30" HorizontalAlignment="Right" Margin="0,495,34,0" Name="textBlock4" Text="Wind Power" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" >
-            	<TextBlock.RenderTransform>
-            		<CompositeTransform/>
-            	</TextBlock.RenderTransform>
-            </TextBlock>
-            <Canvas Height="529" HorizontalAlignment="Left" Margin="6,0,0,0" Name="splashScreen" VerticalAlignment="Top" Width="444" Visibility="Visible" Background="Black">
+            <Canvas Height="529" HorizontalAlignment="Left" Margin="8,8,0,0" Name="splashScreen" VerticalAlignment="Top" Width="444" Visibility="Collapsed" Background="Black">
                  <TextBox Height="72" HorizontalAlignment="Left" Margin="23,138,0,0" Name="userNameTextBox" Text="" VerticalAlignment="Top" Width="421"  />
                 <TextBlock Height="30" HorizontalAlignment="Left" Margin="34,102,0,0" Name="userNameTextBlock" Text="User Name" VerticalAlignment="Top" />
                 <TextBlock Height="30" HorizontalAlignment="Left" Margin="34,242,0,0" Name="passwordTextBlock" Text="Password" VerticalAlignment="Top" />
@@ -207,6 +136,7 @@
             <HyperlinkButton Content="History" Height="30" HorizontalAlignment="Left" Margin="250,531,0,0" Name="hyperlinkButton2" VerticalAlignment="Top" Width="200" NavigateUri="/CloverMobile;component/History.xaml" />
             -->
         </Grid>
+        <Image Grid.Row="1" Height="150" HorizontalAlignment="Left" Margin="146,385,0,0" Name="currentWeather" Stretch="Fill" VerticalAlignment="Top" Width="200" />
     </Grid>
  
     <!--Sample code showing usage of ApplicationBar-->

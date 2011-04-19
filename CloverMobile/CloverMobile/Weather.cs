@@ -14,8 +14,12 @@ namespace CloverMobile
     public class Weather
     {
         public float temp { get; set; }
+        public float high { get; set; }
+        public float low { get; set; }
         public string unit { get; set; }
         public string description { get; set; }
+        public int code { get; set; }
+
 
     }
 }
