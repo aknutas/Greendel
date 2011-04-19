@@ -11,8 +11,13 @@ function requestData() {
         success: function(point) {
             var series = chart.series[0];
 
+            if(chart.series[0].length > 40)
+                trim = true;
+            else
+                trim = false;
+
             // add the point
-            chart.series[0].addPoint(point, true, true);
+            chart.series[0].addPoint(point, false, trim);
         },
         cache: false
     });
