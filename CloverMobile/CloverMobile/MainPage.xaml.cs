@@ -52,10 +52,9 @@ namespace CloverMobile
                 
                 // ** get basic information
                 controller.getUserXML();
-
                 //controller.getSensorsXML();
-                myMaster = controller.getModel();
-                SetCurrentWeather(myMaster.currentWeather.code);
+                //myMaster = controller.getModel();
+                //SetCurrentWeather(myMaster.currentWeather.code);
             }
             else // ** there are no file, user has not logged in yet, display the splash screen
             {
@@ -109,11 +108,9 @@ namespace CloverMobile
             PageTitle.Text = "Main Page";
             myMaster = controller.getModel();
             SetCurrentWeather(myMaster.currentWeather.code);
-            currentWeather.Visibility = System.Windows.Visibility.Visible;
             controller.getSensorsXML();
             GetPowerUsage();
 
-            
 
             if (settingsFileExists == false) // ** if autentication was successfull and this is the first time when logging in, create new file
             {               
@@ -129,17 +126,18 @@ namespace CloverMobile
         public void SetCurrentWeather(int code)
         {
             // get the time of day and determine if it is day or night
-            
+            //DateTime now = DateTime.Now;
+
             string weatherSource = "http://l.yimg.com/a/i/us/nws/weather/gr/" + code.ToString() + "d.png"; //34d.png
             System.Diagnostics.Debug.WriteLine("UI: weathersource is:  " + weatherSource);
             Uri uri = new Uri(weatherSource, UriKind.Absolute);
             ImageSource imgSource = new BitmapImage(uri);
             currentWeather.Source = imgSource;
-            //currentWeather.
+            currentWeather.Visibility = System.Windows.Visibility.Visible;
         }
         public void GetPowerUsage()
         {
-            currentPowerConsumptionTextBlock.Text = myMaster.currentSensors[1].latestReading.ToString();
+            //currentPowerConsumptionTextBlock.Text = myMaster.currentSensors[1].latestReading.ToString();
             controller.getLatestNpoints(1, 20);
         }
     }
