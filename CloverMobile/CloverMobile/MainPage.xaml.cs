@@ -119,7 +119,7 @@ namespace CloverMobile
                 SettingsFile mySettings = new SettingsFile();
                 mySettings.username = userNameTextBox.Text;
                 mySettings.password = passwordTextBox.Password;
-                mySettings.serviceAddress = "http://localhost:3000";
+                mySettings.serviceAddress = "http://anttitek.net:3000";
                 XmlSerilizierHelper.Serialize(fileName, mySettings);
                 settingsFileExists = true;
             }
