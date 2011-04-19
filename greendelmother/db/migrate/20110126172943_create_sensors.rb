@@ -5,6 +5,7 @@ class CreateSensors < ActiveRecord::Migration
       t.string :longname
       t.string :vartype
       t.string :unit
+      t.boolean :counter, :default => false
       t.float :latestreading
 
       t.integer :device_id

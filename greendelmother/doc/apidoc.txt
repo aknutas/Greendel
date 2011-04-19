@@ -18,6 +18,10 @@ Sensors history:
 /sensors/history/<sensorid>.xml
 Options:
 /sensors/history/<sensorid>.xml?avgscale=<hourly|daily|monthly>&startdate=<yyyy-mm-dd>&enddate=<yyyy-mm-dd>
+OR
+/sensors/history/<sensorid>.xml?diffscale=<hourly|daily|monthly>&startdate=<yyyy-mm-dd>&enddate=<yyyy-mm-dd>
+OR
+/sensors/history/<sensorid>.xml?limit=<n>
 
 Weather histories:
 /histories/datastatus/<weatherid>.xml

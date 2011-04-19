@@ -4,6 +4,7 @@ xml.sensor do
   xml.name @sensor.name
   xml.longname @sensor.longname
   xml.vartype @sensor.vartype
+  xml.counter @sensor.counter
   xml.latestreading @sensor.latestreading
   xml.updated_at @sensor.updated_at
   xml.unit @sensor.unit

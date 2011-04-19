@@ -26,6 +26,7 @@ xml.user do
           xml.name sensor.name
           xml.longname sensor.longname
           xml.vartype sensor.vartype
+          xml.counter sensor.counter
           xml.latestreading sensor.latestreading
           xml.unit sensor.unit
           xml.updated_at sensor.updated_at

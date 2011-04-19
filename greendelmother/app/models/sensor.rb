@@ -56,9 +56,66 @@ class Sensor < ActiveRecord::Base
 
   end
 
-  def get_readings(startdate, enddate)
-    readings = self.readings.find(:all, :order => "time ASC", :conditions => {:time => startdate..enddate})
-    return readings
+  def get_diff(startdate, enddate, scale)
+
+    avgreadings = Array.new
+
+    if (scale == "hourly")
+      interval = 1.hours
+    elsif (scale == "daily")
+      interval = 1.days
+    elsif (scale == "monthly")
+      interval = 1.months
+    elsif (scale == "yearly")
+      interval = 1.years
+    else
+      return nil
+    end
+    avgstart = startdate
+    avgend = startdate + interval
+
+    begin
+      diffpart = self.readings.find(:all, :order => "time ASC", :conditions => {:time => avgstart..avgend})
+      first = 0
+      last = 0
+      diff = 0
+
+      if (count > 0)
+        first = diffpart.first.value
+        last = diffpart.last.value
+
+        diff = last - first
+
+        avgreading = Reading.new(:value => diff, :time => diffpart.first.time)
+
+        tt = avgreading.time
+        if (avgscale == "hourly")
+          avgreading.time = Time.local(tt.year, tt.month, tt.day, tt.hour)
+        elsif (avgscale == "daily")
+          avgreading.time = Time.local(tt.year, tt.month, tt.day)
+        elsif (avgscale == "monthly")
+          avgreading.time = Time.local(tt.year, tt.month)
+        elsif (avgscale == "yearly")
+          avgreading.time = Time.local(tt.year)
+        end
+
+        avgreadings << avgreading
+      end
+
+      avgstart = avgstart + interval
+      avgend = avgend + interval
+    end while (avgend <= enddate)
+
+    return avgreadings
+
   end
 
+  def get_readings(startdate, enddate, limit)
+    if (limit)
+      readings = self.readings.find(:all, :order => "time ASC", :conditions => {:time => startdate..enddate})
+    else
+      readings = self.readings.find(:all, :limit => limit, :order => "time ASC", :conditions => {:time => startdate..enddate})
+    end
+    return readings
+  end
 end
