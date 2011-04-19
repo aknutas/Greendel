@@ -1,1 +1,1 @@
-<%= @csensor.try(:latestreading).to_s + @csensor.try(:unit) %>
+<%= @reading.try(:value).to_s + @csensor.try(:unit) %>

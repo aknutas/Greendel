@@ -30,9 +30,6 @@ class Resourcer
       :value => reading,
       :time => time
     )
-    remotesensor = RemoteSensor.find(sensorid)
-    remotesensor.latestreading = reading
-    remotesensor.save
   end
 
   def checkoutput(oneoutput, connection, rvalue)
