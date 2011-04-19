@@ -113,7 +113,12 @@ namespace CloverMobile
                             wcDown.DownloadStringAsync(new Uri(serviceAddress + "/sensors/history/" + currentWorkItem.sensorId.ToString() + ".xml?avgscale="  + currentWorkItem.frequency + "&startdate=" + currentWorkItem.start + "&enddate=" + currentWorkItem.end));
                             // view-source/sensors/history/1.xml?avgscale=daily&startdate=2011-03-01&enddate=2011-04-01
                             break;
-
+                        case "latestSensorValues":
+                            documentType = "latestSensorValues";
+                            currentSensorId = currentWorkItem.sensorId;
+                            wcDown.DownloadStringAsync(new Uri(serviceAddress + "/sensors/history/" + currentWorkItem.sensorId.ToString() + ".xml?limit=" + currentWorkItem.pointsToGet.ToString()));
+                            break;
+                            // /sensors/history/<sensorid>.xml?limit=<n>
                         default:
                             break;
                     }
@@ -276,7 +281,7 @@ namespace CloverMobile
                 master.parseSingleSensorForNewHistoryDatapoint(currentSensorId, dataDoc);
                 documentType = "";
             }
-            else if (documentType == "historyFromTimeScale")
+            else if (documentType == "historyFromTimeScale" || documentType == "latestSensorValues")
             {
                 System.Diagnostics.Debug.WriteLine("nwc: asking model for sensor timescale history information..");
                 dataDoc = XDocument.Load(new StringReader(e.Result));

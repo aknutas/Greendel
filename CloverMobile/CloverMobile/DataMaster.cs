@@ -258,6 +258,7 @@ namespace CloverMobile
                 }
             }
         }
+        
         /*
         System.Diagnostics.Debug.WriteLine("Parsing outputs and sensors: ");
 

@@ -19,6 +19,7 @@ namespace CloverMobile
         public string frequency { get; set; }
         public string start { get; set; }
         public string end { get; set; }
+        public int pointsToGet { get; set; }
 
         public WorkItem(string workName)
         {
@@ -46,6 +47,13 @@ namespace CloverMobile
             frequency = freq;
             start = startDate;
             end = endDate;     
+        }
+        public WorkItem(string workName, int deviceID, int sensorID, int points)
+        {
+            documentName = workName;
+            sensorId = sensorID;
+            deviceId = deviceID;
+            pointsToGet = points;
         }
     }
 }
