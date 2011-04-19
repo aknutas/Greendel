@@ -21,6 +21,7 @@ namespace CloverMobile
     public partial class MainPage : PhoneApplicationPage
     {
         private Controller controller;
+        private DataMaster myMaster;
         bool settingsFileExists = false;
         private string fileName = "settings";
 
@@ -30,7 +31,7 @@ namespace CloverMobile
             InitializeComponent();
             controller = Controller.getInstance;
             controller.setActivePage(this);
-            
+            currentWeather.Visibility = System.Windows.Visibility.Collapsed;
 
             // ** check if the settings file exists
             var appStorage = IsolatedStorageFile.GetUserStoreForApplication();
@@ -52,7 +53,9 @@ namespace CloverMobile
                 // ** get basic information
                 controller.getUserXML();
 
-
+                //controller.getSensorsXML();
+                myMaster = controller.getModel();
+                SetCurrentWeather(myMaster.currentWeather.code);
             }
             else // ** there are no file, user has not logged in yet, display the splash screen
             {
@@ -72,7 +75,7 @@ namespace CloverMobile
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
             // ** this loads the animation
-            MainScreenLoad.Begin();
+            //MainScreenLoad.Begin();
             
         }
 
@@ -104,8 +107,14 @@ namespace CloverMobile
             // ** remove the splashscreen
             splashScreen.Visibility = System.Windows.Visibility.Collapsed;
             PageTitle.Text = "Main Page";
-            //controller.getSensorsXML();
+            myMaster = controller.getModel();
+            SetCurrentWeather(myMaster.currentWeather.code);
+            currentWeather.Visibility = System.Windows.Visibility.Visible;
             controller.getSensorsXML();
+            GetPowerUsage();
+
+            
+
             if (settingsFileExists == false) // ** if autentication was successfull and this is the first time when logging in, create new file
             {               
                 // ** create the settings object, serialize it and write it to phone's memory
@@ -116,6 +125,23 @@ namespace CloverMobile
                 XmlSerilizierHelper.Serialize(fileName, mySettings);
                 settingsFileExists = true;
             }
+        }
+        public void SetCurrentWeather(int code)
+        {
+            // get the time of day and determine if it is day or night
+            
+            string weatherSource = "http://l.yimg.com/a/i/us/nws/weather/gr/" + code.ToString() + "d.png"; //34d.png
+            System.Diagnostics.Debug.WriteLine("UI: weathersource is:  " + weatherSource);
+            Uri uri = new Uri(weatherSource, UriKind.Absolute);
+            ImageSource imgSource = new BitmapImage(uri);
+            currentWeather.Source = imgSource;
+            //currentWeather.
+        }
+        public void GetPowerUsage()
+        {
+            currentPowerConsumptionTextBlock.Text = myMaster.currentSensors[1].latestReading.ToString();
+
+        
         }
     }
 }

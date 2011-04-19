@@ -95,16 +95,20 @@ namespace CloverMobile
             select new Weather
             {
                 temp = float.Parse(weatherValue.Element("temp").Value),
+                high = float.Parse(weatherValue.Element("high").Value),
+                low = float.Parse(weatherValue.Element("low").Value),
                 unit = weatherValue.Element("unit").Value.ToString(),
                 description = weatherValue.Element("desc").Value.ToString(),
+                code = int.Parse(weatherValue.Element("code").Value),
             };
             foreach (Weather w in weather)
             {
                 currentWeather.temp = w.temp;
                 currentWeather.unit = w.unit;
                 currentWeather.description = w.description;
+                currentWeather.code = w.code;
             }
-            System.Diagnostics.Debug.WriteLine("WEATHER:" + " " + currentWeather.temp.ToString() + " " + currentWeather.unit + " " + currentWeather.description);
+            System.Diagnostics.Debug.WriteLine("WEATHER:" + " " + currentWeather.temp.ToString() + " " + currentWeather.unit + " " + currentWeather.description + " " + currentWeather.code.ToString());
         }
         
         // ** get all sensors only

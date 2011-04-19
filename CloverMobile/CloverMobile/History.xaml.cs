@@ -141,7 +141,7 @@ namespace CloverMobile
         private void Timer_tick(object sender, EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("UI: timer.");
-            controller.updateValueOfThisSensor(currentSensorId);
+            //controller.updateValueOfThisSensor(currentSensorId);
             
             //controller.getSensorsXML();
         }
