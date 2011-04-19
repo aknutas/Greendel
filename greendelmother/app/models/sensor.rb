@@ -112,9 +112,9 @@ class Sensor < ActiveRecord::Base
 
   def get_readings(startdate, enddate, limit)
     if (limit)
-      readings = self.readings.find(:all, :order => "time ASC", :conditions => {:time => startdate..enddate})
-    else
       readings = self.readings.find(:all, :limit => limit, :order => "time ASC", :conditions => {:time => startdate..enddate})
+    else
+      readings = self.readings.find(:all, :order => "time ASC", :conditions => {:time => startdate..enddate})
     end
     return readings
   end
