@@ -130,12 +130,12 @@
                     <!--<my:AreaGraph ValueMemberPath="val3" Title="Area #1" Brush="#80FF0000" />-->
                 </my:SerialChart.Graphs>
             </my:SerialChart>
-            <TextBlock Margin="101,161,101,0" x:Name="textBlock1" Text="Current power consumption:" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" Height="35" VerticalAlignment="Top" >
+            <TextBlock Margin="101,161,101,0" x:Name="consumptionTitle" Text="You are consuming:" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" Height="35" VerticalAlignment="Top" >
             	<TextBlock.RenderTransform>
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
             </TextBlock>
-            <TextBlock Margin="134,197,134,236" x:Name="currentPowerConsumptionTextBlock" FontSize="64" RenderTransformOrigin="0.974,0.466" FontFamily="Segoe WP Light" TextAlignment="Center" >
+            <TextBlock Margin="134,197,134,236" x:Name="currentPowerConsumptionTextBlock" FontSize="32" RenderTransformOrigin="0.974,0.466" FontFamily="Segoe WP Light" TextAlignment="Center" >
             	<TextBlock.Foreground>
             		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             			<GradientStop Color="#FFD8D8D8" Offset="0.611"/>
@@ -147,7 +147,7 @@
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
             </TextBlock>
-            <Canvas Height="529" HorizontalAlignment="Left" Margin="8,8,0,0" x:Name="splashScreen" VerticalAlignment="Top" Width="444" Visibility="Collapsed" Background="Black">
+            <Canvas Height="537" HorizontalAlignment="Left" Margin="8,0,0,0" x:Name="splashScreen" VerticalAlignment="Top" Width="444" Visibility="Visible" Background="#EF000000" Opacity="20">
                  <TextBox Height="72" HorizontalAlignment="Left" Margin="23,138,0,0" x:Name="userNameTextBox" Text="" VerticalAlignment="Top" Width="421"  />
                 <TextBlock Height="30" HorizontalAlignment="Left" Margin="34,102,0,0" x:Name="userNameTextBlock" Text="User Name" VerticalAlignment="Top" />
                 <TextBlock Height="30" HorizontalAlignment="Left" Margin="34,242,0,0" x:Name="passwordTextBlock" Text="Password" VerticalAlignment="Top" />
