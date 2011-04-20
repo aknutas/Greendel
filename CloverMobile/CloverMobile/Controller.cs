@@ -19,6 +19,7 @@ namespace CloverMobile
         Device device;
         static readonly object padlock = new object();
         private CloverMobile.MainPage mainPageRef;
+        private CloverMobile.History historyRef;
 
         // ** references to network controller, model (datamaster) and current ui page 
         private NetworkController nwc;
@@ -54,11 +55,16 @@ namespace CloverMobile
         public void setActivePage(PhoneApplicationPage currentPage)
         {
             activePage = currentPage;
-            activePage.GetType().ToString();
-            System.Diagnostics.Debug.WriteLine("ACTIVE PAGE IS: " + activePage.GetType().ToString() );
+            System.Diagnostics.Debug.WriteLine("Controller's active page is: " + activePage.GetType().ToString() );
             if (activePage.GetType().ToString() == "CloverMobile.MainPage")
             {
-                mainPageRef = (CloverMobile.MainPage)currentPage;            
+                mainPageRef = (CloverMobile.MainPage)currentPage;
+                historyRef = null;
+            }
+            else if (activePage.GetType().ToString() == "CloverMobile.History")
+            {
+                historyRef = (CloverMobile.History)currentPage;
+                mainPageRef = null;
             }
             //activePage = 
         }
@@ -100,9 +106,9 @@ namespace CloverMobile
             WorkItem newItem = new WorkItem("sensorUpdate", 0, sensorId);
             nwc.addNewDownloadWorkUnit(newItem);      
         }
-        public void getSensorHistoryFromSpecifiedTimeScale(int sensorId, string frequency, string start, string end)
+        public void getSensorHistoryFromSpecifiedTimeScale(int sensorId, string type, string frequency, string start, string end)
         {
-            WorkItem newItem = new WorkItem("historyFromTimeScale", 0, sensorId, frequency, start, end);
+            WorkItem newItem = new WorkItem("historyFromTimeScale", 0, sensorId, type, frequency, start, end);
             nwc.addNewDownloadWorkUnit(newItem);         
         }
         public void getLatestNpoints(int sensorId, int points)
@@ -117,15 +123,31 @@ namespace CloverMobile
         }
         public void printErrorMessage(string message)
         {
-            mainPageRef.printError();
+            if (mainPageRef != null)
+            {
+                mainPageRef.printError();
+            }
         }
         public void authenticationOk()
         {
-            mainPageRef.authenticationOk();       
+            if (mainPageRef != null)
+            {
+                mainPageRef.authenticationOk();
+            }
         }
         public void parseSensorsOk()
         {
-            mainPageRef.GetPowerUsage();
+            if (mainPageRef != null)
+            {
+                mainPageRef.GetPowerUsage();
+            }
+        }
+        public void sensorHistoryDownloaded()
+        {
+            if (historyRef != null)
+            {
+                historyRef.SetGraphDataContext();
+            }
         }
     }
 }

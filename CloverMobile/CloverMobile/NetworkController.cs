@@ -110,8 +110,11 @@ namespace CloverMobile
                         case "historyFromTimeScale":
                             documentType = "historyFromTimeScale";
                             currentSensorId = currentWorkItem.sensorId;
-                            wcDown.DownloadStringAsync(new Uri(serviceAddress + "/sensors/history/" + currentWorkItem.sensorId.ToString() + ".xml?avgscale="  + currentWorkItem.frequency + "&startdate=" + currentWorkItem.start + "&enddate=" + currentWorkItem.end));
-                            // view-source/sensors/history/1.xml?avgscale=daily&startdate=2011-03-01&enddate=2011-04-01
+                            // /sensors/history/<sensorid>.xml?avgscale=<hourly|daily|monthly>&startdate=<yyyy-mm-dd>&enddate=<yyyy-mm-dd>
+                            // /sensors/history/<sensorid>.xml?diffscale=<hourly|daily|monthly>&startdate=<yyyy-mm-dd>&enddate=<yyyy-mm-dd>
+                            string uri = serviceAddress + "/sensors/history/" + currentWorkItem.sensorId.ToString() + ".xml?" + currentWorkItem.historyInfoType + "=" + currentWorkItem.frequency + "&startdate=" + currentWorkItem.start + "&enddate=" + currentWorkItem.end;
+                            System.Diagnostics.Debug.WriteLine("nwc: current uri is:" + uri);
+                            wcDown.DownloadStringAsync(new Uri(serviceAddress + "/sensors/history/" + currentWorkItem.sensorId.ToString() + ".xml?" + currentWorkItem.historyInfoType + "="  + currentWorkItem.frequency + "&startdate=" + currentWorkItem.start + "&enddate=" + currentWorkItem.end));
                             break;
                         case "latestSensorValues":
                             documentType = "latestSensorValues";
@@ -242,52 +245,62 @@ namespace CloverMobile
                 System.Diagnostics.Debug.WriteLine("CONNECTION ERROR! " + e.Error.ToString());
                 controller.printErrorMessage(e.Error.ToString());
             }
-            System.Diagnostics.Debug.WriteLine("nwc: finished downloading xml.");
-            if (documentType == "userInfo")
+            try
             {
-                System.Diagnostics.Debug.WriteLine("nwc: asking model for userinfo..");
-                // ** xml document received fully, give it to the master for parsing
-                dataDoc = XDocument.Load(new StringReader(e.Result));
-                master.parseUserInformation(dataDoc);
-                documentType = "";
-                // ** successfully downloaded basic document, inform about successfull autetication 
-                controller.authenticationOk();
+                System.Diagnostics.Debug.WriteLine("nwc: finished downloading xml.");
+                if (documentType == "userInfo")
+                {
+                    System.Diagnostics.Debug.WriteLine("nwc: asking model for userinfo..");
+                    // ** xml document received fully, give it to the master for parsing
+                    dataDoc = XDocument.Load(new StringReader(e.Result));
+                    master.parseUserInformation(dataDoc);
+                    documentType = "";
+                    // ** successfully downloaded basic document, inform about successfull autetication 
+                    controller.authenticationOk();
+                }
+                else if (documentType == "sensors")
+                {
+                    System.Diagnostics.Debug.WriteLine("nwc: asking model for sensors..");
+                    dataDoc = XDocument.Load(new StringReader(e.Result));
+                    master.parseSensors(dataDoc);
+                    documentType = "";
+                    controller.parseSensorsOk();
+                }
+                else if (documentType == "outputs")
+                {
+                    System.Diagnostics.Debug.WriteLine("nwc: asking model for outputs..");
+                    dataDoc = XDocument.Load(new StringReader(e.Result));
+                    master.parseOutpus(dataDoc);
+                    documentType = "";
+                }
+                else if (documentType == "sensor")
+                {
+                    System.Diagnostics.Debug.WriteLine("nwc: asking model for sensor history..");
+                    dataDoc = XDocument.Load(new StringReader(e.Result));
+                    master.parseSensorHistory(currentSensorId, dataDoc);
+                    documentType = "";
+                    controller.sensorHistoryDownloaded();
+                }
+                else if (documentType == "sensorUpdate")
+                {
+                    System.Diagnostics.Debug.WriteLine("nwc: asking model for sensor update..");
+                    dataDoc = XDocument.Load(new StringReader(e.Result));
+                    master.parseSingleSensorForNewHistoryDatapoint(currentSensorId, dataDoc);
+                    documentType = "";
+                    
+                }
+                else if (documentType == "historyFromTimeScale" || documentType == "latestSensorValues")
+                {
+                    System.Diagnostics.Debug.WriteLine("nwc: asking model for sensor timescale history information..");
+                    dataDoc = XDocument.Load(new StringReader(e.Result));
+                    master.parseSensorTimeScaleHistory(currentSensorId, dataDoc);
+                    documentType = "";
+                    controller.sensorHistoryDownloaded();
+                }
             }
-            else if (documentType == "sensors")
+            catch (WebException we)
             {
-                System.Diagnostics.Debug.WriteLine("nwc: asking model for sensors..");
-                dataDoc = XDocument.Load(new StringReader(e.Result));
-                master.parseSensors(dataDoc);
-                documentType = "";
-                controller.parseSensorsOk();
-            }
-            else if (documentType == "outputs")
-            {
-                System.Diagnostics.Debug.WriteLine("nwc: asking model for outputs..");
-                dataDoc = XDocument.Load(new StringReader(e.Result));
-                master.parseOutpus(dataDoc);
-                documentType = "";
-            }
-            else if (documentType == "sensor")
-            {
-                System.Diagnostics.Debug.WriteLine("nwc: asking model for sensor history..");
-                dataDoc = XDocument.Load(new StringReader(e.Result));
-                master.parseSensorHistory(currentSensorId, dataDoc);
-                documentType = "";
-            }
-            else if (documentType == "sensorUpdate")
-            {
-                System.Diagnostics.Debug.WriteLine("nwc: asking model for sensor update..");
-                dataDoc = XDocument.Load(new StringReader(e.Result));
-                master.parseSingleSensorForNewHistoryDatapoint(currentSensorId, dataDoc);
-                documentType = "";
-            }
-            else if (documentType == "historyFromTimeScale" || documentType == "latestSensorValues")
-            {
-                System.Diagnostics.Debug.WriteLine("nwc: asking model for sensor timescale history information..");
-                dataDoc = XDocument.Load(new StringReader(e.Result));
-                master.parseSensorTimeScaleHistory(currentSensorId, dataDoc);
-                documentType = "";    
+                we.Message.ToString();
             }
         }
         void wcUpload_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)

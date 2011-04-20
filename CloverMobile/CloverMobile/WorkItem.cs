@@ -16,6 +16,7 @@ namespace CloverMobile
         public string documentName { get; set; }
         public int deviceId { get; set; }
         public int sensorId { get; set; }
+        public string historyInfoType { get; set; }
         public string frequency { get; set; }
         public string start { get; set; }
         public string end { get; set; }
@@ -39,11 +40,12 @@ namespace CloverMobile
             sensorId = sensorID;
             deviceId = deviceID;
         }
-        public WorkItem(string workName, int deviceID, int sensorID, string freq, string startDate, string endDate)
+        public WorkItem(string workName, int deviceID, int sensorID, string type, string freq, string startDate, string endDate)
         {
             documentName = workName;
             deviceId = deviceID;
             sensorId = sensorID;
+            historyInfoType = type;
             frequency = freq;
             start = startDate;
             end = endDate;     
