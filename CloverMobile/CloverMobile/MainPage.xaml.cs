@@ -24,15 +24,18 @@ namespace CloverMobile
         private DispatcherTimer timer;
         private Controller controller;
         private DataMaster myMaster;
+        //private DateTime now;
         bool settingsFileExists = false;
         private string fileName = "settings";
 
         public MainPage()
-        {
-            // ** get the controller instance and give the reference of current page to it
+        {       
             InitializeComponent();
+            // ** get the controller instance and give the reference of current page to it
             controller = Controller.getInstance;
             controller.setActivePage(this);
+
+            // ** disable the ui-elements on the background
             currentWeather.Visibility = System.Windows.Visibility.Collapsed;
 
             // ** check if the settings file exists
@@ -48,14 +51,12 @@ namespace CloverMobile
                 SettingsFile mySerSettings = new SettingsFile();
                 mySerSettings = (SettingsFile)settingsData;
              
-                // ** autheticate
+                // ** send the usenrame and password
                 System.Diagnostics.Debug.WriteLine("ui: authenticating, file exists.");
                 controller.authenticate(mySerSettings.username.ToString(), mySerSettings.password.ToString());
-                //System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER FOR USER INFO");
                 
-                // ** get basic information
+                // ** authenticate by sending basic information 
                 controller.getUserXML();
-                //controller.getSensorsXML();
 
             }
             else // ** there are no file, user has not logged in yet, display the splash screen
@@ -65,38 +66,31 @@ namespace CloverMobile
                 errorMessageTextBlock.Text = "";
             }
 
+            // ** start the timer that polls current power consumption
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 0, 3, 0);
             timer.Tick += new EventHandler(Timer_tick);
             timer.Start();
-            //rotateClover.Begin();
-            //rotateClover.Pause();
-
-        }
-        public void printError()
-        {
-            splashScreen.Visibility = System.Windows.Visibility.Visible;
-            errorMessageTextBlock.Text = "Connection Error.";
         }
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            // ** this loads the animation
-            //MainScreenLoad.Begin();
-            
+            // ** start the timer again when user navigates to the page, and possibly get new values for power consumption graph
         }
 
+        // ** functions for navigating away from mainpage
         private void ApplicationBarIconButtonSettings_Click(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.RelativeOrAbsolute));
+            // ** before navigating, stop the timer!
+            NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.RelativeOrAbsolute));    
         }
-
         private void ApplicationBarIconButtonHistory_Click(object sender, EventArgs e)
         {
+            // ** before navigating, stop the timer!
             NavigationService.Navigate(new Uri("/History.xaml", UriKind.RelativeOrAbsolute));
         }
-
         private void ApplicationBarControlIconButtonControl_Click(object sender, EventArgs e)
         {
+            // ** before navigating, stop the timer!
             NavigationService.Navigate(new Uri("/Control.xaml", UriKind.RelativeOrAbsolute));
         }
 
@@ -107,19 +101,21 @@ namespace CloverMobile
                 controller.authenticate(userNameTextBox.Text, passwordTextBox.Password);
                 controller.getUserXML();        
         }
-
-        public void authenticationOk() // ** this function is called  if the autentication is successfull
+        public void authenticationOk() // ** this function is called by controller if the autentication is successfull
         {
-            //controller.getUserXML();
+            // ** get sensors
             controller.getSensorsXML();
 
             // ** remove the splashscreen
             System.Diagnostics.Debug.WriteLine("UI: authentication OK.");
             splashScreen.Visibility = System.Windows.Visibility.Collapsed;
-            PageTitle.Text = "Main Page";
+            PageTitle.Text = "Main";
+
+            // ** get model reference and set the weather
             myMaster = controller.getModel();
             SetCurrentWeather(myMaster.currentWeather.code);  
 
+            // ** save current settings to the file
             if (settingsFileExists == false) // ** if autentication was successfull and this is the first time when logging in, create new file
             {               
                 // ** create the settings object, serialize it and write it to phone's memory
@@ -131,6 +127,14 @@ namespace CloverMobile
                 settingsFileExists = true;
             }
         }
+
+        // ** this is called from controller if authentication fails
+        public void printError()
+        {
+            splashScreen.Visibility = System.Windows.Visibility.Visible;
+            errorMessageTextBlock.Text = "Connection Error.";
+        }
+
         public void SetCurrentWeather(int code)
         {
             // get the time of day and determine if it is day or night
@@ -147,27 +151,29 @@ namespace CloverMobile
         public void GetPowerUsage()
         {
             sensorsReceived = true;
+            // ** get latest 20 values for power consumption graph
+            System.Diagnostics.Debug.WriteLine("ui: getting latest 20 points for power consumption sensor.");
             controller.getLatestNpoints(1, 20);
-            System.Diagnostics.Debug.WriteLine("ui: plaa plaa");
-            // Set the data context
+                      
+            // ** Set the data context of the graph
             foreach (Sensor s in myMaster.currentSensors)
             {
                 if (s.sensorId == 1)
                 {
-                    System.Diagnostics.Debug.WriteLine("ui: binding datacontext");
+                    System.Diagnostics.Debug.WriteLine("ui: binding datacontext.");
                     this.DataContext = s;
-                    currentPowerConsumptionTextBlock.Text = s.latestReading.ToString();
+                    currentPowerConsumptionTextBlock.Text = s.latestReading.ToString() + " W";
                 }
             }           
         }
-        // ** timer function, updates value of power consumption sensor
+        // ** timer function, updates value of power consumption sensor after 3 seconds
         private void Timer_tick(object sender, EventArgs e)
         {
             if (sensorsReceived == true)
             {
                 System.Diagnostics.Debug.WriteLine("UI: timer.");
                 controller.updateValueOfThisSensor(1);
-                currentPowerConsumptionTextBlock.Text = myMaster.currentSensors[0].latestReading.ToString();
+                currentPowerConsumptionTextBlock.Text = myMaster.currentSensors[0].latestReading.ToString() + " W";
             }
         }
     }
