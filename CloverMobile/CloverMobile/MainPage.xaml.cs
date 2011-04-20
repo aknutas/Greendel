@@ -66,7 +66,7 @@ namespace CloverMobile
             }
 
             timer = new DispatcherTimer();
-            timer.Interval = new TimeSpan(0, 0, 0, 30, 0);
+            timer.Interval = new TimeSpan(0, 0, 0, 3, 0);
             timer.Tick += new EventHandler(Timer_tick);
             timer.Start();
             //rotateClover.Begin();
