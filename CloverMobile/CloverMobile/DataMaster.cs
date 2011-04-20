@@ -248,9 +248,9 @@ namespace CloverMobile
                 // ** find the right sensor from the list of sensors!
                 foreach (Sensor s in currentSensors)
                 {
-                    if (s.sensorId == sensorId) // found it
+                    if (s.sensorId == sensorId) // ** found it
                     {
-                        s.DataUnit.Clear();
+                        s.DataUnit.Clear(); // ** clear the existing values! 
                         
                         foreach (HistoryData hd in allReadings)
                         {

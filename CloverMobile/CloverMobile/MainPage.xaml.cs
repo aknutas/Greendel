@@ -66,7 +66,7 @@ namespace CloverMobile
             }
 
             timer = new DispatcherTimer();
-            timer.Interval = new TimeSpan(0, 0, 0, 3, 0);
+            timer.Interval = new TimeSpan(0, 0, 0, 30, 0);
             timer.Tick += new EventHandler(Timer_tick);
             timer.Start();
             //rotateClover.Begin();
@@ -112,7 +112,7 @@ namespace CloverMobile
         {
             //controller.getUserXML();
             controller.getSensorsXML();
-            sensorsReceived = true;
+
             // ** remove the splashscreen
             System.Diagnostics.Debug.WriteLine("UI: authentication OK.");
             splashScreen.Visibility = System.Windows.Visibility.Collapsed;
@@ -134,7 +134,7 @@ namespace CloverMobile
         public void SetCurrentWeather(int code)
         {
             // get the time of day and determine if it is day or night
-            //DateTime now = DateTime.Now;
+            // DateTime now = DateTime.Now;
 
             string weatherSource = "http://l.yimg.com/a/i/us/nws/weather/gr/" + code.ToString() + "d.png"; //34d.png
             System.Diagnostics.Debug.WriteLine("UI: weathersource is:  " + weatherSource);
@@ -143,9 +143,10 @@ namespace CloverMobile
             currentWeather.Source = imgSource;
             currentWeather.Visibility = System.Windows.Visibility.Visible;
         }
+        // ** this function is called by the controller when we have received sensors
         public void GetPowerUsage()
         {
-            
+            sensorsReceived = true;
             controller.getLatestNpoints(1, 20);
             System.Diagnostics.Debug.WriteLine("ui: plaa plaa");
             // Set the data context
@@ -157,16 +158,16 @@ namespace CloverMobile
                     this.DataContext = s;
                     currentPowerConsumptionTextBlock.Text = s.latestReading.ToString();
                 }
-            }
-            
+            }           
         }
+        // ** timer function, updates value of power consumption sensor
         private void Timer_tick(object sender, EventArgs e)
         {
             if (sensorsReceived == true)
             {
                 System.Diagnostics.Debug.WriteLine("UI: timer.");
                 controller.updateValueOfThisSensor(1);
-                //currentPowerConsumptionTextBlock.Text = myMaster.currentSensors[0].latestReading.ToString();
+                currentPowerConsumptionTextBlock.Text = myMaster.currentSensors[0].latestReading.ToString();
             }
         }
     }
