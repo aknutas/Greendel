@@ -15,6 +15,25 @@ class SensorsController < ApplicationController
   def show
     @sensor = Sensor.find(params[:id])
 
+    @startdate = Time.zone.today.to_time - 1.days
+    @enddate = Time.zone.today.to_time + 1.days
+
+    @startdate = params[:startdate].to_date.to_time if params[:startdate]
+    @enddate = params[:enddate].to_date.to_time if params[:enddate]
+
+    @sensor = Sensor.find(params[:id], :include => [:device])
+    avgscale = params[:avgscale]
+    diffscale = params[:diffscale]
+    limit = params[:limit]
+
+    if (avgscale == "hourly" || avgscale == "daily" || avgscale == "monthly" || avgscale == "yearly")
+      @readings = @sensor.get_avg_readings(@startdate, @enddate, avgscale)
+    elsif (diffscale == "hourly" || diffscale == "daily" || diffscale == "monthly" || diffscale == "yearly")
+      @readings = @sensor.get_diff(@startdate, @enddate, diffscale)
+    else
+      @readings = @sensor.get_readings(@startdate, @enddate, limit)
+    end
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml { render :xml => @sensor }
@@ -36,7 +55,7 @@ class SensorsController < ApplicationController
 
     if (avgscale == "hourly" || avgscale == "daily" || avgscale == "monthly" || avgscale == "yearly")
       @readings = @sensor.get_avg_readings(@startdate, @enddate, avgscale)
-    elsif(diffscale == "hourly" || diffscale == "daily" || diffscale == "monthly" || diffscale == "yearly")
+    elsif (diffscale == "hourly" || diffscale == "daily" || diffscale == "monthly" || diffscale == "yearly")
       @readings = @sensor.get_diff(@startdate, @enddate, diffscale)
     else
       @readings = @sensor.get_readings(@startdate, @enddate, limit)

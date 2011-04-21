@@ -1,4 +1,51 @@
 <p>
   <b><%= @sensor.longname %></b> showed <%= @sensor.latestreading %> at <%= @sensor.updated_at %>
 </p>
-<p>Imagine an awesome chart here</p>
+
+<div id="readings_chart" style="width: 90%; height: 300px;"></div>
+
+<script type="text/javascript" charset="utf-8">
+    Event.observe(window, 'load', function() {
+        chart = new Highcharts.Chart({
+            chart: { renderTo: 'readings_chart', zoomType: 'x', defaultSeriesType: 'spline'},
+            subtitle: {
+                text: document.ontouchstart === undefined ?
+                        'Click and drag in the plot area to zoom in' :
+                        'Drag your finger over the plot to zoom in'
+            },
+            title: { text: '<%= h(@sensor.longname) %> Readings History' },
+            xAxis: { type: 'datetime' },
+            yAxis: {
+                title: { text: 'Measured Reading' }
+            },
+            plotOptions: {
+                spline: {
+                    lineWidth: 4,
+                    states: {
+                        hover: {
+                            lineWidth: 5
+                        }
+                    },
+                    marker: {
+                        enabled: false,
+                        states: {
+                            hover: {
+                                enabled: true,
+                                symbol: 'circle',
+                                radius: 5,
+                                lineWidth: 1
+                            }
+                        }
+                    }
+                }
+            },
+            series: [
+                {
+                    name: '<%= h(@sensor.try(:longname)) + " " + @sensor.try(:unit) %>)',
+                    data: [ <%= plot_helper(@readings) %>
+                    ]
+                }
+            ]
+        });
+    });
+</script>
