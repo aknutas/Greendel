@@ -1,1 +1,1 @@
-ruby script\server
+call ruby script\server
