@@ -15,21 +15,19 @@
     shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded" Unloaded="PhoneApplicationPage_Loaded">
     
 	<phone:PhoneApplicationPage.Resources>
-        <Storyboard x:Name="rotateClover" SpeedRatio="0.5" RepeatBehavior="Forever">
-            <DoubleAnimation Duration="0:0:2" To="360" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="image" d:IsOptimized="True" x:Name="myAnimation" />
-        </Storyboard>
+        <Storyboard x:Name="rotateClover" SpeedRatio="0.5" RepeatBehavior="Forever"/>
         <Storyboard x:Name="MainScreenLoad">
         	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ApplicationTitle">
-        		<EasingDoubleKeyFrame KeyTime="0" Value="-257"/>
+        		<EasingDoubleKeyFrame KeyTime="0" Value="483"/>
         		<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-13"/>
         		<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="-1"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-13"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-11"/>
         	</DoubleAnimationUsingKeyFrames>
         	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="ApplicationTitle">
-        		<EasingDoubleKeyFrame KeyTime="0" Value="-7"/>
+        		<EasingDoubleKeyFrame KeyTime="0" Value="4"/>
         		<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-1"/>
         		<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-3"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-1"/>
         	</DoubleAnimationUsingKeyFrames>
         	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PageTitle">
         		<EasingDoubleKeyFrame KeyTime="0" Value="509"/>
@@ -40,17 +38,27 @@
         	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="PageTitle">
         		<EasingDoubleKeyFrame KeyTime="0" Value="-6"/>
         		<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="2"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="2"/>
         	</DoubleAnimationUsingKeyFrames>
-        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="textBlock1">
-        		<EasingDoubleKeyFrame KeyTime="0" Value="-417"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.296" Value="29"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.504" Value="-11"/>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ApplicationTitle">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
         	</DoubleAnimationUsingKeyFrames>
-        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="textBlock1">
-        		<EasingDoubleKeyFrame KeyTime="0" Value="-10"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.296" Value="-12"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.504" Value="-10"/>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PageTitle">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
         	</DoubleAnimationUsingKeyFrames>
+
+
+
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="image">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="-396"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+        	</DoubleAnimationUsingKeyFrames>
+
+
 
         </Storyboard>
         <Style x:Key="SerialChartStyle1" TargetType="my:SerialChart">
@@ -63,7 +71,7 @@
         							<RowDefinition/>
         							<RowDefinition Height="Auto"/>
         						</Grid.RowDefinitions>
-        						<my:ValueAxis x:Name="PART_ValueAxis" Foreground="{TemplateBinding AxisForeground}" HorizontalAlignment="Right" Margin="0,0,0,-2" Grid.Row="0" Canvas.ZIndex="100" Opacity="0"/>
+        						<my:ValueAxis x:Name="PART_ValueAxis" Foreground="{TemplateBinding AxisForeground}" HorizontalAlignment="Right" Margin="0,1,0,-3" Grid.Row="1" Canvas.ZIndex="100" Opacity="0" d:LayoutOverrides="GridBox"/>
         						<my:CategoryAxis x:Name="PART_CategoryAxis" Foreground="{TemplateBinding AxisForeground}" Grid.Row="1" Opacity="0"/>
         						<Border Background="{TemplateBinding PlotAreaBackground}" Grid.Row="0">
         							<my:ValueGrid x:Name="PART_ValueGrid" Foreground="{TemplateBinding GridStroke}"/>
@@ -91,31 +99,28 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <Image Margin="0,-660,-2236,-454" Grid.RowSpan="2" Source="/Image5.png" Stretch="Fill"/>
+        <Image x:Name="image" Margin="-10,-660,-2226,-454" Grid.RowSpan="2" Source="/Image5.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+        	<Image.RenderTransform>
+        		<CompositeTransform/>
+        	</Image.RenderTransform>
+        </Image>
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="GREENDEL MOBILE" Style="{StaticResource PhoneTextNormalStyle}" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="ApplicationTitle" Text="GREENDEL MOBILE" Style="{StaticResource PhoneTextNormalStyle}" RenderTransformOrigin="0.5,0.5" Margin="20,0,4,0">
             	<TextBlock.RenderTransform>
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
             </TextBlock>
-            <TextBlock x:Name="PageTitle" Text="Main" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="72" RenderTransformOrigin="0.5,0.5" >
+            <TextBlock x:Name="PageTitle" Text="Main" Margin="17,-7,-8,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="72" RenderTransformOrigin="0.5,0.5" >
             	<TextBlock.RenderTransform>
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
             </TextBlock>
         </StackPanel>
-        <Image Height="311" HorizontalAlignment="Left" x:Name="currentWeather" Stretch="Fill" VerticalAlignment="Top" Width="441" Margin="8,-28,0,0" Grid.Row="1" />
-        <Rectangle Margin="89,0,89,52" Grid.Row="1" Stroke="Black" Width="302" Opacity="0.935" Height="150" VerticalAlignment="Bottom" Fill="#FF181818"/>
-        <Rectangle Margin="89,155,89,230" Grid.Row="1" Width="302" Opacity="0.85" StrokeDashArray="1 0" StrokeMiterLimit="0" Stroke="Black">
-        	<Rectangle.Fill>
-        		<LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-        			<GradientStop Color="#FF212121" Offset="0.525"/>
-        			<GradientStop Color="#FF141414" Offset="0.561"/>
-        		</LinearGradientBrush>
-        	</Rectangle.Fill>
-        </Rectangle>
+        <Image Height="311" HorizontalAlignment="Left" x:Name="currentWeather" Stretch="Fill" VerticalAlignment="Top" Width="441" Margin="8,-2,0,0" Grid.Row="1" />
+        <Rectangle Margin="89,0,89,52" Grid.Row="1" Stroke="Black" Width="302" Height="150" VerticalAlignment="Bottom" Fill="#FF181818" Opacity="0.9"/>
+        <Rectangle Margin="89,155,89,230" Grid.Row="1" Width="302" Opacity="0.9" StrokeDashArray="1 0" StrokeMiterLimit="0" Stroke="Black" Fill="#FF181818"/>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,0,0">
@@ -123,9 +128,9 @@
             <my:SerialChart x:Name="powerConsumptionChart" DataSource="{Binding DataUnit}" CategoryValueMemberPath="time"
                          AxisForeground="White"
                          PlotAreaBackground="Black"
-                         GridStroke="{x:Null}" Margin="94,346,106,66" FontSize="10" LegendVisibility="Collapsed" Style="{StaticResource SerialChartStyle1}" d:LayoutOverrides="Width" Opacity="0.425">
+                         GridStroke="#FF5E5E5E" Margin="94,346,106,66" FontSize="10" LegendVisibility="Collapsed" Style="{StaticResource SerialChartStyle1}" d:LayoutOverrides="Width" Opacity="0.55" BorderBrush="#FF838383">
                 <my:SerialChart.Graphs>
-                    <my:LineGraph ValueMemberPath="value" Title="Power Consumption" Brush="#FF009CFF" />
+                    <my:LineGraph ValueMemberPath="value" Title="Power Consumption" Brush="#FF00FF27" />
                     <!--<my:ColumnGraph ValueMemberPath="val2" Title="Column #2" Brush="#8000FF00" ColumnWidthAllocation="0.4" />-->
                     <!--<my:AreaGraph ValueMemberPath="val3" Title="Area #1" Brush="#80FF0000" />-->
                 </my:SerialChart.Graphs>
@@ -135,7 +140,7 @@
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
             </TextBlock>
-            <TextBlock Margin="134,197,134,236" x:Name="currentPowerConsumptionTextBlock" FontSize="32" RenderTransformOrigin="0.974,0.466" FontFamily="Segoe WP Light" TextAlignment="Center" >
+            <TextBlock Margin="134,197,134,236" x:Name="currentPowerConsumptionTextBlock" FontSize="64" RenderTransformOrigin="0.974,0.466" FontFamily="Segoe WP Semibold" TextAlignment="Center" >
             	<TextBlock.Foreground>
             		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             			<GradientStop Color="#FFD8D8D8" Offset="0.611"/>
@@ -147,7 +152,10 @@
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
             </TextBlock>
-            <Canvas Height="537" HorizontalAlignment="Left" Margin="8,0,0,0" x:Name="splashScreen" VerticalAlignment="Top" Width="444" Visibility="Visible" Background="#EF000000" Opacity="20">
+            <Canvas HorizontalAlignment="Left" Margin="6,8,0,-10" x:Name="splashScreen" Width="444" Visibility="Visible" Background="#EF000000" Opacity="20" RenderTransformOrigin="0.5,0.5">
+            	<Canvas.RenderTransform>
+            		<CompositeTransform/>
+            	</Canvas.RenderTransform>
                  <TextBox Height="72" HorizontalAlignment="Left" Margin="23,138,0,0" x:Name="userNameTextBox" Text="" VerticalAlignment="Top" Width="421"  />
                 <TextBlock Height="30" HorizontalAlignment="Left" Margin="34,102,0,0" x:Name="userNameTextBlock" Text="User Name" VerticalAlignment="Top" />
                 <TextBlock Height="30" HorizontalAlignment="Left" Margin="34,242,0,0" x:Name="passwordTextBlock" Text="Password" VerticalAlignment="Top" />
