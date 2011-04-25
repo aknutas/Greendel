@@ -28,6 +28,7 @@ namespace CloverMobile
         public string currentFrequency { get; set; }
         public string newFrequency { get; set; }
         public int currentSensorId { get; set; }
+        public string currentSensorShortName { get; set; }
         public History()
         {
             
@@ -38,7 +39,8 @@ namespace CloverMobile
             controller.setActivePage(this);
             
             // ** set some default values
-            currentSensorId = 2;
+            //currentSensorId = 2;
+            currentSensorShortName = "powerconsumed";
             currentFrequency = "daily";
 
             // ** put content to the frequency listbox
@@ -58,10 +60,11 @@ namespace CloverMobile
             foreach (Sensor s in model.currentSensors)
             {
                 sensorsListBox.Items.Add(s.longName);   // ** fill the sensors listbox
-                if (currentSensorId == s.sensorId)      // ** set the current sensor
+                if (currentSensorShortName == s.sensorName)      // ** set the current sensor
                 {
-                    currentSensorName.Text = s.longName;
-                    unitTextBlock.Text = s.unit;
+                    currentSensorId = s.sensorId;
+                    currentSensorName.Text = s.longName + "(" +s.unit +")";
+                    //unitTextBlock.Text = s.unit;
                     sensorsListBox.SelectedItem = s.longName;
                 }
             }
@@ -82,13 +85,12 @@ namespace CloverMobile
             {
                 if (currentSensorId == s.sensorId)
                 {
-                    currentSensorName.Text = s.longName;
+                    currentSensorName.Text = s.longName + " ( " + s.unit + " )";
                     sensorsListBox.SelectedItem = s.longName;
                     this.DataContext = s;
                 }
             }
         }
-
 
         private void sensorsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -97,8 +99,9 @@ namespace CloverMobile
             {
                 if (s.longName == sensorsListBox.SelectedItem.ToString()) 
                 {
-                    unitTextBlock.Text = s.unit;
+                    //unitTextBlock.Text = s.unit;
                     currentSensorId = s.sensorId;
+                    currentSensorShortName = s.sensorName;
                 }
             }
             System.Diagnostics.Debug.WriteLine("UI.History: current sensor id is now: " + currentSensorId);
@@ -114,7 +117,7 @@ namespace CloverMobile
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("UI.Hisroty: getting history time scale for a single sensor");
-            if (currentSensorId == 1) // ** sensor with id 2 is "power consumed"
+            if (currentSensorShortName == "powerconsumed") // ** sensor with id 2 is "power consumed"
             {
                 controller.getSensorHistoryFromSpecifiedTimeScale(currentSensorId, "diffscale", currentFrequency.ToString(), String.Format("{0:yyyy-MM-dd}", startDatePicker.Value), String.Format("{0:yyyy-MM-dd}", endDatePicker.Value));
             }
@@ -123,5 +126,6 @@ namespace CloverMobile
                 controller.getSensorHistoryFromSpecifiedTimeScale(currentSensorId, "avgscale", currentFrequency.ToString(), String.Format("{0:yyyy-MM-dd}", startDatePicker.Value), String.Format("{0:yyyy-MM-dd}", endDatePicker.Value));
             }
         }
+        // 
     }
 }

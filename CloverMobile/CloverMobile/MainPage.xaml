@@ -119,8 +119,8 @@
             </TextBlock>
         </StackPanel>
         <Image Height="311" HorizontalAlignment="Left" x:Name="currentWeather" Stretch="Fill" VerticalAlignment="Top" Width="441" Margin="8,-2,0,0" Grid.Row="1" />
-        <Rectangle Margin="89,0,89,52" Grid.Row="1" Stroke="Black" Width="302" Height="150" VerticalAlignment="Bottom" Fill="#FF181818" Opacity="0.9"/>
-        <Rectangle Margin="89,155,89,230" Grid.Row="1" Width="302" Opacity="0.9" StrokeDashArray="1 0" StrokeMiterLimit="0" Stroke="Black" Fill="#FF181818"/>
+        <Rectangle Margin="89,0,89,52" Grid.Row="1" Stroke="Black" Width="302" Height="150" VerticalAlignment="Bottom" Fill="#FF181818" Opacity="0.35"/>
+        <Rectangle Margin="89,155,89,230" Grid.Row="1" Width="302" Opacity="0.35" StrokeDashArray="1 0" StrokeMiterLimit="0" Stroke="Black" Fill="#FF181818"/>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,0,0">
@@ -152,7 +152,7 @@
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
             </TextBlock>
-            <Canvas HorizontalAlignment="Left" Margin="6,8,0,-192" x:Name="splashScreen" Width="444" Visibility="Visible" Background="#EF000000" Opacity="20" RenderTransformOrigin="0.5,0.5">
+            <Canvas HorizontalAlignment="Left" Margin="6,8,0,-192" x:Name="splashScreen" Width="444" Visibility="Collapsed" Background="#EF000000" Opacity="20" RenderTransformOrigin="0.5,0.5">
             	<Canvas.RenderTransform>
             		<CompositeTransform/>
             	</Canvas.RenderTransform>

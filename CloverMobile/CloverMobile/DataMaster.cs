@@ -43,8 +43,14 @@ namespace CloverMobile
         }
         public int GetSensorIdByShorName(string shortname)
         {
-
-            return 1;
+            foreach (Sensor s in currentSensors)
+            {
+                if (s.sensorName == shortname)
+                {
+                    return s.sensorId;
+                }
+            }
+            return 0;
         }
 
         public void parseUserInformation(XDocument xmlDoc)
