@@ -1,11 +1,84 @@
+<script type="text/javascript" charset="utf-8">
+    jQuery(document).ready(function() {
+        jQuery('#startdate').datepicker({
+            dateFormat: 'dd.mm.yy',
+            firstDay: 1,
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            defaultDate: '<%=  Time.now.strftime('%d.%m.%Y') %>'
+        });
+        jQuery('#enddate').datepicker({
+            dateFormat: 'dd.mm.yy',
+            firstDay: 1,
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            defaultDate: '<%=  Time.now.strftime('%d.%m.%Y') %>'
+        });
+    })
+</script>
+
 <p>
   <b>Name:</b>
-  <%=h @device.name %>
+  <%= h @device.name %>
 </p>
 <% @device.sensors.each do |sensor| %>
-<p><%= link_to(sensor.longname, sensor_path(sensor)) %> was at <%= if sensor.latestreading then h(sensor.latestreading.to_s + sensor.unit) else h("-") end %> on <%= try_print(sensor.updated_at.asctime) %></p>
+    <p><%= link_to(sensor.longname, sensor_path(sensor)) %> was at <%= if sensor.latestreading then
+                                                                           h(sensor.latestreading.to_s + sensor.unit)
+                                                                       else
+                                                                           h("-")
+                                                                       end %>
+      on <%= try_print(sensor.updated_at.asctime) %></p>
 <% end %>
 <br/>
 <% @device.outputs.each do |output| %>
-<p><%= link_to(output.longname, sensor_path(output)) %> was turned <%= if output.try(:state) == true then h("on") else h("off") end %> at <%= try_print(output.updated_at) %></p>
+    <p><%= link_to(output.longname, sensor_path(output)) %> was turned <%= if output.try(:state) == true then
+                                                                               h("on")
+                                                                           else
+                                                                               h("off")
+                                                                           end %>
+      at <%= try_print(output.updated_at) %></p>
 <% end %>
+<br/>
+<hr/>
+<br/>
+<% form_tag(sensor_path(@device), :method => :get) do %>
+    <%= label_tag(:startdate, "Start date:") %>
+    <%= text_field_tag(:startdate, @startdate.strftime('%d.%m.%Y')) %>
+    <%= label_tag(:enddate, "End date:") %>
+    <%= text_field_tag(:enddate, @enddate.strftime('%d.%m.%Y')) %>
+    <%= radio_button_tag(:avgscale, "none") %> No Averaging
+    <%= radio_button_tag(:avgscale, "hourly", :checked => true) %> Hourly Averages
+    <%= radio_button_tag(:avgscale, "daily") %> Daily Averages
+    <%= radio_button_tag(:avgscale, "monthly") %> Monthly Averages
+    <%= submit_tag("Load Chart") %>
+<% end %>
+<br/>
+<div id="readings_chart" style="width: 90%; height: 300px;"></div>
+
+<script type="text/javascript" charset="utf-8">
+    jQuery(function () {
+        new Highcharts.Chart({
+            chart: { renderTo: 'readings_chart', zoomType: 'x' },
+            subtitle: {
+                text: document.ontouchstart === undefined ?
+                        'Click and drag in the plot area to zoom in' :
+                        'Drag your finger over the plot to zoom in'
+            },
+            title: { text: '<%= h(@device.name) %> Readings History' },
+            xAxis: { type: 'datetime' },
+            yAxis: {
+                title: { text: 'Measured Reading' }
+            },
+            series: [
+                    <%  @device.sensors.each do |sensor| -%>{
+                    name: '<%= h(sensor.name) %> (<%= h(sensor.unit) %>)',
+                    data: [<%= plot_helper(@chartreadings[sensor]) %>
+                    ], visible: false
+                },
+                <% end -%>
+            ]
+        });
+    });
+</script>

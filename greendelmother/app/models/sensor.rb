@@ -78,6 +78,7 @@ class Sensor < ActiveRecord::Base
       diffpart = self.readings.find(:all, :order => "time ASC", :conditions => {:time => avgstart..avgend})
       first = 0
       last = 0
+      count = diffpart.size
       diff = 0
 
       if (count > 0)
@@ -89,13 +90,13 @@ class Sensor < ActiveRecord::Base
         avgreading = Reading.new(:value => diff, :time => diffpart.first.time)
 
         tt = avgreading.time
-        if (avgscale == "hourly")
+        if (scale == "hourly")
           avgreading.time = Time.local(tt.year, tt.month, tt.day, tt.hour)
-        elsif (avgscale == "daily")
+        elsif (scale == "daily")
           avgreading.time = Time.local(tt.year, tt.month, tt.day)
-        elsif (avgscale == "monthly")
+        elsif (scale == "monthly")
           avgreading.time = Time.local(tt.year, tt.month)
-        elsif (avgscale == "yearly")
+        elsif (scale == "yearly")
           avgreading.time = Time.local(tt.year)
         end
 

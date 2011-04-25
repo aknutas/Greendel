@@ -5,8 +5,8 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
   <title>Greendel: <%= controller.action_name + " " + controller.class.to_s.downcase %></title>
-  <%= javascript_include_tag :defaults, 'jquery-1.5.2.min', 'highcharts', 'themes/dark-green' %>
-  <%= stylesheet_link_tag 'style' %>
+  <%= javascript_include_tag :defaults, 'jquery-1.5.2.min', "jquery-ui-1.8.12.custom.min", 'highcharts', 'themes/dark-green' %>
+  <%= stylesheet_link_tag 'style', 'jquery-ui-1.8.12.custom' %>
   <script type="text/javascript">
   jQuery.noConflict();
   </script>

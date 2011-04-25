@@ -13,7 +13,39 @@ class DevicesController < ApplicationController
   # GET /devices/1
   # GET /devices/1.xml
   def show
-    @device = Device.find(params[:id], :include => [:sensors, :outputs, :location])
+    @startdate = Time.zone.today.to_time - 1.days
+    @enddate = Time.zone.today.to_time + 1.days
+
+    @startdate = params[:startdate].to_date.to_time if params[:startdate]
+    @enddate = params[:enddate].to_date.to_time if params[:enddate]
+
+    @sensor = Sensor.find(params[:id], :include => [:device])
+    avgscale = params[:avgscale]
+    diffscale = params[:diffscale]
+    limit = params[:limit]
+
+    # Setting defaults
+    unless (avgscale)
+      avgscale = "hourly"
+    end
+    unless (limit)
+      limit = 500
+    end
+
+    @device = Device.find(params[:id], :include => [:sensors, :location])
+
+    @chartreadings = Hash.new
+
+    @device.sensors.each do |sensor|
+      if (avgscale == "none")
+        reading = sensor.get_readings(@startdate, @enddate, nil)
+      elsif (avgscale == "hourly" || avgscale == "daily" || avgscale == "monthly" || avgscale == "yearly")
+        reading = sensor.get_avg_readings(@startdate, @enddate, avgscale)
+      else
+        reading = sensor.get_readings(@startdate, @enddate, limit)
+      end
+      @chartreadings[sensor] = reading
+    end
 
     respond_to do |format|
       format.html # show.html.erb

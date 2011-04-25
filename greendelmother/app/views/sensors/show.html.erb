@@ -1,7 +1,45 @@
+<script type="text/javascript" charset="utf-8">
+    jQuery(document).ready(function() {
+        jQuery('#startdate').datepicker({
+            dateFormat: 'dd.mm.yy',
+            firstDay: 1,
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            defaultDate: '<%=  @startdate.strftime('%d.%m.%Y') %>'<%  if(@readings.first) %>,
+            minDate: '<%=  (@firstreadings.first.time - 1.days).strftime('%d.%m.%Y') %>'
+            <% end %>
+        });
+        jQuery('#enddate').datepicker({
+            dateFormat: 'dd.mm.yy',
+            firstDay: 1,
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            defaultDate: '<%=  @enddate.strftime('%d.%m.%Y') %>'<%  if(@firstreadings.first) %>,
+            minDate: '<%=  (@firstreadings.first.time - 1.days).strftime('%d.%m.%Y') %>'
+            <% end %>
+        });
+    })
+</script>
+
+
 <p>
   <b><%= @sensor.longname %></b> showed <%= @sensor.latestreading %> at <%= @sensor.updated_at %>
 </p>
 
+<% form_tag(sensor_path(@sensor), :method => :get) do %>
+    <%= label_tag(:startdate, "Start date:") %>
+    <%= text_field_tag(:startdate, @startdate.strftime('%d.%m.%Y')) %>
+    <%= label_tag(:enddate, "End date:") %>
+    <%= text_field_tag(:enddate, @enddate.strftime('%d.%m.%Y')) %>
+    <%= radio_button_tag(:avgscale, "none") %> No Averaging
+    <%= radio_button_tag(:avgscale, "hourly", :checked => true) %> Hourly Averages
+    <%= radio_button_tag(:avgscale, "daily") %> Daily Averages
+    <%= radio_button_tag(:avgscale, "monthly") %> Monthly Averages
+    <%= submit_tag("Load Chart") %>
+<% end %>
+<br/>
 <div id="readings_chart" style="width: 90%; height: 300px;"></div>
 
 <script type="text/javascript" charset="utf-8">

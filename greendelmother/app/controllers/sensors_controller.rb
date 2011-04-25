@@ -26,13 +26,27 @@ class SensorsController < ApplicationController
     diffscale = params[:diffscale]
     limit = params[:limit]
 
-    if (avgscale == "hourly" || avgscale == "daily" || avgscale == "monthly" || avgscale == "yearly")
+    # Setting defaults
+    unless (avgscale)
+      avgscale = "hourly"
+    end
+    unless (limit)
+      limit = 500
+    end
+
+    if (avgscale == "none")
+      @readings = @sensor.get_readings(@startdate, @enddate, nil)
+    elsif (avgscale == "hourly" || avgscale == "daily" || avgscale == "monthly" || avgscale == "yearly")
       @readings = @sensor.get_avg_readings(@startdate, @enddate, avgscale)
-    elsif (diffscale == "hourly" || diffscale == "daily" || diffscale == "monthly" || diffscale == "yearly")
-      @readings = @sensor.get_diff(@startdate, @enddate, diffscale)
+      #elsif (diffscale == "hourly" || diffscale == "daily" || diffscale == "monthly" || diffscale == "yearly")
+      #  @readings = @sensor.get_diff(@startdate, @enddate, diffscale)
     else
       @readings = @sensor.get_readings(@startdate, @enddate, limit)
     end
+
+    # Obsolete
+    # @readings = @sensor.readings.find(:all, :order => "time ASC", :conditions => {:time => @startdate..@enddate})
+    @firstreadings = @sensor.readings.find(:all, :order => "time ASC", :limit => 10)
 
     respond_to do |format|
       format.html # show.html.erb
