@@ -32,7 +32,6 @@ namespace CloverMobile
         {
             
             InitializeComponent();
-
             System.Diagnostics.Debug.WriteLine("UI.History: History page constructor called");
             // ** get controller instance and give our reference
             controller = Controller.getInstance;
@@ -62,6 +61,7 @@ namespace CloverMobile
                 if (currentSensorId == s.sensorId)      // ** set the current sensor
                 {
                     currentSensorName.Text = s.longName;
+                    unitTextBlock.Text = s.unit;
                     sensorsListBox.SelectedItem = s.longName;
                 }
             }
@@ -97,6 +97,7 @@ namespace CloverMobile
             {
                 if (s.longName == sensorsListBox.SelectedItem.ToString()) 
                 {
+                    unitTextBlock.Text = s.unit;
                     currentSensorId = s.sensorId;
                 }
             }
@@ -113,8 +114,14 @@ namespace CloverMobile
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("UI.Hisroty: getting history time scale for a single sensor");
-            controller.getSensorHistoryFromSpecifiedTimeScale(currentSensorId, "avgscale", currentFrequency.ToString(), String.Format("{0:yyyy-MM-dd}", startDatePicker.Value), String.Format("{0:yyyy-MM-dd}", endDatePicker.Value));
+            if (currentSensorId == 1) // ** sensor with id 2 is "power consumed"
+            {
+                controller.getSensorHistoryFromSpecifiedTimeScale(currentSensorId, "diffscale", currentFrequency.ToString(), String.Format("{0:yyyy-MM-dd}", startDatePicker.Value), String.Format("{0:yyyy-MM-dd}", endDatePicker.Value));
+            }
+            else
+            {
+                controller.getSensorHistoryFromSpecifiedTimeScale(currentSensorId, "avgscale", currentFrequency.ToString(), String.Format("{0:yyyy-MM-dd}", startDatePicker.Value), String.Format("{0:yyyy-MM-dd}", endDatePicker.Value));
+            }
         }
-
     }
 }

@@ -36,6 +36,7 @@ namespace CloverMobile
             controller.setActivePage(this);
 
             // ** disable the ui-elements on the background
+            ApplicationBar.IsVisible = false;
             currentWeather.Visibility = System.Windows.Visibility.Collapsed;
 
             // ** check if the settings file exists
@@ -53,7 +54,7 @@ namespace CloverMobile
              
                 // ** send the usenrame and password
                 System.Diagnostics.Debug.WriteLine("ui: authenticating, file exists.");
-                controller.authenticate(mySerSettings.username.ToString(), mySerSettings.password.ToString());
+                controller.authenticate(mySerSettings.username.ToString(), mySerSettings.password.ToString(), mySerSettings.serviceAddress.ToString());
                 
                 // ** authenticate by sending basic information 
                 controller.getUserXML();
@@ -70,10 +71,12 @@ namespace CloverMobile
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 0, 3, 0);
             timer.Tick += new EventHandler(Timer_tick);
-            timer.Start();
+
         }
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
+            System.Diagnostics.Debug.WriteLine("UI: mainpage loaded, timer started.");
+            timer.Start();
             // ** start the timer again when user navigates to the page, and possibly get new values for power consumption graph
         }
 
@@ -98,7 +101,7 @@ namespace CloverMobile
         {
                 // ** try to authenticate
                 System.Diagnostics.Debug.WriteLine("ui: authenticating.");
-                controller.authenticate(userNameTextBox.Text, passwordTextBox.Password);
+                controller.authenticate(userNameTextBox.Text, passwordTextBox.Password, serverAddressTextBox.Text);
                 controller.getUserXML();        
         }
         public void authenticationOk() // ** this function is called by controller if the autentication is successfull
@@ -108,6 +111,7 @@ namespace CloverMobile
 
             // ** remove the splashscreen
             System.Diagnostics.Debug.WriteLine("UI: authentication OK.");
+            ApplicationBar.IsVisible = true;
             splashScreen.Visibility = System.Windows.Visibility.Collapsed;
             PageTitle.Text = "Main";
 
@@ -122,7 +126,7 @@ namespace CloverMobile
                 SettingsFile mySettings = new SettingsFile();
                 mySettings.username = userNameTextBox.Text;
                 mySettings.password = passwordTextBox.Password;
-                mySettings.serviceAddress = "http://anttitek.net:3000";
+                mySettings.serviceAddress = serverAddressTextBox.Text; //"http://greendel.heroku.com:80";
                 XmlSerilizierHelper.Serialize(fileName, mySettings);
                 settingsFileExists = true;
             }
@@ -152,13 +156,13 @@ namespace CloverMobile
         {
             sensorsReceived = true;
             // ** get latest 20 values for power consumption graph
-            System.Diagnostics.Debug.WriteLine("ui: getting latest 20 points for power consumption sensor.");
+            System.Diagnostics.Debug.WriteLine("ui: getting latest 20 points for power use sensor.");
             controller.getLatestNpoints(1, 20);
                       
             // ** Set the data context of the graph
             foreach (Sensor s in myMaster.currentSensors)
             {
-                if (s.sensorId == 1)
+                if (s.sensorName == "poweruse")
                 {
                     System.Diagnostics.Debug.WriteLine("ui: binding datacontext.");
                     this.DataContext = s;
@@ -173,8 +177,20 @@ namespace CloverMobile
             {
                 System.Diagnostics.Debug.WriteLine("UI: timer.");
                 controller.updateValueOfThisSensor(1);
-                currentPowerConsumptionTextBlock.Text = myMaster.currentSensors[0].latestReading.ToString() + " W";
+
+                foreach (Sensor s in myMaster.currentSensors)
+                {
+                    if (s.sensorName == "poweruse")
+                    {
+                        currentPowerConsumptionTextBlock.Text = s.latestReading.ToString() + " W";
+                    }
+                }                  
             }
+        }
+        private void PhoneApplicationPage_Unloaded(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("UI: navigated away from the mainpage.");
+            timer.Stop();
         }
     }
 }
