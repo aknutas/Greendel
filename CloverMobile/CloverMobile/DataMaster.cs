@@ -219,7 +219,8 @@ namespace CloverMobile
                             s.latestReading = sens.latestReading; // ** update the current values
                             s.updatedAt = sens.updatedAt;
                             // ** remove the first value and add a new value
-                            s.DataUnit.RemoveAt(0);
+                            if (s.DataUnit.Count > 0)
+                                s.DataUnit.RemoveAt(0);
                             s.addNewHistoryValue(sens.updatedAt, double.Parse(sens.latestReading));
                         }
                     }

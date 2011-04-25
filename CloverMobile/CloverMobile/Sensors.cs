@@ -32,7 +32,6 @@ namespace CloverMobile
             _data.Add(new HistoryData(time, value)); /*{ time = time.ToString(format), value = f })*/
         }
 
-
         private ObservableCollection<HistoryData> _data = new ObservableCollection<HistoryData>()
         {
             //new SensorData() { time = "cat", value=5, /*val2=15, val3=12*/},
