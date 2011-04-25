@@ -20,6 +20,7 @@ namespace CloverMobile
         public string longName { get; set; }
         public string sensorVarType { get; set; }
         public string latestReading { get; set; }
+        public string unit { get; set; }
         public DateTime updatedAt { get; set; }
         
         static Random _r = new Random();

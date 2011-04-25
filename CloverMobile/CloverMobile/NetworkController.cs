@@ -56,7 +56,7 @@ namespace CloverMobile
         public void setDataMaster(DataMaster mstr)
         {
             master = mstr;
-            serviceAddress = "http://anttitek.net:3000";
+            //serviceAddress = "http://greendel.heroku.com:80";
         }
         public void setMasterController(Controller ctrl)
         {
@@ -79,34 +79,30 @@ namespace CloverMobile
                     {
                         case "userInfo":
                             documentType = "userInfo";
-                            //wcDown.Credentials = new NetworkCredential(username, password);
                             wcDown.DownloadStringAsync(new Uri(serviceAddress + "/users/datastatus/1"));
                             break;
 
                         case "sensors":
                             documentType = "sensors";
-                            //wcDown.Credentials = new NetworkCredential(username, password);
                             wcDown.DownloadStringAsync(new Uri(serviceAddress + "/devices/datastatus/" + currentWorkItem.deviceId.ToString()));                 
                             break;
 
                         case "outputs":
                             documentType = "outputs";
-                            //wcDown.Credentials = new NetworkCredential(username, password);
                             wcDown.DownloadStringAsync(new Uri(serviceAddress + "/devices/datastatus/" + currentWorkItem.deviceId.ToString()));                    
                             break;
 
                         case "sensor":
-                            documentType = "sensor";
-                            //wcDown.Credentials = new NetworkCredential(username, password);
                             currentSensorId = currentWorkItem.sensorId;
                             wcDown.DownloadStringAsync(new Uri(serviceAddress + "/sensors/history/" + currentSensorId.ToString()));                   
                             break;
+
                         case "sensorUpdate":
                             documentType = "sensorUpdate";
-                            //wcDown.Credentials = new NetworkCredential(username, password);
                             currentSensorId = currentWorkItem.sensorId;
                             wcDown.DownloadStringAsync(new Uri(serviceAddress + "/sensors/" + currentSensorId.ToString() + ".xml"));
                             break;
+
                         case "historyFromTimeScale":
                             documentType = "historyFromTimeScale";
                             currentSensorId = currentWorkItem.sensorId;
@@ -116,12 +112,13 @@ namespace CloverMobile
                             System.Diagnostics.Debug.WriteLine("nwc: current uri is:" + uri);
                             wcDown.DownloadStringAsync(new Uri(serviceAddress + "/sensors/history/" + currentWorkItem.sensorId.ToString() + ".xml?" + currentWorkItem.historyInfoType + "="  + currentWorkItem.frequency + "&startdate=" + currentWorkItem.start + "&enddate=" + currentWorkItem.end));
                             break;
+
                         case "latestSensorValues":
                             documentType = "latestSensorValues";
                             currentSensorId = currentWorkItem.sensorId;
                             wcDown.DownloadStringAsync(new Uri(serviceAddress + "/sensors/history/" + currentWorkItem.sensorId.ToString() + ".xml?limit=" + currentWorkItem.pointsToGet.ToString()));
                             break;
-                            // /sensors/history/<sensorid>.xml?limit=<n>
+
                         default:
                             break;
                     }
@@ -177,10 +174,11 @@ namespace CloverMobile
         }
         */
         // ** authorize the user
-        public void authenticate(string name, string pass)
+        public void authenticate(string name, string pass, string address)
         {
             username = name;
             password = pass;
+            serviceAddress = address;
             wcDown.Credentials = new NetworkCredential(username, password);
             wcUp.Credentials = new NetworkCredential(username, password);
         }

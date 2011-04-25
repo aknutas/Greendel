@@ -73,10 +73,10 @@ namespace CloverMobile
             return model;
         }
 
-        public void authenticate(string userName, string password)
+        public void authenticate(string userName, string password, string serviceAddress)
         {
             // ** pass the autentication request from UI to NWC
-            nwc.authenticate(userName, password);
+            nwc.authenticate(userName, password, serviceAddress);
         }
         public void getUserXML()
         {

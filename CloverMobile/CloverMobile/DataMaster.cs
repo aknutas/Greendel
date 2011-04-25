@@ -41,6 +41,11 @@ namespace CloverMobile
         {
             return this;
         }
+        public int GetSensorIdByShorName(string shortname)
+        {
+
+            return 1;
+        }
 
         public void parseUserInformation(XDocument xmlDoc)
         {
@@ -125,7 +130,8 @@ namespace CloverMobile
                         sensorName = s.Element("name").Value.ToString(),
                         longName = s.Element("longname").Value.ToString(),
                         sensorVarType = s.Element("vartype").Value.ToString(),
-                        latestReading = s.Element("latestreading") != null ? s.Element("latestreading").Value : string.Empty
+                        latestReading = s.Element("latestreading") != null ? s.Element("latestreading").Value : string.Empty,
+                        unit = s.Element("unit").Value.ToString(),
                     }).ToList<Sensor>();
             }              
             catch (FormatException f)
