@@ -118,7 +118,7 @@
             	</TextBlock.RenderTransform>
             </TextBlock>
         </StackPanel>
-        <Image Height="311" HorizontalAlignment="Left" x:Name="currentWeather" Stretch="Fill" VerticalAlignment="Top" Width="441" Margin="8,-2,0,0" Grid.Row="1" />
+        <Image Height="311" HorizontalAlignment="Left" x:Name="currentWeather" Stretch="Fill" VerticalAlignment="Top" Width="441" Margin="8,-80,0,0" Grid.Row="1" d:LayoutOverrides="VerticalAlignment" />
         <Rectangle Margin="89,0,89,52" Grid.Row="1" Stroke="Black" Width="302" Height="150" VerticalAlignment="Bottom" Fill="#FF181818" Opacity="0.35"/>
         <Rectangle Margin="89,155,89,230" Grid.Row="1" Width="302" Opacity="0.35" StrokeDashArray="1 0" StrokeMiterLimit="0" Stroke="Black" Fill="#FF181818"/>
 
