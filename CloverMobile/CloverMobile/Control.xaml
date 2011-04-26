@@ -66,6 +66,59 @@
 				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-680"/>
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
+        <Storyboard x:Name="controlScreenAnimationReverse" Completed="controlScreenAnimation_Completed">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ApplicationTitle">
+				<SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="-10"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="-25"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="480"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="ApplicationTitle">
+				<SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="-4"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="7"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PageTitle">
+				<SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="-8"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="23"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="350"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="PageTitle">
+				<SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="-1"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ContentPanel">
+				<SplineDoubleKeyFrame KeyTime="0" Value="-4"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.168" Value="-56.833"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="315.5"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="ContentPanel">
+				<SplineDoubleKeyFrame KeyTime="0" Value="-0.5"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.168" Value="-42.316"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="349.5"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="ContentPanel">
+				<SplineDoubleKeyFrame KeyTime="0" Value="1.022"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.168" Value="1.254"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="-0.379"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="ContentPanel">
+				<SplineDoubleKeyFrame KeyTime="0" Value="0.993"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.168" Value="1.13"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="-0.161"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PageTitle">
+				<SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ApplicationTitle">
+				<SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="image1">
+				<SplineDoubleKeyFrame KeyTime="0" Value="-680"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
 	</phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->

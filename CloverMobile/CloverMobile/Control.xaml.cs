@@ -36,6 +36,7 @@ namespace CloverMobile
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
             controlScreenAnimation.Begin();
+            
         }
         public void UpdateView()
         {
@@ -115,5 +116,23 @@ namespace CloverMobile
         {
 
         }
+
+        // Hijack Back button event for reverse animation
+        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("Reverse animation");
+            controlScreenAnimationReverse.Begin();
+            e.Cancel = true;
+            
+            
+        }
+
+        private void controlScreenAnimation_Completed(object sender, EventArgs e)
+        {
+            NavigationService.GoBack();
+        }
+
+        
+
     }
 }
