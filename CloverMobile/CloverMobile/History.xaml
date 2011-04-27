@@ -135,6 +135,12 @@
 				</Setter.Value>
 			</Setter>
 		</Style>
+		<Storyboard x:Name="historyScreenAnimation">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="background">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1100"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
     </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
@@ -146,6 +152,13 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <Image x:Name="background" Margin="-1358,-570,-1358,-4000" Grid.RowSpan="2" Source="/Image5.png" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Top" Width="2716" Height="1810" CacheMode="BitmapCache" RenderTransformOrigin="0.5,0.5">
+        	<Image.RenderTransform>
+        		<CompositeTransform/>
+        	</Image.RenderTransform>
+        </Image>
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28" DataContext="{Binding}">
@@ -181,17 +194,17 @@
                     <!--<my:AreaGraph ValueMemberPath="val3" Title="Area #1" Brush="#80FF0000" />-->
                 </my:SerialChart.Graphs>
             </my:SerialChart>
-            <ListBox Height="158" HorizontalAlignment="Left" Margin="15,478,0,0" Name="sensorsListBox" VerticalAlignment="Top" Width="209" SelectionChanged="sensorsListBox_SelectionChanged" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="15,444,0,0" Name="sensorsTextBlock" Text="Sensors:" VerticalAlignment="Top" Foreground="#FF44FF00" />
-            <TextBlock Height="30" HorizontalAlignment="Right" Margin="0,444,79,0" Name="updateTimeSpansTextBlock" Text="Frequency:" VerticalAlignment="Top" Foreground="#FF44FF00" />
-            <ListBox Height="98" HorizontalAlignment="Left" Margin="282,478,0,0" Name="frequencyListBox" VerticalAlignment="Top" Width="156" SelectionChanged="frequencyListBox_SelectionChanged" />
+            <ListBox Height="158" HorizontalAlignment="Left" Margin="15,478,0,0" x:Name="sensorsListBox" VerticalAlignment="Top" Width="209" SelectionChanged="sensorsListBox_SelectionChanged" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="15,444,0,0" x:Name="sensorsTextBlock" Text="Sensors:" VerticalAlignment="Top" Foreground="#FF44FF00" />
+            <TextBlock Height="30" HorizontalAlignment="Right" Margin="0,444,79,0" x:Name="updateTimeSpansTextBlock" Text="Frequency:" VerticalAlignment="Top" Foreground="#FF44FF00" />
+            <ListBox Height="98" HorizontalAlignment="Left" Margin="282,478,0,0" x:Name="frequencyListBox" VerticalAlignment="Top" Width="156" SelectionChanged="frequencyListBox_SelectionChanged" />
             <!--<toolkit:DatePicker HorizontalAlignment="Left" Margin="221,597,0,0" Name="datePicker1" VerticalAlignment="Top" />-->
             <!--<toolkit:DatePicker HorizontalAlignment="Left" Margin="546,232,0,0" Name="datePicker2" VerticalAlignment="Top" Width="80" />-->
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="123,386,0,0" Name="currentSensorName" Text="" VerticalAlignment="Top" Width="226" FontSize="20" />
-            <Button Content="Update" Height="72" HorizontalAlignment="Left" Margin="310,604,0,0" Name="button1" VerticalAlignment="Top" Width="138" Click="button1_Click" />
-            <toolkit:DatePicker HorizontalAlignment="Left" Name="startDatePicker" VerticalAlignment="Top" Height="58" Width="168" ValueStringFormat="{}{0:yyyy-MM-dd}" FontSize="10" />
-            <toolkit:DatePicker HorizontalAlignment="Right" Name="endDatePicker" VerticalAlignment="Top" ValueStringFormat="{}{0:yyyy-MM-dd}" FontSize="10" />
-            <TextBlock Height="30" HorizontalAlignment="Right" Margin="0,378,11,0" Name="unitTextBlock" Text="" VerticalAlignment="Top" Width="65" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="123,386,0,0" x:Name="currentSensorName" Text="" VerticalAlignment="Top" Width="226" FontSize="20" />
+            <Button Content="Update" Height="72" HorizontalAlignment="Left" Margin="310,604,0,0" x:Name="button1" VerticalAlignment="Top" Width="138" Click="button1_Click" />
+            <toolkit:DatePicker HorizontalAlignment="Left" x:Name="startDatePicker" VerticalAlignment="Top" Height="58" Width="168" ValueStringFormat="{}{0:yyyy-MM-dd}" FontSize="10" />
+            <toolkit:DatePicker HorizontalAlignment="Right" x:Name="endDatePicker" VerticalAlignment="Top" ValueStringFormat="{}{0:yyyy-MM-dd}" FontSize="10" />
+            <TextBlock Height="30" HorizontalAlignment="Right" Margin="0,378,11,0" x:Name="unitTextBlock" Text="" VerticalAlignment="Top" Width="65" />
         </Grid>
     </Grid>
  
