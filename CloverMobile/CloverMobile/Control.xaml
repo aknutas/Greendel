@@ -61,12 +61,20 @@
 				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
 			</DoubleAnimationUsingKeyFrames>
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="image1">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ContentPanel">
 				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-680"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="TitlePanel">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="background">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="550"/>
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
-        <Storyboard x:Name="controlScreenAnimationReverse" Completed="controlScreenAnimation_Completed">
+		<Storyboard x:Name="controlScreenAnimationReverse" Completed="controlScreenAnimationReverse_Completed">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ApplicationTitle">
 				<SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="-10"/>
 				<SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="-25"/>
@@ -114,8 +122,16 @@
 				<SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
 				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
 			</DoubleAnimationUsingKeyFrames>
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="image1">
-				<SplineDoubleKeyFrame KeyTime="0" Value="-680"/>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ContentPanel">
+				<SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="TitlePanel">
+				<SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="background">
+				<SplineDoubleKeyFrame KeyTime="0" Value="550"/>
 				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
@@ -132,7 +148,8 @@
 
         <!--TitlePanel contains the name of the application and page title-->
     <!--TitlePanel contains the name of the application and page title-->
-        <Image x:Name="image1" Margin="0,-530,-1903,-290" Grid.RowSpan="2" Source="/Image5.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+    <!--TitlePanel contains the name of the application and page title-->
+        <Image x:Name="background" Margin="-1358,-570,-1358,-4000" Grid.RowSpan="2" Source="/Image5.png" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Top" Width="2716" Height="1810" RenderTransformOrigin="0.5,0.5">
         	<Image.RenderTransform>
         		<CompositeTransform/>
         	</Image.RenderTransform>
@@ -150,7 +167,6 @@
             	</TextBlock.RenderTransform>
             </TextBlock>
         </StackPanel>
-        <Rectangle Fill="Black" Height="156" Margin="40,8,40,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Opacity="0.625"/>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="10,-2,12,0" RenderTransformOrigin="0.5,0.5">
@@ -158,6 +174,7 @@
         		<CompositeTransform/>
         	</Grid.RenderTransform>
             <TextBlock Height="30" HorizontalAlignment="Left" Margin="47,212,0,0" x:Name="textBlockHeating" Text="Heating" VerticalAlignment="Top" Width="86" />
+            <Rectangle Fill="Black" Margin="30,29,28,0" Stroke="Black" Opacity="0.625" Height="156" VerticalAlignment="Top"/>
             <TextBlock Height="30" HorizontalAlignment="Left" Margin="47,298,0,0" x:Name="textBlock1" Text="Lightning" VerticalAlignment="Top" />
             <TextBlock Height="30" HorizontalAlignment="Left" Margin="69,46,0,0" x:Name="textBlock2" Text="Temp Outside" VerticalAlignment="Top" />
             <TextBox Height="70" HorizontalAlignment="Left" Margin="63,68,0,0" x:Name="tempInsideTextBox" Text="" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.093,0.597" />

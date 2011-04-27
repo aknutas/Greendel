@@ -120,14 +120,17 @@ namespace CloverMobile
         // Hijack Back button event for reverse animation
         protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
         {
+            e.Cancel = true;
             System.Diagnostics.Debug.WriteLine("Reverse animation");
             controlScreenAnimationReverse.Begin();
-            e.Cancel = true;
+            
             
             
         }
 
-        private void controlScreenAnimation_Completed(object sender, EventArgs e)
+     
+
+        private void controlScreenAnimationReverse_Completed(object sender, EventArgs e)
         {
             NavigationService.GoBack();
         }
