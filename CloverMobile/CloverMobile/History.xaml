@@ -135,10 +135,36 @@
 				</Setter.Value>
 			</Setter>
 		</Style>
-		<Storyboard x:Name="historyScreenAnimation">
+		<Storyboard x:Name="historyScreenAnimation" Completed="historyScreenAnimation_Completed">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="background">
 				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1100"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ContentPanel">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="TitlePanel">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+		<Storyboard x:Name="historyScreenAnimationReverse" Completed="historyScreenAnimationReverse_Completed">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="background">
+				<SplineDoubleKeyFrame KeyTime="0" Value="1100"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ContentPanel">
+				<SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="TitlePanel">
+				<SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
     </phone:PhoneApplicationPage.Resources>
@@ -181,13 +207,7 @@
             <!--<TextBlock Height="35" HorizontalAlignment="Left" Margin="12,8,0,0" Name="fromInternet" Text="" VerticalAlignment="Top" Width="684" TextWrapping="Wrap" /> -->
             <my:SerialChart x:Name="chart1" DataSource="{Binding DataUnit}" CategoryValueMemberPath="time"
                          AxisForeground="White"
-                         GridStroke="#FF5E1E1E" Margin="9,62,8,277" Style="{StaticResource SerialChartStyle2}" LegendVisibility="Collapsed">
-            	<my:SerialChart.PlotAreaBackground>
-            		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            			<GradientStop Color="Black" Offset="0"/>
-            			<GradientStop Color="White" Offset="1"/>
-            		</LinearGradientBrush>
-            	</my:SerialChart.PlotAreaBackground>
+                         GridStroke="#FF5E1E1E" Margin="9,62,8,277" Style="{StaticResource SerialChartStyle2}" LegendVisibility="Collapsed" PlotAreaBackground="#59000000">
                 <my:SerialChart.Graphs>
                     <my:ColumnGraph ValueMemberPath="value" Title="" Brush="Blue" />
                     <!--<my:ColumnGraph ValueMemberPath="val2" Title="Column #2" Brush="#8000FF00" ColumnWidthAllocation="0.4" />-->

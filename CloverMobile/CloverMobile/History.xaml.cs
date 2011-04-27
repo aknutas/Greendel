@@ -33,48 +33,15 @@ namespace CloverMobile
         {
             
             InitializeComponent();
-            System.Diagnostics.Debug.WriteLine("UI.History: History page constructor called");
-            // ** get controller instance and give our reference
-            controller = Controller.getInstance;
-            controller.setActivePage(this);
+           
             
-            // ** set some default values
-            //currentSensorId = 2;
-            currentSensorShortName = "powerconsumed";
-            currentFrequency = "daily";
-
-            // ** put content to the frequency listbox
-            frequencyListBox.Items.Add("hourly");
-            frequencyListBox.Items.Add("daily");
-            frequencyListBox.Items.Add("monthly");
-            frequencyListBox.SelectedItem = currentFrequency;
-            
-            // ** get default dates for datepickers
-            endDatePicker.Value = currentTime = DateTime.Now;
-            startDatePicker.Value = currentTime - TimeSpan.FromDays(7);
-
-            // ** get a reference to the model
-            model = controller.getModel();
-
-            // ** get sensors from model
-            foreach (Sensor s in model.currentSensors)
-            {
-                sensorsListBox.Items.Add(s.longName);   // ** fill the sensors listbox
-                if (currentSensorShortName == s.sensorName)      // ** set the current sensor
-                {
-                    currentSensorId = s.sensorId;
-                    currentSensorName.Text = s.longName + "(" +s.unit +")";
-                    //unitTextBlock.Text = s.unit;
-                    sensorsListBox.SelectedItem = s.longName;
-                }
-            }
-            // ** get the default graph that is, power consumption from last week
-            controller.getSensorHistoryFromSpecifiedTimeScale(currentSensorId, "avgscale", currentFrequency.ToString(), String.Format("{0:yyyy-MM-dd}", startDatePicker.Value), String.Format("{0:yyyy-MM-dd}", endDatePicker.Value));
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
+            historyScreenAnimation.Begin();
             System.Diagnostics.Debug.WriteLine("UI.History: History page loaded.");
+            
         }
 
         // ** this function is called by the controller when history infromation for current sensor is successfully downloaded
@@ -125,6 +92,62 @@ namespace CloverMobile
             {
                 controller.getSensorHistoryFromSpecifiedTimeScale(currentSensorId, "avgscale", currentFrequency.ToString(), String.Format("{0:yyyy-MM-dd}", startDatePicker.Value), String.Format("{0:yyyy-MM-dd}", endDatePicker.Value));
             }
+        }
+
+        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            System.Diagnostics.Debug.WriteLine("Reverse animation");
+            historyScreenAnimationReverse.Begin();
+
+
+
+        }
+
+        private void historyScreenAnimationReverse_Completed(object sender, EventArgs e)
+        {
+            NavigationService.GoBack();
+        }
+
+        private void historyScreenAnimation_Completed(object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("UI.History: History page constructor called");
+            // ** get controller instance and give our reference
+            controller = Controller.getInstance;
+            controller.setActivePage(this);
+
+            // ** set some default values
+            //currentSensorId = 2;
+            currentSensorShortName = "powerconsumed";
+            currentFrequency = "daily";
+
+            // ** put content to the frequency listbox
+            frequencyListBox.Items.Add("hourly");
+            frequencyListBox.Items.Add("daily");
+            frequencyListBox.Items.Add("monthly");
+            frequencyListBox.SelectedItem = currentFrequency;
+
+            // ** get default dates for datepickers
+            endDatePicker.Value = currentTime = DateTime.Now;
+            startDatePicker.Value = currentTime - TimeSpan.FromDays(7);
+
+            // ** get a reference to the model
+            model = controller.getModel();
+
+            // ** get sensors from model
+            foreach (Sensor s in model.currentSensors)
+            {
+                sensorsListBox.Items.Add(s.longName);   // ** fill the sensors listbox
+                if (currentSensorShortName == s.sensorName)      // ** set the current sensor
+                {
+                    currentSensorId = s.sensorId;
+                    currentSensorName.Text = s.longName + "(" + s.unit + ")";
+                    //unitTextBlock.Text = s.unit;
+                    sensorsListBox.SelectedItem = s.longName;
+                }
+            }
+            // ** get the default graph that is, power consumption from last week
+            controller.getSensorHistoryFromSpecifiedTimeScale(currentSensorId, "avgscale", currentFrequency.ToString(), String.Format("{0:yyyy-MM-dd}", startDatePicker.Value), String.Format("{0:yyyy-MM-dd}", endDatePicker.Value));
         }
         // 
     }

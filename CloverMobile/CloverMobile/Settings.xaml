@@ -13,7 +13,7 @@
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
 	<phone:PhoneApplicationPage.Resources>
-		<Storyboard x:Name="settingsScreenLoad">
+		<Storyboard x:Name="settingsScreenAnimation">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ApplicationTitle">
 				<EasingDoubleKeyFrame KeyTime="0" Value="471.667"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="7"/>
@@ -38,7 +38,7 @@
 			</DoubleAnimationUsingKeyFrames>
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ContentPanel">
 				<EasingDoubleKeyFrame KeyTime="0" Value="10.204"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-17.5"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.5"/>
 			</DoubleAnimationUsingKeyFrames>
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.SkewX)" Storyboard.TargetName="ContentPanel">
 				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
@@ -52,9 +52,65 @@
 				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
 			</DoubleAnimationUsingKeyFrames>
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="image">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="background">
 				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-370"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-550"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="TitlePanel">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+		<Storyboard x:Name="settingsScreenAnimationReverse" Completed="settingsScreenAnimationReverse_Completed">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ApplicationTitle">
+				<SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="7"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="471.667"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="ApplicationTitle">
+				<SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="-0.333"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="-0.333"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PageTitle">
+				<SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="4"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="469"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="PageTitle">
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="-0.999"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="ContentPanel">
+				<SplineDoubleKeyFrame KeyTime="0" Value="0.975"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.557"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="ContentPanel">
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="2.5"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="ContentPanel">
+				<SplineDoubleKeyFrame KeyTime="0" Value="0.923"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="-0.054"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ContentPanel">
+				<SplineDoubleKeyFrame KeyTime="0" Value="-17.5"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="10.204"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.SkewX)" Storyboard.TargetName="ContentPanel">
+				<SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="ContentPanel">
+				<SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ContentPanel">
+				<SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="background">
+				<SplineDoubleKeyFrame KeyTime="0" Value="-550"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="TitlePanel">
+				<SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
 	</phone:PhoneApplicationPage.Resources>
@@ -71,7 +127,8 @@
         <!--TitlePanel contains the name of the application and page title-->
 
         <!--TitlePanel contains the name of the application and page title-->
-        <Image x:Name="image" Margin="0,-530,-1903,-290" Grid.RowSpan="2" Source="/Image5.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+    <!--TitlePanel contains the name of the application and page title-->
+        <Image x:Name="background" Margin="-1358,-570,-1358,-2000" Grid.RowSpan="2" Source="/Image5.png" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Top" Width="2716" Height="1810" RenderTransformOrigin="0.5,0.5">
         	<Image.RenderTransform>
         		<CompositeTransform/>
         	</Image.RenderTransform>
@@ -102,27 +159,10 @@
             <TextBox Height="72" HorizontalAlignment="Left" Margin="22,247,0,0" x:Name="textBox2" Text="" VerticalAlignment="Top" Width="188" />
             <TextBlock Height="30" HorizontalAlignment="Left" Margin="236,225,0,0" x:Name="textBlock4" Text="Password" VerticalAlignment="Top" Width="106" />
             <TextBox Height="72" Margin="223,247,45,0" x:Name="textBox3" Text="" VerticalAlignment="Top" />
-            <Button Content="Commit" Height="72" HorizontalAlignment="Left" Margin="273,379,0,0" x:Name="button1" VerticalAlignment="Top" Width="160" Click="button1_Click" />
             <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="5" Margin="55,112,0,0" Stroke="Black" VerticalAlignment="Top" Width="5"/>
         </Grid>
     </Grid>
  
-    <!--Sample code showing usage of ApplicationBar-->
-    <!--
-    <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Icons/appbar.back.rest.png" Text="Back" Click="ApplicationBarIconButtonBack_Click" />
-            <shell:ApplicationBarIconButton IconUri="/Icons/appbar.feature.settings.rest.png" Text="Settings" />
-            <shell:ApplicationBarIconButton IconUri="/Icons/appbar.edit.rest.png" Text="Control"/>
-            <shell:ApplicationBarIconButton IconUri="/Icons/appbar.folder.rest.png" Text="History" Click="ApplicationBarIconButtonHistory_Click"/>
-            
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
-                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
-            </shell:ApplicationBar.MenuItems>
-            
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
-    -->
+   
 
 </phone:PhoneApplicationPage>

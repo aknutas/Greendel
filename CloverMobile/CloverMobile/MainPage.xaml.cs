@@ -97,6 +97,11 @@ namespace CloverMobile
             NavigationService.Navigate(new Uri("/Control.xaml", UriKind.RelativeOrAbsolute));
         }
 
+        private void ApplicationBarIconButtonSocial_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Social.xaml", UriKind.RelativeOrAbsolute));
+        }
+
         private void loginButton_Click(object sender, RoutedEventArgs e)
         {
                 // ** try to authenticate
@@ -192,5 +197,7 @@ namespace CloverMobile
             System.Diagnostics.Debug.WriteLine("UI: navigated away from the mainpage.");
             timer.Stop();
         }
+
+
     }
 }

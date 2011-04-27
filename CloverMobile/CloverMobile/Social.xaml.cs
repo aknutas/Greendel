@@ -13,35 +13,32 @@ using Microsoft.Phone.Controls;
 
 namespace CloverMobile
 {
-    public partial class Settings : PhoneApplicationPage
+    public partial class Social : PhoneApplicationPage
     {
-        public Settings()
+        public Social()
         {
             InitializeComponent();
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            settingsScreenAnimation.Begin();   
+            socialScreenAnimation.Begin();
+            System.Diagnostics.Debug.WriteLine("Animation");
         }
-
 
 
         protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = true;
             System.Diagnostics.Debug.WriteLine("Reverse animation");
-            settingsScreenAnimationReverse.Begin();
-
+            socialScreenAnimationReverse.Begin();
 
         }
 
-        private void settingsScreenAnimationReverse_Completed(object sender, EventArgs e)
+        private void socialScreenAnimationReverse_Completed(object sender, EventArgs e)
         {
             NavigationService.GoBack();
         }
-
-      
 
 
     }
