@@ -69,8 +69,9 @@ namespace CloverMobile
         {           
 
             activePage = currentPage;
-            //myBinding = new Binding("BackgroundImage");
-            if (GlobalData.currentConsumption > 0 && GlobalData.currentConsumption < 200)
+
+            System.Diagnostics.Debug.WriteLine("Controller: Current power consumption is: " + GlobalData.currentConsumption.ToString());
+            if ( GlobalData.currentConsumption < 200)
             {
                 System.Diagnostics.Debug.WriteLine("Controller: binding1");
                 uri = new Uri("Backgrounds/greendel_100pros.png", UriKind.Relative);
