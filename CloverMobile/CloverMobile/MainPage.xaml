@@ -157,12 +157,12 @@
                 	<my:LineGraph ValueMemberPath="value" Title="Power Consumption" Brush="#FF00FF27" />
                 </my:SerialChart.Graphs>
             </my:SerialChart>
-            <TextBlock Margin="101,161,101,0" x:Name="consumptionTitle" Text="You are consuming:" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" Height="35" VerticalAlignment="Top" >
+            <TextBlock Margin="90,134,112,0" x:Name="consumptionTitle" Text="You are consuming:" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" Height="35" VerticalAlignment="Top" >
             	<TextBlock.RenderTransform>
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
             </TextBlock>
-            <TextBlock Margin="134,161,134,0" x:Name="currentPowerConsumptionTextBlock" FontSize="64" RenderTransformOrigin="0.974,0.466" FontFamily="Segoe WP Semibold" TextAlignment="Center" Height="102" VerticalAlignment="Top" >
+            <TextBlock Margin="134,161,134,0" x:Name="currentPowerConsumptionTextBlock" FontSize="48" RenderTransformOrigin="0.974,0.466" FontFamily="Segoe WP Semibold" TextAlignment="Center" Height="102" VerticalAlignment="Top" >
             	<TextBlock.Foreground>
             		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             			<GradientStop Color="#FFD8D8D8" Offset="0.611"/>
@@ -174,7 +174,7 @@
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
             </TextBlock>
-            <Canvas HorizontalAlignment="Left" Margin="6,8,0,-192" x:Name="splashScreen" Width="444" Visibility="Visible" Background="#EF000000" Opacity="20" RenderTransformOrigin="0.5,0.5">
+            <Canvas HorizontalAlignment="Left" Margin="6,8,0,-192" x:Name="splashScreen" Width="444" Visibility="Collapsed" Background="#EF000000" Opacity="20" RenderTransformOrigin="0.5,0.5">
             	<Canvas.RenderTransform>
             		<CompositeTransform/>
             	</Canvas.RenderTransform>
@@ -187,8 +187,10 @@
                 <Button Content="Log In" Height="71" x:Name="loginButton" Width="160" Click="loginButton_Click" Grid.Row="1" Canvas.Left="146" Canvas.Top="439" />
                 <TextBox Height="71" x:Name="serverAddressTextBox" Text="http://localhost:3000" Grid.Row="1" Canvas.Left="23" Width="403" Canvas.Top="344" DataContext="{Binding}" />
             </Canvas>
-
-                <!--
+            <TextBlock Height="30" HorizontalAlignment="Left" Name="currentTemperatureTextBlock" Text="Temperature: " VerticalAlignment="Top" Width="172" Margin="6,6,0,0" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="209,0,0,0" Name="highestTempTextBlock" Text="High:" VerticalAlignment="Top" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="209,0,0,455" Name="lowestTempTextBlock" Text="Low:" VerticalAlignment="Bottom" />
+            <!--
             <HyperlinkButton Content="Settings" Height="30" HorizontalAlignment="Left" Margin="18,531,0,0" Name="hyperlinkButton1" VerticalAlignment="Top" Width="200" NavigateUri="/CloverMobile;component/Settings.xaml" />
             <HyperlinkButton Content="History" Height="30" HorizontalAlignment="Left" Margin="250,531,0,0" Name="hyperlinkButton2" VerticalAlignment="Top" Width="200" NavigateUri="/CloverMobile;component/History.xaml" />
             -->

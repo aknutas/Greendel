@@ -119,7 +119,7 @@ namespace CloverMobile
                 currentWeather.description = w.description;
                 currentWeather.code = w.code;
             }
-            System.Diagnostics.Debug.WriteLine("WEATHER:" + " " + currentWeather.temp.ToString() + " " + currentWeather.unit + " " + currentWeather.description + " " + currentWeather.code.ToString());
+            System.Diagnostics.Debug.WriteLine("WEATHER:" + " " + currentWeather.temp.ToString() + " " + currentWeather.high.ToString() + " " + currentWeather.low.ToString() + " " + currentWeather.unit + " " + currentWeather.description + " " + currentWeather.code.ToString());
         }
         
         // ** get all sensors only

@@ -21,6 +21,7 @@ namespace CloverMobile
     public partial class MainPage : PhoneApplicationPage
     {
         private bool sensorsReceived = false;
+        private Weather weatherNow;
         private DispatcherTimer timer;
         private Controller controller;
         private DataMaster myMaster;
@@ -35,9 +36,8 @@ namespace CloverMobile
             controller = Controller.getInstance;
             controller.setActivePage(this);
 
-            // ** disable the ui-elements on the background
-            ApplicationBar.IsVisible = false;
-            currentWeather.Visibility = System.Windows.Visibility.Collapsed;
+            // ** disable the ui-elements on the background        
+            hideMainScreenElements();
 
             // ** check if the settings file exists
             var appStorage = IsolatedStorageFile.GetUserStoreForApplication();
@@ -112,17 +112,18 @@ namespace CloverMobile
         public void authenticationOk() // ** this function is called by controller if the autentication is successfull
         {
             // ** get sensors
-            controller.getSensorsXML();
-
-            // ** remove the splashscreen
+            controller.getSensorsXML();  
             System.Diagnostics.Debug.WriteLine("UI: authentication OK.");
-            ApplicationBar.IsVisible = true;
+
+            // ** remove the splashscreen and show the UI elements
             splashScreen.Visibility = System.Windows.Visibility.Collapsed;
+            showMainScreenElements();
             PageTitle.Text = "Main";
 
-            // ** get model reference and set the weather
+            // ** get model reference and get the weather
             myMaster = controller.getModel();
-            SetCurrentWeather(myMaster.currentWeather.code);  
+            weatherNow = myMaster.currentWeather;
+            SetCurrentWeather(weatherNow.code);  
 
             // ** save current settings to the file
             if (settingsFileExists == false) // ** if autentication was successfull and this is the first time when logging in, create new file
@@ -131,7 +132,7 @@ namespace CloverMobile
                 SettingsFile mySettings = new SettingsFile();
                 mySettings.username = userNameTextBox.Text;
                 mySettings.password = passwordTextBox.Password;
-                mySettings.serviceAddress = serverAddressTextBox.Text; //"http://greendel.heroku.com:80";
+                mySettings.serviceAddress = serverAddressTextBox.Text;
                 XmlSerilizierHelper.Serialize(fileName, mySettings);
                 settingsFileExists = true;
             }
@@ -146,6 +147,7 @@ namespace CloverMobile
 
         public void SetCurrentWeather(int code)
         {
+            
             // get the time of day and determine if it is day or night
             // DateTime now = DateTime.Now;
 
@@ -155,6 +157,10 @@ namespace CloverMobile
             ImageSource imgSource = new BitmapImage(uri);
             currentWeather.Source = imgSource;
             currentWeather.Visibility = System.Windows.Visibility.Visible;
+
+            currentTemperatureTextBlock.Text += weatherNow.temp.ToString() + " " + weatherNow.unit.ToString();
+            highestTempTextBlock.Text += weatherNow.high.ToString() + " " + weatherNow.unit.ToString();
+            lowestTempTextBlock.Text += weatherNow.low.ToString() + " " + weatherNow.unit.ToString();
         }
         // ** this function is called by the controller when we have received sensors
         public void GetPowerUsage()
@@ -194,10 +200,26 @@ namespace CloverMobile
         }
         private void PhoneApplicationPage_Unloaded(object sender, RoutedEventArgs e)
         {
+            // ** stop the timer when navigating away from mainpage
             System.Diagnostics.Debug.WriteLine("UI: navigated away from the mainpage.");
             timer.Stop();
         }
-
-
+        public void hideMainScreenElements()
+        {
+            currentTemperatureTextBlock.Visibility = System.Windows.Visibility.Collapsed;
+            highestTempTextBlock.Visibility = System.Windows.Visibility.Collapsed;
+            lowestTempTextBlock.Visibility = System.Windows.Visibility.Collapsed;
+            currentWeather.Visibility = System.Windows.Visibility.Collapsed;
+            ApplicationBar.IsVisible = false;
+        }
+        public void showMainScreenElements()
+        {
+            currentTemperatureTextBlock.Visibility = System.Windows.Visibility.Visible;
+            highestTempTextBlock.Visibility = System.Windows.Visibility.Visible;
+            lowestTempTextBlock.Visibility = System.Windows.Visibility.Visible;
+            currentWeather.Visibility = System.Windows.Visibility.Visible;
+            ApplicationBar.IsVisible = true;
+        
+        }
     }
 }
