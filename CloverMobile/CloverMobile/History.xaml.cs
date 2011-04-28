@@ -25,6 +25,8 @@ namespace CloverMobile
         private Controller controller;
         private DataMaster model;
         private DateTime currentTime;
+        private List<string> sensorNames;
+        private List<string> frequencies;
         public string currentFrequency { get; set; }
         public string newFrequency { get; set; }
         public int currentSensorId { get; set; }
@@ -33,7 +35,50 @@ namespace CloverMobile
         {
             
             InitializeComponent();
-           
+
+            sensorNames = new List<string>();
+            frequencies = new List<string>();
+
+            frequencies.Add("hourly");
+            frequencies.Add("daily");
+            frequencies.Add("monthly");
+
+            System.Diagnostics.Debug.WriteLine("UI.History: History page constructor called");
+            // ** get controller instance and give our reference
+            controller = Controller.getInstance;
+            controller.setActivePage(this);
+
+            // ** set some default values
+            //currentSensorId = 2;
+            currentSensorShortName = "powerconsumed";
+            currentFrequency = "daily";
+
+            // ** put content to the frequency listbox
+            //frequencyListBox.SelectedItem = currentFrequency;
+
+            // ** get default dates for datepickers
+            endDatePicker.Value = currentTime = DateTime.Now;
+            startDatePicker.Value = currentTime - TimeSpan.FromDays(7);
+
+            // ** get a reference to the model
+            model = controller.getModel();
+
+            // ** get sensors from model
+            foreach (Sensor s in model.currentSensors)
+            {
+                sensorNames.Add(s.longName); // ** set the current sensor
+                if (currentSensorShortName == s.sensorName)      
+                {
+                    currentSensorId = s.sensorId;
+                    currentSensorName.Text = s.longName + "(" + s.unit + ")";
+                    //unitTextBlock.Text = s.unit;
+                    
+                }
+            }
+            // ** get the default graph that is, power consumption from last week
+            controller.getSensorHistoryFromSpecifiedTimeScale(currentSensorId, "avgscale", currentFrequency.ToString(), String.Format("{0:yyyy-MM-dd}", startDatePicker.Value), String.Format("{0:yyyy-MM-dd}", endDatePicker.Value));
+            this.sensorsListPicker.ItemsSource = sensorNames;
+            this.frequenciesListPicker.ItemsSource = frequencies;
             
         }
 
@@ -53,32 +98,10 @@ namespace CloverMobile
                 if (currentSensorId == s.sensorId)
                 {
                     currentSensorName.Text = s.longName + " ( " + s.unit + " )";
-                    sensorsListBox.SelectedItem = s.longName;
+
                     this.DataContext = s;
                 }
             }
-        }
-
-        private void sensorsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // ** change the current sensor!
-            foreach (Sensor s in model.currentSensors)
-            {
-                if (s.longName == sensorsListBox.SelectedItem.ToString()) 
-                {
-                    //unitTextBlock.Text = s.unit;
-                    currentSensorId = s.sensorId;
-                    currentSensorShortName = s.sensorName;
-                }
-            }
-            System.Diagnostics.Debug.WriteLine("UI.History: current sensor id is now: " + currentSensorId);
-        }
-
-        private void frequencyListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // ** change the current frequency!
-            currentFrequency = frequencyListBox.SelectedItem.ToString();
-            System.Diagnostics.Debug.WriteLine("UI.History: current frequency is now: " + currentFrequency);
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
@@ -111,44 +134,27 @@ namespace CloverMobile
 
         private void historyScreenAnimation_Completed(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("UI.History: History page constructor called");
-            // ** get controller instance and give our reference
-            controller = Controller.getInstance;
-            controller.setActivePage(this);
 
-            // ** set some default values
-            //currentSensorId = 2;
-            currentSensorShortName = "powerconsumed";
-            currentFrequency = "daily";
+        }
 
-            // ** put content to the frequency listbox
-            frequencyListBox.Items.Add("hourly");
-            frequencyListBox.Items.Add("daily");
-            frequencyListBox.Items.Add("monthly");
-            frequencyListBox.SelectedItem = currentFrequency;
-
-            // ** get default dates for datepickers
-            endDatePicker.Value = currentTime = DateTime.Now;
-            startDatePicker.Value = currentTime - TimeSpan.FromDays(7);
-
-            // ** get a reference to the model
-            model = controller.getModel();
-
-            // ** get sensors from model
+        private void sensorsListPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // ** change the current sensor!
             foreach (Sensor s in model.currentSensors)
             {
-                sensorsListBox.Items.Add(s.longName);   // ** fill the sensors listbox
-                if (currentSensorShortName == s.sensorName)      // ** set the current sensor
+                if (s.longName == sensorsListPicker.SelectedItem.ToString()) 
                 {
                     currentSensorId = s.sensorId;
-                    currentSensorName.Text = s.longName + "(" + s.unit + ")";
-                    //unitTextBlock.Text = s.unit;
-                    sensorsListBox.SelectedItem = s.longName;
+                    currentSensorShortName = s.sensorName;
                 }
             }
-            // ** get the default graph that is, power consumption from last week
-            controller.getSensorHistoryFromSpecifiedTimeScale(currentSensorId, "avgscale", currentFrequency.ToString(), String.Format("{0:yyyy-MM-dd}", startDatePicker.Value), String.Format("{0:yyyy-MM-dd}", endDatePicker.Value));
+            System.Diagnostics.Debug.WriteLine("UI.History: current sensor id is now: " + currentSensorId);
+
         }
-        // 
+
+        private void frequenciesListPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            currentFrequency = frequenciesListPicker.SelectedItem.ToString();
+        }
     }
 }
