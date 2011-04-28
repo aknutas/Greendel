@@ -39,6 +39,12 @@ class SocialmediasController < ApplicationController
     end
   end
 
+  def postuse
+    success = true
+
+    render :xml => success
+  end
+
 # GET /socialmedias/new
 # GET /socialmedias/new.xml
   def new

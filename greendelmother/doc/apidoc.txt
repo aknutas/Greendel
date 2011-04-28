@@ -29,10 +29,11 @@ Weather histories:
 Savings Goals:
 /savingsgoals/datastatus/<userid>.xml
 
----
-
-Missing APIs:
--Social media
+Social media information:
+/socialmedia/<userid>.xml
+Option:
+Post current sensor data with:
+/socialmedia/postuse/<userid>.xml?sensorid=<sensorid>
 
 ---
 
