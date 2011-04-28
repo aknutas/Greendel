@@ -25,6 +25,7 @@ class ReadingsController < ApplicationController
   # GET /readings/new.xml
   def new
     @reading = Reading.new
+    @sensors = Sensor.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,6 +42,7 @@ class ReadingsController < ApplicationController
   # POST /readings.xml
   def create
     @reading = Reading.new(params[:reading])
+    @reading.time = Time.now
 
     respond_to do |format|
       if @reading.save

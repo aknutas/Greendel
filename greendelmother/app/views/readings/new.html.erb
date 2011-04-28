@@ -4,12 +4,11 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
     <%= f.label :value %><br />
     <%= f.text_field :value %>
+  </p>
+  <p>
+    <%= select("post", "sensor_id", Sensor.all.collect {|p| [ p.name, p.id ] }, {:include_blank => 'None'}) %>
   </p>
   <p>
     <%= f.submit 'Create' %>
