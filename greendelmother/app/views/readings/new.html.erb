@@ -8,7 +8,7 @@
     <%= f.text_field :value %>
   </p>
   <p>
-    <%= select("post", "sensor_id", Sensor.all.collect {|p| [ p.name, p.id ] }, {:include_blank => 'None'}) %>
+    <%= f.select("sensor_id", Sensor.all.collect {|p| [ p.name, p.id ] }, {:include_blank => 'None'}) %>
   </p>
   <p>
     <%= f.submit 'Create' %>

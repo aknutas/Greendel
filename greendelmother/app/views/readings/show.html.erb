@@ -1,11 +1,17 @@
 <p>
-  <b>Name:</b>
-  <%=h @reading.name %>
+  <b>Sensor Name:</b>
+  <%=h @reading.sensor.name %>
 </p>
 
 <p>
-  <b>Value:</b>
+  <b>Reading Value:</b>
   <%=h @reading.value %>
+</p>
+
+
+<p>
+  <b>Measured Time:</b>
+  <%=h @reading.time.ctime %>
 </p>
 
 
