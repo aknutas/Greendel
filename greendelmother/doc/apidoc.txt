@@ -33,7 +33,8 @@ Social media information:
 /socialmedia/<userid>.xml
 Option:
 Post current sensor data with:
-/socialmedias/postuse/<userid>.xml?sensorid=<sensorid>
+/socialmedias/postuse/<userid>.xml?sensorid=<sensorid>,<sensorid>,<sensorid>
+(you can select several ids with comma separated values)
 
 ---
 
