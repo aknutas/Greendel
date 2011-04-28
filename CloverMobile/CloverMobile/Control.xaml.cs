@@ -27,6 +27,7 @@ namespace CloverMobile
             controller = Controller.getInstance;  
             model = controller.getModel();
             controller.setActivePage(this);
+            controller.setImageSource(this);
             // ** after 10 seconds, ask the model for new information
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 0, 10, 0);

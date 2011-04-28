@@ -180,7 +180,7 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <Image x:Name="background" Margin="-1358,-570,-1358,-4000" Grid.RowSpan="2" Source="/Image5.png" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Top" Width="2716" Height="1810" CacheMode="BitmapCache" RenderTransformOrigin="0.5,0.5" Visibility="Visible">
+        <Image x:Name="background" Margin="-1358,-570,-1358,-4000" Grid.RowSpan="2" Source="{Binding Path=imgSource}" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Top" Width="2716" Height="1810" CacheMode="BitmapCache" RenderTransformOrigin="0.5,0.5" Visibility="Visible">
         	<Image.RenderTransform>
         		<CompositeTransform/>
         	</Image.RenderTransform>
