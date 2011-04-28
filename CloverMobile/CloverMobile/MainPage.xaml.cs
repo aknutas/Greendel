@@ -35,7 +35,8 @@ namespace CloverMobile
             // ** get the controller instance and give the reference of current page to it
             controller = Controller.getInstance;
             controller.setActivePage(this);
-
+            controller.setImageSource(this);
+            //background.SetBinding(Image.SourceProperty, controller.setImageSource(this));
             // ** disable the ui-elements on the background        
             hideMainScreenElements();
 
@@ -193,7 +194,10 @@ namespace CloverMobile
                 {
                     if (s.sensorName == "poweruse")
                     {
+                        GlobalData.currentConsumption = Convert.ToDouble(s.latestReading);
                         currentPowerConsumptionTextBlock.Text = s.latestReading.ToString() + " W";
+                        controller.setImageSource(this);
+                        
                     }
                 }                  
             }

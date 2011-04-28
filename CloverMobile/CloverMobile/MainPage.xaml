@@ -6,6 +6,18 @@
     DataContext="{Binding}"
     shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded" Unloaded="PhoneApplicationPage_Unloaded">
     <phone:PhoneApplicationPage.Resources>
+        <Storyboard x:Name="FadeOut">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="background">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="FadeIn">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="background">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
         <Storyboard x:Name="rotateClover" SpeedRatio="0.5" RepeatBehavior="Forever"/>
         <Storyboard x:Name="MainScreenLoad">
         	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ApplicationTitle">
@@ -125,7 +137,7 @@
         <!--TitlePanel contains the name of the application and page title-->
 
         <!--TitlePanel contains the name of the application and page title-->
-        <Image x:Name="background" Margin="-1358,-570,-1358,-4000" Grid.RowSpan="2" Source="/Image5.png" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Top" Width="2716" Height="1810"/>
+        <Image x:Name="background" Margin="-1358,-570,-1358,-4000" Grid.RowSpan="2" Source="Backgrounds/greendel_20pros.png" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Top" Width="2716" Height="1810"/>
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">

@@ -47,7 +47,7 @@ namespace CloverMobile
             // ** get controller instance and give our reference
             controller = Controller.getInstance;
             controller.setActivePage(this);
-
+            controller.setImageSource(this);
             // ** set some default values
             //currentSensorId = 2;
             currentSensorShortName = "powerconsumed";

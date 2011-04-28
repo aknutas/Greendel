@@ -69,6 +69,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Device.cs" />
+    <Compile Include="GlobalData.cs" />
     <Compile Include="HistoryData.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Sensors.cs" />
@@ -135,6 +136,11 @@
     <Content Include="Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Backgrounds\greendel_100pros.png" />
+    <Resource Include="Backgrounds\greendel_20pros.png" />
+    <Resource Include="Backgrounds\greendel_40pros.png" />
+    <Resource Include="Backgrounds\greendel_60pros.png" />
+    <Resource Include="Backgrounds\greendel_80pros.png" />
     <Content Include="Icons\appbar.sync.rest.png" />
     <Content Include="Image5.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

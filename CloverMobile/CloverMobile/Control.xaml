@@ -135,6 +135,8 @@
 				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
+		
+
 	</phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
@@ -149,7 +151,8 @@
         <!--TitlePanel contains the name of the application and page title-->
     <!--TitlePanel contains the name of the application and page title-->
     <!--TitlePanel contains the name of the application and page title-->
-        <Image x:Name="background" Margin="-1358,-570,-1358,-4000" Grid.RowSpan="2" Source="/Image5.png" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Top" Width="2716" Height="1810" RenderTransformOrigin="0.5,0.5">
+    <!--TitlePanel contains the name of the application and page title-->
+        <Image x:Name="background" Margin="-1358,-570,-1358,-4000" Grid.RowSpan="2" Source="Backgrounds/greendel_60pros.png" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Top" Width="2716" Height="1810" RenderTransformOrigin="0.5,0.5">
         	<Image.RenderTransform>
         		<CompositeTransform/>
         	</Image.RenderTransform>

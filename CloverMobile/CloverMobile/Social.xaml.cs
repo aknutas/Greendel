@@ -15,9 +15,13 @@ namespace CloverMobile
 {
     public partial class Social : PhoneApplicationPage
     {
+        private Controller controller;
         public Social()
         {
             InitializeComponent();
+            controller = Controller.getInstance;
+            controller.setActivePage(this);
+            controller.setImageSource(this);
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)

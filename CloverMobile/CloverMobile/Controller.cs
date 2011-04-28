@@ -9,6 +9,9 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using System.Windows.Media.Imaging;
+using System.Collections.Generic;
+using System.Windows.Data;
 
 namespace CloverMobile
 {
@@ -17,9 +20,18 @@ namespace CloverMobile
         // ** controller is singleton
         static Controller instance=null;
         Device device;
-        static readonly object padlock = new object();
+        static readonly object padlock = new object();        
         private CloverMobile.MainPage mainPageRef;
         private CloverMobile.History historyRef;
+        private CloverMobile.Social socialRef;
+        private CloverMobile.Settings settingsRef;
+        private CloverMobile.Control controlRef;
+        //private Binding myBinding;
+        
+        private Uri uri;
+        //private picturePath;
+        private ImageSource imgSource;
+
 
         // ** references to network controller, model (datamaster) and current ui page 
         private NetworkController nwc;
@@ -33,6 +45,11 @@ namespace CloverMobile
             model = new DataMaster();
             nwc.setDataMaster(model);
             nwc.setMasterController(this);
+            //pageReferences.Add(mainPageRef);
+            //pageReferences.Add(historyRef);
+            //pageReferences.Add(socialRef);
+            //pageReferences.Add(controlRef);
+            //pageReferences.Add(settingsRef);
         }
         public static Controller getInstance
         {
@@ -48,6 +65,94 @@ namespace CloverMobile
                 }
             }
         }
+        public void setImageSource(PhoneApplicationPage currentPage)
+        {           
+
+            activePage = currentPage;
+            //myBinding = new Binding("BackgroundImage");
+            if (GlobalData.currentConsumption > 0 && GlobalData.currentConsumption < 200)
+            {
+                System.Diagnostics.Debug.WriteLine("Controller: binding1");
+                uri = new Uri("Backgrounds/greendel_100pros.png", UriKind.Relative);
+                    
+            }
+            else if (GlobalData.currentConsumption >= 200 && GlobalData.currentConsumption < 400)
+            {
+                System.Diagnostics.Debug.WriteLine("Controller: binding2");
+                uri = new Uri("Backgrounds/greendel_80pros.png", UriKind.Relative);
+            }
+            else if (GlobalData.currentConsumption >= 400 && GlobalData.currentConsumption < 600)
+            {
+                System.Diagnostics.Debug.WriteLine("Controller: binding3");
+                uri = new Uri("Backgrounds/greendel_60pros.png", UriKind.Relative);
+            }
+            else if (GlobalData.currentConsumption >= 600 && GlobalData.currentConsumption < 800)
+            {
+                System.Diagnostics.Debug.WriteLine("Controller: binding4");
+                uri = new Uri("Backgrounds/greendel_40pros.png", UriKind.Relative);
+            }
+            else if (GlobalData.currentConsumption >= 800 && GlobalData.currentConsumption < 1000)
+            {
+                System.Diagnostics.Debug.WriteLine("Controller: binding5");
+                uri = new Uri("Backgrounds/greendel_20pros.png", UriKind.Relative);
+            }
+            // determine, which page is active
+            
+            imgSource = new BitmapImage(uri);
+       
+            if (activePage.GetType().ToString() == "CloverMobile.MainPage")
+            {
+
+                mainPageRef = (CloverMobile.MainPage)currentPage;
+                mainPageRef.FadeOut.Begin();
+                mainPageRef.background.Source = imgSource;
+                mainPageRef.FadeIn.Begin();
+                historyRef = null;
+                socialRef = null;
+                settingsRef = null;
+                controlRef = null;
+            }
+            else if (activePage.GetType().ToString() == "CloverMobile.History")
+            {
+                historyRef = (CloverMobile.History)currentPage;
+                historyRef.background.Source = imgSource;
+                mainPageRef = null;
+                socialRef = null;
+                settingsRef = null;
+                controlRef = null;
+
+            }
+            else if (activePage.GetType().ToString() == "CloverMobile.Social")
+            {
+                socialRef = (CloverMobile.Social)currentPage;
+                socialRef.background.Source = imgSource;
+                mainPageRef = null;
+                historyRef = null;
+                settingsRef = null;
+                controlRef = null;
+            }
+            else if (activePage.GetType().ToString() == "CloverMobile.Settings")
+            {
+                settingsRef = (CloverMobile.Settings)currentPage;
+                settingsRef.background.Source = imgSource;
+                mainPageRef = null;
+                historyRef = null;
+                socialRef = null;
+                controlRef = null;
+
+            }
+            else if (activePage.GetType().ToString() == "CloverMobile.Control")
+            {
+                controlRef = (CloverMobile.Control)currentPage;
+                controlRef.background.Source = imgSource;              
+                settingsRef = null; ;
+                mainPageRef = null;
+                historyRef = null;
+                socialRef = null;
+            }
+            
+            //mainPageRef.UpdateLayout();
+        }
         public DataMaster getModelInstance()
         {
            return model.getReference();        
@@ -56,17 +161,50 @@ namespace CloverMobile
         {
             activePage = currentPage;
             System.Diagnostics.Debug.WriteLine("Controller's active page is: " + activePage.GetType().ToString() );
+            
             if (activePage.GetType().ToString() == "CloverMobile.MainPage")
             {
+  
                 mainPageRef = (CloverMobile.MainPage)currentPage;
                 historyRef = null;
+                socialRef = null;
+                settingsRef = null;
+                controlRef = null;
             }
             else if (activePage.GetType().ToString() == "CloverMobile.History")
             {
                 historyRef = (CloverMobile.History)currentPage;
                 mainPageRef = null;
+                socialRef = null;
+                settingsRef = null;
+                controlRef = null;
+
             }
-            //activePage = 
+            else if (activePage.GetType().ToString() == "CloverMobile.Social")
+            {
+                socialRef = (CloverMobile.Social)currentPage;
+                mainPageRef = null;
+                historyRef = null;
+                settingsRef = null;
+                controlRef = null;
+            }
+            else if (activePage.GetType().ToString() == "CloverMobile.Settings")
+            {
+                settingsRef = (CloverMobile.Settings)currentPage;
+                mainPageRef = null;
+                historyRef = null;
+                socialRef = null;
+                controlRef = null;
+
+            }
+            else if (activePage.GetType().ToString() == "CloverMobile.Control")
+            {
+                controlRef = (CloverMobile.Control)currentPage;
+                settingsRef = null; ;
+                mainPageRef = null;
+                historyRef = null;
+                socialRef = null;
+            }
         }
         public DataMaster getModel()
         {
