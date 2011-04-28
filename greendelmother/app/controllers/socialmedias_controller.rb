@@ -42,7 +42,7 @@ class SocialmediasController < ApplicationController
   def postuse
     success = true
 
-    render :xml => success
+    render :xml => {:status => success}
   end
 
 # GET /socialmedias/new
