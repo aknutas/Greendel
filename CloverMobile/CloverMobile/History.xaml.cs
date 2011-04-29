@@ -132,10 +132,7 @@ namespace CloverMobile
             NavigationService.GoBack();
         }
 
-        private void historyScreenAnimation_Completed(object sender, EventArgs e)
-        {
 
-        }
 
         private void sensorsListPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
