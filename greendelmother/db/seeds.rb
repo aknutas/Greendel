@@ -39,11 +39,9 @@ s = Sensor.create(:name => 'outsidetemp', :longname => 'Outside Temperature', :v
 cloverpower.sensors << s
 cloverpower.save
 
-o = Output.create(:name => 'heating', :longname => 'Heating', :cost => true)
+o = Output.create(:name => 'wall_socket', :longname => 'Kitchen Wall Socket', :cost => true)
 cloverpower.outputs << o
 o = Output.create(:name => 'solar', :longname => 'Solar', :cost => false)
-cloverpower.outputs << o
-o = Output.create(:name => 'wind', :longname => 'Wind', :cost => false)
 cloverpower.outputs << o
 cloverpower.save
 
