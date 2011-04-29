@@ -70,8 +70,8 @@
 				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
 			</DoubleAnimationUsingKeyFrames>
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="background">
-				<EasingDoubleKeyFrame KeyTime="0" Value="-306"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-1735"/>
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="375"/>
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
 		<Storyboard x:Name="controlScreenAnimationReverse" Completed="controlScreenAnimationReverse_Completed">
@@ -131,7 +131,7 @@
 				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
 			</DoubleAnimationUsingKeyFrames>
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="background">
-				<SplineDoubleKeyFrame KeyTime="0" Value="550"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="375"/>
 				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
@@ -152,7 +152,8 @@
     <!--TitlePanel contains the name of the application and page title-->
     <!--TitlePanel contains the name of the application and page title-->
     <!--TitlePanel contains the name of the application and page title-->
-        <Image x:Name="background" Margin="-1840,-552,-3771,-490" Source="/Image5.png" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2" Stretch="None">
+    <!--TitlePanel contains the name of the application and page title-->
+        <Image x:Name="background" Margin="-2806,-300,-2806,-4000" Source="Backgrounds/greendel_20pros.png" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2" Stretch="None" VerticalAlignment="Top">
         	<Image.RenderTransform>
         		<CompositeTransform/>
         	</Image.RenderTransform>
@@ -170,30 +171,31 @@
             	</TextBlock.RenderTransform>
             </TextBlock>
         </StackPanel>
-
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="10,-2,12,0" RenderTransformOrigin="0.5,0.5">
         	<Grid.RenderTransform>
         		<CompositeTransform/>
         	</Grid.RenderTransform>
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="47,212,0,0" x:Name="textBlockHeating" Text="Heating" VerticalAlignment="Top" Width="86" />
-            <Rectangle Fill="Black" Margin="30,29,28,0" Stroke="Black" Opacity="0.625" Height="156" VerticalAlignment="Top"/>
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="47,298,0,0" x:Name="textBlock1" Text="Lightning" VerticalAlignment="Top" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="69,46,0,0" x:Name="textBlock2" Text="Temp Outside" VerticalAlignment="Top" />
-            <TextBox Height="70" HorizontalAlignment="Left" Margin="63,68,0,0" x:Name="tempInsideTextBox" Text="" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.093,0.597" />
-            <TextBlock Height="30" HorizontalAlignment="Right" Margin="0,46,79,0" x:Name="textBlock3" Text="Temp Inside" VerticalAlignment="Top" />
-            <TextBox Height="70" HorizontalAlignment="Left" Margin="262,68,0,0" x:Name="tempOutsideTextBox" Text="" VerticalAlignment="Top" Width="130" />
-            <RadioButton Content="On" Height="72" Margin="154,188,0,0" x:Name="radioButtonHeatingOn" VerticalAlignment="Top" GroupName="radioButtonGroupHeating" HorizontalAlignment="Left" Width="127" />
-            <RadioButton Content="Off" GroupName="radioButtonGroupHeating" Height="72" HorizontalAlignment="Right" Margin="0,188,69,0" x:Name="radioButtonHeatingOff" VerticalAlignment="Top" Width="127" />
-            <RadioButton Content="On" GroupName="radioButtonGroupLightning" Height="72" Margin="154,274,0,0" x:Name="radioButtonLightsOn" VerticalAlignment="Top" HorizontalAlignment="Left" Width="127" />
-            <RadioButton Content="Off" GroupName="radioButtonGroupLightning" Height="72" HorizontalAlignment="Left" Margin="262,274,0,0" x:Name="radioButtonLightsOff" VerticalAlignment="Top" Width="127" />
-            <Button Content="Get S Hist" Height="72" HorizontalAlignment="Left" Margin="237,501,0,0" x:Name="sendChanges" VerticalAlignment="Top" Width="181" Click="sendChanges_Click" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="88,499,0,0" x:Name="textBlockTest" Text="" VerticalAlignment="Top" />
-            <Button Content="1" Height="72" Margin="37,358,0,0" x:Name="button1" VerticalAlignment="Top" HorizontalAlignment="Left" Width="99" Click="button1_Click" />
-            <Button Content="2" Height="72" HorizontalAlignment="Left" Margin="161,357,0,0" x:Name="button2" VerticalAlignment="Top" Width="76" Click="button2_Click" />
-            <Button Content="3" Height="72" HorizontalAlignment="Left" Margin="256,354,0,0" x:Name="button3" VerticalAlignment="Top" Width="87" Click="button3_Click" />
-            <Button Content="Get Sens" Height="72" HorizontalAlignment="Left" Margin="20,499,0,0" x:Name="getSensors" VerticalAlignment="Top" Width="160" Click="getSensors_Click" />
+        	<TextBlock Height="30" HorizontalAlignment="Left" Margin="47,212,0,0" x:Name="textBlockHeating" Text="Heating" VerticalAlignment="Top" Width="86" />
+        	<Rectangle Fill="Black" Margin="30,29,28,0" Stroke="Black" Opacity="0.625" Height="156" VerticalAlignment="Top"/>
+        	<TextBlock Height="30" HorizontalAlignment="Left" Margin="47,298,0,0" x:Name="textBlock1" Text="Lightning" VerticalAlignment="Top" />
+        	<TextBlock Height="30" HorizontalAlignment="Left" Margin="69,46,0,0" x:Name="textBlock2" Text="Temp Outside" VerticalAlignment="Top" />
+        	<TextBox Height="70" HorizontalAlignment="Left" Margin="63,68,0,0" x:Name="tempInsideTextBox" Text="" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.093,0.597" />
+        	<TextBlock Height="30" HorizontalAlignment="Right" Margin="0,46,79,0" x:Name="textBlock3" Text="Temp Inside" VerticalAlignment="Top" />
+        	<TextBox Height="70" HorizontalAlignment="Left" Margin="262,68,0,0" x:Name="tempOutsideTextBox" Text="" VerticalAlignment="Top" Width="130" />
+        	<RadioButton Content="On" Height="72" Margin="154,188,0,0" x:Name="radioButtonHeatingOn" VerticalAlignment="Top" GroupName="radioButtonGroupHeating" HorizontalAlignment="Left" Width="127" />
+        	<RadioButton Content="Off" GroupName="radioButtonGroupHeating" Height="72" HorizontalAlignment="Right" Margin="0,188,69,0" x:Name="radioButtonHeatingOff" VerticalAlignment="Top" Width="127" />
+        	<RadioButton Content="On" GroupName="radioButtonGroupLightning" Height="72" Margin="154,274,0,0" x:Name="radioButtonLightsOn" VerticalAlignment="Top" HorizontalAlignment="Left" Width="127" />
+        	<RadioButton Content="Off" GroupName="radioButtonGroupLightning" Height="72" HorizontalAlignment="Left" Margin="262,274,0,0" x:Name="radioButtonLightsOff" VerticalAlignment="Top" Width="127" />
+        	<Button Content="Get S Hist" Height="72" HorizontalAlignment="Left" Margin="237,501,0,0" x:Name="sendChanges" VerticalAlignment="Top" Width="181" Click="sendChanges_Click" />
+        	<TextBlock Height="30" HorizontalAlignment="Left" Margin="88,499,0,0" x:Name="textBlockTest" Text="" VerticalAlignment="Top" />
+        	<Button Content="1" Height="72" Margin="37,358,0,0" x:Name="button1" VerticalAlignment="Top" HorizontalAlignment="Left" Width="99" Click="button1_Click" />
+        	<Button Content="2" Height="72" HorizontalAlignment="Left" Margin="161,357,0,0" x:Name="button2" VerticalAlignment="Top" Width="76" Click="button2_Click" />
+        	<Button Content="3" Height="72" HorizontalAlignment="Left" Margin="256,354,0,0" x:Name="button3" VerticalAlignment="Top" Width="87" Click="button3_Click" />
+        	<Button Content="Get Sens" Height="72" HorizontalAlignment="Left" Margin="20,499,0,0" x:Name="getSensors" VerticalAlignment="Top" Width="160" Click="getSensors_Click" />
         </Grid>
+
+        <!--ContentPanel - place additional content here-->
     </Grid>
  
     <!--Sample code showing usage of ApplicationBar-->

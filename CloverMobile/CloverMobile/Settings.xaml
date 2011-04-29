@@ -88,6 +88,11 @@
 				<SplineDoubleKeyFrame KeyTime="0" Value="1"/>
 				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
 			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="background">
+				<EasingDoubleKeyFrame KeyTime="0" Value="-325"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-325"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
 	</phone:PhoneApplicationPage.Resources>
 
