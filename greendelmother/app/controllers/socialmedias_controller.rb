@@ -40,8 +40,18 @@ class SocialmediasController < ApplicationController
   end
 
   def postuse
-    success = true
+    @socialmedia = Socialmedia.find(params[:id])
 
+    @id = "me"
+    @type = "feed"
+    @message = "Hello World!"
+
+    if (@socialmedia.facebookon)
+      MiniFB.post(@socialmedia.fbauth, @id, :type=>@type, :metadata=>true, :params => {:message => @message})
+      success = true
+    else
+      success = false
+    end
     render :xml => {:status => success}
   end
 
