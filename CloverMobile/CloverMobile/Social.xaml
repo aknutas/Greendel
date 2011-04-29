@@ -16,25 +16,13 @@
 		<Storyboard x:Name="socialScreenAnimation">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="background">
 				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-1100"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="-750"/>
 			</DoubleAnimationUsingKeyFrames>
-			<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="background">
-				<DiscreteObjectKeyFrame KeyTime="0">
-					<DiscreteObjectKeyFrame.Value>
-						<Thickness>-1358,-570,-1358,-4000</Thickness>
-					</DiscreteObjectKeyFrame.Value>
-				</DiscreteObjectKeyFrame>
-				<DiscreteObjectKeyFrame KeyTime="0:0:0.5">
-					<DiscreteObjectKeyFrame.Value>
-						<Thickness>-1358,-570,-1358,-2000</Thickness>
-					</DiscreteObjectKeyFrame.Value>
-				</DiscreteObjectKeyFrame>
-			</ObjectAnimationUsingKeyFrames>
 		</Storyboard>
 		<Storyboard x:Name="socialScreenAnimationReverse" Completed="socialScreenAnimationReverse_Completed">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="background">
-				<SplineDoubleKeyFrame KeyTime="0" Value="-1100"/>
-				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+				<SplineDoubleKeyFrame KeyTime="0" Value="-750"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
 	</phone:PhoneApplicationPage.Resources>
@@ -47,13 +35,16 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <Image x:Name="background" Margin="-1358,-570,-1358,-2000" Source="/Image5.png" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Top" Width="2716" Height="1810" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2">
-    		<Image.RenderTransform>
-    			<CompositeTransform/>
-    		</Image.RenderTransform>
-    	</Image>
 
         <!--TitlePanel contains the name of the application and page title-->
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <Image x:Name="background" Margin="-2806,-300,-2806,-4000" Grid.RowSpan="2" Stretch="None" VerticalAlignment="Top" Width="2716" Height="1810" CacheMode="BitmapCache" RenderTransformOrigin="0.5,0.5" Visibility="Visible" Source="Backgrounds/greendel_20pros.png">
+        	<Image.RenderTransform>
+        		<CompositeTransform/>
+        	</Image.RenderTransform>
+        </Image>
+    <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="GREENDEL MOBILE" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Text="Social" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" Foreground="White"/>

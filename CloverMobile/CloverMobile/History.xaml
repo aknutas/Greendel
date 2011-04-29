@@ -136,10 +136,6 @@
 			</Setter>
 		</Style>
 		<Storyboard x:Name="historyScreenAnimation" Completed="historyScreenAnimation_Completed">
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="background">
-				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1100"/>
-			</DoubleAnimationUsingKeyFrames>
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ContentPanel">
 				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
@@ -150,12 +146,12 @@
 				<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
 			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="background">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="750"/>
+			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
 		<Storyboard x:Name="historyScreenAnimationReverse" Completed="historyScreenAnimationReverse_Completed">
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="background">
-				<SplineDoubleKeyFrame KeyTime="0" Value="1100"/>
-				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
-			</DoubleAnimationUsingKeyFrames>
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ContentPanel">
 				<SplineDoubleKeyFrame KeyTime="0" Value="1"/>
 				<SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
@@ -180,20 +176,23 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <Image x:Name="background" Margin="-1358,-570,-1358,-4000" Grid.RowSpan="2" Source="{Binding Path=imgSource}" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Top" Width="2716" Height="1810" CacheMode="BitmapCache" RenderTransformOrigin="0.5,0.5" Visibility="Visible">
+
+        <!--TitlePanel contains the name of the application and page title-->
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <Image x:Name="background" Margin="-2806,-300,-2806,-4000" Source="Backgrounds/greendel_20pros.png" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2" Stretch="None" VerticalAlignment="Top">
         	<Image.RenderTransform>
         		<CompositeTransform/>
         	</Image.RenderTransform>
         </Image>
-
-        <!--TitlePanel contains the name of the application and page title-->
+    <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28" DataContext="{Binding}">
             <TextBlock x:Name="ApplicationTitle" Text="GREENDEL MOBILE" Style="{StaticResource PhoneTextNormalStyle}" RenderTransformOrigin="0.5,0.5">
             	<TextBlock.RenderTransform>
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
             </TextBlock>
-            <TextBlock x:Name="PageTitle" Text="History" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" RenderTransformOrigin="0.5,0.5" Height="19" Width="712">
+            <TextBlock x:Name="PageTitle" Text="History" Margin="9,-7,12,0" Style="{StaticResource PhoneTextTitle1Style}" RenderTransformOrigin="0.5,0.5" Height="94">
             	<TextBlock.RenderTransform>
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
@@ -203,19 +202,19 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="24,-8,0,8">
             <!--<HyperlinkButton Content="Back" Height="30" HorizontalAlignment="Left" Margin="131,551,0,0" Name="hyperlinkButton1" VerticalAlignment="Top" Width="200" NavigateUri="/CloverMobile;component/MainPage.xaml" />-->
-            <!--<ListBox Height="186" HorizontalAlignment="Left" Margin="12,47,0,0" Name="listBox1" VerticalAlignment="Top" Width="684" FontSize="36" /> -->
-            <!--<TextBlock Height="35" HorizontalAlignment="Left" Margin="12,8,0,0" Name="fromInternet" Text="" VerticalAlignment="Top" Width="684" TextWrapping="Wrap" /> -->
+    <!--<ListBox Height="186" HorizontalAlignment="Left" Margin="12,47,0,0" Name="listBox1" VerticalAlignment="Top" Width="684" FontSize="36" /> -->
+    <!--<TextBlock Height="35" HorizontalAlignment="Left" Margin="12,8,0,0" Name="fromInternet" Text="" VerticalAlignment="Top" Width="684" TextWrapping="Wrap" /> -->
             <my:SerialChart x:Name="chart1" DataSource="{Binding DataUnit}" CategoryValueMemberPath="time"
                          AxisForeground="White"
                          GridStroke="#FF5E1E1E" Margin="7,121,10,239" Style="{StaticResource SerialChartStyle2}" LegendVisibility="Collapsed" PlotAreaBackground="#59000000">
                 <my:SerialChart.Graphs>
-                    <my:ColumnGraph ValueMemberPath="value" Title="" Brush="Blue" />
+                	<my:ColumnGraph ValueMemberPath="value" Title="" Brush="Blue" />
                     <!--<my:ColumnGraph ValueMemberPath="val2" Title="Column #2" Brush="#8000FF00" ColumnWidthAllocation="0.4" />-->
-                    <!--<my:AreaGraph ValueMemberPath="val3" Title="Area #1" Brush="#80FF0000" />-->
+    <!--<my:AreaGraph ValueMemberPath="val3" Title="Area #1" Brush="#80FF0000" />-->
                 </my:SerialChart.Graphs>
             </my:SerialChart>
-            <toolkit:ListPicker Header="Sensors"  SelectedIndex="0" Margin="5,439,171,-415" SelectionChanged="sensorsListPicker_SelectionChanged" Name="sensorsListPicker" />
-            <toolkit:ListPicker Header="Frequency" SelectedIndex="1" Margin="305,438,8,-414" SelectionChanged="frequenciesListPicker_SelectionChanged" Name="frequenciesListPicker" />
+            <toolkit:ListPicker Header="Sensors"  SelectedIndex="0" Margin="5,439,171,-415" SelectionChanged="sensorsListPicker_SelectionChanged" x:Name="sensorsListPicker" />
+            <toolkit:ListPicker Header="Frequency" SelectedIndex="1" Margin="305,438,8,-414" SelectionChanged="frequenciesListPicker_SelectionChanged" x:Name="frequenciesListPicker" />
             <TextBlock Height="50" HorizontalAlignment="Left" Margin="3,10,0,0" x:Name="currentSensorName" Text="" VerticalAlignment="Top" Width="445" FontSize="30" />
             <Button Content="Update" Height="72" HorizontalAlignment="Left" Margin="317,608,0,0" x:Name="button1" VerticalAlignment="Top" Width="138" Click="button1_Click" />
             <toolkit:DatePicker HorizontalAlignment="Left" x:Name="startDatePicker" VerticalAlignment="Top" Height="58" Width="168" ValueStringFormat="{}{0:yyyy-MM-dd}" FontSize="8" Margin="-1,61,0,0" />

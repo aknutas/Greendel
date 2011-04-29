@@ -70,8 +70,8 @@
 				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
 			</DoubleAnimationUsingKeyFrames>
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="background">
-				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="550"/>
+				<EasingDoubleKeyFrame KeyTime="0" Value="-306"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-1735"/>
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
 		<Storyboard x:Name="controlScreenAnimationReverse" Completed="controlScreenAnimationReverse_Completed">
@@ -152,7 +152,7 @@
     <!--TitlePanel contains the name of the application and page title-->
     <!--TitlePanel contains the name of the application and page title-->
     <!--TitlePanel contains the name of the application and page title-->
-        <Image x:Name="background" Margin="-1358,-570,-1358,-4000" Grid.RowSpan="2" Source="Backgrounds/greendel_60pros.png" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Top" Width="2716" Height="1810" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="background" Margin="-1840,-552,-3771,-490" Source="/Image5.png" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2" Stretch="None">
         	<Image.RenderTransform>
         		<CompositeTransform/>
         	</Image.RenderTransform>
