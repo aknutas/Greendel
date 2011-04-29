@@ -13,13 +13,61 @@
 	<phone:PhoneApplicationPage.Resources>
 		<Storyboard x:Name="socialScreenAnimation">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="background">
-				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.106" Value="0"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="-750"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ApplicationTitle">
+				<EasingDoubleKeyFrame KeyTime="0" Value="350"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.303" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.354" Value="35"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.396" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PageTitle">
+				<EasingDoubleKeyFrame KeyTime="0" Value="350"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.303" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.354" Value="35"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.396" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ApplicationTitle">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.303" Value="1"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.354" Value="1"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.396" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PageTitle">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.303" Value="1"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.354" Value="1"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.396" Value="1"/>
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
 		<Storyboard x:Name="socialScreenAnimationReverse" Completed="socialScreenAnimationReverse_Completed">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="background">
-				<SplineDoubleKeyFrame KeyTime="0" Value="-750"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.294" Value="0"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ApplicationTitle">
+				<SplineDoubleKeyFrame KeyTime="0:0:0.004" Value="0"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.046" Value="35"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.097" Value="0"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.4" Value="350"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PageTitle">
+				<SplineDoubleKeyFrame KeyTime="0:0:0.004" Value="0"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.046" Value="35"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.097" Value="0"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.4" Value="350"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ApplicationTitle">
+				<SplineDoubleKeyFrame KeyTime="0:0:0.004" Value="1"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.046" Value="1"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.097" Value="1"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PageTitle">
+				<SplineDoubleKeyFrame KeyTime="0:0:0.004" Value="1"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.046" Value="1"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.097" Value="1"/>
 				<SplineDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
@@ -66,8 +114,16 @@
         </Image>
     <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="GREENDEL MOBILE" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="Social" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" Foreground="White"/>
+            <TextBlock x:Name="ApplicationTitle" Text="GREENDEL MOBILE" Style="{StaticResource PhoneTextNormalStyle}" RenderTransformOrigin="0.5,0.5">
+            	<TextBlock.RenderTransform>
+            		<CompositeTransform/>
+            	</TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock x:Name="PageTitle" Text="Social" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" Foreground="White" RenderTransformOrigin="0.5,0.5">
+            	<TextBlock.RenderTransform>
+            		<CompositeTransform/>
+            	</TextBlock.RenderTransform>
+            </TextBlock>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
