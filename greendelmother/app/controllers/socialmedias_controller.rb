@@ -28,11 +28,11 @@ class SocialmediasController < ApplicationController
   def fbpost
     @socialmedia = Socialmedia.find(params[:id])
     @id = "me"
-    @type = "post"
-    @message = "Halloo"
+    @type = "feed"
+    @message = "Hello World!"
 
     if (@socialmedia.facebookon)
-      MiniFB.post(@access_token, @id, :type=>@type, :metadata=>true, :params => {:message => @message})
+      MiniFB.post(@socialmedia.fbauth, @id, :type=>@type, :metadata=>true, :params => {:message => @message})
       redirect_to(@socialmedia, :notice => 'Post was successful!')
     else
       redirect_to(@socialmedia, :notice => 'Post failed: You do not have facebook configured.')

@@ -15,7 +15,9 @@ cloverpower = Device.create(:name => 'Cloverpower')
 user.device = cloverpower
 user.save
 
-sm = Socialmedia.create(:twitteron => false, :facebookon => false)
+sm = Socialmedia.create(:twitteron => false, :facebookon => true, :status => true)
+sm.fbauth = "***REMOVED***|411b0321d0327ebd24583973.1-100002348930065|jsDNib6501byb1NYcSeQ7v5PP4M"
+sm.save
 user.socialmedia = sm
 user.save
 

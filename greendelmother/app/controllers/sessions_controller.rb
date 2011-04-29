@@ -16,7 +16,8 @@ class SessionsController < ApplicationController
 
       @user.socialmedia.fbauth = @access_token
       @user.socialmedia.facebookon = true
-      @user.save
+      @user.socialmedia.status = true
+      @user.socialmedia.save
 
     end
     redirect_to :controller => "socialmedias"

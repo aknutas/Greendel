@@ -1,9 +1,18 @@
 <p>
   <b>Status:</b>
-  <%=h @socialmedia.status %>
+  <%= h @socialmedia.status %>
 </p>
 
 <p>
   <b>Facebook:</b>
-  <%=h @socialmedia.facebookon %>
+  <%= h @socialmedia.facebookon %>
 </p>
+
+<% unless @socialmedia.facebookon %>
+    <%= link_to "Login", @oauth_url %>
+<% end %>
+<% if @socialmedia.facebookon %>
+    <% form_tag(url_for(:action => 'fbpost', :controller => 'socialmedias', :id => @socialmedia.id), :method => :get) do %>
+        <%= submit_tag("Postaas kuule feispuukkiin") %>
+    <% end %>
+<% end %>
