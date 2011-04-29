@@ -25,15 +25,15 @@ namespace CloverMobile
         private WebClient wcUp = null;
         private XDocument dataDoc;
         private bool downloading = false;
-        //private bool uploading = false;
+        private bool uploading = false;
         private string documentType = "";
         private string xmlMessage;
         private string username;
         private string password;
         private Thread downloader;
-        //private Thread uploader;
+        private Thread uploader;
         private List<WorkItem> downloadWorkQueue;
-        //private List<WorkItem> uploadWorkQueue;
+        private List<WorkItem> uploadWorkQueue;
         private WorkItem currentWorkItem;
         private int currentSensorId;
 
@@ -41,16 +41,25 @@ namespace CloverMobile
         public NetworkController()
         {
             downloadWorkQueue = new List<WorkItem>();
+            uploadWorkQueue = new List<WorkItem>();
+
             wcDown = new WebClient();
             wcDown.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted);
             wcUp = new WebClient();
+            
+            
+
+            
+
 
             downloader = new Thread(doDownloading);
             downloader.Name = "Downloader";
             downloader.Start();
-            //uploader = new Thread(doUploading);
-            //uploader.Name = "Uploader";
-            //uploader.Start();
+
+            uploader = new Thread(doUploading);
+            uploader.Name = "Uploader";
+            uploader.Start();
+          
 
         }
         public void setDataMaster(DataMaster mstr)
@@ -119,6 +128,7 @@ namespace CloverMobile
                             wcDown.DownloadStringAsync(new Uri(serviceAddress + "/sensors/history/" + currentWorkItem.sensorId.ToString() + ".xml?limit=" + currentWorkItem.pointsToGet.ToString()));
                             break;
 
+
                         default:
                             break;
                     }
@@ -131,48 +141,68 @@ namespace CloverMobile
                 // ** work queue is empty
                 else
                 {
-                    Thread.Sleep(50);
+                    Thread.Sleep(100);
                 }
             }
         }
-        /*
+        
         public void doUploading()
         {
-            // ** there is some downloading to do
-            if (uploadWorkQueue.Count > 0 && !uploading)
+            while (true)
             {
-                uploading = true;
-                lock (uploadWorkQueue)
+                // ** there is some downloading to do
+                if (uploadWorkQueue.Count > 0 && !uploading)
                 {
-                    currentWorkItem = uploadWorkQueue[uploadWorkQueue.Count - 1];
+                    uploading = true;
+                    lock (uploadWorkQueue)
+                    {
+                        System.Diagnostics.Debug.WriteLine("nwc: getting first upload queue member");
+                        currentWorkItem = uploadWorkQueue.First();
+                    }
+                    switch (currentWorkItem.documentName)
+                    {
+                        case "userInfo":
+
+                            break;
+                        case "sensors":
+
+                            break;
+                        case "sendOutput":
+                            System.Diagnostics.Debug.WriteLine("nwc: sending output state.");
+                            wcUp.Headers[HttpRequestHeader.ContentType] = "application/xml";
+                            
+                            documentType = "sendOutput";
+                            if (currentWorkItem.output_state == true) {
+                                System.Diagnostics.Debug.WriteLine("SENDOUTPUT: sending output state true.");
+                                xmlMessage = "<output><haschanged>true</haschanged><state>true</state></output>";
+                            }
+                            else{
+                                System.Diagnostics.Debug.WriteLine("SENDOUTPUT: sending output state false.");
+                                xmlMessage = "<output><haschanged>true</haschanged><state>false</state></output>";
+                            }
+                            
+                            wcUp.UploadStringAsync(new Uri("http://localhost:3000/outputs/1.xml"), "PUT", xmlMessage);
+
+                            //wcUp.UploadStringAsync(new Uri(serviceAddress + "outputs/" + currentWorkItem.sensorId.ToString()), "PUT", xmlMessage);
+                            wcUp.UploadStringCompleted += new UploadStringCompletedEventHandler(wcUpload_UploadStringCompleted);
+                            break;
+                        default:
+                            break;
+                    }
+                    // ** delete workunit from the list
+                    lock (uploadWorkQueue)
+                    {
+                        uploadWorkQueue.RemoveAt(0);
+                    }
                 }
-                switch (currentWorkItem.documentName)
+                // ** work queue is empty
+                else
                 {
-                    case "userInfo":
-
-                        break;
-                    case "sensors":
-
-                        break;
-                    case "outputs":
-
-                        break;
-                    default:
-                        break;
+                    Thread.Sleep(100);
                 }
-                // ** delete workunit from the list
-                lock (uploadWorkQueue)
-                {
-                    uploadWorkQueue.RemoveAt(uploadWorkQueue.Count - 1);
-                }
-            }
-            // ** work queue is empty
-            else
-            {
-                Thread.Sleep(50);
             }
         }
-        */
+        
         // ** authorize the user
         public void authenticate(string name, string pass, string address)
         {
@@ -192,42 +222,30 @@ namespace CloverMobile
             }
         }
         // ** Safely add new work unit to the upload list !
-        /*
+        
         public void addNewUploadWorkUnit(WorkItem newItem)
         {
             lock (uploadWorkQueue)
             {
+                System.Diagnostics.Debug.WriteLine("nwc: adding workitem to upload que");
                 uploadWorkQueue.Add(newItem);
             }
         }
-        */
-        public void sendValues(bool lightning, bool heating)
+        
+        public void sendOutput(bool output)
         {
             // ** this is old function
             wcUp.Headers[HttpRequestHeader.ContentType] = "application/xml";
             xmlMessage = "";
 
-            if (heating)
-            {
-                xmlMessage = "<output><haschanged>true</haschanged><state>true</state></output>";
-                wcUp.UploadStringAsync(new Uri(serviceAddress + "outputs/1"), "PUT", xmlMessage);
-                wcUp.UploadStringCompleted += new UploadStringCompletedEventHandler(wcUpload_UploadStringCompleted);
-            }
-            else if (!heating)
-            {
-                xmlMessage = "<output><haschanged>true</haschanged><state>false</state></output>";
-                wcUp.UploadStringAsync(new Uri(serviceAddress + "outputs/1"), "PUT", xmlMessage);
-                wcUp.UploadStringCompleted += new UploadStringCompletedEventHandler(wcUpload_UploadStringCompleted);
-            }
-
-            else if (lightning)
+            if (output)
             {
                 xmlMessage = "<output><haschanged>true</haschanged><state>true</state></output>";
                 wcUp.UploadStringAsync(new Uri(serviceAddress + "outputs/2"), "PUT", xmlMessage);
                 wcUp.UploadStringCompleted += new UploadStringCompletedEventHandler(wcUpload_UploadStringCompleted);
             }
 
-            else if (lightning)
+            else if (!output)
             {
                 xmlMessage = "<output><haschanged>true</haschanged><state>false</state></output>";
                 wcUp.UploadStringAsync(new Uri(serviceAddress + "outputs/2"), "PUT", xmlMessage);
@@ -303,7 +321,31 @@ namespace CloverMobile
         }
         void wcUpload_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
         {
-            //uploading = false;
+            //sendOutput
+            uploading = false;
+            if (e.Error != null) // ** connection error
+            {
+                System.Diagnostics.Debug.WriteLine("CONNECTION ERROR! " + e.Error.ToString());
+                controller.printErrorMessage(e.Error.ToString());
+            }
+            try
+            {
+                System.Diagnostics.Debug.WriteLine("nwc: finished uploading xml.");
+                if (documentType == "sendOutput")
+                {
+                    System.Diagnostics.Debug.WriteLine("nwc: asking model for userinfo..");
+                    // Return HTTP message
+                    System.Diagnostics.Debug.WriteLine(e.Result.ToString());
+                    documentType = "";
+                 
+                }
+                
+            }
+            catch (WebException we)
+            {
+                we.Message.ToString();
+            }
+
         }
     }
 }

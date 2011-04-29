@@ -21,6 +21,7 @@ namespace CloverMobile
         DispatcherTimer timer;
         Controller controller;
         DataMaster model;
+        private bool Socket_Toggle = true;
         public Control()
         {
             InitializeComponent();
@@ -29,94 +30,61 @@ namespace CloverMobile
             controller.setActivePage(this);
             controller.setImageSource(this);
             // ** after 10 seconds, ask the model for new information
-            timer = new DispatcherTimer();
-            timer.Interval = new TimeSpan(0, 0, 0, 10, 0);
-            timer.Tick += new EventHandler(Timer_tick);
-            //timer.Start();
+            model = controller.getModel();
+            UpdateView();
         }
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
             controlScreenAnimation.Begin();
             
         }
+        private void Socket_Click(object sender, RoutedEventArgs e)
+        {
+            if (Socket_Toggle == true) 
+            {
+                System.Diagnostics.Debug.WriteLine("ui: changing socket output to false");
+                controller.sendOutputs(1, false);
+
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("ui: changing socket output to true");
+                controller.sendOutputs(1, true);
+            }
+
+            
+        }
+
+
         public void UpdateView()
         {
-            /*
-            foreach (Sensor s in sensors)
+            System.Diagnostics.Debug.WriteLine("UI: timer.");
+            controller.updateValueOfThisSensor(1);
+
+            foreach (Output o in model.currentOutputs)
             {
-                // get values to ui
+                if (o.name == "heating")
+                {
+                    if (o.state == "true")
+                    {
+                        SocketAnimation_ON.Begin();
+                        Socket_Toggle = true;
+                    }
+                    else
+                    {
+                        SocketAnimation_OFF.Begin();
+                        Socket_Toggle = false;
+                    }
+
+                }
             }
-            foreach (Output o in outputs)
-            { 
-                // get values to ui
-            }
-            */
         
         }
-        // ** THESE BUTTONS ARE FOR TESTING ONLY!
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER FOR USER INFO");
-            controller.getUserXML();               
-        }
+        
+        
 
-        private void button2_Click(object sender, RoutedEventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER FOR OUTPUTS");
-            controller.getOutputsXML();
-        }
+ 
 
-        private void button3_Click(object sender, RoutedEventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER FOR SENSORS");
-            controller.getSensorsXML();
-        }
-        private void sendChanges_Click(object sender, RoutedEventArgs e)
-        {
-
-            //controller.getXML();
-            System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER FOR SENSOR");
-            controller.getSensorHistory(1);
-            /*
-            bool heating = false;
-            bool lightning = false;
-            // ** get values from radiobuttons
-            if (radioButtonHeatingOn.IsChecked == true)
-            {
-                heating = true;
-
-            }
-            else if (radioButtonHeatingOff.IsChecked == true)
-            {
-                heating = false;
-            }
-
-            else if (radioButtonLightsOn.IsChecked == true)
-            {
-                lightning = true;
-            }
-
-            else if (radioButtonLightsOff.IsChecked == true)
-            {
-                lightning = false;
-
-            }
-            controller.sendHeatingAndLightning(heating, lightning);
-             */
-        }
-        private void Timer_tick(object sender, EventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("CALLING CONTROLLER FOR SENSORS");
-            //controller.getSensorsXML();
-            //outputs = model.getOutputs();
-            //sensors = model.getSensors();
-            UpdateView();
-        }
-
-        private void getSensors_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         // Hijack Back button event for reverse animation
         protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
@@ -124,19 +92,11 @@ namespace CloverMobile
             e.Cancel = true;
             System.Diagnostics.Debug.WriteLine("Reverse animation");
             controlScreenAnimationReverse.Begin();
-            
-            
-            
         }
-
-     
-
+        
         private void controlScreenAnimationReverse_Completed(object sender, EventArgs e)
         {
             NavigationService.GoBack();
         }
-
-        
-
     }
 }

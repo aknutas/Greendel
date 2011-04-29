@@ -256,9 +256,11 @@ namespace CloverMobile
             nwc.addNewDownloadWorkUnit(newItem); 
         }
 
-        public void sendHeatingAndLightning(bool heating, bool lightning)
-        { 
-    
+        public void sendOutputs(int sensorId, bool output1)
+        {
+            System.Diagnostics.Debug.WriteLine("controller: sending output state");
+            WorkItem newItem = new WorkItem("sendOutput", 0, sensorId, output1);
+            nwc.addNewUploadWorkUnit(newItem);
         }
         public void printErrorMessage(string message)
         {

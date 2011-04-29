@@ -135,7 +135,7 @@
 				</Setter.Value>
 			</Setter>
 		</Style>
-		<Storyboard x:Name="historyScreenAnimation" Completed="historyScreenAnimation_Completed">
+		<Storyboard x:Name="historyScreenAnimation">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ContentPanel">
 				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
@@ -175,9 +175,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--TitlePanel contains the name of the application and page title-->
 
-        <!--TitlePanel contains the name of the application and page title-->
 
         <!--TitlePanel contains the name of the application and page title-->
         <Image x:Name="background" Margin="-2806,-300,-2806,-4000" Source="Backgrounds/greendel_20pros.png" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2" Stretch="None" VerticalAlignment="Top">
