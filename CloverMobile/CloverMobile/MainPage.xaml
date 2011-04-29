@@ -170,12 +170,13 @@
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
             </TextBlock>
-            <TextBlock Margin="134,161,134,0" x:Name="currentPowerConsumptionTextBlock" FontSize="48" RenderTransformOrigin="0.974,0.466" FontFamily="Segoe WP Semibold" TextAlignment="Center" Height="102" VerticalAlignment="Top" >
+            <TextBlock Margin="170,161,98,0" x:Name="currentPowerConsumptionTextBlock" FontSize="48" RenderTransformOrigin="0.974,0.466" FontFamily="Segoe WP Black" TextAlignment="Right" Height="102" VerticalAlignment="Top" FontWeight="Bold" >
             	<TextBlock.Foreground>
             		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            			<GradientStop Color="#FFD8D8D8" Offset="0.611"/>
-            			<GradientStop Color="#FF979797" Offset="0.631"/>
-            			<GradientStop Color="#FFD8D8D8" Offset="0.68"/>
+            			<GradientStop Color="#FFC8C8C8" Offset="0.623"/>
+            			<GradientStop Color="#FFE0E0E0" Offset="0.615"/>
+            			<GradientStop Color="White"/>
+            			<GradientStop Color="#FF919191" Offset="1"/>
             		</LinearGradientBrush>
             	</TextBlock.Foreground>
             	<TextBlock.RenderTransform>
