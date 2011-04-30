@@ -57,7 +57,7 @@ class SocialmediasController < ApplicationController
       if(sensor.name == 'poweruse')
         poststring << "My house is currently consuming " + sensor.latestreading.to_s + "W\n"
       else
-        poststring << sensor.longname + " is currently at: " + sensor.latestreading.to_s + sensor.unit + "\n"
+        poststring << sensor.longname + " is currently at: " + sensor.latestreading.to_s + " " + sensor.unit + "\n"
       end
     end
 
