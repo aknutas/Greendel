@@ -10,6 +10,7 @@ xml.user do
       xml.address @user.device.location.address
       xml.town @user.device.location.town
       xml.weather do
+        xml.id @user.device.location.weather.id
         xml.temp @user.device.location.weather.temp
         xml.high @user.device.location.weather.high
         xml.low @user.device.location.weather.low

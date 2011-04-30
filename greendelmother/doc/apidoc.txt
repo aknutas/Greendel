@@ -24,7 +24,7 @@ OR
 /sensors/history/<sensorid>.xml?limit=<n>
 
 Weather histories:
-/histories/datastatus/<weatherid>.xml
+/weathers/histories/<weatherid>.xml
 
 Savings Goals:
 /savingsgoals/datastatus/<userid>.xml

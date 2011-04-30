@@ -29,10 +29,11 @@ class SocialmediasController < ApplicationController
     @socialmedia = Socialmedia.find(params[:id])
     @id = "me"
     @type = "feed"
-    @message = "Hello World!"
+    @message = "Hello World! Greendel is awesome."
+    @link = "http://greendel.appcloud.net"
 
     if (@socialmedia.facebookon)
-      MiniFB.post(@socialmedia.fbauth, @id, :type=>@type, :metadata=>true, :params => {:message => @message})
+      MiniFB.post(@socialmedia.fbauth, @id, :type=>@type, :metadata=>true, :params => {:message => @message, :link => @link})
       redirect_to(@socialmedia, :notice => 'Post was successful!')
     else
       redirect_to(@socialmedia, :notice => 'Post failed: You do not have facebook configured.')
@@ -42,9 +43,15 @@ class SocialmediasController < ApplicationController
   def postuse
     @socialmedia = Socialmedia.find(params[:id])
 
+    params['results'].split(',').each do |s|
+      sensors << s.to_i
+    end
+
+    @sensors.find_by_id(sensors)
+
     @id = "me"
     @type = "feed"
-    @message = "Hello World!"
+    @message = "Hello World from mobile!"
 
     if (@socialmedia.facebookon)
       MiniFB.post(@socialmedia.fbauth, @id, :type=>@type, :metadata=>true, :params => {:message => @message})

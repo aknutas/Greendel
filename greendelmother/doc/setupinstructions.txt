@@ -9,3 +9,7 @@ rake genhistory
 To start up a test server:
 ./script/server
 (or script\server)
+
+Facebook test user, Veli-Ensiö Järvinen:
+veliejarvinen@hotmail.fi
+vievievie
