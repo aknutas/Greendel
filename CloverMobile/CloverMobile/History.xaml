@@ -222,7 +222,7 @@
 
 
         <!--TitlePanel contains the name of the application and page title-->
-        <Image x:Name="background" Margin="-2806,-300,-2806,-4000" Source="Backgrounds/greendel_20pros.png" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2" Stretch="None" VerticalAlignment="Top">
+        <Image x:Name="background" Margin="-2806,-300,-2806,-4000" Source="Backgrounds/greendel_20pros.png" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2" Stretch="None" VerticalAlignment="Top" d:IsHidden="True">
         	<Image.RenderTransform>
         		<CompositeTransform/>
         	</Image.RenderTransform>
@@ -242,7 +242,7 @@
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="24,-8,0,8" RenderTransformOrigin="0.5,0.5">
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="0" RenderTransformOrigin="0.5,0.5">
         	<Grid.RenderTransform>
         		<CompositeTransform/>
         	</Grid.RenderTransform>
@@ -251,18 +251,18 @@
     <!--<TextBlock Height="35" HorizontalAlignment="Left" Margin="12,8,0,0" Name="fromInternet" Text="" VerticalAlignment="Top" Width="684" TextWrapping="Wrap" /> -->
             <my:SerialChart x:Name="chart1" DataSource="{Binding DataUnit}" CategoryValueMemberPath="time"
                          AxisForeground="White"
-                         GridStroke="#FF5E1E1E" Margin="7,0,7,23" Style="{StaticResource SerialChartStyle2}" LegendVisibility="Collapsed" PlotAreaBackground="#59000000" Height="249" VerticalAlignment="Bottom">
+                         GridStroke="#FF5E1E1E" Margin="5,257,9,69" Style="{StaticResource SerialChartStyle2}" LegendVisibility="Collapsed" PlotAreaBackground="#59000000">
                 <my:SerialChart.Graphs>
                 	<my:ColumnGraph ValueMemberPath="value" Title="" Brush="Blue" />
                     <!--<my:ColumnGraph ValueMemberPath="val2" Title="Column #2" Brush="#8000FF00" ColumnWidthAllocation="0.4" />-->
     <!--<my:AreaGraph ValueMemberPath="val3" Title="Area #1" Brush="#80FF0000" />-->
                 </my:SerialChart.Graphs>
             </my:SerialChart>
-            <TextBlock Height="50" HorizontalAlignment="Left" Margin="3,10,0,0" x:Name="currentSensorName" Text="" VerticalAlignment="Top" Width="445" FontSize="30" />
-            <toolkit:DatePicker HorizontalAlignment="Left" x:Name="startDatePicker" Width="168" ValueStringFormat="{}{0:yyyy-MM-dd}" FontSize="8" Margin="8,263,0,288" ValueChanged="DatePicker_ValueChanged" />
-            <toolkit:DatePicker HorizontalAlignment="Right" x:Name="endDatePicker" ValueStringFormat="{}{0:yyyy-MM-dd}" FontSize="8" Margin="0,263,8,274" d:LayoutOverrides="Height" ValueChanged="DatePicker_ValueChanged" />
-            <toolkit:ListPicker Header="Frequency"  Margin="21,151,292,-127" SelectionChanged="frequenciesListPicker_SelectionChanged" x:Name="frequenciesListPicker" d:LayoutOverrides="VerticalAlignment" />
-            <toolkit:ListPicker Header="Sensors"  Margin="21,39,155,-15" SelectionChanged="sensorsListPicker_SelectionChanged" x:Name="sensorsListPicker" d:LayoutOverrides="VerticalAlignment" />
+            <TextBlock Height="50" HorizontalAlignment="Left" Margin="19,220,0,0" x:Name="currentSensorName" VerticalAlignment="Top" Width="429" FontSize="30" />
+            <toolkit:DatePicker HorizontalAlignment="Left" x:Name="startDatePicker" ValueStringFormat="{}{0:yyyy-MM-dd}" FontSize="8" Margin="9,0,0,14" ValueChanged="DatePicker_ValueChanged" Height="58" VerticalAlignment="Bottom" />
+            <toolkit:DatePicker HorizontalAlignment="Right" x:Name="endDatePicker" ValueStringFormat="{}{0:yyyy-MM-dd}" FontSize="8" Margin="0,0,9,14" ValueChanged="DatePicker_ValueChanged" Height="58" VerticalAlignment="Bottom" />
+            <toolkit:ListPicker Header="Frequency"  Margin="21,117,292,-93" SelectionChanged="frequenciesListPicker_SelectionChanged" x:Name="frequenciesListPicker" />
+            <toolkit:ListPicker Header="Sensors"  Margin="21,9,155,15" SelectionChanged="sensorsListPicker_SelectionChanged" x:Name="sensorsListPicker" d:LayoutOverrides="VerticalAlignment" />
         </Grid>
     </Grid>
  

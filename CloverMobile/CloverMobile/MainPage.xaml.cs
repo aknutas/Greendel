@@ -63,7 +63,7 @@ namespace CloverMobile
             }
             else // ** there are no file, user has not logged in yet, display the splash screen
             {
-                PageTitle.Text = "Log In";
+                PageTitle.Text = "Login";
                 splashScreen.Visibility = System.Windows.Visibility.Visible;
                 errorMessageTextBlock.Text = "";
             }
@@ -142,6 +142,7 @@ namespace CloverMobile
         // ** this is called from controller if authentication fails
         public void printError()
         {
+            hideMainScreenElements();
             splashScreen.Visibility = System.Windows.Visibility.Visible;
             errorMessageTextBlock.Text = "Connection Error.";
         }
@@ -159,9 +160,8 @@ namespace CloverMobile
             currentWeather.Source = imgSource;
             currentWeather.Visibility = System.Windows.Visibility.Visible;
 
-            currentTemperatureTextBlock.Text += weatherNow.temp.ToString() + " " + weatherNow.unit.ToString();
-            highestTempTextBlock.Text += weatherNow.high.ToString() + " " + weatherNow.unit.ToString();
-            lowestTempTextBlock.Text += weatherNow.low.ToString() + " " + weatherNow.unit.ToString();
+            currentTemperatureTextBlock.Text = weatherNow.temp.ToString() + " °C";
+            
         }
         // ** this function is called by the controller when we have received sensors
         public void GetPowerUsage()
@@ -210,18 +210,20 @@ namespace CloverMobile
         }
         public void hideMainScreenElements()
         {
-            currentTemperatureTextBlock.Visibility = System.Windows.Visibility.Collapsed;
-            highestTempTextBlock.Visibility = System.Windows.Visibility.Collapsed;
-            lowestTempTextBlock.Visibility = System.Windows.Visibility.Collapsed;
-            currentWeather.Visibility = System.Windows.Visibility.Collapsed;
+            currentTemperatureTextBlock.Visibility = Visibility.Collapsed;
+            currentWeather.Visibility = Visibility.Collapsed;
+            PageTitle.Text = "Login";
+            Chart_Grid.Visibility = Visibility.Collapsed;
+            Powervalue_Grid.Visibility = Visibility.Collapsed;
             ApplicationBar.IsVisible = false;
         }
         public void showMainScreenElements()
         {
-            currentTemperatureTextBlock.Visibility = System.Windows.Visibility.Visible;
-            highestTempTextBlock.Visibility = System.Windows.Visibility.Visible;
-            lowestTempTextBlock.Visibility = System.Windows.Visibility.Visible;
-            currentWeather.Visibility = System.Windows.Visibility.Visible;
+            currentTemperatureTextBlock.Visibility = Visibility.Visible;
+            currentWeather.Visibility = Visibility.Visible;
+            PageTitle.Text = "Main";
+            Chart_Grid.Visibility = Visibility.Visible;
+            Powervalue_Grid.Visibility = Visibility.Visible;
             ApplicationBar.IsVisible = true;
         
         }
