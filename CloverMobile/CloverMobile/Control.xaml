@@ -190,7 +190,7 @@
         	<Grid.RenderTransform>
         		<CompositeTransform/>
         	</Grid.RenderTransform>
-        	<Grid x:Name="Grid_Output" Height="136" Margin="26,26,26,0" VerticalAlignment="Top">
+        	<Grid x:Name="Grid_Output" Height="136" Margin="26,29,26,0" VerticalAlignment="Top">
         		<Rectangle Stroke="Black" Fill="#FF181818" Opacity="0.35"/>
         		<TextBlock Margin="20,52,140,52" TextWrapping="Wrap" Text="Kitchen Wall Sockets" FontSize="24" d:LayoutOverrides="Height" HorizontalAlignment="Left"/>
         		<Button x:Name="Socket" Margin="0,24,10,16" HorizontalAlignment="Right" Width="152" FontSize="24" Height="96" Click="Socket_Click" >
@@ -200,7 +200,7 @@
         		</Button>
         	</Grid>
         	<Grid x:Name="Grid_Heating" Margin="26,188,26,26">
-        		<Rectangle Stroke="Black" Fill="#FF181818" Opacity="0.35"/>
+        		<Rectangle Stroke="Black" Fill="#59181818"/>
         		<TextBlock x:Name="Central_Heating" Margin="102,13,102,0" TextWrapping="Wrap" Text="Central Heating" FontSize="24" VerticalAlignment="Top" d:LayoutOverrides="Width" TextAlignment="Center"/>
         		<Button x:Name="Update" Content="Update" Margin="0,67,10,0" HorizontalAlignment="Right" Width="152" Height="96" VerticalAlignment="Top" FontSize="24"/>
         		<TextBlock x:Name="Forecast" Margin="119,195,118,168" TextWrapping="Wrap" Text="2 Day Forecast" d:LayoutOverrides="Width, Height" FontSize="24" TextAlignment="Center"/>

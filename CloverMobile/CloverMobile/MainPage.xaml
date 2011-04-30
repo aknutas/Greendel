@@ -161,54 +161,57 @@
         <Image Height="311" HorizontalAlignment="Left" x:Name="currentWeather" Stretch="Fill" VerticalAlignment="Top" Width="441" Margin="8,-80,0,0" Grid.Row="1" d:LayoutOverrides="VerticalAlignment" />
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,0,0">
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="0">
+            <TextBlock x:Name="currentTemperatureTextBlock" VerticalAlignment="Top" Margin="0,-8,130,0" HorizontalAlignment="Right" RenderTransformOrigin="-9.884,0.296" FontSize="48" Foreground="White" TextAlignment="Center" />
+            <Grid x:Name="Powervalue_Grid" Margin="60,120,60,260" Background="#66181818" VerticalAlignment="Top" Height="150">
+        		<TextBlock Margin="28,2,28,0" x:Name="consumptionTitle" Text="You are consuming" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" Height="35" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="21.333" >
+        			<TextBlock.RenderTransform>
+        				<CompositeTransform/>
+        			</TextBlock.RenderTransform>
+        		</TextBlock>
+        		<TextBlock Margin="9,49,5,18" x:Name="currentPowerConsumptionTextBlock" FontSize="48" RenderTransformOrigin="0.974,0.466" FontFamily="Segoe WP Black" TextAlignment="Center" FontWeight="Bold" >
+        			<TextBlock.Foreground>
+        				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+        					<GradientStop Color="#FFC8C8C8" Offset="0.623"/>
+        					<GradientStop Color="#FFE0E0E0" Offset="0.615"/>
+        					<GradientStop Color="White"/>
+        					<GradientStop Color="#FF919191" Offset="1"/>
+        				</LinearGradientBrush>
+        			</TextBlock.Foreground>
+        			<TextBlock.RenderTransform>
+        				<CompositeTransform/>
+        			</TextBlock.RenderTransform>
+        		</TextBlock>
+        	</Grid>
+            <Grid x:Name="Chart_Grid" Height="172" Margin="60,305,60,0" Background="#66181818" VerticalAlignment="Top">
             
-            <Rectangle Margin="82,130,84,255" Stroke="Black" Width="302" Fill="#FF181818" Opacity="0.35"/>
-            <Rectangle Margin="83,0,83,63" Width="302" Opacity="0.35" StrokeDashArray="1 0" StrokeMiterLimit="0" Stroke="Black" Fill="#FF181818" Height="150" VerticalAlignment="Bottom"/>
-            
-            <my:SerialChart x:Name="powerConsumptionChart" DataSource="{Binding DataUnit}" CategoryValueMemberPath="time"
-                         AxisForeground="White"
-                         PlotAreaBackground="Black"
-                         GridStroke="#FF5E5E5E" Margin="100,346,100,66" FontSize="10" LegendVisibility="Collapsed" Style="{StaticResource SerialChartStyle1}" d:LayoutOverrides="Width" Opacity="0.55" BorderBrush="#FF838383">
-                <my:SerialChart.Graphs>
-                    <!--<my:ColumnGraph ValueMemberPath="val2" Title="Column #2" Brush="#8000FF00" ColumnWidthAllocation="0.4" />--><!--<my:AreaGraph ValueMemberPath="val3" Title="Area #1" Brush="#80FF0000" />-->
-                	<my:LineGraph ValueMemberPath="value" Title="Power Consumption" Brush="#FF00FF27" />
-                </my:SerialChart.Graphs>
-            </my:SerialChart>
-            <TextBlock Margin="90,134,112,0" x:Name="consumptionTitle" Text="You are consuming:" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" Height="35" VerticalAlignment="Top" >
-            	<TextBlock.RenderTransform>
-            		<CompositeTransform/>
-            	</TextBlock.RenderTransform>
-            </TextBlock>
-            <TextBlock Margin="100,161,98,0" x:Name="currentPowerConsumptionTextBlock" FontSize="48" RenderTransformOrigin="0.974,0.466" FontFamily="Segoe WP Black" TextAlignment="Right" Height="102" VerticalAlignment="Top" FontWeight="Bold" >
-            	<TextBlock.Foreground>
-            		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            			<GradientStop Color="#FFC8C8C8" Offset="0.623"/>
-            			<GradientStop Color="#FFE0E0E0" Offset="0.615"/>
-            			<GradientStop Color="White"/>
-            			<GradientStop Color="#FF919191" Offset="1"/>
-            		</LinearGradientBrush>
-            	</TextBlock.Foreground>
-            	<TextBlock.RenderTransform>
-            		<CompositeTransform/>
-            	</TextBlock.RenderTransform>
-            </TextBlock>
-            <Canvas HorizontalAlignment="Left" Margin="6,8,0,-192" x:Name="splashScreen" Width="444" Visibility="Collapsed" Background="#EF000000" Opacity="20" RenderTransformOrigin="0.5,0.5">
+            	<my:SerialChart x:Name="powerConsumptionChart" DataSource="{Binding DataUnit}" CategoryValueMemberPath="time"
+            		AxisForeground="White"
+            		PlotAreaBackground="Black"
+            		GridStroke="#FF5E5E5E" FontSize="10" LegendVisibility="Collapsed" Style="{StaticResource SerialChartStyle1}" Opacity="0.55" BorderBrush="#FF838383" Margin="0,25,0,0">
+            		<my:SerialChart.Graphs>
+            			<my:LineGraph ValueMemberPath="value" Title="Power Consumption" Brush="#FF00FF27" />
+            		</my:SerialChart.Graphs>
+            	</my:SerialChart>
+            	<TextBlock Margin="28,2,28,0" x:Name="ConsumptionHistoryTitle" Text="Consumption history" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" Height="35" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="21.333" >
+            		<TextBlock.RenderTransform>
+            			<CompositeTransform/>
+            		</TextBlock.RenderTransform>
+            	</TextBlock>
+            </Grid>
+            <Canvas Margin="10" x:Name="splashScreen" RenderTransformOrigin="0.5,0.5" Background="#A1000000" Visibility="Collapsed">
             	<Canvas.RenderTransform>
             		<CompositeTransform/>
             	</Canvas.RenderTransform>
-                 <TextBox Height="72" HorizontalAlignment="Left" x:Name="userNameTextBox" Text="testipaavo" VerticalAlignment="Top" Width="403" Canvas.Left="23" Canvas.Top="78"  />
-                <TextBlock Height="30" HorizontalAlignment="Left" x:Name="userNameTextBlock" Text="User Name" VerticalAlignment="Top" Canvas.Left="34" Canvas.Top="33" />
-                <TextBlock Height="30" HorizontalAlignment="Left" x:Name="passwordTextBlock" Text="Password" VerticalAlignment="Top" Canvas.Left="34" Canvas.Top="167" />
-                <TextBlock Canvas.Left="34" Canvas.Top="405" Height="30" x:Name="errorMessageTextBlock" Text="" Width="380" Foreground="Red" />
-                <PasswordBox Canvas.Left="23" Canvas.Top="210" Height="71" x:Name="passwordTextBox" Width="403" Password="testi" />
-                <TextBlock Canvas.Left="34" Canvas.Top="300" Height="30" x:Name="serverAddressTextBlock" Text="Server Address" Width="117" />
-                <Button Content="Log In" Height="71" x:Name="loginButton" Width="160" Click="loginButton_Click" Grid.Row="1" Canvas.Left="146" Canvas.Top="439" />
-                <TextBox Height="71" x:Name="serverAddressTextBox" Text="http://localhost:3000" Grid.Row="1" Canvas.Left="23" Width="403" Canvas.Top="344" DataContext="{Binding}" />
+            	<TextBox x:Name="userNameTextBox" Text="testipaavo" Canvas.Top="68" Height="72" Width="400" HorizontalAlignment="Left" Margin="35,0,0,0"  />
+            	<TextBlock Height="30" HorizontalAlignment="Left" x:Name="userNameTextBlock" Text="User Name" VerticalAlignment="Top" Canvas.Top="19" Canvas.Left="55" />
+            	<TextBlock Height="30" HorizontalAlignment="Left" x:Name="passwordTextBlock" Text="Password" VerticalAlignment="Top" Canvas.Top="153" Canvas.Left="55" />
+            	<PasswordBox Canvas.Top="196" x:Name="passwordTextBox" Password="testi" Height="72" Width="400" HorizontalAlignment="Left" Margin="35,0,0,0" />
+            	<TextBlock Canvas.Top="288" Height="30" x:Name="serverAddressTextBlock" Text="Server Address" Width="117" Canvas.Left="55" />
+            	<Button Height="71" x:Name="loginButton" Width="160" Click="loginButton_Click" Grid.Row="1" Canvas.Left="159" Canvas.Top="435" HorizontalAlignment="Left" Content="Login" />
+            	<TextBlock Height="30" x:Name="errorMessageTextBlock" Text="" Width="380" Foreground="Red" Canvas.Top="408" Canvas.Left="44" />
+            	<TextBox x:Name="serverAddressTextBox" Text="http://localhost:3000" Grid.Row="1" Canvas.Top="330" DataContext="{Binding}" Height="72" Width="400" HorizontalAlignment="Left" Margin="35,0,0,0" />
             </Canvas>
-            <TextBlock Height="30" HorizontalAlignment="Left" x:Name="currentTemperatureTextBlock" Text="Temperature: " VerticalAlignment="Top" Width="172" Margin="6,6,0,0" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="209,0,0,0" x:Name="highestTempTextBlock" Text="High:" VerticalAlignment="Top" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="209,0,0,455" x:Name="lowestTempTextBlock" Text="Low:" VerticalAlignment="Bottom" />
             <!--
             <HyperlinkButton Content="Settings" Height="30" HorizontalAlignment="Left" Margin="18,531,0,0" Name="hyperlinkButton1" VerticalAlignment="Top" Width="200" NavigateUri="/CloverMobile;component/Settings.xaml" />
             <HyperlinkButton Content="History" Height="30" HorizontalAlignment="Left" Margin="250,531,0,0" Name="hyperlinkButton2" VerticalAlignment="Top" Width="200" NavigateUri="/CloverMobile;component/History.xaml" />
