@@ -14,7 +14,7 @@
 		<Storyboard x:Name="socialScreenAnimation">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="background">
 				<EasingDoubleKeyFrame KeyTime="0:0:0.106" Value="0"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="-750"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="-750"/>
 			</DoubleAnimationUsingKeyFrames>
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ApplicationTitle">
 				<EasingDoubleKeyFrame KeyTime="0" Value="350"/>
@@ -127,7 +127,29 @@
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0"/>
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0" RenderTransformOrigin="0.5,0.5" Opacity="1">
+        	<Grid.RenderTransform>
+        		<CompositeTransform SkewY="0" TranslateX="0" TranslateY="0"/>
+        	</Grid.RenderTransform>
+        	<Grid.Projection>
+        		<PlaneProjection GlobalOffsetX="0"/>
+        	</Grid.Projection>
+        	<Rectangle x:Name="rectangle" Fill="Black" Margin="20,55,20,206" Stroke="Black" Opacity="0.58" RenderTransformOrigin="0.5,0.5">
+        		<Rectangle.RenderTransform>
+        			<CompositeTransform/>
+        		</Rectangle.RenderTransform>
+        	</Rectangle>
+        	<TextBlock x:Name="textBlock" Margin="112,0,110,206" TextWrapping="Wrap" Text="Share in Facebook! " FontSize="26.667" Height="54" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
+        		<TextBlock.RenderTransform>
+        			<CompositeTransform/>
+        		</TextBlock.RenderTransform>
+        	</TextBlock>
+        	<Image x:Name="image" Margin="165,215,165,264" Source="Graphics/facebookicon.png" Stretch="Fill" Width="128" Height="128" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" RenderTransformOrigin="0.5,0.5">
+        		<Image.RenderTransform>
+        			<CompositeTransform/>
+        		</Image.RenderTransform>
+        	</Image>
+        </Grid>
     </Grid>
 
 </phone:PhoneApplicationPage>

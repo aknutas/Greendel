@@ -203,7 +203,7 @@
         		<Rectangle Stroke="Black" Fill="#FF181818" Opacity="0.35"/>
         		<TextBlock x:Name="Central_Heating" Margin="102,13,102,0" TextWrapping="Wrap" Text="Central Heating" FontSize="24" VerticalAlignment="Top" d:LayoutOverrides="Width" TextAlignment="Center"/>
         		<Button x:Name="Update" Content="Update" Margin="0,67,10,0" HorizontalAlignment="Right" Width="152" Height="96" VerticalAlignment="Top" FontSize="24"/>
-        		<TextBlock x:Name="Forecast" Margin="119,0,118,122" TextWrapping="Wrap" Text="2 Day Forecast" d:LayoutOverrides="Width" VerticalAlignment="Bottom" FontSize="24" TextAlignment="Center"/>
+        		<TextBlock x:Name="Forecast" Margin="119,195,118,168" TextWrapping="Wrap" Text="2 Day Forecast" d:LayoutOverrides="Width, Height" FontSize="24" TextAlignment="Center"/>
         		<TextBlock Margin="32,57,172,0" TextWrapping="Wrap" Text="Thermostat °C" VerticalAlignment="Top" TextAlignment="Center" d:LayoutOverrides="Width"/>
         		<TextBox Height="80" Margin="59,88,0,0" TextWrapping="Wrap" Text="22" VerticalAlignment="Top" TextAlignment="Center" HorizontalAlignment="Left" Width="142"/>
         	</Grid>

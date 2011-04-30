@@ -101,7 +101,7 @@
  
     <!--Sample code showing usage of ApplicationBar-->
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" BackgroundColor="#FF07D600" ForegroundColor="White">
             <!--<shell:ApplicationBarIconButton IconUri="/Icons/appbar.back.rest.png" Text="Back" />-->
             <shell:ApplicationBarIconButton IconUri="/Icons/appbar.folder.rest.png" Text="History" Click="ApplicationBarIconButtonHistory_Click" />
             <shell:ApplicationBarIconButton IconUri="/Icons/appbar.edit.rest.png" Text="Control" Click="ApplicationBarControlIconButtonControl_Click" />
@@ -170,7 +170,7 @@
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
             </TextBlock>
-            <TextBlock Margin="170,161,98,0" x:Name="currentPowerConsumptionTextBlock" FontSize="48" RenderTransformOrigin="0.974,0.466" FontFamily="Segoe WP Black" TextAlignment="Right" Height="102" VerticalAlignment="Top" FontWeight="Bold" >
+            <TextBlock Margin="100,161,98,0" x:Name="currentPowerConsumptionTextBlock" FontSize="48" RenderTransformOrigin="0.974,0.466" FontFamily="Segoe WP Black" TextAlignment="Right" Height="102" VerticalAlignment="Top" FontWeight="Bold" >
             	<TextBlock.Foreground>
             		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             			<GradientStop Color="#FFC8C8C8" Offset="0.623"/>
