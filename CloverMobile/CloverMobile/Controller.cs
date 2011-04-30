@@ -284,6 +284,26 @@ namespace CloverMobile
             WorkItem newItem = new WorkItem("sendOutput", outputId, output1);
             nwc.addNewUploadWorkUnit(newItem);
         }
+        public void SendToFaceBook(int userId, int sensor1value, int sensor2value)
+        {
+            System.Diagnostics.Debug.WriteLine("controller: sending to facebook");
+            if (sensor1value != 0 && sensor2value == 0)
+            {
+                WorkItem newItem = new WorkItem(true, userId, "sendToFaceBook", sensor1value);
+                nwc.addNewDownloadWorkUnit(newItem);
+            }
+            else if (sensor1value == 0 && sensor2value != 0)
+            {
+                WorkItem newItem = new WorkItem(true, userId, "sendToFaceBook", sensor2value);
+                nwc.addNewDownloadWorkUnit(newItem);
+            }
+            else
+            {
+                WorkItem newItem = new WorkItem(true, userId, "sendToFaceBook", sensor1value, sensor2value);
+                nwc.addNewDownloadWorkUnit(newItem);
+            }
+
+        }
         public void printErrorMessage(string message)
         {
             if (mainPageRef != null)
@@ -337,5 +357,15 @@ namespace CloverMobile
             }
         
         }
+        public void informFacebookPostOk()
+        {
+            if (socialRef != null)
+            {
+                socialRef.statusMessageTextBlock.Text = "Selected values successfully posted to facebook!";
+
+            }
+        
+        }
+
     }
 }

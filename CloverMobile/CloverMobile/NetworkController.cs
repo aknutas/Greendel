@@ -39,6 +39,7 @@ namespace CloverMobile
         private WorkItem currentUploadWorkItem;
         private int currentSensorId;
         private int currentOutputId;
+        private string uri;
 
 
         public NetworkController()
@@ -113,7 +114,7 @@ namespace CloverMobile
                             currentSensorId = currentDownloadWorkItem.sensorId;
                             // /sensors/history/<sensorid>.xml?avgscale=<hourly|daily|monthly>&startdate=<yyyy-mm-dd>&enddate=<yyyy-mm-dd>
                             // /sensors/history/<sensorid>.xml?diffscale=<hourly|daily|monthly>&startdate=<yyyy-mm-dd>&enddate=<yyyy-mm-dd>
-                            string uri = serviceAddress + "/sensors/history/" + currentDownloadWorkItem.sensorId.ToString() + ".xml?" + currentDownloadWorkItem.historyInfoType + "=" + currentDownloadWorkItem.frequency + "&startdate=" + currentDownloadWorkItem.start + "&enddate=" + currentDownloadWorkItem.end;
+                            uri = serviceAddress + "/sensors/history/" + currentDownloadWorkItem.sensorId.ToString() + ".xml?" + currentDownloadWorkItem.historyInfoType + "=" + currentDownloadWorkItem.frequency + "&startdate=" + currentDownloadWorkItem.start + "&enddate=" + currentDownloadWorkItem.end;
                             System.Diagnostics.Debug.WriteLine("nwc: current uri is:" + uri);
                             wcDown.DownloadStringAsync(new Uri(serviceAddress + "/sensors/history/" + currentDownloadWorkItem.sensorId.ToString() + ".xml?" + currentDownloadWorkItem.historyInfoType + "="  + currentDownloadWorkItem.frequency + "&startdate=" + currentDownloadWorkItem.start + "&enddate=" + currentDownloadWorkItem.end));
                             break;
@@ -128,6 +129,22 @@ namespace CloverMobile
                             downloaDocumentType = "outputUpdate";
                             currentOutputId = currentDownloadWorkItem.outputId;
                             wcDown.DownloadStringAsync(new Uri(serviceAddress + "/outputs/" + currentOutputId.ToString() + ".xml"));
+                            break;
+                        case "sendToFaceBook":
+                            downloaDocumentType = "sendToFaceBook";
+                            if (currentDownloadWorkItem.sensor2ToPublished == 0)
+                            {
+                                uri = serviceAddress + "/socialmedias/postuse/" + currentDownloadWorkItem.userId.ToString() + ".xml?" + "sensorid=" + currentDownloadWorkItem.sensor1ToPublished.ToString();
+                                System.Diagnostics.Debug.WriteLine("nwc: facebook uri is:" + uri);
+                                wcDown.DownloadStringAsync(new Uri(uri));
+                            }
+                            else
+                            {
+                                uri = serviceAddress + "/socialmedias/postuse/" + currentDownloadWorkItem.userId.ToString() + ".xml?" + "sensorid=" + currentDownloadWorkItem.sensor1ToPublished.ToString() + "," + currentDownloadWorkItem.sensor2ToPublished.ToString();
+                                System.Diagnostics.Debug.WriteLine("nwc: facebook uri is:" + uri);
+                                wcDown.DownloadStringAsync(new Uri(uri));
+                            }
+                            // /socialmedias/postuse/<userid>.xml?sensorid=<sensorid>,<sensorid>,<sensorid>
                             break;
                                 
                         default:
@@ -180,9 +197,10 @@ namespace CloverMobile
                             }
                             wcUp.Headers[HttpRequestHeader.ContentType] = "application/xml";
                             wcUp.UploadStringAsync(new Uri(serviceAddress + "/outputs/" + currentOutputId + ".xml"), "PUT", xmlMessage);
-                            System.Diagnostics.Debug.WriteLine(xmlMessage); 
+                            //System.Diagnostics.Debug.WriteLine(xmlMessage); 
                             
                             break;
+
 
                         default:
                             break;
@@ -324,6 +342,15 @@ namespace CloverMobile
                     downloaDocumentType = "";
                     controller.outputUpdated();
                 }
+                else if (downloaDocumentType == "sendToFaceBook")
+                {
+                    System.Diagnostics.Debug.WriteLine("nwc: facebook update downloaded");
+                    
+                    dataDoc = XDocument.Load(new StringReader(e.Result));
+                    System.Diagnostics.Debug.WriteLine(e.Result.ToString());
+                    downloaDocumentType = "";
+                    controller.informFacebookPostOk();
+                }
             }
             catch (WebException we)
             {
@@ -350,7 +377,9 @@ namespace CloverMobile
                     
                     //controller.getOutputsXML();
                     //controller.updateControlPageView();  
-                }              
+                }
+
+
             }
             catch (WebException we)
             {

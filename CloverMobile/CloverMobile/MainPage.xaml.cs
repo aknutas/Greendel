@@ -166,6 +166,7 @@ namespace CloverMobile
         // ** this function is called by the controller when we have received sensors
         public void GetPowerUsage()
         {
+            ApplicationBar.IsVisible = true;
             sensorsReceived = true;
             // ** get latest 20 values for power consumption graph
             System.Diagnostics.Debug.WriteLine("ui: getting latest 20 points for power use sensor.");
