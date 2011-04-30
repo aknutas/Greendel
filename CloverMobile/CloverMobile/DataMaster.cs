@@ -66,6 +66,7 @@ namespace CloverMobile
             };
             foreach (User u in user)
             {
+                currentUser.id = u.id;
                 currentUser.name = u.name;
                 currentUser.realName = u.realName;     
             }

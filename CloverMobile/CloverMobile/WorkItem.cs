@@ -14,6 +14,7 @@ namespace CloverMobile
     public class WorkItem
     {
         public string documentName { get; set; }
+        public int userId { get; set; }
         public int deviceId { get; set; }
         public int sensorId { get; set; }
         public string historyInfoType { get; set; }
@@ -23,10 +24,9 @@ namespace CloverMobile
         public int pointsToGet { get; set; }
         public string outputName { get; set; }
         public bool outputState { get; set;}
-        
         public int outputId { get; set; }
-
-
+        public int sensor1ToPublished { get; set; }
+        public int sensor2ToPublished { get; set; }
 
         public WorkItem(string workName)
         {
@@ -69,10 +69,25 @@ namespace CloverMobile
             outputId = outputID;
             outputState = outputSt;     
         }
-        public WorkItem(string workname, int deviceID, int outputID, bool value)
+        public WorkItem(string workname, int deviceID, int outputID, bool output)
         {
             documentName = workname;
             outputId = outputID;
+        }
+
+        public WorkItem(bool facebook, int userID, string workName, int sensor1ID)
+        {
+            documentName = workName;
+            userId = userID;
+            sensor1ToPublished = sensor1ID;
+                  
+        }
+        public WorkItem(bool facebook, int userID, string workName, int sensor1iD, int sensor2iD)
+        {
+            documentName = workName;
+            userId = userID;
+            sensor1ToPublished = sensor1iD;
+            sensor2ToPublished = sensor2iD;
         }
     }
 }

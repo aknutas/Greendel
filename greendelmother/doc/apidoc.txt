@@ -30,7 +30,7 @@ Savings Goals:
 /savingsgoals/datastatus/<userid>.xml
 
 Social media information:
-/socialmedia/<userid>.xml
+/socialmedias/<userid>.xml
 Option:
 Post current sensor data with:
 /socialmedias/postuse/<userid>.xml?sensorid=<sensorid>,<sensorid>,<sensorid>

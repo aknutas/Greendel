@@ -134,7 +134,7 @@
         	<Grid.Projection>
         		<PlaneProjection GlobalOffsetX="0"/>
         	</Grid.Projection>
-        	<Rectangle x:Name="rectangle" Fill="Black" Margin="20,55,20,206" Stroke="Black" Opacity="0.58" RenderTransformOrigin="0.5,0.5">
+        	<Rectangle x:Name="rectangle" Fill="Black" Margin="20,29,20,206" Stroke="Black" Opacity="0.58" RenderTransformOrigin="0.5,0.5">
         		<Rectangle.RenderTransform>
         			<CompositeTransform/>
         		</Rectangle.RenderTransform>
@@ -144,11 +144,10 @@
         			<CompositeTransform/>
         		</TextBlock.RenderTransform>
         	</TextBlock>
-        	<Image x:Name="image" Margin="165,215,165,264" Source="Graphics/facebookicon.png" Stretch="Fill" Width="128" Height="128" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" RenderTransformOrigin="0.5,0.5">
-        		<Image.RenderTransform>
-        			<CompositeTransform/>
-        		</Image.RenderTransform>
-        	</Image>
+            <Button Content="Button" Height="72" HorizontalAlignment="Left" Margin="139,269,0,0" Name="button1" VerticalAlignment="Top" Width="160" Click="button1_Click" />
+            <CheckBox Height="72" HorizontalAlignment="Left" Margin="32,60,0,0" VerticalAlignment="Top" Name="sensor1CheckBox" />
+            <CheckBox Height="72" HorizontalAlignment="Left" Margin="33,150,0,0" Name="sensor2CheckBox" VerticalAlignment="Top" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="106,239,0,0" Name="statusMessageTextBlock" Text="" VerticalAlignment="Top" Width="244" Foreground="#FF77FF00" />
         </Grid>
     </Grid>
 
