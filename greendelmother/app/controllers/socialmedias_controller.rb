@@ -43,15 +43,27 @@ class SocialmediasController < ApplicationController
   def postuse
     @socialmedia = Socialmedia.find(params[:id])
 
-    params['results'].split(',').each do |s|
-      sensors << s.to_i
+    sensorids = Array.new
+
+    params['sensorid'].split(',').each do |s|
+      sensorids << s.to_i
     end
 
-    @sensors.find_by_id(sensors)
+    @sensors = Sensor.find_all_by_id(sensorids)
+
+    poststring = "Greendel status report! \n"
+
+    @sensors.each do |sensor|
+      if(sensor.name == 'poweruse')
+        poststring << "My house is currently consuming " + sensor.latestreading.to_s + "W\n"
+      else
+        poststring << sensor.longname + " is currently at: " + sensor.latestreading.to_s + sensor.unit + "\n"
+      end
+    end
 
     @id = "me"
     @type = "feed"
-    @message = "Hello World from mobile!"
+    @message = poststring
 
     if (@socialmedia.facebookon)
       MiniFB.post(@socialmedia.fbauth, @id, :type=>@type, :metadata=>true, :params => {:message => @message})
