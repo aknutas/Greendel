@@ -21,7 +21,12 @@ namespace CloverMobile
         public string start { get; set; }
         public string end { get; set; }
         public int pointsToGet { get; set; }
-        public bool output_state { get; set;}
+        public string outputName { get; set; }
+        public bool outputState { get; set;}
+        
+        public int outputId { get; set; }
+
+
 
         public WorkItem(string workName)
         {
@@ -58,12 +63,16 @@ namespace CloverMobile
             deviceId = deviceID;
             pointsToGet = points;
         }
-        public WorkItem(string workName, int deviceID, int sensorID, bool state) 
+        public WorkItem (string workName, int outputID, bool outputSt)
         {
             documentName = workName;
-            sensorId = sensorID;
-            deviceId = deviceID;
-            state = output_state;
+            outputId = outputID;
+            outputState = outputSt;     
+        }
+        public WorkItem(string workname, int outputID)
+        {
+            documentName = workname;
+            outputId = outputID;
         }
     }
 }

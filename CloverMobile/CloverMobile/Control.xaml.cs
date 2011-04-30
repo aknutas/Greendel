@@ -18,10 +18,10 @@ namespace CloverMobile
 {
     public partial class Control : PhoneApplicationPage
     {
-        DispatcherTimer timer;
         Controller controller;
         DataMaster model;
-        private bool Socket_Toggle = true;
+        private bool Socket_Toggle;
+
         public Control()
         {
             InitializeComponent();
@@ -29,9 +29,11 @@ namespace CloverMobile
             model = controller.getModel();
             controller.setActivePage(this);
             controller.setImageSource(this);
-            // ** after 10 seconds, ask the model for new information
-            model = controller.getModel();
-            UpdateView();
+
+            // ** get outputs
+            controller.getOutputsXML();
+
+
         }
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
@@ -40,52 +42,45 @@ namespace CloverMobile
         }
         private void Socket_Click(object sender, RoutedEventArgs e)
         {
-            if (Socket_Toggle == true) 
+            if (Socket_Toggle == true)
             {
                 System.Diagnostics.Debug.WriteLine("ui: changing socket output to false");
                 controller.sendOutputs(1, false);
-                
-
             }
             else
             {
                 System.Diagnostics.Debug.WriteLine("ui: changing socket output to true");
-                controller.sendOutputs(1, true);
+                controller.sendOutputs(1, true);     
             }
-
-            
         }
-
-
-        public void UpdateView()
+        public void UpdateView() // this is called by controller when the outputs are updated
         {
-            System.Diagnostics.Debug.WriteLine("UI: timer.");
-            controller.getOutputsXML();
-
+            
+            
+            /*
             foreach (Output o in model.currentOutputs)
             {
-                if (o.name == "heating")
+                if (o.name == "wall_socket")
                 {
                     if (o.state == "true")
                     {
-                        SocketAnimation_ON.Begin();
+                        Socket.Content = "ON";
                         Socket_Toggle = true;
+                        //SocketAnimation_ON.Begin();
+
                     }
-                    else
+                    else if (o.state == "false")
                     {
-                        SocketAnimation_OFF.Begin();
+                        Socket.Content = "OFF";
                         Socket_Toggle = false;
+                        //SocketAnimation_OFF.Begin();
                     }
 
                 }
             }
-        
+             */
+            
         }
-        
-        
-
- 
-
 
         // Hijack Back button event for reverse animation
         protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
@@ -98,6 +93,32 @@ namespace CloverMobile
         private void controlScreenAnimationReverse_Completed(object sender, EventArgs e)
         {
             NavigationService.GoBack();
+        }
+
+        // ** this is called by the controller when the outuputs are received!
+        public void OutputsReceived()
+        {
+            // ** when outputs received, set the current value for outputs
+            foreach (Output o in model.currentOutputs)
+            {
+                if (o.name == "wall_socket")
+                {
+                    if (o.state == "true")
+                    {
+                        Socket_Toggle = true;
+                        Socket.Content = "ON";
+                        //SocketAnimation_ON.Begin();
+
+                    }
+                    else
+                    {
+                        Socket_Toggle = false;
+                        Socket.Content = "OFF";
+                        //SocketAnimation_OFF.Begin();
+                    }
+                }
+            }
+        
         }
     }
 }

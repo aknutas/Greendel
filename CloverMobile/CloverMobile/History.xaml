@@ -258,8 +258,8 @@
     <!--<my:AreaGraph ValueMemberPath="val3" Title="Area #1" Brush="#80FF0000" />-->
                 </my:SerialChart.Graphs>
             </my:SerialChart>
-            <toolkit:ListPicker Header="Sensors"  SelectedIndex="0" Margin="5,439,171,-415" SelectionChanged="sensorsListPicker_SelectionChanged" x:Name="sensorsListPicker" />
-            <toolkit:ListPicker Header="Frequency" SelectedIndex="1" Margin="305,438,8,-414" SelectionChanged="frequenciesListPicker_SelectionChanged" x:Name="frequenciesListPicker" />
+            <toolkit:ListPicker Header="Sensors"  SelectedIndex="0" Margin="7,364,169,-340" SelectionChanged="sensorsListPicker_SelectionChanged" x:Name="sensorsListPicker" />
+            <toolkit:ListPicker Header="Frequency" SelectedIndex="1" Margin="300,367,13,-343" SelectionChanged="frequenciesListPicker_SelectionChanged" x:Name="frequenciesListPicker" />
             <TextBlock Height="50" HorizontalAlignment="Left" Margin="3,10,0,0" x:Name="currentSensorName" Text="" VerticalAlignment="Top" Width="445" FontSize="30" />
             <Button Content="Update" Height="72" HorizontalAlignment="Left" Margin="317,608,0,0" x:Name="button1" VerticalAlignment="Top" Width="138" Click="button1_Click" />
             <toolkit:DatePicker HorizontalAlignment="Left" x:Name="startDatePicker" VerticalAlignment="Top" Height="58" Width="168" ValueStringFormat="{}{0:yyyy-MM-dd}" FontSize="8" Margin="-1,61,0,0" />

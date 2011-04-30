@@ -236,6 +236,13 @@ namespace CloverMobile
             WorkItem newItem = new WorkItem("outputs", device.deviceId);
             nwc.addNewDownloadWorkUnit(newItem);
         }
+        public void updateValueForThisOutput(int outputId)
+        {
+            WorkItem newItem = new WorkItem("outputUpdate", outputId);
+            nwc.addNewDownloadWorkUnit(newItem);   
+    
+        }
+
         public void getSensorHistory(int sensorId)
         {
             WorkItem newItem = new WorkItem("sensor", 0, sensorId);
@@ -257,10 +264,10 @@ namespace CloverMobile
             nwc.addNewDownloadWorkUnit(newItem); 
         }
 
-        public void sendOutputs(int sensorId, bool output1)
+        public void sendOutputs(int outputId, bool output1)
         {
             System.Diagnostics.Debug.WriteLine("controller: sending output state");
-            WorkItem newItem = new WorkItem("sendOutput", 0, sensorId, output1);
+            WorkItem newItem = new WorkItem("sendOutput", outputId, output1);
             nwc.addNewUploadWorkUnit(newItem);
         }
         public void printErrorMessage(string message)
@@ -289,6 +296,22 @@ namespace CloverMobile
             if (historyRef != null)
             {
                 historyRef.SetGraphDataContext();
+            }
+        }
+        public void updateControlPageView()
+        {
+            if (controlRef != null)
+            {
+                controlRef.UpdateView();
+            
+            }
+        }
+        public void Outputsdownloaded()
+        {
+            if (controlRef != null)
+            {
+                controlRef.OutputsReceived();
+
             }
         }
     }

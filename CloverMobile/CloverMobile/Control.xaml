@@ -211,7 +211,7 @@
         	<Grid x:Name="Grid_Output" Height="136" Margin="26,26,26,0" VerticalAlignment="Top">
         		<Rectangle Stroke="Black" Fill="#FF181818" Opacity="0.35"/>
         		<TextBlock Margin="20,52,140,52" TextWrapping="Wrap" Text="Kitchen Wall Sockets" FontSize="24" d:LayoutOverrides="Height" HorizontalAlignment="Left"/>
-        		<Button x:Name="Socket" Content="ON" Margin="0,24,10,16" HorizontalAlignment="Right" Width="152" FontSize="24" Height="96" Click="Socket_Click" Background="#7FE43434" />
+        		<Button x:Name="Socket" Margin="0,24,10,16" HorizontalAlignment="Right" Width="152" FontSize="24" Height="96" Click="Socket_Click" Background="#7FE43434" />
         	</Grid>
         	<Grid x:Name="Grid_Heating" Margin="26,188,26,26">
         		<Rectangle Stroke="Black" Fill="#FF181818" Opacity="0.35"/>

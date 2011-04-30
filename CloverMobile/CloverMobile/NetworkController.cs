@@ -36,6 +36,7 @@ namespace CloverMobile
         private List<WorkItem> uploadWorkQueue;
         private WorkItem currentWorkItem;
         private int currentSensorId;
+        private int currentOutputId;
 
 
         public NetworkController()
@@ -47,11 +48,6 @@ namespace CloverMobile
             wcDown.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted);
             wcUp = new WebClient();
             wcUp.UploadStringCompleted += new UploadStringCompletedEventHandler(wcUpload_UploadStringCompleted);
-            
-            
-
-            
-
 
             downloader = new Thread(doDownloading);
             downloader.Name = "Downloader";
@@ -60,13 +56,10 @@ namespace CloverMobile
             uploader = new Thread(doUploading);
             uploader.Name = "Uploader";
             uploader.Start();
-          
-
         }
         public void setDataMaster(DataMaster mstr)
         {
             master = mstr;
-            //serviceAddress = "http://greendel.heroku.com:80";
         }
         public void setMasterController(Controller ctrl)
         {
@@ -129,7 +122,12 @@ namespace CloverMobile
                             wcDown.DownloadStringAsync(new Uri(serviceAddress + "/sensors/history/" + currentWorkItem.sensorId.ToString() + ".xml?limit=" + currentWorkItem.pointsToGet.ToString()));
                             break;
 
-
+                        case "outputUpdate":
+                            documentType = "outputUpdate";
+                            currentOutputId = currentWorkItem.outputId;
+                            wcDown.DownloadStringAsync(new Uri(serviceAddress + "/outputs/" + currentOutputId.ToString() + ".xml"));
+                            break;
+                                
                         default:
                             break;
                     }
@@ -151,7 +149,7 @@ namespace CloverMobile
         {
             while (true)
             {
-                // ** there is some downloading to do
+                // ** there is some uploading to do
                 if (uploadWorkQueue.Count > 0 && !uploading)
                 {
                     uploading = true;
@@ -162,31 +160,26 @@ namespace CloverMobile
                     }
                     switch (currentWorkItem.documentName)
                     {
-                        case "userInfo":
-
-                            break;
-                        case "sensors":
-
-                            break;
                         case "sendOutput":
-                            System.Diagnostics.Debug.WriteLine("nwc: sending output state.");
-                            wcUp.Headers[HttpRequestHeader.ContentType] = "application/xml";
-                            
+                            System.Diagnostics.Debug.WriteLine("nwc: sending output state."); 
                             documentType = "sendOutput";
-                            if (currentWorkItem.output_state == true) {
-                                System.Diagnostics.Debug.WriteLine("SENDOUTPUT: sending output state true.");
+                            currentOutputId = currentWorkItem.outputId;
+                            
+                            if (currentWorkItem.outputState == true) 
+                            {
+                                
+                                System.Diagnostics.Debug.WriteLine("nwc: sending output state true.");
                                 xmlMessage = "<output><haschanged>true</haschanged><state>true</state></output>";
                             }
-                            else{
-                                System.Diagnostics.Debug.WriteLine("SENDOUTPUT: sending output state false.");
+                            else
+                            {
+                                System.Diagnostics.Debug.WriteLine("nwc: sending output state false.");
                                 xmlMessage = "<output><haschanged>true</haschanged><state>false</state></output>";
                             }
                             
-                            wcUp.UploadStringAsync(new Uri("http://localhost:3000/outputs/1.xml"), "PUT", xmlMessage);
-
-                            //wcUp.UploadStringAsync(new Uri(serviceAddress + "outputs/" + currentWorkItem.sensorId.ToString()), "PUT", xmlMessage);
-                            
+                            wcUp.UploadStringAsync(new Uri(serviceAddress + "/outputs/" + currentOutputId + ".xml"), "PUT", xmlMessage);                         
                             break;
+
                         default:
                             break;
                     }
@@ -213,6 +206,7 @@ namespace CloverMobile
             serviceAddress = address;
             wcDown.Credentials = new NetworkCredential(username, password);
             wcUp.Credentials = new NetworkCredential(username, password);
+            wcUp.Headers[HttpRequestHeader.ContentType] = "application/xml";
         }
 
         // ** Safely add new work unit to the download list !
@@ -290,6 +284,7 @@ namespace CloverMobile
                     dataDoc = XDocument.Load(new StringReader(e.Result));
                     master.parseOutpus(dataDoc);
                     documentType = "";
+                    controller.Outputsdownloaded();
                 }
                 else if (documentType == "sensor")
                 {
@@ -315,6 +310,13 @@ namespace CloverMobile
                     documentType = "";
                     controller.sensorHistoryDownloaded();
                 }
+                else if (documentType == "outputUpdate")
+                {
+                    System.Diagnostics.Debug.WriteLine("nwc: asking model for sensor timescale history information..");
+                    dataDoc = XDocument.Load(new StringReader(e.Result));
+                    master.parseSingleOutput(currentOutputId, dataDoc);
+                    documentType = "";
+                }
             }
             catch (WebException we)
             {
@@ -335,13 +337,15 @@ namespace CloverMobile
                 System.Diagnostics.Debug.WriteLine("nwc: finished uploading xml.");
                 if (documentType == "sendOutput")
                 {
-                    System.Diagnostics.Debug.WriteLine("nwc: asking model for userinfo..");
-                    // Return HTTP message
-                    System.Diagnostics.Debug.WriteLine(e.Result.ToString());
+                    System.Diagnostics.Debug.WriteLine("nwc: output changes sent");
+                    
                     documentType = "";
-                 
-                }
-                
+                    // ** when update has been made, controller needs to get new values for the model!!!
+                    controller.updateValueForThisOutput(currentOutputId);
+                    
+                    //controller.getOutputsXML();
+                    //controller.updateControlPageView();  
+                }              
             }
             catch (WebException we)
             {

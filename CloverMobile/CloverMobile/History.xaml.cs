@@ -76,9 +76,11 @@ namespace CloverMobile
                 }
             }
             // ** get the default graph that is, power consumption from last week
-            controller.getSensorHistoryFromSpecifiedTimeScale(currentSensorId, "avgscale", currentFrequency.ToString(), String.Format("{0:yyyy-MM-dd}", startDatePicker.Value), String.Format("{0:yyyy-MM-dd}", endDatePicker.Value));
+            //controller.getSensorHistoryFromSpecifiedTimeScale(currentSensorId, "avgscale", currentFrequency.ToString(), String.Format("{0:yyyy-MM-dd}", startDatePicker.Value), String.Format("{0:yyyy-MM-dd}", endDatePicker.Value));
             this.sensorsListPicker.ItemsSource = sensorNames;
             this.frequenciesListPicker.ItemsSource = frequencies;
+
+            //sensorsListPicker.SelectedIndex
             
         }
 
@@ -106,15 +108,8 @@ namespace CloverMobile
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("UI.Hisroty: getting history time scale for a single sensor");
-            if (currentSensorShortName == "powerconsumed") // ** sensor with id 2 is "power consumed"
-            {
-                controller.getSensorHistoryFromSpecifiedTimeScale(currentSensorId, "diffscale", currentFrequency.ToString(), String.Format("{0:yyyy-MM-dd}", startDatePicker.Value), String.Format("{0:yyyy-MM-dd}", endDatePicker.Value));
-            }
-            else
-            {
-                controller.getSensorHistoryFromSpecifiedTimeScale(currentSensorId, "avgscale", currentFrequency.ToString(), String.Format("{0:yyyy-MM-dd}", startDatePicker.Value), String.Format("{0:yyyy-MM-dd}", endDatePicker.Value));
-            }
+            AskNewValues();
+
         }
 
         protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
@@ -136,6 +131,7 @@ namespace CloverMobile
 
         private void sensorsListPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            System.Diagnostics.Debug.WriteLine("UI.History CALLING SENORS CHANGED");
             // ** change the current sensor!
             foreach (Sensor s in model.currentSensors)
             {
@@ -146,12 +142,28 @@ namespace CloverMobile
                 }
             }
             System.Diagnostics.Debug.WriteLine("UI.History: current sensor id is now: " + currentSensorId);
+            //AskNewValues();
 
         }
 
         private void frequenciesListPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            System.Diagnostics.Debug.WriteLine("UI.History CALLING FREQS CHANGED");
             currentFrequency = frequenciesListPicker.SelectedItem.ToString();
+            //AskNewValues();
+        }
+
+        public void AskNewValues()
+        {
+            System.Diagnostics.Debug.WriteLine("UI.Hisroty: getting history time scale for a single sensor");
+            if (currentSensorShortName == "powerconsumed") // ** sensor with id 2 is "power consumed"
+            {
+                controller.getSensorHistoryFromSpecifiedTimeScale(currentSensorId, "diffscale", currentFrequency.ToString(), String.Format("{0:yyyy-MM-dd}", startDatePicker.Value), String.Format("{0:yyyy-MM-dd}", endDatePicker.Value));
+            }
+            else
+            {
+                controller.getSensorHistoryFromSpecifiedTimeScale(currentSensorId, "avgscale", currentFrequency.ToString(), String.Format("{0:yyyy-MM-dd}", startDatePicker.Value), String.Format("{0:yyyy-MM-dd}", endDatePicker.Value));
+            }       
         }
     }
 }
