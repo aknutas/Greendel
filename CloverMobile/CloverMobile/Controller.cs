@@ -158,6 +158,7 @@ namespace CloverMobile
         {
            return model.getReference();        
         }
+
         public void setActivePage(PhoneApplicationPage currentPage)
         {
             activePage = currentPage;
