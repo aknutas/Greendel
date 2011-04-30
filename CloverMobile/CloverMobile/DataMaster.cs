@@ -274,7 +274,33 @@ namespace CloverMobile
                 }
             }
         }
-        
+        // gets the latest value for a sensor
+        public void parseSingleOutput(int outputId, XDocument xmlDoc)
+        {
+            System.Diagnostics.Debug.WriteLine("Model: getting current value for an output.");
+            var output = from outputValue in xmlDoc.Descendants("output")
+                         select new Output
+                         {
+                             state = outputValue.Element("state").Value,
+                             // ** get latestreading and updated-at values from xml
+                             //latestReading = outputValue.Element("latestreading").Value,
+                             //updatedAt = Convert.ToDateTime(sensorValue.Element("updated-at").Value),
+                         };
+            lock (currentOutputs) // ** lock the list of outputss before updating!
+            {
+                foreach (Output o in currentOutputs) // ** this is our outputss list
+                {
+                    if (o.id == outputId) // ** find a output with given id
+                    {
+                        foreach (Output outp in output) // ** this is the temp "list" of 1 output
+                        {
+                            o.state = outp.state;
+                            System.Diagnostics.Debug.WriteLine("Model: Current output state: " + o.state.ToString());
+                        }
+                    }
+                }
+            }
+        }
         /*
         System.Diagnostics.Debug.WriteLine("Parsing outputs and sensors: ");
 

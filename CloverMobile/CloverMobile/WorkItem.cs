@@ -69,7 +69,7 @@ namespace CloverMobile
             outputId = outputID;
             outputState = outputSt;     
         }
-        public WorkItem(string workname, int outputID)
+        public WorkItem(string workname, int deviceID, int outputID, bool value)
         {
             documentName = workname;
             outputId = outputID;

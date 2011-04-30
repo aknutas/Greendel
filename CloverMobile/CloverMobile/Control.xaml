@@ -135,41 +135,23 @@
 				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
-		<Storyboard x:Name="SocketAnimation_OFF">
-			<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.Background).(SolidColorBrush.Color)" Storyboard.TargetName="Socket">
-				<EasingColorKeyFrame KeyTime="0" Value="#7FE43434"/>
-				<EasingColorKeyFrame KeyTime="0:0:0.2" Value="#7E82B834"/>
-				<EasingColorKeyFrame KeyTime="0:0:0.5" Value="#7F62E434"/>
-			</ColorAnimationUsingKeyFrames>
+		
+		<Storyboard x:Name="Socket_FadeIn">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Socket">
-				<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
 			</DoubleAnimationUsingKeyFrames>
-			<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(ContentControl.Content)" Storyboard.TargetName="Socket">
-				<DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="OFF"/>
-			</ObjectAnimationUsingKeyFrames>
 		</Storyboard>
-		<Storyboard x:Name="SocketAnimation_ON">
-			<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.Background).(SolidColorBrush.Color)" Storyboard.TargetName="Socket">
-				<SplineColorKeyFrame KeyTime="0" Value="#7F62E434"/>
-				<SplineColorKeyFrame KeyTime="0:0:0.3" Value="#7E82B834"/>
-				<SplineColorKeyFrame KeyTime="0:0:0.5" Value="#7FE43434"/>
-			</ColorAnimationUsingKeyFrames>
+		<Storyboard x:Name="Socket_FadeOut" Completed="Socket_FadeOut_Completed">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Socket">
-				<SplineDoubleKeyFrame KeyTime="0" Value="1"/>
-				<SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
-				<SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
-				<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+				<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
 			</DoubleAnimationUsingKeyFrames>
-			<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(ContentControl.Content)" Storyboard.TargetName="Socket">
-				<DiscreteObjectKeyFrame KeyTime="0:0:0.3" Value="OFF"/>
-			</ObjectAnimationUsingKeyFrames>
 		</Storyboard>
-		
 
-	</phone:PhoneApplicationPage.Resources>
+        <Color x:Key="Socket_Color_ON">#7FFF0000</Color>
+        <Color x:Key="Socket_Color_OFF">#7F00FF00</Color>
+    </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -211,7 +193,11 @@
         	<Grid x:Name="Grid_Output" Height="136" Margin="26,26,26,0" VerticalAlignment="Top">
         		<Rectangle Stroke="Black" Fill="#FF181818" Opacity="0.35"/>
         		<TextBlock Margin="20,52,140,52" TextWrapping="Wrap" Text="Kitchen Wall Sockets" FontSize="24" d:LayoutOverrides="Height" HorizontalAlignment="Left"/>
-        		<Button x:Name="Socket" Margin="0,24,10,16" HorizontalAlignment="Right" Width="152" FontSize="24" Height="96" Click="Socket_Click" Background="#7FE43434" />
+        		<Button x:Name="Socket" Margin="0,24,10,16" HorizontalAlignment="Right" Width="152" FontSize="24" Height="96" Click="Socket_Click" >
+        			<Button.Background>
+        				<SolidColorBrush Color="#A7212121"/>
+        			</Button.Background>
+        		</Button>
         	</Grid>
         	<Grid x:Name="Grid_Heating" Margin="26,188,26,26">
         		<Rectangle Stroke="Black" Fill="#FF181818" Opacity="0.35"/>

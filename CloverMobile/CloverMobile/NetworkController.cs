@@ -26,7 +26,8 @@ namespace CloverMobile
         private XDocument dataDoc;
         private bool downloading = false;
         private bool uploading = false;
-        private string documentType = "";
+        private string downloaDocumentType = "";
+        private string uploadDocumentType = "";
         private string xmlMessage;
         private string username;
         private string password;
@@ -34,7 +35,8 @@ namespace CloverMobile
         private Thread uploader;
         private List<WorkItem> downloadWorkQueue;
         private List<WorkItem> uploadWorkQueue;
-        private WorkItem currentWorkItem;
+        private WorkItem currentDownloadWorkItem;
+        private WorkItem currentUploadWorkItem;
         private int currentSensorId;
         private int currentOutputId;
 
@@ -76,55 +78,55 @@ namespace CloverMobile
 
                     lock (downloadWorkQueue)
                     {
-                        currentWorkItem = downloadWorkQueue.First(); //(downloadWorkQueue.Count - downloadWorkQueue.Count-1)
+                        currentDownloadWorkItem = downloadWorkQueue.First(); //(downloadWorkQueue.Count - downloadWorkQueue.Count-1)
                     }
-                    switch (currentWorkItem.documentName)
+                    switch (currentDownloadWorkItem.documentName)
                     {
                         case "userInfo":
-                            documentType = "userInfo";
+                            downloaDocumentType = "userInfo";
                             wcDown.DownloadStringAsync(new Uri(serviceAddress + "/users/datastatus/1"));
                             break;
 
                         case "sensors":
-                            documentType = "sensors";
-                            wcDown.DownloadStringAsync(new Uri(serviceAddress + "/devices/datastatus/" + currentWorkItem.deviceId.ToString()));                 
+                            downloaDocumentType = "sensors";
+                            wcDown.DownloadStringAsync(new Uri(serviceAddress + "/devices/datastatus/" + currentDownloadWorkItem.deviceId.ToString()));                 
                             break;
 
                         case "outputs":
-                            documentType = "outputs";
-                            wcDown.DownloadStringAsync(new Uri(serviceAddress + "/devices/datastatus/" + currentWorkItem.deviceId.ToString()));                    
+                            downloaDocumentType = "outputs";
+                            wcDown.DownloadStringAsync(new Uri(serviceAddress + "/devices/datastatus/" + currentDownloadWorkItem.deviceId.ToString()));                    
                             break;
 
                         case "sensor":
-                            currentSensorId = currentWorkItem.sensorId;
+                            currentSensorId = currentDownloadWorkItem.sensorId;
                             wcDown.DownloadStringAsync(new Uri(serviceAddress + "/sensors/history/" + currentSensorId.ToString()));                   
                             break;
 
                         case "sensorUpdate":
-                            documentType = "sensorUpdate";
-                            currentSensorId = currentWorkItem.sensorId;
+                            downloaDocumentType = "sensorUpdate";
+                            currentSensorId = currentDownloadWorkItem.sensorId;
                             wcDown.DownloadStringAsync(new Uri(serviceAddress + "/sensors/" + currentSensorId.ToString() + ".xml"));
                             break;
 
                         case "historyFromTimeScale":
-                            documentType = "historyFromTimeScale";
-                            currentSensorId = currentWorkItem.sensorId;
+                            downloaDocumentType = "historyFromTimeScale";
+                            currentSensorId = currentDownloadWorkItem.sensorId;
                             // /sensors/history/<sensorid>.xml?avgscale=<hourly|daily|monthly>&startdate=<yyyy-mm-dd>&enddate=<yyyy-mm-dd>
                             // /sensors/history/<sensorid>.xml?diffscale=<hourly|daily|monthly>&startdate=<yyyy-mm-dd>&enddate=<yyyy-mm-dd>
-                            string uri = serviceAddress + "/sensors/history/" + currentWorkItem.sensorId.ToString() + ".xml?" + currentWorkItem.historyInfoType + "=" + currentWorkItem.frequency + "&startdate=" + currentWorkItem.start + "&enddate=" + currentWorkItem.end;
+                            string uri = serviceAddress + "/sensors/history/" + currentDownloadWorkItem.sensorId.ToString() + ".xml?" + currentDownloadWorkItem.historyInfoType + "=" + currentDownloadWorkItem.frequency + "&startdate=" + currentDownloadWorkItem.start + "&enddate=" + currentDownloadWorkItem.end;
                             System.Diagnostics.Debug.WriteLine("nwc: current uri is:" + uri);
-                            wcDown.DownloadStringAsync(new Uri(serviceAddress + "/sensors/history/" + currentWorkItem.sensorId.ToString() + ".xml?" + currentWorkItem.historyInfoType + "="  + currentWorkItem.frequency + "&startdate=" + currentWorkItem.start + "&enddate=" + currentWorkItem.end));
+                            wcDown.DownloadStringAsync(new Uri(serviceAddress + "/sensors/history/" + currentDownloadWorkItem.sensorId.ToString() + ".xml?" + currentDownloadWorkItem.historyInfoType + "="  + currentDownloadWorkItem.frequency + "&startdate=" + currentDownloadWorkItem.start + "&enddate=" + currentDownloadWorkItem.end));
                             break;
 
                         case "latestSensorValues":
-                            documentType = "latestSensorValues";
-                            currentSensorId = currentWorkItem.sensorId;
-                            wcDown.DownloadStringAsync(new Uri(serviceAddress + "/sensors/history/" + currentWorkItem.sensorId.ToString() + ".xml?limit=" + currentWorkItem.pointsToGet.ToString()));
+                            downloaDocumentType = "latestSensorValues";
+                            currentSensorId = currentDownloadWorkItem.sensorId;
+                            wcDown.DownloadStringAsync(new Uri(serviceAddress + "/sensors/history/" + currentDownloadWorkItem.sensorId.ToString() + ".xml?limit=" + currentDownloadWorkItem.pointsToGet.ToString()));
                             break;
 
                         case "outputUpdate":
-                            documentType = "outputUpdate";
-                            currentOutputId = currentWorkItem.outputId;
+                            downloaDocumentType = "outputUpdate";
+                            currentOutputId = currentDownloadWorkItem.outputId;
                             wcDown.DownloadStringAsync(new Uri(serviceAddress + "/outputs/" + currentOutputId.ToString() + ".xml"));
                             break;
                                 
@@ -156,16 +158,16 @@ namespace CloverMobile
                     lock (uploadWorkQueue)
                     {
                         System.Diagnostics.Debug.WriteLine("nwc: getting first upload queue member");
-                        currentWorkItem = uploadWorkQueue.First();
+                        currentUploadWorkItem = uploadWorkQueue.First();
                     }
-                    switch (currentWorkItem.documentName)
+                    switch (currentUploadWorkItem.documentName)
                     {
                         case "sendOutput":
-                            System.Diagnostics.Debug.WriteLine("nwc: sending output state."); 
-                            documentType = "sendOutput";
-                            currentOutputId = currentWorkItem.outputId;
-                            
-                            if (currentWorkItem.outputState == true) 
+                            //System.Diagnostics.Debug.WriteLine("nwc: sending output state."); 
+                            uploadDocumentType = "sendOutput";
+                            currentOutputId = currentUploadWorkItem.outputId;
+
+                            if (currentUploadWorkItem.outputState == true) 
                             {
                                 
                                 System.Diagnostics.Debug.WriteLine("nwc: sending output state true.");
@@ -176,8 +178,10 @@ namespace CloverMobile
                                 System.Diagnostics.Debug.WriteLine("nwc: sending output state false.");
                                 xmlMessage = "<output><haschanged>true</haschanged><state>false</state></output>";
                             }
+                            wcUp.Headers[HttpRequestHeader.ContentType] = "application/xml";
+                            wcUp.UploadStringAsync(new Uri(serviceAddress + "/outputs/" + currentOutputId + ".xml"), "PUT", xmlMessage);
+                            System.Diagnostics.Debug.WriteLine(xmlMessage); 
                             
-                            wcUp.UploadStringAsync(new Uri(serviceAddress + "/outputs/" + currentOutputId + ".xml"), "PUT", xmlMessage);                         
                             break;
 
                         default:
@@ -206,7 +210,8 @@ namespace CloverMobile
             serviceAddress = address;
             wcDown.Credentials = new NetworkCredential(username, password);
             wcUp.Credentials = new NetworkCredential(username, password);
-            wcUp.Headers[HttpRequestHeader.ContentType] = "application/xml";
+            
+            
         }
 
         // ** Safely add new work unit to the download list !
@@ -260,62 +265,64 @@ namespace CloverMobile
             try
             {
                 System.Diagnostics.Debug.WriteLine("nwc: finished downloading xml.");
-                if (documentType == "userInfo")
+                if (downloaDocumentType == "userInfo")
                 {
                     System.Diagnostics.Debug.WriteLine("nwc: asking model for userinfo..");
                     // ** xml document received fully, give it to the master for parsing
                     dataDoc = XDocument.Load(new StringReader(e.Result));
                     master.parseUserInformation(dataDoc);
-                    documentType = "";
+                    downloaDocumentType = "";
                     // ** successfully downloaded basic document, inform about successfull autetication 
                     controller.authenticationOk();
                 }
-                else if (documentType == "sensors")
+                else if (downloaDocumentType == "sensors")
                 {
                     System.Diagnostics.Debug.WriteLine("nwc: asking model for sensors..");
                     dataDoc = XDocument.Load(new StringReader(e.Result));
                     master.parseSensors(dataDoc);
-                    documentType = "";
+                    downloaDocumentType = "";
                     controller.parseSensorsOk();
                 }
-                else if (documentType == "outputs")
+                else if (downloaDocumentType == "outputs")
                 {
                     System.Diagnostics.Debug.WriteLine("nwc: asking model for outputs..");
                     dataDoc = XDocument.Load(new StringReader(e.Result));
                     master.parseOutpus(dataDoc);
-                    documentType = "";
+                    downloaDocumentType = "";
                     controller.Outputsdownloaded();
                 }
-                else if (documentType == "sensor")
+                else if (downloaDocumentType == "sensor")
                 {
                     System.Diagnostics.Debug.WriteLine("nwc: asking model for sensor history..");
                     dataDoc = XDocument.Load(new StringReader(e.Result));
                     master.parseSensorHistory(currentSensorId, dataDoc);
-                    documentType = "";
+                    downloaDocumentType = "";
                     controller.sensorHistoryDownloaded();
                 }
-                else if (documentType == "sensorUpdate")
+                else if (downloaDocumentType == "sensorUpdate")
                 {
                     System.Diagnostics.Debug.WriteLine("nwc: asking model for sensor update..");
                     dataDoc = XDocument.Load(new StringReader(e.Result));
                     master.parseSingleSensorForNewHistoryDatapoint(currentSensorId, dataDoc);
-                    documentType = "";
+                    downloaDocumentType = "";
                     
                 }
-                else if (documentType == "historyFromTimeScale" || documentType == "latestSensorValues")
+                else if (downloaDocumentType == "historyFromTimeScale" || downloaDocumentType == "latestSensorValues")
                 {
                     System.Diagnostics.Debug.WriteLine("nwc: asking model for sensor timescale history information..");
                     dataDoc = XDocument.Load(new StringReader(e.Result));
                     master.parseSensorTimeScaleHistory(currentSensorId, dataDoc);
-                    documentType = "";
+                    downloaDocumentType = "";
                     controller.sensorHistoryDownloaded();
                 }
-                else if (documentType == "outputUpdate")
+                else if (downloaDocumentType == "outputUpdate")
                 {
-                    System.Diagnostics.Debug.WriteLine("nwc: asking model for sensor timescale history information..");
+                    System.Diagnostics.Debug.WriteLine("nwc: asking model for single output information..");
                     dataDoc = XDocument.Load(new StringReader(e.Result));
+                    System.Diagnostics.Debug.WriteLine(e.Result.ToString());
                     master.parseSingleOutput(currentOutputId, dataDoc);
-                    documentType = "";
+                    downloaDocumentType = "";
+                    controller.outputUpdated();
                 }
             }
             catch (WebException we)
@@ -335,12 +342,10 @@ namespace CloverMobile
             try
             {
                 System.Diagnostics.Debug.WriteLine("nwc: finished uploading xml.");
-                if (documentType == "sendOutput")
+                if (uploadDocumentType == "sendOutput")
                 {
-                    System.Diagnostics.Debug.WriteLine("nwc: output changes sent");
-                    
-                    documentType = "";
-                    // ** when update has been made, controller needs to get new values for the model!!!
+                    System.Diagnostics.Debug.WriteLine("nwc: event handler output changes sent");             
+                    uploadDocumentType = "";
                     controller.updateValueForThisOutput(currentOutputId);
                     
                     //controller.getOutputsXML();

@@ -21,6 +21,8 @@ namespace CloverMobile
         Controller controller;
         DataMaster model;
         private bool Socket_Toggle;
+        
+        
 
         public Control()
         {
@@ -53,34 +55,6 @@ namespace CloverMobile
                 controller.sendOutputs(1, true);     
             }
         }
-        public void UpdateView() // this is called by controller when the outputs are updated
-        {
-            
-            
-            /*
-            foreach (Output o in model.currentOutputs)
-            {
-                if (o.name == "wall_socket")
-                {
-                    if (o.state == "true")
-                    {
-                        Socket.Content = "ON";
-                        Socket_Toggle = true;
-                        //SocketAnimation_ON.Begin();
-
-                    }
-                    else if (o.state == "false")
-                    {
-                        Socket.Content = "OFF";
-                        Socket_Toggle = false;
-                        //SocketAnimation_OFF.Begin();
-                    }
-
-                }
-            }
-             */
-            
-        }
 
         // Hijack Back button event for reverse animation
         protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
@@ -98,6 +72,7 @@ namespace CloverMobile
         // ** this is called by the controller when the outuputs are received!
         public void OutputsReceived()
         {
+            System.Diagnostics.Debug.WriteLine("ui.control: outputs received.");
             // ** when outputs received, set the current value for outputs
             foreach (Output o in model.currentOutputs)
             {
@@ -106,19 +81,32 @@ namespace CloverMobile
                     if (o.state == "true")
                     {
                         Socket_Toggle = true;
-                        Socket.Content = "ON";
-                        //SocketAnimation_ON.Begin();
 
                     }
                     else
                     {
                         Socket_Toggle = false;
-                        Socket.Content = "OFF";
-                        //SocketAnimation_OFF.Begin();
+
                     }
+                    Socket_FadeOut.Begin();
                 }
+            }     
+        }
+
+        private void Socket_FadeOut_Completed(object sender, EventArgs e)
+        {
+            if (Socket_Toggle == true)
+            {
+                Socket.Content = "ON";
+                
+
             }
-        
+            else
+            {
+                Socket.Content = "OFF";
+                
+            }
+            Socket_FadeIn.Begin();
         }
     }
 }

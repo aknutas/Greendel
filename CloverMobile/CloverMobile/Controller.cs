@@ -238,7 +238,7 @@ namespace CloverMobile
         }
         public void updateValueForThisOutput(int outputId)
         {
-            WorkItem newItem = new WorkItem("outputUpdate", outputId);
+            WorkItem newItem = new WorkItem("outputUpdate", 0, outputId, true);
             nwc.addNewDownloadWorkUnit(newItem);   
     
         }
@@ -302,7 +302,7 @@ namespace CloverMobile
         {
             if (controlRef != null)
             {
-                controlRef.UpdateView();
+                //controlRef.UpdateView();
             
             }
         }
@@ -313,6 +313,15 @@ namespace CloverMobile
                 controlRef.OutputsReceived();
 
             }
+        }
+        public void outputUpdated()
+        {
+            if (controlRef != null)
+            {
+                controlRef.OutputsReceived();
+
+            }
+        
         }
     }
 }
