@@ -14,7 +14,9 @@ class SocialmediasController < ApplicationController
   # GET /socialmedias/1
   # GET /socialmedias/1.xml
   def show
-    @socialmedia = Socialmedia.find(params[:id])
+    @socialmedia = Socialmedia.find(params[:id], :include => [:user, {:user => [:device, {:device => :sensors}]}])
+
+    @sensors = @socialmedia.user.device.sensors
 
     @oauth_url = MiniFB.oauth_url(FB_APP_ID, HOST + "sessions/create",
                                   :scope=>MiniFB.scopes.join(","))
@@ -26,11 +28,25 @@ class SocialmediasController < ApplicationController
   end
 
   def fbpost
-    @socialmedia = Socialmedia.find(params[:id])
+    @socialmedia = Socialmedia.find(params[:id], :include => [:user, {:user => [:device, {:device => :sensors}]}])
+
+    @sensors = @socialmedia.user.device.sensors
+
+    poststring = "Greendel status report! \n\n"
+
+    @sensors.each do |sensor|
+      if (params[sensor.name] == "1")
+        if (sensor.name == 'poweruse')
+          poststring << "My house is currently consuming " + sensor.latestreading.round(1).to_s + " W\n"
+        else
+          poststring << sensor.longname.downcase.capitalize + " is currently at: " + sensor.latestreading.to_s + " " + sensor.unit + "\n"
+        end
+      end
+    end
+
     @id = "me"
     @type = "feed"
-    @message = "Hello World! Greendel is awesome."
-    @link = "http://greendel.appcloud.net"
+    @message = poststring
 
     if (@socialmedia.facebookon)
       MiniFB.post(@socialmedia.fbauth, @id, :type=>@type, :metadata=>true, :params => {:message => @message, :link => @link})
@@ -51,13 +67,13 @@ class SocialmediasController < ApplicationController
 
     @sensors = Sensor.find_all_by_id(sensorids)
 
-    poststring = "Greendel status report! \n"
+    poststring = "Greendel status report! \n\n"
 
     @sensors.each do |sensor|
-      if(sensor.name == 'poweruse')
-        poststring << "My house is currently consuming " + sensor.latestreading.to_s + "W\n"
+      if (sensor.name == 'poweruse')
+        poststring << "My house is currently consuming " + sensor.latestreading.round(1).to_s + "W\n"
       else
-        poststring << sensor.longname + " is currently at: " + sensor.latestreading.to_s + " " + sensor.unit + "\n"
+        poststring << sensor.longname.downcase.capitalize + " is currently at: " + sensor.latestreading.to_s + " " + sensor.unit + "\n"
       end
     end
 
