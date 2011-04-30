@@ -1,18 +1,23 @@
-<p>
-  <b>Status:</b>
-  <%= h @socialmedia.status %>
-</p>
-
-<p>
-  <b>Facebook:</b>
-  <%= h @socialmedia.facebookon %>
-</p>
-
 <% unless @socialmedia.facebookon %>
-    <%= link_to "Login", @oauth_url %>
+    <p>
+      <b>Status:</b>
+      <%= h @socialmedia.status %>
+    </p>
+    <p>
+      <b>Facebook:</b>
+      <%= h @socialmedia.facebookon %>
+    </p>
+    <%= link_to "Login to Facebook", @oauth_url %>
 <% end %>
 <% if @socialmedia.facebookon %>
+    <br/>
+    <b>Update my status to Facebook</b>
     <% form_tag(url_for(:action => 'fbpost', :controller => 'socialmedias', :id => @socialmedia.id), :method => :get) do %>
+        <% @sensors.each do |sensor| %>
+            <p> Publish <%= sensor.longname.downcase %>
+              <%= check_box_tag sensor.name %>
+            </p>
+        <% end %>
         <%= submit_tag("Postaas kuule feispuukkiin") %>
     <% end %>
 <% end %>
