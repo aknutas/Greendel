@@ -27,7 +27,7 @@ namespace CloverMobile
             InitializeComponent();
             controller = Controller.getInstance;  
             model = controller.getModel();
-            controller.setActivePage(this);
+            //controller.setActivePage(this);
             controller.setImageSource(this);
 
             // ** get outputs

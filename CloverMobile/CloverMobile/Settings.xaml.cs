@@ -20,7 +20,7 @@ namespace CloverMobile
         {
             InitializeComponent();
             controller = Controller.getInstance;
-            controller.setActivePage(this);
+            //controller.setActivePage(this);
             controller.setImageSource(this);
         }
 

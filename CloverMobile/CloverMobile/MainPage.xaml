@@ -6,8 +6,18 @@
     DataContext="{Binding}"
     shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded" Unloaded="PhoneApplicationPage_Unloaded">
     <phone:PhoneApplicationPage.Resources>
-        <Storyboard x:Name="FadeOut"/>
-        <Storyboard x:Name="FadeIn"/>
+        <Storyboard x:Name="FadeOut">
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="background">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0"/>
+        	</DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="FadeIn">
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="background">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="1"/>
+        	</DoubleAnimationUsingKeyFrames>
+        </Storyboard>
         <Storyboard x:Name="rotateClover" SpeedRatio="0.5" RepeatBehavior="Forever"/>
         <Storyboard x:Name="MainScreenLoad">
         	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ApplicationTitle">
@@ -101,7 +111,7 @@
  
     <!--Sample code showing usage of ApplicationBar-->
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" BackgroundColor="#FF07D600" ForegroundColor="White">
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" ForegroundColor="White" BackgroundColor="#DD212121">
             <!--<shell:ApplicationBarIconButton IconUri="/Icons/appbar.back.rest.png" Text="Back" />-->
             <shell:ApplicationBarIconButton IconUri="/Icons/appbar.folder.rest.png" Text="History" Click="ApplicationBarIconButtonHistory_Click" />
             <shell:ApplicationBarIconButton IconUri="/Icons/appbar.edit.rest.png" Text="Control" Click="ApplicationBarControlIconButtonControl_Click" />

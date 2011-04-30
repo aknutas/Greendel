@@ -34,7 +34,7 @@ namespace CloverMobile
             InitializeComponent();
             // ** get the controller instance and give the reference of current page to it
             controller = Controller.getInstance;
-            controller.setActivePage(this);
+            //controller.setActivePage(this);
             controller.setImageSource(this);
             //background.SetBinding(Image.SourceProperty, controller.setImageSource(this));
             // ** disable the ui-elements on the background        

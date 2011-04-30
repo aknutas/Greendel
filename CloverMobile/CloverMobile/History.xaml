@@ -11,7 +11,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded" xmlns:my="clr-namespace:AmCharts.Windows.QuickCharts;assembly=AmCharts.Windows.QuickCharts.WP" DataContext="{Binding}" xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit">
+    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded" xmlns:my="clr-namespace:AmCharts.Windows.QuickCharts;assembly=AmCharts.Windows.QuickCharts.WP" DataContext="{Binding}" xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" Unloaded="PhoneApplicationPage_Unloaded">
 	<phone:PhoneApplicationPage.Resources>
         
         <!--<Storyboard x:Name="historyScreenLoad">
@@ -258,12 +258,11 @@
     <!--<my:AreaGraph ValueMemberPath="val3" Title="Area #1" Brush="#80FF0000" />-->
                 </my:SerialChart.Graphs>
             </my:SerialChart>
-            <toolkit:ListPicker Header="Sensors"  SelectedIndex="0" Margin="21,39,155,-15" SelectionChanged="sensorsListPicker_SelectionChanged" x:Name="sensorsListPicker" d:LayoutOverrides="VerticalAlignment" />
-            <toolkit:ListPicker Header="Frequency" SelectedIndex="1" Margin="21,151,292,-127" SelectionChanged="frequenciesListPicker_SelectionChanged" x:Name="frequenciesListPicker" d:LayoutOverrides="VerticalAlignment" />
             <TextBlock Height="50" HorizontalAlignment="Left" Margin="3,10,0,0" x:Name="currentSensorName" Text="" VerticalAlignment="Top" Width="445" FontSize="30" />
-            <Button Content="Update" Height="72" HorizontalAlignment="Left" Margin="317,608,0,0" x:Name="button1" VerticalAlignment="Top" Width="138" Click="button1_Click" />
-            <toolkit:DatePicker HorizontalAlignment="Left" x:Name="startDatePicker" Width="168" ValueStringFormat="{}{0:yyyy-MM-dd}" FontSize="8" Margin="8,263,0,288" />
-            <toolkit:DatePicker HorizontalAlignment="Right" x:Name="endDatePicker" ValueStringFormat="{}{0:yyyy-MM-dd}" FontSize="8" Margin="0,263,8,274" d:LayoutOverrides="Height" />
+            <toolkit:DatePicker HorizontalAlignment="Left" x:Name="startDatePicker" Width="168" ValueStringFormat="{}{0:yyyy-MM-dd}" FontSize="8" Margin="8,263,0,288" ValueChanged="DatePicker_ValueChanged" />
+            <toolkit:DatePicker HorizontalAlignment="Right" x:Name="endDatePicker" ValueStringFormat="{}{0:yyyy-MM-dd}" FontSize="8" Margin="0,263,8,274" d:LayoutOverrides="Height" ValueChanged="DatePicker_ValueChanged" />
+            <toolkit:ListPicker Header="Frequency"  Margin="21,151,292,-127" SelectionChanged="frequenciesListPicker_SelectionChanged" x:Name="frequenciesListPicker" d:LayoutOverrides="VerticalAlignment" />
+            <toolkit:ListPicker Header="Sensors"  Margin="21,39,155,-15" SelectionChanged="sensorsListPicker_SelectionChanged" x:Name="sensorsListPicker" d:LayoutOverrides="VerticalAlignment" />
         </Grid>
     </Grid>
  

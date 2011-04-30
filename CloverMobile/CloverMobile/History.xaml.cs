@@ -31,26 +31,27 @@ namespace CloverMobile
         public string newFrequency { get; set; }
         public int currentSensorId { get; set; }
         public string currentSensorShortName { get; set; }
+        public int i;
         public History()
         {
             
             InitializeComponent();
-
+            i = 0;
             sensorNames = new List<string>();
             frequencies = new List<string>();
-
-            frequencies.Add("hourly");
+            
             frequencies.Add("daily");
+            frequencies.Add("hourly");
             frequencies.Add("monthly");
 
             System.Diagnostics.Debug.WriteLine("UI.History: History page constructor called");
             // ** get controller instance and give our reference
             controller = Controller.getInstance;
-            controller.setActivePage(this);
+            //controller.setActivePage(this);
             controller.setImageSource(this);
             // ** set some default values
-            //currentSensorId = 2;
-            currentSensorShortName = "powerconsumed";
+
+            currentSensorShortName = "poweruse";
             currentFrequency = "daily";
 
             // ** put content to the frequency listbox
@@ -62,6 +63,7 @@ namespace CloverMobile
 
             // ** get a reference to the model
             model = controller.getModel();
+
 
             // ** get sensors from model
             foreach (Sensor s in model.currentSensors)
@@ -77,9 +79,10 @@ namespace CloverMobile
             }
             // ** get the default graph that is, power consumption from last week
             //controller.getSensorHistoryFromSpecifiedTimeScale(currentSensorId, "avgscale", currentFrequency.ToString(), String.Format("{0:yyyy-MM-dd}", startDatePicker.Value), String.Format("{0:yyyy-MM-dd}", endDatePicker.Value));
-            this.sensorsListPicker.ItemsSource = sensorNames;
-            this.frequenciesListPicker.ItemsSource = frequencies;
-
+            
+            sensorsListPicker.ItemsSource = sensorNames;
+            frequenciesListPicker.ItemsSource = frequencies;
+            AskNewValues();
             //sensorsListPicker.SelectedIndex
             
         }
@@ -131,26 +134,45 @@ namespace CloverMobile
 
         private void sensorsListPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("UI.History CALLING SENORS CHANGED");
-            // ** change the current sensor!
-            foreach (Sensor s in model.currentSensors)
+
+            if (i < 4)
             {
-                if (s.longName == sensorsListPicker.SelectedItem.ToString()) 
-                {
-                    currentSensorId = s.sensorId;
-                    currentSensorShortName = s.sensorName;
-                }
+                i++;
             }
-            System.Diagnostics.Debug.WriteLine("UI.History: current sensor id is now: " + currentSensorId);
-            //AskNewValues();
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("UI.History CALLING SENSORS SELECTION CHANGED");
+                System.Diagnostics.Debug.WriteLine(sender.ToString(), e.ToString());
+                // ** change the current sensor!
+                foreach (Sensor s in model.currentSensors)
+                {
+                    if (s.longName == sensorsListPicker.SelectedItem.ToString())
+                    {
+                        currentSensorId = s.sensorId;
+                        currentSensorShortName = s.sensorName;
+                    }
+                }
+                System.Diagnostics.Debug.WriteLine("UI.History: current sensor id is now: " + currentSensorId);
+                AskNewValues();
+                
+            }
 
         }
 
         private void frequenciesListPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("UI.History CALLING FREQS CHANGED");
-            currentFrequency = frequenciesListPicker.SelectedItem.ToString();
-            //AskNewValues();
+            if (i < 4)
+            {
+                i++;
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("UI.History CALLING FREQS SELECTION CHANGED");
+                System.Diagnostics.Debug.WriteLine(sender.ToString(), e.ToString());
+                currentFrequency = frequenciesListPicker.SelectedItem.ToString();
+                AskNewValues();
+                
+            }
         }
 
         public void AskNewValues()
@@ -164,6 +186,23 @@ namespace CloverMobile
             {
                 controller.getSensorHistoryFromSpecifiedTimeScale(currentSensorId, "avgscale", currentFrequency.ToString(), String.Format("{0:yyyy-MM-dd}", startDatePicker.Value), String.Format("{0:yyyy-MM-dd}", endDatePicker.Value));
             }       
+        }
+
+        private void DatePicker_ValueChanged(object sender, DateTimeValueChangedEventArgs e)
+        {
+            if (i < 4)
+            {
+                i++;
+            }
+            else
+            {
+                AskNewValues();
+            }
+        }
+
+        private void PhoneApplicationPage_Unloaded(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("UI.History PAGE UNLOADED!");
         }
     }
 }

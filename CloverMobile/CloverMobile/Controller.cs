@@ -26,6 +26,8 @@ namespace CloverMobile
         private CloverMobile.Social socialRef;
         private CloverMobile.Settings settingsRef;
         private CloverMobile.Control controlRef;
+        private string pictureSourceString;
+        private string oldPictureSourceString = "Backgrounds/greendel_100pros.png";
         //private Binding myBinding;
         
         private Uri uri;
@@ -71,31 +73,36 @@ namespace CloverMobile
             activePage = currentPage;
 
             System.Diagnostics.Debug.WriteLine("Controller: Current power consumption is: " + GlobalData.currentConsumption.ToString());
-            if ( GlobalData.currentConsumption < 200)
+            if ( GlobalData.currentConsumption < 400)
             {
+                pictureSourceString = "Backgrounds/greendel_20pros.png";
                 System.Diagnostics.Debug.WriteLine("Controller: binding1");
-                uri = new Uri("Backgrounds/greendel_100pros.png", UriKind.Relative);
+                uri = new Uri(pictureSourceString, UriKind.Relative);
                     
             }
-            else if (GlobalData.currentConsumption >= 200 && GlobalData.currentConsumption < 400)
+            else if (GlobalData.currentConsumption >= 400 && GlobalData.currentConsumption < 800)
             {
+                pictureSourceString = "Backgrounds/greendel_40pros.png";
                 System.Diagnostics.Debug.WriteLine("Controller: binding2");
-                uri = new Uri("Backgrounds/greendel_80pros.png", UriKind.Relative);
+                uri = new Uri(pictureSourceString, UriKind.Relative);
             }
-            else if (GlobalData.currentConsumption >= 400 && GlobalData.currentConsumption < 600)
+            else if (GlobalData.currentConsumption >= 800 && GlobalData.currentConsumption < 1200)
             {
+                pictureSourceString = "Backgrounds/greendel_60pros.png";
                 System.Diagnostics.Debug.WriteLine("Controller: binding3");
-                uri = new Uri("Backgrounds/greendel_60pros.png", UriKind.Relative);
+                uri = new Uri(pictureSourceString, UriKind.Relative);
             }
-            else if (GlobalData.currentConsumption >= 600 && GlobalData.currentConsumption < 800)
+            else if (GlobalData.currentConsumption >= 1200 && GlobalData.currentConsumption < 1600)
             {
+                pictureSourceString = "Backgrounds/greendel_80pros.png";
                 System.Diagnostics.Debug.WriteLine("Controller: binding4");
-                uri = new Uri("Backgrounds/greendel_40pros.png", UriKind.Relative);
+                uri = new Uri(pictureSourceString, UriKind.Relative);
             }
-            else if (GlobalData.currentConsumption >= 800 && GlobalData.currentConsumption < 1000)
+            else if (GlobalData.currentConsumption >= 1600)
             {
+                pictureSourceString = "Backgrounds/greendel_100pros.png";
                 System.Diagnostics.Debug.WriteLine("Controller: binding5");
-                uri = new Uri("Backgrounds/greendel_20pros.png", UriKind.Relative);
+                uri = new Uri(pictureSourceString, UriKind.Relative);
             }
             // determine, which page is active
             
@@ -105,9 +112,15 @@ namespace CloverMobile
             {
 
                 mainPageRef = (CloverMobile.MainPage)currentPage;
-                mainPageRef.FadeOut.Begin();
-                mainPageRef.background.Source = imgSource;
-                mainPageRef.FadeIn.Begin();
+                if (oldPictureSourceString != pictureSourceString)
+                {
+                    System.Diagnostics.Debug.WriteLine("Controller: changing mainpage background");
+                    mainPageRef.FadeOut.Begin();
+                    mainPageRef.background.Source = imgSource;
+                    mainPageRef.FadeIn.Begin();
+                    oldPictureSourceString = pictureSourceString;
+                }
+
                 historyRef = null;
                 socialRef = null;
                 settingsRef = null;
@@ -158,7 +171,7 @@ namespace CloverMobile
         {
            return model.getReference();        
         }
-
+        /*
         public void setActivePage(PhoneApplicationPage currentPage)
         {
             activePage = currentPage;
@@ -208,6 +221,7 @@ namespace CloverMobile
                 socialRef = null;
             }
         }
+        */
         public DataMaster getModel()
         {
             return model;
