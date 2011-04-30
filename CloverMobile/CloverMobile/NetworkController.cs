@@ -46,6 +46,7 @@ namespace CloverMobile
             wcDown = new WebClient();
             wcDown.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted);
             wcUp = new WebClient();
+            wcUp.UploadStringCompleted += new UploadStringCompletedEventHandler(wcUpload_UploadStringCompleted);
             
             
 
@@ -184,7 +185,7 @@ namespace CloverMobile
                             wcUp.UploadStringAsync(new Uri("http://localhost:3000/outputs/1.xml"), "PUT", xmlMessage);
 
                             //wcUp.UploadStringAsync(new Uri(serviceAddress + "outputs/" + currentWorkItem.sensorId.ToString()), "PUT", xmlMessage);
-                            wcUp.UploadStringCompleted += new UploadStringCompletedEventHandler(wcUpload_UploadStringCompleted);
+                            
                             break;
                         default:
                             break;
@@ -192,6 +193,7 @@ namespace CloverMobile
                     // ** delete workunit from the list
                     lock (uploadWorkQueue)
                     {
+                        System.Diagnostics.Debug.WriteLine("nwc: deleting first member of the upload queue");
                         uploadWorkQueue.RemoveAt(0);
                     }
                 }

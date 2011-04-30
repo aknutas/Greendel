@@ -44,6 +44,7 @@ namespace CloverMobile
             {
                 System.Diagnostics.Debug.WriteLine("ui: changing socket output to false");
                 controller.sendOutputs(1, false);
+                
 
             }
             else
@@ -59,7 +60,7 @@ namespace CloverMobile
         public void UpdateView()
         {
             System.Diagnostics.Debug.WriteLine("UI: timer.");
-            controller.updateValueOfThisSensor(1);
+            controller.getOutputsXML();
 
             foreach (Output o in model.currentOutputs)
             {
