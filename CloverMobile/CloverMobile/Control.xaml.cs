@@ -22,8 +22,6 @@ namespace CloverMobile
         DataMaster model;
         private bool Socket_Toggle;
         
-        
-
         public Control()
         {
             InitializeComponent();
@@ -34,8 +32,6 @@ namespace CloverMobile
 
             // ** get outputs
             controller.getOutputsXML();
-
-
         }
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
