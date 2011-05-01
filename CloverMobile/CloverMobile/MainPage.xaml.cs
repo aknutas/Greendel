@@ -150,7 +150,7 @@ namespace CloverMobile
         // ** this is called from controller if authentication fails
         public void printError()
         {
-            hideMainScreenElements();
+            StopLoadingAnimation();
             splashScreen.Visibility = System.Windows.Visibility.Visible;
             errorMessageTextBlock.Text = "Connection Error.";
         }

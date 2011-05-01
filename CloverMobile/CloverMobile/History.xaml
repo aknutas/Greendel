@@ -13,7 +13,7 @@
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded" xmlns:my="clr-namespace:AmCharts.Windows.QuickCharts;assembly=AmCharts.Windows.QuickCharts.WP" DataContext="{Binding}" xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" Unloaded="PhoneApplicationPage_Unloaded">
 	<phone:PhoneApplicationPage.Resources>
-        <Storyboard x:Name="RotateGreendelIcon" >
+        <Storyboard x:Name="RotateGreendelIcon" RepeatBehavior="Forever" >
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="cloverImage">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:2" Value="359.65"/>

@@ -100,7 +100,7 @@
         		</Setter.Value>
         	</Setter>
         </Style>
-        <Storyboard x:Name="RotateGreendelIcon" >
+        <Storyboard x:Name="RotateGreendelIcon" RepeatBehavior="Forever" >
         	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="cloverImage">
         		<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
         		<EasingDoubleKeyFrame KeyTime="0:0:2" Value="359.65"/>
