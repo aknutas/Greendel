@@ -320,8 +320,8 @@
                 </my:SerialChart.Graphs>
             </my:SerialChart>
             <TextBlock Height="50" HorizontalAlignment="Left" Margin="19,220,0,0" x:Name="currentSensorName" VerticalAlignment="Top" Width="429" FontSize="30" />
-            <toolkit:DatePicker HorizontalAlignment="Left" x:Name="startDatePicker" ValueStringFormat="{}{0:yyyy-MM-dd}" FontSize="8" Margin="9,0,0,14" ValueChanged="DatePicker_ValueChanged" Height="58" VerticalAlignment="Bottom" />
-            <toolkit:DatePicker HorizontalAlignment="Right" x:Name="endDatePicker" ValueStringFormat="{}{0:yyyy-MM-dd}" FontSize="8" Margin="0,0,9,14" ValueChanged="DatePicker_ValueChanged" Height="58" VerticalAlignment="Bottom" />
+            <toolkit:DatePicker HorizontalAlignment="Left" x:Name="startDatePicker" ValueStringFormat="{}{0:dd/MM/yyyy}" FontSize="8" Margin="9,0,0,14" ValueChanged="DatePicker_ValueChanged" Height="58" VerticalAlignment="Bottom" />
+            <toolkit:DatePicker HorizontalAlignment="Right" x:Name="endDatePicker" ValueStringFormat="{}{0:dd/MM/yyyy}" FontSize="8" Margin="0,0,9,14" ValueChanged="DatePicker_ValueChanged" Height="58" VerticalAlignment="Bottom" />
             <toolkit:ListPicker Header="Frequency"  Margin="21,117,292,-93" SelectionChanged="frequenciesListPicker_SelectionChanged" x:Name="frequenciesListPicker" />
             <toolkit:ListPicker Header="Sensors"  Margin="21,9,155,15" SelectionChanged="sensorsListPicker_SelectionChanged" x:Name="sensorsListPicker" d:LayoutOverrides="VerticalAlignment" />
             <Canvas Height="529" HorizontalAlignment="Left" Margin="12,6,0,0" Name="loadingSplashscreen" VerticalAlignment="Top" Width="462" Background="Black" RenderTransformOrigin="0.5,0.5" Opacity="0.8" Visibility="Collapsed">

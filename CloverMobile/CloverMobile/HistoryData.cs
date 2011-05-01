@@ -27,7 +27,7 @@ namespace CloverMobile
             {   
                 // ** convert the datetime to proper form!
                 //format = "yy:mm:dd:hh:mm:ss";
-                format = "yyyy:MM:dd:hh:mm";
+                format = "d/M/yyyy HH:mm";
                 time = timevalue.ToString(format);
                 value = number;
             }
