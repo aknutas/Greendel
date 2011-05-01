@@ -32,6 +32,7 @@ namespace CloverMobile
         public MainPage()
         {       
             InitializeComponent();
+            
             // ** get the controller instance and give the reference of current page to it
             controller = Controller.getInstance;
             //controller.setActivePage(this);
@@ -44,9 +45,11 @@ namespace CloverMobile
             var appStorage = IsolatedStorageFile.GetUserStoreForApplication();
             if (appStorage.FileExists(fileName) == true) // file is found
             {
+                StartLoadingAnimation();
                 settingsFileExists = true;
                 // ** no need for splashscreen (user settings exist)
                 splashScreen.Visibility = System.Windows.Visibility.Collapsed;
+                
                   
                 // ** get the serialized settings file
                 var settingsData = XmlSerilizierHelper.Deserialize(fileName, typeof(SettingsFile));
@@ -59,6 +62,8 @@ namespace CloverMobile
                 
                 // ** authenticate by sending basic information 
                 controller.getUserXML();
+               
+
 
             }
             else // ** there are no file, user has not logged in yet, display the splash screen
@@ -105,10 +110,12 @@ namespace CloverMobile
 
         private void loginButton_Click(object sender, RoutedEventArgs e)
         {
+                StartLoadingAnimation();
                 // ** try to authenticate
                 System.Diagnostics.Debug.WriteLine("ui: authenticating.");
                 controller.authenticate(userNameTextBox.Text, passwordTextBox.Password, serverAddressTextBox.Text);
-                controller.getUserXML();        
+                controller.getUserXML();
+                
         }
         public void authenticationOk() // ** this function is called by controller if the autentication is successfull
         {
@@ -118,7 +125,7 @@ namespace CloverMobile
 
             // ** remove the splashscreen and show the UI elements
             splashScreen.Visibility = System.Windows.Visibility.Collapsed;
-            showMainScreenElements();
+            
             PageTitle.Text = "Main";
 
             // ** get model reference and get the weather
@@ -137,12 +144,13 @@ namespace CloverMobile
                 XmlSerilizierHelper.Serialize(fileName, mySettings);
                 settingsFileExists = true;
             }
+            
         }
 
         // ** this is called from controller if authentication fails
         public void printError()
         {
-            hideMainScreenElements();
+            StopLoadingAnimation();
             splashScreen.Visibility = System.Windows.Visibility.Visible;
             errorMessageTextBlock.Text = "Connection Error.";
         }
@@ -159,7 +167,6 @@ namespace CloverMobile
             ImageSource imgSource = new BitmapImage(uri);
             currentWeather.Source = imgSource;
             currentWeather.Visibility = System.Windows.Visibility.Visible;
-
             currentTemperatureTextBlock.Text = weatherNow.temp.ToString() + " °C";
             
         }
@@ -181,7 +188,8 @@ namespace CloverMobile
                     this.DataContext = s;
                     currentPowerConsumptionTextBlock.Text = s.latestReading.ToString() + " W";
                 }
-            }           
+            }
+            StopLoadingAnimation();
         }
         // ** timer function, updates value of power consumption sensor after 3 seconds
         private void Timer_tick(object sender, EventArgs e)
@@ -227,6 +235,20 @@ namespace CloverMobile
             Powervalue_Grid.Visibility = Visibility.Visible;
             ApplicationBar.IsVisible = true;
         
+        }
+        public void StartLoadingAnimation()
+        {
+            hideMainScreenElements();
+            loadingSplashscreen.Visibility = System.Windows.Visibility.Visible;
+            LoadScreenIn.Begin();
+            RotateGreendelIcon.Begin();  
+        }
+        public void StopLoadingAnimation()
+        {
+            RotateGreendelIcon.Pause();
+            LoadScreenOut.Begin();    
+            loadingSplashscreen.Visibility = System.Windows.Visibility.Collapsed;
+            showMainScreenElements();
         }
     }
 }

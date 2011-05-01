@@ -107,6 +107,7 @@ namespace CloverMobile
                     this.DataContext = s;
                 }
             }
+            StopLoadingAnimation();
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
@@ -177,6 +178,8 @@ namespace CloverMobile
 
         public void AskNewValues()
         {
+            StartLoadingAnimation();
+            
             System.Diagnostics.Debug.WriteLine("UI.Hisroty: getting history time scale for a single sensor");
             if (currentSensorShortName == "powerconsumed") // ** sensor with id 2 is "power consumed"
             {
@@ -203,6 +206,19 @@ namespace CloverMobile
         private void PhoneApplicationPage_Unloaded(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("UI.History PAGE UNLOADED!");
+        }
+        public void StartLoadingAnimation()
+        {
+       
+            loadingSplashscreen.Visibility = System.Windows.Visibility.Visible;
+            LoadScreenIn.Begin();
+            RotateGreendelIcon.Begin();
+        }
+        public void StopLoadingAnimation()
+        {
+            RotateGreendelIcon.Pause();
+            LoadScreenOut.Begin();
+            loadingSplashscreen.Visibility = System.Windows.Visibility.Collapsed;
         }
     }
 }
