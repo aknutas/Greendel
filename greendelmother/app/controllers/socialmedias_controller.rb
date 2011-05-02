@@ -32,6 +32,12 @@ class SocialmediasController < ApplicationController
 
     @sensors = @socialmedia.user.device.sensors
 
+    sensorhash = Hash.new
+
+    @sensors.each do |sensor|
+      sensorhash[sensor.name] = sensor
+    end
+
     startuse = sensorhash['powerconsumed'].readings.find(:first, :conditions => {:time => 14.days.ago .. 6.days.ago}, :order => "time")
     enduse = sensorhash['powerconsumed'].readings.find(:last, :conditions => {:time => 14.days.ago .. 6.days.ago}, :order => "time")
     pprice = sensorhash['powerprice'].readings.find(:first, :conditions => {:time => 14.days.ago .. 6.days.ago}, :order => "time")
@@ -45,12 +51,6 @@ class SocialmediasController < ApplicationController
 
     mdiff = enduse.value - startuse.value
     myprice = diff * pprice.value
-
-    sensorhash = Hash.new
-
-    @sensors.each do |sensor|
-      sensorhash[sensor.name] = sensor
-    end
 
     poststring = "Greendel status report! \n\n"
 
@@ -95,6 +95,10 @@ class SocialmediasController < ApplicationController
 
     @sensors = Sensor.find_all_by_id(sensorids)
 
+    @sensors.each do |sensor|
+      sensorhash[sensor.name] = sensor
+    end
+
     startuse = sensorhash['powerconsumed'].readings.find(:first, :conditions => {:time => 14.days.ago .. 6.days.ago}, :order => "time")
     enduse = sensorhash['powerconsumed'].readings.find(:last, :conditions => {:time => 14.days.ago .. 6.days.ago}, :order => "time")
     pprice = sensorhash['powerprice'].readings.find(:first, :conditions => {:time => 14.days.ago .. 6.days.ago}, :order => "time")
@@ -110,10 +114,6 @@ class SocialmediasController < ApplicationController
     myprice = diff * pprice.value
 
     sensorhash = Hash.new
-
-    @sensors.each do |sensor|
-      sensorhash[sensor.name] = sensor
-    end
 
     poststring = "Greendel status report! \n\n"
 
