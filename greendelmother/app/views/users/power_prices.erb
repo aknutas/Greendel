@@ -1,0 +1,5 @@
+<p><%= "My house is currently consuming " + @sensorhash['poweruse'].latestreading.round(1).to_s + " W"  %></p>
+<p><%= "A full week of use at this rate would cost me " + (@sensorhash['poweruse'].latestreading * 24 * 7 * @sensorhash['powerprice'].latestreading / 1000).round(2).to_s + " euros." %></p>
+<br/>
+<p><%= "Last week electricity use was " + @wdiff.round(2).to_s + " kWh and it cost me " + @wyprice.round(2).to_s + " euros."  %></p>
+<p><%= "Last month electricity use was " + @mdiff.round(2).to_s + " kWh and it cost me " + @myprice.round(2).to_s + " euros."  %></p>

@@ -43,14 +43,14 @@ class SocialmediasController < ApplicationController
     pprice = sensorhash['powerprice'].readings.find(:first, :conditions => {:time => 14.days.ago .. 6.days.ago}, :order => "time")
 
     wdiff = enduse.value - startuse.value
-    wyprice = diff * pprice.value
+    wyprice = wdiff * pprice.value
 
     startuse = sensorhash['powerconsumed'].readings.find(:first, :conditions => {:time => 2.months.ago .. 1.months.ago}, :order => "time")
     enduse = sensorhash['powerconsumed'].readings.find(:last, :conditions => {:time => 2.months.ago .. 1.months.ago}, :order => "time")
     pprice = sensorhash['powerprice'].readings.find(:first, :conditions => {:time => 2.months.ago .. 1.months.ago}, :order => "time")
 
     mdiff = enduse.value - startuse.value
-    myprice = diff * pprice.value
+    myprice = mdiff * pprice.value
 
     poststring = "Greendel status report! \n\n"
 
@@ -60,8 +60,8 @@ class SocialmediasController < ApplicationController
           poststring << "My house is currently consuming " + sensor.latestreading.round(1).to_s + " W\n"
           poststring << "A full week of use at this rate would cost me " + (sensorhash['poweruse'].latestreading * 24 * 7 * sensorhash['powerprice'].latestreading / 1000).round(2).to_s + " euros. \n"
         elsif (sensor.name == 'powerconsumed')
-          poststring << "Last week my electricity use was " + wdiff.to_s + " kWh and it cost me " + wyprice.round(2).to_s + " euros. \n"
-          poststring << "Last month my electricity use was " + mdiff.to_s + " kWh and it cost me " + myprice.round(2).to_s + " euros. \n"
+          poststring << "Last week my electricity use was " + wdiff.round(2).to_s + " kWh and it cost me " + wyprice.round(2).to_s + " euros. \n"
+          poststring << "Last month my electricity use was " + mdiff.round(2).to_s + " kWh and it cost me " + myprice.round(2).to_s + " euros. \n"
         else
           poststring << sensor.longname.downcase.capitalize + " is currently at: " + sensor.latestreading.to_s + " " + sensor.unit + "\n"
         end
@@ -77,7 +77,7 @@ class SocialmediasController < ApplicationController
         MiniFB.post(@socialmedia.fbauth, @id, :type=>@type, :metadata=>true, :params => {:message => @message, :link => @link})
         redirect_to(@socialmedia, :notice => 'Post was successful!')
       rescue
-        redirect_to(@socialmedia, :error => 'Facebook post error!')
+        redirect_to(@socialmedia, :notice => 'Facebook post error!')
       end
     else
       redirect_to(@socialmedia, :notice => 'Post failed: You do not have facebook configured.')
@@ -95,6 +95,8 @@ class SocialmediasController < ApplicationController
 
     @sensors = Sensor.find_all_by_id(sensorids)
 
+    sensorhash = Hash.new
+
     @sensors.each do |sensor|
       sensorhash[sensor.name] = sensor
     end
@@ -104,16 +106,14 @@ class SocialmediasController < ApplicationController
     pprice = sensorhash['powerprice'].readings.find(:first, :conditions => {:time => 14.days.ago .. 6.days.ago}, :order => "time")
 
     wdiff = enduse.value - startuse.value
-    wyprice = diff * pprice.value
+    wyprice = wdiff * pprice.value
 
     startuse = sensorhash['powerconsumed'].readings.find(:first, :conditions => {:time => 2.months.ago .. 1.months.ago}, :order => "time")
     enduse = sensorhash['powerconsumed'].readings.find(:last, :conditions => {:time => 2.months.ago .. 1.months.ago}, :order => "time")
     pprice = sensorhash['powerprice'].readings.find(:first, :conditions => {:time => 2.months.ago .. 1.months.ago}, :order => "time")
 
     mdiff = enduse.value - startuse.value
-    myprice = diff * pprice.value
-
-    sensorhash = Hash.new
+    myprice = mdiff * pprice.value
 
     poststring = "Greendel status report! \n\n"
 
@@ -122,8 +122,8 @@ class SocialmediasController < ApplicationController
         poststring << "My house is currently consuming " + sensor.latestreading.round(1).to_s + " W\n"
         poststring << "A full week of use at this rate would cost me " + (sensorhash['poweruse'].latestreading * 24 * 7 * sensorhash['powerprice'].latestreading / 1000).round(2).to_s + " euros. \n"
       elsif (sensor.name == 'powerconsumed')
-        poststring << "Last week my electricity use was " + wdiff.to_s + " kWh and it cost me " + wyprice.round(2).to_s + " euros. \n"
-        poststring << "Last month my electricity use was " + mdiff.to_s + " kWh and it cost me " + myprice.round(2).to_s + " euros. \n"
+        poststring << "Last week my electricity use was " + wdiff.round(2).to_s + " kWh and it cost me " + wyprice.round(2).to_s + " euros. \n"
+        poststring << "Last month my electricity use was " + mdiff.round(2).to_s + " kWh and it cost me " + myprice.round(2).to_s + " euros. \n"
       else
         poststring << sensor.longname.downcase.capitalize + " is currently at: " + sensor.latestreading.to_s + " " + sensor.unit + "\n"
       end

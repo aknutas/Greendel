@@ -25,11 +25,11 @@
       </p>
       <% @device.sensors.each do |sensor| %>
     </p>
-    <p><%= link_to(sensor.longname, sensor_path(sensor)) %> was at <%= if sensor.latestreading then
+    <p><%= link_to(sensor.longname, sensor_path(sensor)) %> was <%= if sensor.latestreading then
                                                                            h(sensor.latestreading.to_s + sensor.unit)
                                                                        else
                                                                            h("-")
-                                                                       end %> on <%= try_print(sensor.updated_at.asctime) %></p>
+                                                                       end %> <%= time_ago_in_words(sensor.updated_at) %> ago</p>
     <% end %>
     <br/>
     <% @device.outputs.each do |output| %>

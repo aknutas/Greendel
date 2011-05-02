@@ -19,6 +19,24 @@ xml.user do
         xml.code @user.device.location.weather.code
         xml.updated_at @user.device.location.weather.updated_at
       end
+      if @wtomorrow
+        xml.forecast do
+          xml.date @wtomorrow.date
+          xml.day @wtomorrow.day
+          xml.temp (@wtomorrow.high + @wtomorrow.low) / 2
+          xml.high @wtomorrow.high
+          xml.low @wtomorrow.low
+          xml.desc @wtomorrow.text
+          xml.code @wtomorrow.code
+        end
+      end
+    end
+    xml.powerprices do
+      xml.powerprice @sensorhash['powerprice'].latestreading
+      xml.lwuse @wdiff.round(2).to_s
+      xml.lwprice @wyprice.round(2).to_s
+      xml.lmuse @mdiff.round(2).to_s
+      xml.lmprice @myprice.round(2).to_s
     end
     xml.sensors do
       @user.device.sensors.each do |sensor|
