@@ -32,12 +32,26 @@ class SocialmediasController < ApplicationController
 
     @sensors = @socialmedia.user.device.sensors
 
+    sensorhash = Hash.new
+    @sensors.each do |sensor|
+      sensorhash[sensor.name] = sensor
+    end
+
     poststring = "Greendel status report! \n\n"
 
     @sensors.each do |sensor|
       if (params[sensor.name] == "1")
         if (sensor.name == 'poweruse')
+          startuse = sensorhash['powerconsumed'].find(:first, :conditions => {:time => Date.yesterday}, :sort_by => "time")
+          enduse = sensorhash['powerconsumed'].find(:last, :conditions => {:time => Date.yesterday}, :sort_by => "time")
+          pprice = sensorhash['powerprice'].find(:first, conditions => {:time => Date.yesterday..Date.today}, :sort_by => "time")
+
+          diff = enduse - startuse
+          yprice = diff * pprice
+
           poststring << "My house is currently consuming " + sensor.latestreading.round(1).to_s + " W\n"
+          poststring << "A full day of use at this rate would cost me " + (sensorhash['poweruse'] * 24 * sensorhash['powerprice']).round(2).to_s + " euros."
+          poststring << "Yesterday my electricity use was " + diff + " kWh and it cost me " + yprice.to_s + " euros."
         else
           poststring << sensor.longname.downcase.capitalize + " is currently at: " + sensor.latestreading.to_s + " " + sensor.unit + "\n"
         end

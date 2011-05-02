@@ -28,13 +28,7 @@ task :weatherload => :environment do
       weather.temp = response.condition.temp
       weather.desc = response.condition.text
       weather.code = response.condition.code
-      outsidesensor = Sensor.find_by_name('outsidetemp')
-      if outsidesensor
-        outsidesensor.latestreading = weather.temp
-        outsidesensor.readings << Reading.create(:value => weather.temp, :time => Time.zone.now)
-        outsidesensor.save
-      end
-      if (weather.histories.last.try(:fday) != Date.today && fc != nil)
+      if (weather.histories.last.try(:fday) < Time.zone.today && fc != nil)
         his = History.new
         his.fday = fc.date
         his.desc = fc.text
