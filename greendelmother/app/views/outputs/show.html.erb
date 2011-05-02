@@ -1,13 +1,16 @@
 <p>
   <b>Name:</b>
-  <%=h @output.name %>
+  <%= h @output.longname %>
 </p>
 
 <p>
   <b>State:</b>
-  <%=h @output.state %>
+  <% if (@output.state) %>
+      On
+  <% else %>
+      Off
+  <% end %>
 </p>
 
 
-<%= link_to 'Edit', edit_output_path(@output) %> |
-<%= link_to 'Back', outputs_path %>
+<%= link_to 'Toggle', url_for(:action => :toggle, :id => @output.id), :confirm => "Are you sure?" %> |

@@ -11,7 +11,7 @@
 #Creating first test user
 user = User.create(:name => 'testipaavo', :realname => 'Veli-Ensiö Järvinen', :email => 'velipoika@example.com', :password => 'testi')
 
-cloverpower = Device.create(:name => 'Cloverpower')
+cloverpower = Device.create(:name => 'GRN01')
 user.device = cloverpower
 user.save
 

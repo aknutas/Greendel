@@ -17,11 +17,8 @@
      scalefactor: 1
   outputs:
     - id: 1
-      name: heating
+      name: wallsocket
       register: 30
     - id: 2
       name: solar
       register: 32
-    - id: 3
-      name: wind
-      register: 33
