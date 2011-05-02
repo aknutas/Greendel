@@ -15,18 +15,29 @@ namespace CloverMobile
 {
     public partial class Settings : PhoneApplicationPage
     {
+        private DataMaster myMaster;
         private Controller controller;
+        private PowerPrice currentpowerPrice;
         public Settings()
         {
             InitializeComponent();
             controller = Controller.getInstance;
             //controller.setActivePage(this);
             controller.setImageSource(this);
+            myMaster = controller.getModel();
+            currentpowerPrice = myMaster.currentPowerPrise;
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            settingsScreenAnimation.Begin();   
+            settingsScreenAnimation.Begin();
+            ppTextBox.Text = currentpowerPrice.powerPrice.ToString() + " €";
+            monthlyUseTextBox.Text = currentpowerPrice.lmuse.ToString() + " kW/h";
+            monthlyPriceTextBox.Text = currentpowerPrice.lmprice.ToString() + " €";
+            weeklyUseTextBox.Text = currentpowerPrice.lwuse.ToString() + " kW/h";
+            weeklyPriceTextBox.Text = currentpowerPrice.lmprice.ToString() + " €";
+
+
         }
 
 

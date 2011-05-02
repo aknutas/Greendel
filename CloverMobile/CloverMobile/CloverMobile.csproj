@@ -72,6 +72,7 @@
     <Compile Include="GlobalData.cs" />
     <Compile Include="HistoryData.cs" />
     <Compile Include="Location.cs" />
+    <Compile Include="PowerPrice.cs" />
     <Compile Include="Sensors.cs" />
     <Compile Include="SettingsFile.cs" />
     <Compile Include="Social.xaml.cs">
@@ -96,6 +97,7 @@
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Weather.cs" />
+    <Compile Include="WeatherForecast.cs" />
     <Compile Include="WorkItem.cs" />
     <Compile Include="XmlSerilizierHelper.cs" />
   </ItemGroup>

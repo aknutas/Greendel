@@ -190,8 +190,8 @@
         	<Grid.RenderTransform>
         		<CompositeTransform/>
         	</Grid.RenderTransform>
-        	<Grid x:Name="Grid_Output" Height="136" Margin="26,26,26,0" VerticalAlignment="Top" Background="#54212121">
-        		<TextBlock Margin="20,52,140,52" TextWrapping="Wrap" Text="Kitchen Wall Sockets" FontSize="24" d:LayoutOverrides="Height" HorizontalAlignment="Left"/>
+        	<Grid x:Name="Grid_Output" Height="136" Margin="26,0,26,82" VerticalAlignment="Bottom" Background="#54212121">
+        		<TextBlock Margin="20,52,0,52" TextWrapping="Wrap" Text="Kitchen Wall Sockets" FontSize="24" d:LayoutOverrides="Height" HorizontalAlignment="Left"/>
         		<Button x:Name="Socket" Margin="0,24,10,16" HorizontalAlignment="Right" Width="152" FontSize="24" Height="96" Click="Socket_Click" >
         			<Button.Background>
         				<SolidColorBrush Color="#A7212121"/>
@@ -204,9 +204,10 @@
                 <TextBlock Margin="32,54,172,0" TextWrapping="Wrap" Text="Thermostat °C" VerticalAlignment="Top" TextAlignment="Center" d:LayoutOverrides="Width"/>
         		<TextBox x:Name="Heating_TextBlock" Margin="76,75,0,18" TextWrapping="Wrap" Text="22" TextAlignment="Center" HorizontalAlignment="Left" Width="115"/>
         	</Grid>
-        	<Grid x:Name="Grid_Output_Copy" Margin="26,0,26,26" Background="#54212121" Height="182" VerticalAlignment="Bottom">
-        		<TextBlock x:Name="Forecast_TitleText" Margin="0,13,0,0" TextWrapping="Wrap" Text="Weather" FontSize="24" HorizontalAlignment="Center" Height="44" VerticalAlignment="Top"/>
-        	</Grid>
+        	<Grid x:Name="Grid_Output_Copy" Margin="26,8,26,0" Background="#54212121" Height="163" VerticalAlignment="Top">
+        		<TextBlock x:Name="forecastTextBlock" Margin="0,13,0,0" TextWrapping="Wrap" Text="Forecast for tomorrow:" FontSize="24" HorizontalAlignment="Center" Height="44" VerticalAlignment="Top"/>
+                <Image Height="311" HorizontalAlignment="Left" Margin="19,0,0,0" Name="weatherForecastImage" Stretch="Fill" VerticalAlignment="Top" Width="441" />
+            </Grid>
         </Grid>
 
         <!--ContentPanel - place additional content here-->
