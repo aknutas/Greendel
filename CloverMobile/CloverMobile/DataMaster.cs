@@ -302,6 +302,15 @@ namespace CloverMobile
                 }
             }
         }
+        public void parseSavingGoals(int userId, XDocument xmlDoc)
+        { 
+        
+        
+        
+        
+        
+        
+        }
         /*
         System.Diagnostics.Debug.WriteLine("Parsing outputs and sensors: ");
 

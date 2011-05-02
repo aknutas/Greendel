@@ -29,7 +29,7 @@ namespace CloverMobile
                 //format = "yy:mm:dd:hh:mm:ss";
                 format = "d/M/yyyy HH:mm";
                 time = timevalue.ToString(format);
-                value = number;
+                value = double.Parse(String.Format("{0:0.###}", number));
             }
     }
 }

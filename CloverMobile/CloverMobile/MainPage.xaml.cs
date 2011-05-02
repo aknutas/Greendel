@@ -186,7 +186,7 @@ namespace CloverMobile
                 {
                     System.Diagnostics.Debug.WriteLine("ui: binding datacontext.");
                     this.DataContext = s;
-                    currentPowerConsumptionTextBlock.Text = s.latestReading.ToString() + " W";
+                    currentPowerConsumptionTextBlock.Text = String.Format("{0:0.#}", double.Parse(s.latestReading)) + " W";
                 }
             }
             StopLoadingAnimation();

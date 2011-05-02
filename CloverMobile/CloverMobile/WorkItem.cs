@@ -74,7 +74,7 @@ namespace CloverMobile
             documentName = workname;
             outputId = outputID;
         }
-
+        // ** workitem for facebook posting with 1 sensor
         public WorkItem(bool facebook, int userID, string workName, int sensor1ID)
         {
             documentName = workName;
@@ -82,12 +82,21 @@ namespace CloverMobile
             sensor1ToPublished = sensor1ID;
                   
         }
+        // ** workitem for facebook posting with 2 sensors
         public WorkItem(bool facebook, int userID, string workName, int sensor1iD, int sensor2iD)
         {
             documentName = workName;
             userId = userID;
             sensor1ToPublished = sensor1iD;
             sensor2ToPublished = sensor2iD;
+        }
+        // ** workitem for saving goals
+        public WorkItem(bool savingGoals, int userID, string workName)
+        {
+            
+            userId = userID;
+            documentName = workName;
+        
         }
     }
 }

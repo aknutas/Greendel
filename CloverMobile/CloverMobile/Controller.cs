@@ -304,6 +304,12 @@ namespace CloverMobile
             }
 
         }
+        public void GetSavingGoals(int userId)
+        {
+            WorkItem newItem = new WorkItem(true, userId, "getSavingGoals");
+            nwc.addNewDownloadWorkUnit(newItem);
+        
+        }
         public void printErrorMessage(string message)
         {
             if (mainPageRef != null)
@@ -364,6 +370,11 @@ namespace CloverMobile
                 socialRef.statusMessageTextBlock.Text = "Selected values successfully posted to facebook!";
 
             }
+        
+        }
+        public void savingsGoalsDownloaded()
+        { 
+        
         
         }
 
