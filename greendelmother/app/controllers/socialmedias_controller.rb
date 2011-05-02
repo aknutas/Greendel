@@ -42,16 +42,16 @@ class SocialmediasController < ApplicationController
     @sensors.each do |sensor|
       if (params[sensor.name] == "1")
         if (sensor.name == 'poweruse')
-          startuse = sensorhash['powerconsumed'].find(:first, :conditions => {:time => Date.yesterday}, :sort_by => "time")
-          enduse = sensorhash['powerconsumed'].find(:last, :conditions => {:time => Date.yesterday}, :sort_by => "time")
-          pprice = sensorhash['powerprice'].find(:first, conditions => {:time => Date.yesterday..Date.today}, :sort_by => "time")
+          startuse = sensorhash['powerconsumed'].readings.find(:first, :conditions => {:time => 14.days.ago .. 6.days.ago}, :order => "time")
+          enduse = sensorhash['powerconsumed'].readings.find(:last, :conditions => {:time => 14.days.ago .. 6.days.ago}, :order => "time")
+          pprice = sensorhash['powerprice'].readings.find(:first, :conditions => {:time => 14.days.ago .. 6.days.ago}, :order => "time")
 
-          diff = enduse - startuse
-          yprice = diff * pprice
+          diff = enduse.value - startuse.value
+          yprice = diff * pprice.value
 
           poststring << "My house is currently consuming " + sensor.latestreading.round(1).to_s + " W\n"
-          poststring << "A full day of use at this rate would cost me " + (sensorhash['poweruse'] * 24 * sensorhash['powerprice']).round(2).to_s + " euros."
-          poststring << "Yesterday my electricity use was " + diff + " kWh and it cost me " + yprice.to_s + " euros."
+          poststring << "A full week of use at this rate would cost me " + (sensorhash['poweruse'].latestreading * 24 * 7 * sensorhash['powerprice'].latestreading / 1000).round(2).to_s + " euros. \n"
+          poststring << "Last week my electricity use was " + diff.to_s + " kWh and it cost me " + yprice.round(1).to_s + " euros. \n"
         else
           poststring << sensor.longname.downcase.capitalize + " is currently at: " + sensor.latestreading.to_s + " " + sensor.unit + "\n"
         end
@@ -85,7 +85,16 @@ class SocialmediasController < ApplicationController
 
     @sensors.each do |sensor|
       if (sensor.name == 'poweruse')
-        poststring << "My house is currently consuming " + sensor.latestreading.round(1).to_s + "W\n"
+        startuse = sensorhash['powerconsumed'].readings.find(:first, :conditions => {:time => 14.days.ago .. 6.days.ago}, :order => "time")
+        enduse = sensorhash['powerconsumed'].readings.find(:last, :conditions => {:time => 14.days.ago .. 6.days.ago}, :order => "time")
+        pprice = sensorhash['powerprice'].readings.find(:first, :conditions => {:time => 14.days.ago .. 6.days.ago}, :order => "time")
+
+        diff = enduse.value - startuse.value
+        yprice = diff * pprice.value
+
+        poststring << "My house is currently consuming " + sensor.latestreading.round(1).to_s + " W\n"
+        poststring << "A full week of use at this rate would cost me " + (sensorhash['poweruse'].latestreading * 24 * 7 * sensorhash['powerprice'].latestreading / 1000).round(2).to_s + " euros."
+        poststring << "Last week my electricity use was " + diff.to_s + " kWh and it cost me " + yprice.round(2).to_s + " euros."
       else
         poststring << sensor.longname.downcase.capitalize + " is currently at: " + sensor.latestreading.to_s + " " + sensor.unit + "\n"
       end
@@ -162,10 +171,6 @@ class SocialmediasController < ApplicationController
       format.html { redirect_to(socialmedias_url) }
       format.xml { head :ok }
     end
-  end
-
-  def twitter_wrapper
-    @wrapper = TwitterWrapper.new(current_user)
   end
 
 end
