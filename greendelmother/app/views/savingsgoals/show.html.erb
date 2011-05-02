@@ -1,31 +1,41 @@
 <p>
   <b>Amount:</b>
-  <%=h @savingsgoal.amount %>
+  <%= h @savingsgoal.amount %>
 </p>
 
 <p>
   <b>Type:</b>
-  <%=h @savingsgoal.type %>
+  <%= h @savingsgoal.stype %>
+</p>
+
+<p>
+  <b>Compare to:</b>
+  <%= h @savingsgoal.period %>
+</p>
+
+<p>
+  <b>Duration:</b>
+  <%= h distance_of_time_in_words(@savingsgoal.timeend, @savingsgoal.timestart) %>
 </p>
 
 <p>
   <b>Timestart:</b>
-  <%=h @savingsgoal.timestart %>
+  <%= h @savingsgoal.timestart %>
 </p>
 
 <p>
   <b>Timeend:</b>
-  <%=h @savingsgoal.timeend %>
+  <%= h @savingsgoal.timeend %>
 </p>
 
 <p>
-  <b>Device:</b>
-  <%=h @savingsgoal.device_id %>
+  <b>Successful:</b>
+  <%= h @savingsgoal.successful %>
 </p>
 
 <p>
-  <b>Sensor:</b>
-  <%=h @savingsgoal.sensor_id %>
+  <b>Completed:</b>
+  <%= h @savingsgoal.completed %>
 </p>
 
 

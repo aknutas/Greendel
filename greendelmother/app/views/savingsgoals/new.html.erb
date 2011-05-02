@@ -1,35 +1,37 @@
-<h1>New savingsgoal</h1>
+<h1>Decide how you want to save!</h1>
+
+<p>Decide if you want to save money or watts, and decide how much you want to reduce your consumption.</p>
 
 <% form_for(@savingsgoal) do |f| %>
-  <%= f.error_messages %>
+    <%= f.error_messages %>
 
-  <p>
-    <%= f.label :amount %><br />
-    <%= f.text_field :amount %>
-  </p>
-  <p>
-    <%= f.label :type %><br />
-    <%= f.text_field :type %>
-  </p>
-  <p>
-    <%= f.label :timestart %><br />
-    <%= f.date_select :timestart %>
-  </p>
-  <p>
-    <%= f.label :timeend %><br />
-    <%= f.date_select :timeend %>
-  </p>
-  <p>
-    <%= f.label :device_id %><br />
-    <%= f.text_field :device_id %>
-  </p>
-  <p>
-    <%= f.label :sensor_id %><br />
-    <%= f.text_field :sensor_id %>
-  </p>
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
+    <p>
+      <%= f.label :amount, "How much?" %><br/>
+      <%= f.text_field :amount %>
+    </p>
+    <p>
+      <%= f.label :stype, "Save:" %><br/>
+      <%= f.select(:stype, {"Watts" => "Watts", "Money" => "Money"}) %>
+    </p>
+    <p>
+      <%= f.label :period, "Compare to:" %><br/>
+      <%= f.select(:period, {"Last year" => "lastyear", "Previous date" => "previous"}) %>
+    </p>
+    <p>
+      <%= f.label :timestart, "Start time" %><br/>
+      <%= f.date_select :timestart %>
+    </p>
+    <p>
+      <%= f.label :timeend, "End time" %><br/>
+      <%= f.date_select :timeend %>
+    </p>
+    <p>
+      <%= f.label :publishsocial, "Publish on Facebook?" %><br/>
+      <%= f.check_box :publishsocial %>
+    </p>
+    <p>
+      <%= f.submit 'Create' %>
+    </p>
 <% end %>
 
 <%= link_to 'Back', savingsgoals_path %>

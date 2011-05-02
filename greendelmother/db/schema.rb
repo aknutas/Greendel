@@ -76,7 +76,8 @@ ActiveRecord::Schema.define(:version => 20110407082126) do
 
   create_table "savingsgoals", :force => true do |t|
     t.float    "amount"
-    t.string   "type"
+    t.string   "stype"
+    t.string   "period"
     t.boolean  "completed",     :default => false
     t.boolean  "successful"
     t.boolean  "publishsocial"

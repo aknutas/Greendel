@@ -30,15 +30,15 @@
         <div class="art-nav-center">
           <ul class="art-menu">
             <li>
-              <a href="<%= url_for(@current_user) %>" <%= if controller.class.to_s.downcase == "userscontroller" then p("class=\" active\"") end %>><span class="l"></span><span class="r"></span><span class="t">Home</span></a>
+              <a href="<%= url_for(@current_user) %>" <%= if controller.class.to_s.downcase == "userscontroller" then ("class=\" active\"") end %>><span class="l"></span><span class="r"></span><span class="t">Home</span></a>
             </li>
             <li>
-              <a href="<%= url_for(@current_user.device) %>" <%= if controller.class.to_s.downcase == "devicescontroller" then p("class=\" active\"") end %>><span class="l"></span><span class="r"></span><span class="t">Device</span></a>
+              <a href="<%= url_for(@current_user.device) %>" <%= if controller.class.to_s.downcase == "devicescontroller" then ("class=\" active\"") end %>><span class="l"></span><span class="r"></span><span class="t">Device</span></a>
             </li>
             <li>
-              <a href="<%= url_for(@current_user.socialmedia) %>" <%= if controller.class.to_s.downcase == "socialmediascontroller" then p("class=\" active\"") end %>><span class="l"></span><span class="r"></span><span class="t">Social Media</span></a>
+              <a href="<%= url_for(@current_user.socialmedia) %>" <%= if controller.class.to_s.downcase == "socialmediascontroller" then ("class=\" active\"") end %>><span class="l"></span><span class="r"></span><span class="t">Social Media</span></a>
             </li>
-            <li><a href="<%= url_for(:action => 'index', :controller => 'savingsgoals') %>" <%= if controller.class.to_s.downcase == "savingsgoalscontroller" then p("class=\" active\"") end %>><span class="l"></span><span class="r"></span><span class="t">Saving Goals</span></a>
+            <li><a href="<%= url_for(:action => 'index', :controller => 'savingsgoals') %>" <%= if controller.class.to_s.downcase == "savingsgoalscontroller" then ("class=\" active\"") end %>><span class="l"></span><span class="r"></span><span class="t">Saving Goals</span></a>
             </li>
             <li>
               <a href="<%= url_for(:action => 'logout', :controller => 'sign') %>"><span class="l"></span><span class="r"></span><span class="t">Log out</span></a>

@@ -49,7 +49,10 @@ class SavingsgoalsController < ApplicationController
   # POST /savingsgoals
   # POST /savingsgoals.xml
   def create
+    user = current_user
     @savingsgoal = Savingsgoal.new(params[:savingsgoal])
+    @savingsgoal.device = user.device
+    @savingsgoal.sensor = Sensor.find_by_name('powerconsumed')
 
     respond_to do |format|
       if @savingsgoal.save

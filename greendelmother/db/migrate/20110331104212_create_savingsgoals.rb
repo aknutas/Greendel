@@ -2,7 +2,8 @@ class CreateSavingsgoals < ActiveRecord::Migration
   def self.up
     create_table :savingsgoals do |t|
       t.float :amount
-      t.string :type
+      t.string :stype
+      t.string :period
       t.boolean :completed, :default => false
       t.boolean :successful
       t.boolean :publishsocial
