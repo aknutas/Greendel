@@ -72,7 +72,6 @@
     <Compile Include="GlobalData.cs" />
     <Compile Include="HistoryData.cs" />
     <Compile Include="Location.cs" />
-    <Compile Include="SavingGoal.cs" />
     <Compile Include="Sensors.cs" />
     <Compile Include="SettingsFile.cs" />
     <Compile Include="Social.xaml.cs">
