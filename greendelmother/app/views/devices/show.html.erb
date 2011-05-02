@@ -33,11 +33,11 @@
     <% end %>
     <br/>
     <% @device.outputs.each do |output| %>
-    <p><%= link_to(output.longname, sensor_path(output)) %> was turned <%= if output.try(:state) == true then
+    <p><%= link_to(output.longname, output_path(output)) %> was turned <%= if output.try(:state) == true then
                                                                                h("on")
                                                                            else
                                                                                h("off")
-                                                                           end %> at <%= try_print(output.updated_at) %></p>
+                                                                           end %> at <%= time_ago_in_words(output.updated_at) %> ago</p>
     <% end %>
     <br/>
     <hr/>

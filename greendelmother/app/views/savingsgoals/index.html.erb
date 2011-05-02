@@ -5,27 +5,27 @@
         <tr>
           <th>Amount</th>
           <th>Type</th>
+          <th>Compared to</th>
+          <th>Duration</th>
           <th>Start</th>
           <th>End</th>
-          <th>Device</th>
-          <th>Sensor</th>
-          <th>Complete?</th>
-          <th>Success?</th>
+          <th>Completed</th>
+          <th>Successful</th>
         </tr>
         <% @savingsgoals.each do |savingsgoal| %>
-        <tr>
-          <td><%=h savingsgoal.amount %></td>
-          <td><%=h savingsgoal.type %></td>
-          <td><%=h savingsgoal.timestart.to_s %></td>
-          <td><%=h savingsgoal.timeend.to_s %></td>
-          <td><%=h savingsgoal.device.location.name %></td>
-          <td><%=h savingsgoal.sensor.longname %></td>
-          <td><%=h savingsgoal.completed %></td>
-          <td><%=h savingsgoal.successful %></td>
-          <td><%= link_to 'Show', savingsgoal %></td>
-          <td><%= link_to 'Edit', edit_savingsgoal_path(savingsgoal) %></td>
-          <td><%= link_to 'Destroy', savingsgoal, :confirm => 'Are you sure?', :method => :delete %></td>
-        </tr>
+            <tr>
+              <td><%= h savingsgoal.amount %></td>
+              <td><%= h savingsgoal.stype %></td>
+              <td><%= h savingsgoal.period %></td>
+              <td><%= h distance_of_time_in_words(savingsgoal.timeend, savingsgoal.timestart) %></td>
+              <td><%= h savingsgoal.timestart.to_s %></td>
+              <td><%= h savingsgoal.timeend.to_s %></td>
+              <td><%= h savingsgoal.completed %></td>
+              <td><%= h savingsgoal.successful %></td>
+              <td><%= link_to 'Show', savingsgoal %></td>
+              <td><%= link_to 'Edit', edit_savingsgoal_path(savingsgoal) %></td>
+              <td><%= link_to 'Destroy', savingsgoal, :confirm => 'Are you sure?', :method => :delete %></td>
+            </tr>
         <% end %>
       </table>
       <p>&nbsp;</p>
