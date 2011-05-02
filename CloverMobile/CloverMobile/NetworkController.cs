@@ -39,6 +39,7 @@ namespace CloverMobile
         private WorkItem currentUploadWorkItem;
         private int currentSensorId;
         private int currentOutputId;
+        private int currentUserId;
         private string uri;
 
 
@@ -146,7 +147,11 @@ namespace CloverMobile
                             }
                             // /socialmedias/postuse/<userid>.xml?sensorid=<sensorid>,<sensorid>,<sensorid>
                             break;
-                                
+                        case "getSavingGoals":
+                            downloaDocumentType = "getSavingGoals";
+                            currentUserId = currentDownloadWorkItem.userId;
+                            wcDown.DownloadStringAsync(new Uri(serviceAddress + "/savingsgoals/datastatus/" + currentUserId.ToString() + ".xml"));
+                            break;
                         default:
                             break;
                     }
@@ -351,6 +356,16 @@ namespace CloverMobile
                     downloaDocumentType = "";
                     controller.informFacebookPostOk();
                 }
+                else if (downloaDocumentType == "getSavingGoals")
+                {
+                    System.Diagnostics.Debug.WriteLine("nwc: saving goals downloaded");
+                    dataDoc = XDocument.Load(new StringReader(e.Result));
+                    master.parseSensorTimeScaleHistory(currentUserId, dataDoc);
+                    //System.Diagnostics.Debug.WriteLine(e.Result.ToString());
+                    downloaDocumentType = "";
+                    controller.savingsGoalsDownloaded();
+                
+                }
             }
             catch (WebException we)
             {
@@ -378,7 +393,6 @@ namespace CloverMobile
                     //controller.getOutputsXML();
                     //controller.updateControlPageView();  
                 }
-
 
             }
             catch (WebException we)

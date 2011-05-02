@@ -33,7 +33,7 @@ namespace CloverMobile
                 if (s.sensorName == "poweruse")
                 {
 
-                    sensor1CheckBox.Content = s.longName + " : " + s.latestReading + " : " + s.unit;
+                    sensor1CheckBox.Content = s.longName + " : " + String.Format("{0:0.#}", double.Parse(s.latestReading)) + " : " + s.unit;
                     sensor1Id = s.sensorId;
                     
                     //currentSensorId = s.sensorId;
@@ -42,7 +42,7 @@ namespace CloverMobile
                 }
                 else if (s.sensorName == "powerconsumed")
                 {
-                    sensor2CheckBox.Content = s.longName + " : " + s.latestReading + " : " + s.unit;
+                    sensor2CheckBox.Content = s.longName + " : " + String.Format("{0:0.#}", double.Parse(s.latestReading)) +" : " + s.unit;
                     sensor2Id = s.sensorId;
                 }
             }
@@ -87,6 +87,16 @@ namespace CloverMobile
                 System.Diagnostics.Debug.WriteLine("ui.social: current user id is " + myMaster.currentUser.id);
                 controller.SendToFaceBook(myMaster.currentUser.id, sensor1value, sensor2value);
             }           
+        }
+        // ** when user clicks either of the checkboxes, clear the text
+        private void sensor1CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            statusMessageTextBlock.Text = "";
+        }
+
+        private void sensor2CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            statusMessageTextBlock.Text = "";
         }
     }
 }

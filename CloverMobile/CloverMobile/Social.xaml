@@ -145,8 +145,8 @@
         		</TextBlock.RenderTransform>
         	</TextBlock>
             <Button Content="Button" Height="72" HorizontalAlignment="Left" Margin="139,269,0,0" Name="button1" VerticalAlignment="Top" Width="160" Click="button1_Click" />
-            <CheckBox Height="72" HorizontalAlignment="Left" Margin="32,60,0,0" VerticalAlignment="Top" Name="sensor1CheckBox" />
-            <CheckBox Height="72" HorizontalAlignment="Left" Margin="33,150,0,0" Name="sensor2CheckBox" VerticalAlignment="Top" />
+            <CheckBox Height="72" HorizontalAlignment="Left" Margin="32,60,0,0" VerticalAlignment="Top" Name="sensor1CheckBox" Click="sensor1CheckBox_Click" />
+            <CheckBox Height="72" HorizontalAlignment="Left" Margin="33,150,0,0" Name="sensor2CheckBox" VerticalAlignment="Top" Click="sensor2CheckBox_Click" />
             <TextBlock Height="30" HorizontalAlignment="Left" Margin="106,239,0,0" Name="statusMessageTextBlock" Text="" VerticalAlignment="Top" Width="244" Foreground="#FF77FF00" />
         </Grid>
     </Grid>

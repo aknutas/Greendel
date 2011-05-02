@@ -123,7 +123,7 @@
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
             </TextBlock>
-            <TextBlock x:Name="PageTitle" Text="Settings" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="PageTitle" Text="Saving Goals" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" RenderTransformOrigin="0.5,0.5">
             	<TextBlock.RenderTransform>
             		<CompositeTransform/>
             	</TextBlock.RenderTransform>
@@ -132,17 +132,7 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0" RenderTransformOrigin="0.5,0.5">
-        	<Grid.RenderTransform>
-        		<CompositeTransform/>
-        	</Grid.RenderTransform>
-            <Rectangle Fill="Black" Margin="18,88,23,243" Stroke="Black" Opacity="0.58"/>
-            <TextBox Height="72" HorizontalAlignment="Left" Margin="20,130,0,0" x:Name="textBoxServiceAddress" Text="" VerticalAlignment="Top" Width="391" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="32,104,0,0" x:Name="textBlock2" Text="Service Address" VerticalAlignment="Top" Width="224" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="32,225,0,0" x:Name="textBlock3" Text="User Name" VerticalAlignment="Top" Width="96" />
-            <TextBox Height="72" HorizontalAlignment="Left" Margin="22,247,0,0" x:Name="textBox2" Text="" VerticalAlignment="Top" Width="188" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="236,225,0,0" x:Name="textBlock4" Text="Password" VerticalAlignment="Top" Width="106" />
-            <TextBox Height="72" Margin="223,247,45,0" x:Name="textBox3" Text="" VerticalAlignment="Top" />
-            <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="5" Margin="55,112,0,0" Stroke="Black" VerticalAlignment="Top" Width="5"/>
+
         </Grid>
     </Grid>
  
