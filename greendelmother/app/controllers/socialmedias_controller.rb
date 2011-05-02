@@ -118,16 +118,14 @@ class SocialmediasController < ApplicationController
     poststring = "Greendel status report! \n\n"
 
     @sensors.each do |sensor|
-      if (params[sensor.name] == "1")
-        if (sensor.name == 'poweruse')
-          poststring << "My house is currently consuming " + sensor.latestreading.round(1).to_s + " W\n"
-          poststring << "A full week of use at this rate would cost me " + (sensorhash['poweruse'].latestreading * 24 * 7 * sensorhash['powerprice'].latestreading / 1000).round(2).to_s + " euros. \n"
-        elsif (sensor.name == 'powerconsumed')
-          poststring << "Last week my electricity use was " + wdiff.to_s + " kWh and it cost me " + wyprice.round(2).to_s + " euros. \n"
-          poststring << "Last month my electricity use was " + mdiff.to_s + " kWh and it cost me " + myprice.round(2).to_s + " euros. \n"
-        else
-          poststring << sensor.longname.downcase.capitalize + " is currently at: " + sensor.latestreading.to_s + " " + sensor.unit + "\n"
-        end
+      if (sensor.name == 'poweruse')
+        poststring << "My house is currently consuming " + sensor.latestreading.round(1).to_s + " W\n"
+        poststring << "A full week of use at this rate would cost me " + (sensorhash['poweruse'].latestreading * 24 * 7 * sensorhash['powerprice'].latestreading / 1000).round(2).to_s + " euros. \n"
+      elsif (sensor.name == 'powerconsumed')
+        poststring << "Last week my electricity use was " + wdiff.to_s + " kWh and it cost me " + wyprice.round(2).to_s + " euros. \n"
+        poststring << "Last month my electricity use was " + mdiff.to_s + " kWh and it cost me " + myprice.round(2).to_s + " euros. \n"
+      else
+        poststring << sensor.longname.downcase.capitalize + " is currently at: " + sensor.latestreading.to_s + " " + sensor.unit + "\n"
       end
     end
 
