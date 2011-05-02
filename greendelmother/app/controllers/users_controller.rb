@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  layout false, :only => [:current_consumption, :power_prices]
+
   # GET /users
   # GET /users.xml
   def index
@@ -42,7 +44,37 @@ class UsersController < ApplicationController
     @reading = @csensor.readings.last
   end
 
-    # AJAX update method for Highcharts
+  # AJAX update method
+  def power_prices
+    @sensors = current_user.device.sensors
+
+    @sensorhash = Hash.new
+
+    @sensors.each do |sensor|
+      @sensorhash[sensor.name] = sensor
+    end
+
+    startuse = @sensorhash['powerconsumed'].readings.find(:first, :conditions => {:time => 14.days.ago .. 6.days.ago}, :order => "time")
+    enduse = @sensorhash['powerconsumed'].readings.find(:last, :conditions => {:time => 14.days.ago .. 6.days.ago}, :order => "time")
+    @pprice = @sensorhash['powerprice'].readings.find(:first, :conditions => {:time => 14.days.ago .. 6.days.ago}, :order => "time")
+
+    @wdiff = enduse.value - startuse.value
+    @wyprice = @wdiff * @pprice.value
+
+    startuse = @sensorhash['powerconsumed'].readings.find(:first, :conditions => {:time => 2.months.ago .. 1.months.ago}, :order => "time")
+    enduse = @sensorhash['powerconsumed'].readings.find(:last, :conditions => {:time => 2.months.ago .. 1.months.ago}, :order => "time")
+    @pprice = @sensorhash['powerprice'].readings.find(:first, :conditions => {:time => 2.months.ago .. 1.months.ago}, :order => "time")
+
+    @mdiff = enduse.value - startuse.value
+    @myprice = @mdiff * @pprice.value
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml # show.xml.builder
+    end
+  end
+
+  # AJAX update method for Highcharts
   def current_consumption_chart
     @user = current_user()
     @csensor = @user.device.sensors.find(:first, :conditions => {:name => "poweruse"})
@@ -59,6 +91,39 @@ class UsersController < ApplicationController
   #Custom for mobile
   def datastatus
     @user = User.find(session[:user_id], :include => [:device, {:device => [:sensors, :outputs, :location, {:location => :weather}]}])
+
+    begin
+      @wnow = @user.device.location.weather
+      fcs = @wnow.get_forecasts
+      @wtoday = fcs[:today]
+      @wtomorrow = fcs[:tomorrow]
+    rescue
+      @wnow = nil
+      @wtoday = nil
+      @wtomorrow = nil
+    end
+
+    @sensors = @user.device.sensors
+
+    @sensorhash = Hash.new
+
+    @sensors.each do |sensor|
+      @sensorhash[sensor.name] = sensor
+    end
+
+    startuse = @sensorhash['powerconsumed'].readings.find(:first, :conditions => {:time => 14.days.ago .. 6.days.ago}, :order => "time")
+    enduse = @sensorhash['powerconsumed'].readings.find(:last, :conditions => {:time => 14.days.ago .. 6.days.ago}, :order => "time")
+    @pprice = @sensorhash['powerprice'].readings.find(:first, :conditions => {:time => 14.days.ago .. 6.days.ago}, :order => "time")
+
+    @wdiff = enduse.value - startuse.value
+    @wyprice = @wdiff * @pprice.value
+
+    startuse = @sensorhash['powerconsumed'].readings.find(:first, :conditions => {:time => 2.months.ago .. 1.months.ago}, :order => "time")
+    enduse = @sensorhash['powerconsumed'].readings.find(:last, :conditions => {:time => 2.months.ago .. 1.months.ago}, :order => "time")
+    @pprice = @sensorhash['powerprice'].readings.find(:first, :conditions => {:time => 2.months.ago .. 1.months.ago}, :order => "time")
+
+    @mdiff = enduse.value - startuse.value
+    @myprice = @mdiff * @pprice.value
 
     respond_to do |format|
       format.xml # datastatus.xml.builder
