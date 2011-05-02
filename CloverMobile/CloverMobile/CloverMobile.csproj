@@ -72,6 +72,7 @@
     <Compile Include="GlobalData.cs" />
     <Compile Include="HistoryData.cs" />
     <Compile Include="Location.cs" />
+    <Compile Include="SavingGoal.cs" />
     <Compile Include="Sensors.cs" />
     <Compile Include="SettingsFile.cs" />
     <Compile Include="Social.xaml.cs">
@@ -141,6 +142,8 @@
     <Resource Include="Backgrounds\greendel_40pros.png" />
     <Resource Include="Backgrounds\greendel_60pros.png" />
     <Resource Include="Backgrounds\greendel_80pros.png" />
+    <Resource Include="Graphics\greendel-logo.png" />
+    <Resource Include="Graphics\round-animation.png" />
     <Content Include="Icons\appbar.sync.rest.png" />
     <Content Include="Image5.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

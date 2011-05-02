@@ -103,7 +103,40 @@
         <Storyboard x:Name="RotateGreendelIcon" RepeatBehavior="Forever" >
         	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="cloverImage">
         		<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:2" Value="359.65"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:2" Value="-360.245"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="cloverImage">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="80"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:2" Value="80"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="cloverImage">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="80"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:2" Value="80"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.OpacityMask).(SolidColorBrush.Color)" Storyboard.TargetName="image">
+        		<EasingColorKeyFrame KeyTime="0" Value="White"/>
+        		<EasingColorKeyFrame KeyTime="0:0:1" Value="#FE89FF00"/>
+        		<EasingColorKeyFrame KeyTime="0:0:2" Value="White"/>
+        	</ColorAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="image">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:1" Value="1.212"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:2" Value="1"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="image">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:1" Value="1.212"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:2" Value="1"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="image">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.5"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:2" Value="0"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="image">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:1" Value="-0.5"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:2" Value="0"/>
         	</DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Name="LoadScreenIn">
@@ -223,7 +256,7 @@
         <Image Height="311" HorizontalAlignment="Left" x:Name="currentWeather" Stretch="Fill" VerticalAlignment="Top" Width="441" Margin="8,-80,0,0" Grid.Row="1" d:LayoutOverrides="VerticalAlignment" />
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="0">
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="0" Visibility="Visible">
             <TextBlock x:Name="currentTemperatureTextBlock" VerticalAlignment="Top" Margin="0,-8,130,0" HorizontalAlignment="Right" RenderTransformOrigin="-9.884,0.296" FontSize="48" Foreground="White" TextAlignment="Center" />
             <Grid x:Name="Powervalue_Grid" Margin="60,120,60,260" Background="#66181818" VerticalAlignment="Top" Height="150">
         		<TextBlock Margin="28,2,28,0" x:Name="consumptionTitle" Text="You are consuming" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" Height="35" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="21.333" >
@@ -274,20 +307,25 @@
             	<TextBlock Height="30" x:Name="errorMessageTextBlock" Text="" Width="380" Foreground="Red" Canvas.Top="408" Canvas.Left="44" />
             	<TextBox x:Name="serverAddressTextBox" Text="http://localhost:3000" Grid.Row="1" Canvas.Top="330" DataContext="{Binding}" Height="72" Width="400" HorizontalAlignment="Left" Margin="35,0,0,0" />
             </Canvas>
-            <Canvas Height="529" HorizontalAlignment="Left" Margin="12,6,0,0" Name="loadingSplashscreen" VerticalAlignment="Top" Width="462" Background="Black" RenderTransformOrigin="0.5,0.5" Opacity="0.8" Visibility="Collapsed">
+            <Canvas Height="529" HorizontalAlignment="Left" Margin="13,6,0,0" Name="loadingSplashscreen" VerticalAlignment="Top" Width="462" Background="Black" RenderTransformOrigin="0.5,0.5" Opacity="0.8" Visibility="Collapsed">
             	<Canvas.RenderTransform>
             		<CompositeTransform/>
             	</Canvas.RenderTransform>
-                <Image Canvas.Left="117" Canvas.Top="139" Height="180" Name="cloverImage" Stretch="Fill" Width="200" Source="/CloverMobile;component/Graphics/Clover.png" RenderTransformOrigin="0.5,0.5" >
+                <Image Canvas.Left="180" Canvas.Top="144" Height="180" Name="cloverImage" Stretch="Fill" Width="200" Source="Graphics/round-animation.png" RenderTransformOrigin="0.5,0.5" >
                 	<Image.RenderTransform>
                 		<CompositeTransform/>
                 	</Image.RenderTransform>
                 </Image>
-                <TextBlock Canvas.Left="93" Canvas.Top="83" Height="30" Name="loadingTextBlock" Text="Waiting for Greendel service . . ." Width="294" Foreground="#FF00E100" RenderTransformOrigin="0.5,0.5" >
+                <TextBlock Canvas.Left="78" Canvas.Top="294" Height="30" Name="loadingTextBlock" Text="Connecting to Greendel service . . ." Width="294" Foreground="#FF00E100" RenderTransformOrigin="0.5,0.5" FontFamily="Segoe WP Light" FontSize="24" >
                 	<TextBlock.RenderTransform>
                 		<CompositeTransform/>
                 	</TextBlock.RenderTransform>
                 </TextBlock>
+                <Image x:Name="image" Height="80" Canvas.Left="195" Source="Graphics/greendel-logo.png" Stretch="Fill" Canvas.Top="161" Width="80" OpacityMask="#FF88FF00" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                	<Image.RenderTransform>
+                		<CompositeTransform/>
+                	</Image.RenderTransform>
+                </Image>
             </Canvas>
             <!--
             <HyperlinkButton Content="Settings" Height="30" HorizontalAlignment="Left" Margin="18,531,0,0" Name="hyperlinkButton1" VerticalAlignment="Top" Width="200" NavigateUri="/CloverMobile;component/Settings.xaml" />
