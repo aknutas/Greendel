@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  layout false, :only => [:current_consumption, :power_prices]
+  layout 'application', :except => [:current_consumption, :power_prices]
 
   # GET /users
   # GET /users.xml
@@ -30,6 +30,28 @@ class UsersController < ApplicationController
       @wtoday = nil
       @wtomorrow = nil
     end
+
+    @sensors = @user.device.sensors
+
+    @sensorhash = Hash.new
+
+    @sensors.each do |sensor|
+      @sensorhash[sensor.name] = sensor
+    end
+
+    startuse = @sensorhash['powerconsumed'].readings.find(:first, :conditions => {:time => 14.days.ago .. 6.days.ago}, :order => "time")
+    enduse = @sensorhash['powerconsumed'].readings.find(:last, :conditions => {:time => 14.days.ago .. 6.days.ago}, :order => "time")
+    @pprice = @sensorhash['powerprice'].readings.find(:first, :conditions => {:time => 14.days.ago .. 6.days.ago}, :order => "time")
+
+    @wdiff = enduse.value - startuse.value
+    @wyprice = @wdiff * @pprice.value
+
+    startuse = @sensorhash['powerconsumed'].readings.find(:first, :conditions => {:time => 2.months.ago .. 1.months.ago}, :order => "time")
+    enduse = @sensorhash['powerconsumed'].readings.find(:last, :conditions => {:time => 2.months.ago .. 1.months.ago}, :order => "time")
+    @pprice = @sensorhash['powerprice'].readings.find(:first, :conditions => {:time => 2.months.ago .. 1.months.ago}, :order => "time")
+
+    @mdiff = enduse.value - startuse.value
+    @myprice = @mdiff * @pprice.value
 
     respond_to do |format|
       format.html # show.html.erb
