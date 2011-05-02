@@ -1,23 +1,23 @@
 <% unless @socialmedia.facebookon %>
-    <p>
-      <b>Status:</b>
-      <%= h @socialmedia.status %>
+    <p><b>Status:</b> <%= h @socialmedia.status %>
+    
     </p>
-    <p>
-      <b>Facebook:</b>
-      <%= h @socialmedia.facebookon %>
-    </p>
+    <p> <b>Facebook:</b> <%= h @socialmedia.facebookon %></p>
     <%= link_to "Login to Facebook", @oauth_url %>
-<% end %>
-<% if @socialmedia.facebookon %>
-    <br/>
-    <b>Update my status to Facebook</b>
-    <% form_tag(url_for(:action => 'fbpost', :controller => 'socialmedias', :id => @socialmedia.id), :method => :get) do %>
-        <% @sensors.each do |sensor| %>
-            <p> Publish <%= sensor.longname.downcase %>
-              <%= check_box_tag sensor.name %>
-            </p>
-        <% end %>
-        <%= submit_tag("Postaas kuule feispuukkiin") %>
     <% end %>
-<% end %>
+    <% if @socialmedia.facebookon %>
+<table width="90%" border="0" align="center">
+  <tr>
+    <td align="LEFT" valign="TOP"><img src="../../../images/social-media-title.png" width="450" height="100">
+        <b><br />
+        Update my status to Facebook</b>
+    <% form_tag(url_for(:action => 'fbpost', :controller => 'socialmedias', :id => @socialmedia.id), :method => :get) do %>
+    <% @sensors.each do |sensor| %>
+    </p>
+<p> Publish <%= sensor.longname.downcase %> <%= check_box_tag sensor.name %> </p>
+    <% end %>
+    <%= submit_tag("Share in Facebook!") %>
+    <% end %>
+    <% end %></td>
+  </tr>
+</table>
