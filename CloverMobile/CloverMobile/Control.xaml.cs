@@ -22,6 +22,7 @@ namespace CloverMobile
         DataMaster model;
         private bool Socket_Toggle;
         
+        
         public Control()
         {
             InitializeComponent();
@@ -29,13 +30,21 @@ namespace CloverMobile
             model = controller.getModel();
             //controller.setActivePage(this);
             controller.setImageSource(this);
+            
+            //disable heating
+            Update_Button.IsEnabled = false;
+            Heating_TextBlock.IsEnabled = false;
 
             // ** get outputs
             controller.getOutputsXML();
+
+
         }
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
             controlScreenAnimation.Begin();
+            
+            
             
         }
         private void Socket_Click(object sender, RoutedEventArgs e)
@@ -94,12 +103,15 @@ namespace CloverMobile
             if (Socket_Toggle == true)
             {
                 Socket.Content = "ON";
-                
+                Socket.Background = Resources["Socket_Color_ON"] as Brush;
+
+            
 
             }
             else
             {
                 Socket.Content = "OFF";
+                Socket.Background = Resources["Socket_Color_OFF"] as Brush;
                 
             }
             Socket_FadeIn.Begin();
