@@ -45,7 +45,7 @@ task :genhistory => :environment do
         reading = Reading.create(:value => (random.rand(500) + random.rand(500) + random.rand(500) + random.rand(500))/1000, :time => timenow)
         prevcons = reading.value
       elsif (sensor.name == "powerprice")
-        reading = Reading.create(:value => ((random.rand(21) + random.rand(21) + random.rand(21) + random.rand(21))*0.00018), :time => timenow)
+        reading = Reading.create(:value => random.rand(0.060..0.080), :time => timenow)
       elsif (sensor.name == "poweruse")
         reading = Reading.new(:value => (random.rand(500) + random.rand(500) + random.rand(500) + random.rand(500)), :time => timenow)
         powerfluctuate(reading)
