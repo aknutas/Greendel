@@ -36,7 +36,7 @@ task :genhistory => :environment do
     puts Time.zone.now.to_s + ": Processing " + timenow.ctime
     sensors.each do |sensor|
       if (sensor.name == "powerconsumed" && prevpower)
-        reading = Reading.create(:value => (prevpower + prevcons), :time => timenow)
+        reading = Reading.create(:value => ((prevpower / 1000) + prevcons), :time => timenow)
         prevcons = reading.value
       elsif (sensor.name == "powerconsumed" && sensor.readings.last)
         reading = Reading.create(:value => (sensor.readings.last.value + (random.rand(500) + random.rand(500) + random.rand(500) + random.rand(500))/1000), :time => timenow)
