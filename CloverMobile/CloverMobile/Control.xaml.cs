@@ -38,6 +38,10 @@ namespace CloverMobile
             Update_Button.IsEnabled = false;
             Heating_TextBlock.IsEnabled = false;
 
+            // ** get weather forecast
+            forecast = model.currentForecast;
+            SetCurrentWeather(forecast.code);
+
             // ** get outputs
             controller.getOutputsXML();
 
@@ -80,9 +84,6 @@ namespace CloverMobile
         // ** this is called by the controller when the outuputs are received!
         public void OutputsReceived()
         {
-            // ** get weather forecast
-            forecast = model.currentForecast;
-            SetCurrentWeather(forecast.code);
   
             System.Diagnostics.Debug.WriteLine("ui.control: outputs received.");
             // ** when outputs received, set the current value for outputs
@@ -128,14 +129,16 @@ namespace CloverMobile
 
             // get the time of day and determine if it is day or night
             // DateTime now = DateTime.Now;
-
-            weatherForecastSource = "http://l.yimg.com/a/i/us/nws/weather/gr/" + code.ToString() + "d.png"; //34d.png
-            System.Diagnostics.Debug.WriteLine("UI: weathersource is:  " + weatherForecastSource);
-            Uri uri = new Uri(weatherForecastSource, UriKind.Absolute);
-            ImageSource imgSource = new BitmapImage(uri);
-            weatherForecastImage.Source = imgSource;
-            weatherForecastImage.Visibility = System.Windows.Visibility.Visible;
-            forecastTextBlock.Text += forecast.temp.ToString() + " °C";
+            if (code != 0)
+            {
+                weatherForecastSource = "http://l.yimg.com/a/i/us/nws/weather/gr/" + code.ToString() + "d.png"; //34d.png
+                System.Diagnostics.Debug.WriteLine("UI: weathersource is:  " + weatherForecastSource);
+                Uri uri = new Uri(weatherForecastSource, UriKind.Absolute);
+                ImageSource imgSource = new BitmapImage(uri);
+                weatherForecastImage.Source = imgSource;
+                weatherForecastImage.Visibility = System.Windows.Visibility.Visible;
+                forecastTextBlock.Text += forecast.temp.ToString() + " °C";
+            }
 
         }
     }
