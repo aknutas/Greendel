@@ -18,7 +18,7 @@ task :weatherload => :environment do
       weather.yweather = Marshal.dump(response)
       response.forecasts.each do |ofc|
         puts "Examining forecast at " + ofc.date.to_s
-        if (Date.parse(ofc.date.to_s) == Date.today)
+        if (Date.parse(ofc.date.to_s) == Time.zone.today)
           puts "Match found!"
           fc = ofc
         end
@@ -28,7 +28,7 @@ task :weatherload => :environment do
       weather.temp = response.condition.temp
       weather.desc = response.condition.text
       weather.code = response.condition.code
-      if (weather.histories.last.try(:fday) < Time.zone.today && fc != nil)
+      if (weather.histories.last.try(:fday) != Time.zone.today && fc != nil)
         his = History.new
         his.fday = fc.date
         his.desc = fc.text
