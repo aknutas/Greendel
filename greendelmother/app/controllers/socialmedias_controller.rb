@@ -85,7 +85,7 @@ class SocialmediasController < ApplicationController
   end
 
   def postuse
-    @socialmedia = Socialmedia.find(params[:id])
+    @socialmedia = Socialmedia.find(params[:id], :include => [:user, {:user => [:device, {:device => :sensors}]}])
 
     sensorids = Array.new
 
@@ -93,11 +93,12 @@ class SocialmediasController < ApplicationController
       sensorids << s.to_i
     end
 
+    @sensorsall = @socialmedia.user.device.sensors
     @sensors = Sensor.find_all_by_id(sensorids)
 
     sensorhash = Hash.new
 
-    @sensors.each do |sensor|
+    @sensorsall.each do |sensor|
       sensorhash[sensor.name] = sensor
     end
 
