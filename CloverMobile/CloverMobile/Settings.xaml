@@ -135,14 +135,25 @@
         	<Grid.RenderTransform>
         		<CompositeTransform/>
         	</Grid.RenderTransform>
-            <Rectangle Fill="Black" Margin="18,88,23,243" Stroke="Black" Opacity="0.58"/>
-            <TextBox Height="72" HorizontalAlignment="Left" Margin="20,130,0,0" x:Name="textBoxServiceAddress" Text="" VerticalAlignment="Top" Width="391" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="32,104,0,0" x:Name="textBlock2" Text="Service Address" VerticalAlignment="Top" Width="224" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="32,225,0,0" x:Name="textBlock3" Text="User Name" VerticalAlignment="Top" Width="96" />
-            <TextBox Height="72" HorizontalAlignment="Left" Margin="22,247,0,0" x:Name="textBox2" Text="" VerticalAlignment="Top" Width="188" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="236,225,0,0" x:Name="textBlock4" Text="Password" VerticalAlignment="Top" Width="106" />
-            <TextBox Height="72" Margin="223,247,45,0" x:Name="textBox3" Text="" VerticalAlignment="Top" />
+            <Rectangle Fill="Black" Margin="18,10,20,257" Opacity="0.58" Stroke="Black" />
+            <Rectangle Fill="Black" Margin="18,367,23,24" Stroke="Black" Opacity="0.58"/>
+            <TextBox Height="72" HorizontalAlignment="Left" Margin="31,401,0,0" x:Name="textBoxServiceAddress" Text="" VerticalAlignment="Top" Width="391" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="31,367,0,0" x:Name="textBlock2" Text="Service Address" VerticalAlignment="Top" Width="224" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="31,477,0,0" x:Name="textBlock3" Text="User Name" VerticalAlignment="Top" Width="96" />
+            <TextBox Height="72" HorizontalAlignment="Left" Margin="31,511,0,0" x:Name="textBox2" Text="" VerticalAlignment="Top" Width="188" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="234,477,0,0" x:Name="textBlock4" Text="Password" VerticalAlignment="Top" Width="106" />
+            <TextBox Height="72" Margin="234,511,34,0" x:Name="textBox3" Text="" VerticalAlignment="Top" />
             <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="5" Margin="55,112,0,0" Stroke="Black" VerticalAlignment="Top" Width="5"/>
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="39,30,0,0" x:Name="currentPowerPriseTextBlock" Text="Current power price is: " VerticalAlignment="Top" Width="255" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="89,91,0,0" x:Name="monthlyUseTextBlock" Text="Monthly Use:" VerticalAlignment="Top" Width="166" />
+            <TextBox Height="72" HorizontalAlignment="Left" Margin="240,10,0,0" x:Name="ppTextBox" Text="" VerticalAlignment="Top" Width="193" />
+            <TextBox Height="72" HorizontalAlignment="Right" Margin="0,74,23,0" x:Name="monthlyUseTextBox" Text="" VerticalAlignment="Top" Width="187" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="82,154,0,0" x:Name="textBlock1" Text="Monthly Price" VerticalAlignment="Top" />
+            <TextBox Height="72" HorizontalAlignment="Left" Margin="246,137,0,0" x:Name="monthlyPriceTextBox" Text="" VerticalAlignment="Top" Width="190" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="81,212,0,0" x:Name="textBlock5" Text="Weekly Use:" VerticalAlignment="Top" Width="130" />
+            <TextBox Height="72" HorizontalAlignment="Left" Margin="248,205,0,0" x:Name="weeklyUseTextBox" Text="" VerticalAlignment="Top" Width="188" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="77,276,0,0" x:Name="weeklyPriceTextBlock" Text="Weekly Price:" VerticalAlignment="Top" />
+            <TextBox Height="72" HorizontalAlignment="Left" Margin="247,267,0,0" Name="weeklyPriceTextBox" Text="" VerticalAlignment="Top" Width="187" />
         </Grid>
     </Grid>
  

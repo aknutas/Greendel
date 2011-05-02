@@ -23,6 +23,8 @@ namespace CloverMobile
         public Device currentDevice { get; set; }
         public Location currentLocation { get; set; }
         public Weather currentWeather { get; set; }
+        public WeatherForecast currentForecast {get; set;}
+        public PowerPrice currentPowerPrise {get; set;}
         public List<Sensor> currentSensors { get; set; }
         public List<Output> currentOutputs { get; set; }
         public List<HistoryData> currentReadings { get; set; }
@@ -32,6 +34,8 @@ namespace CloverMobile
             currentDevice = new Device();
             currentLocation = new Location();
             currentWeather = new Weather();
+            currentForecast = new WeatherForecast();
+            currentPowerPrise = new PowerPrice();
             currentOutputs = new List<Output>();
             currentSensors = new List<Sensor>();
             currentReadings = new List<HistoryData>();
@@ -121,6 +125,43 @@ namespace CloverMobile
                 currentWeather.code = w.code;
             }
             System.Diagnostics.Debug.WriteLine("WEATHER:" + " " + currentWeather.temp.ToString() + " " + currentWeather.high.ToString() + " " + currentWeather.low.ToString() + " " + currentWeather.unit + " " + currentWeather.description + " " + currentWeather.code.ToString());
+            
+            var forecast = from weatherForecastValue in xmlDoc.Descendants("forecast")
+            select new WeatherForecast
+            {
+                temp = float.Parse(weatherForecastValue.Element("temp").Value),
+                high = float.Parse(weatherForecastValue.Element("high").Value),
+                low = float.Parse(weatherForecastValue.Element("low").Value),
+                //unit = weatherForecastValue.Element("unit").Value.ToString(),
+                description = weatherForecastValue.Element("desc").Value.ToString(),
+                code = int.Parse(weatherForecastValue.Element("code").Value),
+            };
+            foreach (WeatherForecast wf in forecast)
+            {
+                currentForecast.temp = wf.temp;
+                //currentForecast.unit = wf.unit;
+                currentForecast.description = wf.description;
+                currentForecast.code = wf.code;
+            }
+
+            var prises = from powerPriseValue in xmlDoc.Descendants("powerprices")
+            select new PowerPrice
+            {
+                powerPrice = float.Parse(powerPriseValue.Element("powerprice").Value),
+                lwuse = float.Parse(powerPriseValue.Element("lwuse").Value),
+                lwprice = float.Parse(powerPriseValue.Element("lmprice").Value),
+                lmuse = float.Parse(powerPriseValue.Element("lmuse").Value),
+                lmprice = float.Parse(powerPriseValue.Element("lmprice").Value),
+            };
+
+            foreach (PowerPrice pp in prises)
+            {
+                currentPowerPrise.powerPrice = pp.powerPrice;
+                currentPowerPrise.lwuse = pp.lwuse;
+                currentPowerPrise.lwprice = pp.lwprice;
+                currentPowerPrise.lmuse = pp.lmuse;
+                currentPowerPrise.lmprice = pp.lmprice;
+            }
         }
         
         // ** get all sensors only
@@ -311,67 +352,5 @@ namespace CloverMobile
         
         
         }
-        /*
-        System.Diagnostics.Debug.WriteLine("Parsing outputs and sensors: ");
-
-
-
-        var sensorOutputs = from sensors in dataDoc.Descendants("sensors")
-        //select new Sensor
-        select new Sensor
-        {
-             
-           sensorId = int.Parse(sensors.Element("id").Value),
-           sensorName = sensors.Element("name").Value.ToString(),
-           sensorVarType = sensors.Element("vartype").Value,
-           latestReading = int.Parse(sensors.Element("latestreading").Value), 
-                    
-                    
-                                          
-        };
-            
-        foreach (Sensor s in sensorOutputs)
-        {
-           System.Diagnostics.Debug.WriteLine(s.sensorId.ToString() + " " + s.sensorName + " " + s.sensorVarType);
-           allSensors.Add(s);
-           System.Diagnostics.Debug.WriteLine("FOR EACH ");
-        }
-         
-        //allOutputs.Clear();
-        var dataUnitoutputs = from outputs in dataDoc.Descendants("output")
-        select new Output
-        {
-            id = int.Parse(outputs.Element("id").Value),
-            name = outputs.Element("name").Value.ToString(),
-            state = bool.Parse(outputs.Element("state").Value),
-            hasChanged = bool.Parse(outputs.Element("haschanged").Value),
-        };
-                
-        foreach (Output o in dataUnitoutputs)
-        {
-            System.Diagnostics.Debug.WriteLine(o.id.ToString() + " " + o.name + " " + o.state.ToString() + " " + o.hasChanged.ToString());
-            allOutputs.Add(o);
-            System.Diagnostics.Debug.WriteLine("FOR EACH ");
-                    
-        }
-public void WriteHistory(XDocument xmlDoc)
-{
-    /*
-    allHistoryData.Clear();
-    var historyValues = from historyValue in xmlDoc.Descendants("hash")
-    select new HistoryData
-    {
-        powerConsumption0 = int.Parse(historyValue.Element("today").Value),
-        powerConsumption1 = int.Parse(historyValue.Element("yesterday").Value),
-        powerConsumption2 = int.Parse(historyValue.Element("daysago2").Value),
-        powerConsumption3 = int.Parse(historyValue.Element("daysago3").Value),
-    };
-    foreach (HistoryData hd in historyValues)
-    {
-        allHistoryData.Add(hd);
-    }
-    isUpdated = true;
-   */
-        //}
     }
 }

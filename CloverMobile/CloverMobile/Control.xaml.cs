@@ -13,14 +13,17 @@ using Microsoft.Phone.Controls;
 using System.Xml.Linq;
 using System.IO;
 using System.Windows.Threading;
+using System.Windows.Media.Imaging;
 
 namespace CloverMobile
 {
     public partial class Control : PhoneApplicationPage
     {
-        Controller controller;
-        DataMaster model;
+        private Controller controller;
+        private DataMaster model;
+        private WeatherForecast forecast;
         private bool Socket_Toggle;
+        private string weatherForecastSource;
         
         
         public Control()
@@ -77,6 +80,10 @@ namespace CloverMobile
         // ** this is called by the controller when the outuputs are received!
         public void OutputsReceived()
         {
+            // ** get weather forecast
+            forecast = model.currentForecast;
+            SetCurrentWeather(forecast.code);
+  
             System.Diagnostics.Debug.WriteLine("ui.control: outputs received.");
             // ** when outputs received, set the current value for outputs
             foreach (Output o in model.currentOutputs)
@@ -115,6 +122,21 @@ namespace CloverMobile
                 
             }
             Socket_FadeIn.Begin();
+        }
+        public void SetCurrentWeather(int code)
+        {
+
+            // get the time of day and determine if it is day or night
+            // DateTime now = DateTime.Now;
+
+            weatherForecastSource = "http://l.yimg.com/a/i/us/nws/weather/gr/" + code.ToString() + "d.png"; //34d.png
+            System.Diagnostics.Debug.WriteLine("UI: weathersource is:  " + weatherForecastSource);
+            Uri uri = new Uri(weatherForecastSource, UriKind.Absolute);
+            ImageSource imgSource = new BitmapImage(uri);
+            weatherForecastImage.Source = imgSource;
+            weatherForecastImage.Visibility = System.Windows.Visibility.Visible;
+            forecastTextBlock.Text += forecast.temp.ToString() + " °C";
+
         }
     }
 }
