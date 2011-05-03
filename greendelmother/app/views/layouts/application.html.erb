@@ -33,7 +33,7 @@
               <a href="<%= url_for(@current_user) %>" <%= if controller.class.to_s.downcase == "userscontroller" then ("class=\" active\"") end %>><span class="l"></span><span class="r"></span><span class="t">Home</span></a>
             </li>
             <li>
-              <a href="<%= url_for(@current_user.device) %>" <%= if controller.class.to_s.downcase == "devicescontroller" then ("class=\" active\"") end %>><span class="l"></span><span class="r"></span><span class="t">Device</span></a>
+              <a href="<%= url_for(@current_user.device) %>" <%= if controller.class.to_s.downcase == "devicescontroller" then ("class=\" active\"") end %>><span class="l"></span><span class="r"></span><span class="t">Details</span></a>
             </li>
             <li>
               <a href="<%= url_for(@current_user.socialmedia) %>" <%= if controller.class.to_s.downcase == "socialmediascontroller" then ("class=\" active\"") end %>><span class="l"></span><span class="r"></span><span class="t">Social Media</span></a>

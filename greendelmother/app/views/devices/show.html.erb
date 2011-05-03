@@ -23,21 +23,24 @@
     <td align="LEFT" valign="TOP"><img src="../../../images/device-title.png" width="450" height="100" alt="Device">
     <p><b>Name:</b> <%= h @device.name %>
       </p>
+      <br/>
+      <b>Monitor</b>
       <% @device.sensors.each do |sensor| %>
     </p>
     <p><%= link_to(sensor.longname, sensor_path(sensor)) %> was <%= if sensor.latestreading then
-                                                                           h(sensor.latestreading.to_s + sensor.unit)
+                                                                           h(sensor.latestreading.round(2).to_s + sensor.unit)
                                                                        else
                                                                            h("-")
                                                                        end %> <%= time_ago_in_words(sensor.updated_at) %> ago</p>
     <% end %>
     <br/>
+      <b>Control</b>
     <% @device.outputs.each do |output| %>
     <p><%= link_to(output.longname, output_path(output)) %> was turned <%= if output.try(:state) == true then
                                                                                h("on")
                                                                            else
                                                                                h("off")
-                                                                           end %> at <%= time_ago_in_words(output.updated_at) %> ago</p>
+                                                                           end %> <%= time_ago_in_words(output.updated_at) %> ago</p>
     <% end %>
     <br/>
     <hr/>

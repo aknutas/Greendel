@@ -9,7 +9,7 @@
 #   Major.create(:name => 'Daley', :city => cities.first)
 
 #Creating first test user
-user = User.create(:name => 'testipaavo', :realname => 'Veli-Ensiö Järvinen', :email => 'velipoika@example.com', :password => 'testi')
+user = User.create(:name => 'veliejarvinen@hotmail.fi', :realname => 'Veli-Ensiö Järvinen', :email => 'velipoika@example.com', :password => 'testi')
 
 cloverpower = Device.create(:name => 'GRN01')
 user.device = cloverpower
@@ -21,7 +21,7 @@ sm.save
 user.socialmedia = sm
 user.save
 
-testlocation = Location.create(:address => 'Nollakatu 2', :name => 'Oma Koti', :town => 'Lappeenranta')
+testlocation = Location.create(:address => 'Nollakatu 2', :name => 'Oma Koti', :town => 'Kuopio')
 cloverpower.location = testlocation
 cloverpower.save
 
@@ -50,6 +50,7 @@ cloverpower.save
 #Populating woeid db
 Woeid.create(:location => 'Lappeenranta', :woeid => '568782')
 Woeid.create(:location => 'Helsinki', :woeid => '565346')
+Woeid.create(:location => 'Kuopio', :woeid => '568301')
 
 #Populating woeids
 weathers = Weather.find(:all)

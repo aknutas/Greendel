@@ -43,15 +43,6 @@
       </div>
 
       <div id="readings_chart" style="width: 90%; height: 300px;"></div>
-
-      <% @user.device.sensors.each do |sensor| %>
-          <p><%= link_to(sensor.longname, sensor_path(sensor)) %> was at <%= if sensor.latestreading then
-                                                                                 h(number_with_precision(sensor.latestreading).to_f.to_s + sensor.unit)
-                                                                             else
-                                                                                 h("-")
-                                                                             end %>
-            on <%= try_print(sensor.updated_at.asctime) %>
-      <% end %>
     </td>
     <td align="CENTER" valign="TOP" width="50%"><img src="../../../images/weather-title.png" width="450" height="100" align="LEFT">
 	<p>It is <%= Time.zone.now.asctime %> and the weather
