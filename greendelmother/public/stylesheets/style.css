@@ -954,7 +954,7 @@ blockquote {
     display: block;
     height: 34px;
     font-family: "Segoe WP", Arial, Helvetica, Sans-Serif;
-    font-size: 12px;
+    font-size: 14px;
     font-style: normal;
     font-weight: normal;
     white-space: nowrap;
@@ -967,9 +967,10 @@ blockquote {
 
 input, select {
     font-family: "Segoe WP", Arial, Helvetica, Sans-Serif;
-    font-size: 12px;
+    font-size: 14px;
     font-style: normal;
     font-weight: normal;
+    color: #000000
 }
 
 .art-button-wrapper.hover .art-button, .art-button:hover {

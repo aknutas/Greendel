@@ -1,16 +1,16 @@
 <table width="90%" border="0" align="center">
   <tr>
     <td><img src="../../../images/saving-goals-title.png" width="450" height="100"><br />
-      <table width="80%" align="left">
+      <table width="100%" align="left">
         <tr>
-          <th>Amount</th>
-          <th>Type</th>
-          <th>Compared to</th>
-          <th>Duration</th>
-          <th>Start</th>
-          <th>End</th>
-          <th>Completed</th>
-          <th>Successful</th>
+          <th width="11%">Amount</th>
+          <th width="8%">Type</th>
+          <th width="18%">Compared to</th>
+          <th width="13%">Duration</th>
+          <th width="7%">Start</th>
+          <th width="6%">End</th>
+          <th width="14%">Completed</th>
+          <th width="11%">Successful</th>
         </tr>
         <% @savingsgoals.each do |savingsgoal| %>
             <tr>
@@ -22,16 +22,16 @@
               <td><%= h savingsgoal.timeend.to_s %></td>
               <td><%= h savingsgoal.completed %></td>
               <td><%= h savingsgoal.successful %></td>
-              <td><%= link_to 'Show', savingsgoal %></td>
-              <td><%= link_to 'Edit', edit_savingsgoal_path(savingsgoal) %></td>
-              <td><%= link_to 'Destroy', savingsgoal, :confirm => 'Are you sure?', :method => :delete %></td>
+              <td width="8%"><%= link_to 'Show', savingsgoal %></td>
+              <td width="2%"><%= link_to 'Edit', edit_savingsgoal_path(savingsgoal) %></td>
+              <td width="2%"><%= link_to 'Destroy', savingsgoal, :confirm => 'Are you sure?', :method => :delete %></td>
             </tr>
         <% end %>
       </table>
       <p>&nbsp;</p>
-      <p>
-        
-        <%= link_to 'Create New Goal', new_savingsgoal_path %>
+      <p>&nbsp;
+      </p>
+      <p><%= link_to 'Create New Goal', new_savingsgoal_path %>
     </p></td>
   </tr>
 </table>
