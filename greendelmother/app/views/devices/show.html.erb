@@ -1,5 +1,6 @@
 <script type="text/javascript" charset="utf-8">
     jQuery(document).ready(function() {
+        jQuery("#accordion").accordion({ collapsible: true, active: false });
         jQuery('#startdate').datepicker({
             dateFormat: 'dd.mm.yy',
             firstDay: 1,
@@ -16,40 +17,56 @@
             showButtonPanel: true,
             defaultDate: '<%=  Time.now.strftime('%d.%m.%Y') %>'
         });
-    })
+    });
 </script>
 <table width="90%" border="0" align="center">
   <tr>
     <td align="LEFT" valign="TOP"><img src="../../../images/device-title.png" width="450" height="100" alt="Device">
-    <p><b>Name:</b> <%= h @device.name %>
-      </p>
       <br/>
       <b>Monitor</b>
       <% @device.sensors.each do |sensor| %>
-    </p>
-    <p><%= link_to(sensor.longname, sensor_path(sensor)) %> was <%= if sensor.latestreading then
-                                                                           h(sensor.latestreading.round(2).to_s + sensor.unit)
-                                                                       else
-                                                                           h("-")
-                                                                       end %> <%= time_ago_in_words(sensor.updated_at) %> ago</p>
-    <% end %>
-    <br/>
+          </p>
+          <p><%= link_to(sensor.longname, sensor_path(sensor)) %> was <%= if sensor.latestreading then
+                                                                              h(sensor.latestreading.round(2).to_s + sensor.unit)
+                                                                          else
+                                                                              h("-")
+                                                                          end %> <%= time_ago_in_words(sensor.updated_at) %>
+            ago</p>
+      <% end %>
+      <br/>
       <b>Control</b>
-    <% @device.outputs.each do |output| %>
-    <p><%= link_to(output.longname, output_path(output)) %> was turned <%= if output.try(:state) == true then
-                                                                               h("on")
-                                                                           else
-                                                                               h("off")
-                                                                           end %> <%= time_ago_in_words(output.updated_at) %> ago</p>
-    <% end %>
-    <br/>
-    <hr/>
-    <br/>
-    <% form_tag(device_path(@device), :method => :get) do %>
-    <%= label_tag(:startdate, "Start date:") %> <%= text_field_tag(:startdate, @startdate.strftime('%d.%m.%Y')) %> <%= label_tag(:enddate, "End date:") %> <%= text_field_tag(:enddate, @enddate.strftime('%d.%m.%Y')) %> <%= radio_button_tag(:avgscale, "none") %> No Averaging <%= radio_button_tag(:avgscale, "hourly", :checked => true) %> Hourly Averages <%= radio_button_tag(:avgscale, "daily") %> Daily Averages <%= radio_button_tag(:avgscale, "monthly") %> Monthly Averages <%= submit_tag("Load Chart") %>
-    <% end %>
-    <br/>
-    <div id="readings_chart" style="width: 90%; height: 300px;"></div></td>
+      <% @device.outputs.each do |output| %>
+          <p><%= link_to(output.longname, output_path(output)) %> was turned <%= if output.try(:state) == true then
+                                                                                     h("on")
+                                                                                 else
+                                                                                     h("off")
+                                                                                 end %> <%= time_ago_in_words(output.updated_at) %>
+            ago</p>
+      <% end %>
+      <br/>
+      <hr/>
+      <br/>
+      <% form_tag(device_path(@device), :method => :get) do %>
+          <%= label_tag(:startdate, "Start date:") %> <%= text_field_tag(:startdate, @startdate.strftime('%d.%m.%Y')) %> <%= label_tag(:enddate, "End date:") %> <%= text_field_tag(:enddate, @enddate.strftime('%d.%m.%Y')) %> <%= radio_button_tag(:avgscale, "none") %>
+          No Averaging <%= radio_button_tag(:avgscale, "hourly", :checked => true) %> Hourly
+          Averages <%= radio_button_tag(:avgscale, "daily") %> Daily
+          Averages <%= radio_button_tag(:avgscale, "monthly") %> Monthly Averages <%= submit_tag("Load Chart") %>
+      <% end %>
+      <br/>
+
+      <div id="readings_chart" style="width: 90%; height: 300px;"></div>
+      <div id="accordion" style="width: 90%;"><h3><a href="#">Compare</a></h3>
+
+        <div>
+          <div id="compare_chart" style="height: 300px;"></div>
+        </div>
+        <h3><a href="#">Compare to History</a></h3>
+
+        <div>
+          <div id="history_chart" style="height: 300px;"></div>
+        </div>
+      </div>
+    </td>
   </tr>
 </table>
 <script type="text/javascript" charset="utf-8">
@@ -75,5 +92,55 @@
                 <% end -%>
             ]
         });
+    });
+</script>
+<script type="text/javascript" charset="utf-8">
+    jQuery("#accordion").accordion({
+        change: function(event, ui) {
+            new Highcharts.Chart({
+                chart: { renderTo: 'compare_chart', zoomType: 'x' },
+                subtitle: {
+                    text: document.ontouchstart === undefined ?
+                            'Click and drag in the plot area to zoom in' :
+                            'Drag your finger over the plot to zoom in'
+                },
+                title: { text: '<%= h(@device.name) %> Readings History' },
+                xAxis: { type: 'datetime' },
+                yAxis: {
+                    title: { text: 'Measured Reading' }
+                },
+                series: [
+                        <%  @sensors.each do |sensor| -%>{
+                        name: '<%= h(sensor.name) %> (<%= h(sensor.unit) %>)',
+                        data: [<%= plot_helper(@chartreadings[sensor]) %>
+                        ], visible: false
+                    },
+                    <% end -%>
+                ]
+            });
+
+            new Highcharts.Chart({
+                chart: { renderTo: 'history_chart', zoomType: 'x' },
+                subtitle: {
+                    text: document.ontouchstart === undefined ?
+                            'Click and drag in the plot area to zoom in' :
+                            'Drag your finger over the plot to zoom in'
+                },
+                title: { text: '<%= h(@device.name) %> Readings History' },
+                xAxis: { type: 'datetime' },
+                yAxis: {
+                    title: { text: 'Measured Reading' }
+                },
+                series: [
+                        <%  @sensors.each do |sensor| -%>{
+                        name: '<%= h(sensor.name) %> (<%= h(sensor.unit) %>)',
+                        data: [<%= plot_helper(@chartreadings[sensor]) %>
+                        ], visible: false
+                    },
+                    <% end -%>
+                ]
+            });
+
+        }
     });
 </script>
