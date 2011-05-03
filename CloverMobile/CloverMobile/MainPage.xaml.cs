@@ -82,7 +82,7 @@ namespace CloverMobile
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("UI: mainpage loaded, timer started.");
-            
+            timer.Start();
             // ** start the timer again when user navigates to the page, and possibly get new values for power consumption graph
         }
 
@@ -119,7 +119,7 @@ namespace CloverMobile
         }
         public void authenticationOk() // ** this function is called by controller if the autentication is successfull
         {
-            timer.Start();
+            //timer.Start();
             // ** get sensors
             controller.getSensorsXML();  
             System.Diagnostics.Debug.WriteLine("UI: authentication OK.");
