@@ -211,7 +211,7 @@
             <shell:ApplicationBarIconButton IconUri="/Icons/appbar.folder.rest.png" Text="History" Click="ApplicationBarIconButtonHistory_Click" />
             <shell:ApplicationBarIconButton IconUri="/Icons/appbar.edit.rest.png" Text="Control" Click="ApplicationBarControlIconButtonControl_Click" />
             <!--<shell:ApplicationBarIconButton IconUri="/Icons/appbar.back.rest.png" Text="Back" />-->
-            <shell:ApplicationBarIconButton IconUri="/Icons/appbar.feature.settings.rest.png" Text="Settings" Click="ApplicationBarIconButtonSettings_Click" />
+            <shell:ApplicationBarIconButton IconUri="/Icons/appbar.feature.settings.rest.png" Text="Power price" Click="ApplicationBarIconButtonSettings_Click" />
             <shell:ApplicationBarIconButton IconUri="/Icons/appbar.sync.rest.png" Text="Social" Click="ApplicationBarIconButtonSocial_Click" />
             <!--
             <shell:ApplicationBar.MenuItems>
@@ -257,18 +257,17 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="0" Visibility="Visible">
-            <TextBlock x:Name="currentTemperatureTextBlock" VerticalAlignment="Top" Margin="0,-8,130,0" HorizontalAlignment="Right" RenderTransformOrigin="-9.884,0.296" FontSize="48" Foreground="White" TextAlignment="Center" />
             <Grid x:Name="Powervalue_Grid" Margin="60,120,60,260" Background="#66181818" VerticalAlignment="Top" Height="150">
         		<TextBlock Margin="28,2,28,0" x:Name="consumptionTitle" Text="You are consuming" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" Height="35" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="21.333" >
         			<TextBlock.RenderTransform>
         				<CompositeTransform/>
         			</TextBlock.RenderTransform>
         		</TextBlock>
-        		<TextBlock Margin="9,49,5,18" x:Name="currentPowerConsumptionTextBlock" FontSize="48" RenderTransformOrigin="0.974,0.466" FontFamily="Segoe WP Black" TextAlignment="Center" FontWeight="Bold" >
+        		<TextBlock Margin="9,38,5,-4" x:Name="currentPowerConsumptionTextBlock" FontSize="64" RenderTransformOrigin="0.974,0.466" FontFamily="Segoe WP Semibold" TextAlignment="Center" FontWeight="Bold" >
         			<TextBlock.Foreground>
         				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-        					<GradientStop Color="#FFC8C8C8" Offset="0.623"/>
-        					<GradientStop Color="#FFE0E0E0" Offset="0.615"/>
+        					<GradientStop Color="#FFC8C8C8" Offset="0.517"/>
+        					<GradientStop Color="#FFE0E0E0" Offset="0.509"/>
         					<GradientStop Color="White"/>
         					<GradientStop Color="#FF919191" Offset="1"/>
         				</LinearGradientBrush>
@@ -327,6 +326,8 @@
                 	</Image.RenderTransform>
                 </Image>
             </Canvas>
+            <TextBlock x:Name="currentTemperatureTextBlock" VerticalAlignment="Top" Margin="0,20,84,0" HorizontalAlignment="Right" RenderTransformOrigin="-9.884,0.296" FontSize="48" TextAlignment="Center" FontFamily="Segoe WP Light" Foreground="#FF101010" />
+            <TextBlock Height="30" Margin="232,0,55,0" TextWrapping="Wrap" Text="Current temperature:" VerticalAlignment="Top" Foreground="#FF2F2F2F" Name="currentTemperatureTitleText" />
             <!--
             <HyperlinkButton Content="Settings" Height="30" HorizontalAlignment="Left" Margin="18,531,0,0" Name="hyperlinkButton1" VerticalAlignment="Top" Width="200" NavigateUri="/CloverMobile;component/Settings.xaml" />
             <HyperlinkButton Content="History" Height="30" HorizontalAlignment="Left" Margin="250,531,0,0" Name="hyperlinkButton2" VerticalAlignment="Top" Width="200" NavigateUri="/CloverMobile;component/History.xaml" />

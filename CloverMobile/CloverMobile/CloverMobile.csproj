@@ -143,12 +143,10 @@
     <Resource Include="Backgrounds\greendel_40pros.png" />
     <Resource Include="Backgrounds\greendel_60pros.png" />
     <Resource Include="Backgrounds\greendel_80pros.png" />
+    <Resource Include="Graphics\FACEBOOK ICON.png" />
     <Resource Include="Graphics\greendel-logo.png" />
     <Resource Include="Graphics\round-animation.png" />
     <Content Include="Icons\appbar.sync.rest.png" />
-    <Content Include="Image5.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Toolkit.Content\Applicationbar.cancel.png" />
     <Content Include="Toolkit.Content\Applicationbar.check.png" />
     <Resource Include="Graphics\Wind_disabled.png" />

@@ -13,7 +13,7 @@
 	<phone:PhoneApplicationPage.Resources>
 		<Storyboard x:Name="socialScreenAnimation">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="background">
-				<EasingDoubleKeyFrame KeyTime="0:0:0.106" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="-750"/>
 			</DoubleAnimationUsingKeyFrames>
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ApplicationTitle">
@@ -40,35 +40,52 @@
 				<EasingDoubleKeyFrame KeyTime="0:0:0.354" Value="1"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:0.396" Value="1"/>
 			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ContentPanel">
+				<EasingDoubleKeyFrame KeyTime="0" Value="528"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ContentPanel">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
 		<Storyboard x:Name="socialScreenAnimationReverse" Completed="socialScreenAnimationReverse_Completed">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="background">
-				<SplineDoubleKeyFrame KeyTime="0:0:0.294" Value="0"/>
-				<SplineDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+				<SplineDoubleKeyFrame KeyTime="0" Value="-750"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="-750"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="0"/>
 			</DoubleAnimationUsingKeyFrames>
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ApplicationTitle">
-				<SplineDoubleKeyFrame KeyTime="0:0:0.004" Value="0"/>
-				<SplineDoubleKeyFrame KeyTime="0:0:0.046" Value="35"/>
-				<SplineDoubleKeyFrame KeyTime="0:0:0.097" Value="0"/>
-				<SplineDoubleKeyFrame KeyTime="0:0:0.4" Value="350"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.204" Value="0"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.246" Value="35"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.297" Value="0"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="350"/>
 			</DoubleAnimationUsingKeyFrames>
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PageTitle">
-				<SplineDoubleKeyFrame KeyTime="0:0:0.004" Value="0"/>
-				<SplineDoubleKeyFrame KeyTime="0:0:0.046" Value="35"/>
-				<SplineDoubleKeyFrame KeyTime="0:0:0.097" Value="0"/>
-				<SplineDoubleKeyFrame KeyTime="0:0:0.4" Value="350"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.204" Value="0"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.246" Value="35"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.297" Value="0"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="350"/>
 			</DoubleAnimationUsingKeyFrames>
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ApplicationTitle">
-				<SplineDoubleKeyFrame KeyTime="0:0:0.004" Value="1"/>
-				<SplineDoubleKeyFrame KeyTime="0:0:0.046" Value="1"/>
-				<SplineDoubleKeyFrame KeyTime="0:0:0.097" Value="1"/>
-				<SplineDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.204" Value="1"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.246" Value="1"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.297" Value="1"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="0"/>
 			</DoubleAnimationUsingKeyFrames>
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PageTitle">
-				<SplineDoubleKeyFrame KeyTime="0:0:0.004" Value="1"/>
-				<SplineDoubleKeyFrame KeyTime="0:0:0.046" Value="1"/>
-				<SplineDoubleKeyFrame KeyTime="0:0:0.097" Value="1"/>
-				<SplineDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.204" Value="1"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.246" Value="1"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.297" Value="1"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ContentPanel">
+				<SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="528"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ContentPanel">
+				<SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="0"/>
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
 	</phone:PhoneApplicationPage.Resources>
@@ -139,15 +156,19 @@
         			<CompositeTransform/>
         		</Rectangle.RenderTransform>
         	</Rectangle>
-        	<TextBlock x:Name="textBlock" Margin="112,0,110,206" TextWrapping="Wrap" Text="Share in Facebook! " FontSize="26.667" Height="54" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
+        	<TextBlock x:Name="textBlock" Margin="112,0,110,196" TextWrapping="Wrap" Text="Share in Facebook! " FontSize="26.667" Height="54" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
         		<TextBlock.RenderTransform>
         			<CompositeTransform/>
         		</TextBlock.RenderTransform>
         	</TextBlock>
-            <Button Content="Button" Height="72" HorizontalAlignment="Left" Margin="139,269,0,0" Name="button1" VerticalAlignment="Top" Width="160" Click="button1_Click" />
+            <Button Content="" Height="128" HorizontalAlignment="Left" Margin="160,229,160,0" Name="button1" VerticalAlignment="Top" Width="128" Click="button1_Click" BorderBrush="{x:Null}" >
+            	<Button.Background>
+            		<ImageBrush Stretch="Fill" ImageSource="Graphics/FACEBOOK ICON.png"/>
+            	</Button.Background>
+            </Button>
             <CheckBox Height="72" HorizontalAlignment="Left" Margin="32,60,0,0" VerticalAlignment="Top" Name="sensor1CheckBox" Click="sensor1CheckBox_Click" />
             <CheckBox Height="72" HorizontalAlignment="Left" Margin="33,150,0,0" Name="sensor2CheckBox" VerticalAlignment="Top" Click="sensor2CheckBox_Click" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="106,239,0,0" Name="statusMessageTextBlock" Text="" VerticalAlignment="Top" Width="244" Foreground="#FF77FF00" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="106,213,0,0" Name="statusMessageTextBlock" Text="" VerticalAlignment="Top" Width="244" Foreground="#FF77FF00" />
         </Grid>
     </Grid>
 

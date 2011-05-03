@@ -205,8 +205,8 @@
         		<TextBox x:Name="Heating_TextBlock" Margin="76,75,0,18" TextWrapping="Wrap" Text="22" TextAlignment="Center" HorizontalAlignment="Left" Width="115"/>
         	</Grid>
         	<Grid x:Name="Grid_Output_Copy" Margin="26,8,26,0" Background="#54212121" Height="163" VerticalAlignment="Top">
-        		<TextBlock x:Name="forecastTextBlock" Margin="0,13,0,0" TextWrapping="Wrap" Text="Forecast for tomorrow:" FontSize="24" HorizontalAlignment="Center" Height="44" VerticalAlignment="Top"/>
-                <Image Height="311" HorizontalAlignment="Left" Margin="19,0,0,0" Name="weatherForecastImage" Stretch="Fill" VerticalAlignment="Top" Width="441" />
+        		<Image Height="311" HorizontalAlignment="Left" Margin="2,-45,0,0" x:Name="weatherForecastImage" Stretch="Fill" VerticalAlignment="Top" Width="441" />
+        		<TextBlock x:Name="forecastTextBlock" Margin="0,7,0,0" TextWrapping="Wrap" Text="Forecast for tomorrow:" FontSize="29.333" HorizontalAlignment="Center" Height="44" VerticalAlignment="Top"/>
             </Grid>
         </Grid>
 

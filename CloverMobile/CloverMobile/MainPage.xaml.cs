@@ -153,6 +153,7 @@ namespace CloverMobile
         {
             timer.Stop();
             StopLoadingAnimation();
+            hideMainScreenElements();
             splashScreen.Visibility = System.Windows.Visibility.Visible;
             errorMessageTextBlock.Text = "Connection Error.";
         }
@@ -221,7 +222,9 @@ namespace CloverMobile
         }
         public void hideMainScreenElements()
         {
+
             currentTemperatureTextBlock.Visibility = Visibility.Collapsed;
+            currentTemperatureTitleText.Visibility = Visibility.Collapsed;
             currentWeather.Visibility = Visibility.Collapsed;
             PageTitle.Text = "Login";
             Chart_Grid.Visibility = Visibility.Collapsed;
@@ -231,6 +234,7 @@ namespace CloverMobile
         public void showMainScreenElements()
         {
             currentTemperatureTextBlock.Visibility = Visibility.Visible;
+            currentTemperatureTitleText.Visibility = Visibility.Visible;
             currentWeather.Visibility = Visibility.Visible;
             PageTitle.Text = "Main";
             Chart_Grid.Visibility = Visibility.Visible;
