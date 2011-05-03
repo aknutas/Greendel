@@ -1,0 +1,88 @@
+<html>
+<head>
+<script type="text/javascript" src="jquery-1.5.2.min.js"></script>
+<script type="text/javascript" src="highcharts.js"></script>
+	<title>CloverPower</title>
+	<style>
+        body{width: 600px; height: 300px;}
+    </style>
+
+	<script type="text/javascript">
+	jQuery.support.cors = true;
+
+    $(document).ready(function() {
+        setInterval(requestData, 5000);
+    });
+	
+    var chart;
+
+    function requestData() {
+        $.ajax({
+            url: 'http://localhost:3000/users/current_consumption_chart/1',
+            success: function(point) {
+                var series = chart.series[0];
+
+                if (series.data.length > 40) {
+                    trim = true;
+                }
+                else {
+                    trim = false;
+                }
+
+                // add the point
+                chart.series[0].addPoint(point, true, trim);
+            },
+            cache: false
+        });
+    }
+	
+	    $(document).ready(function() {
+			chart = new Highcharts.Chart({
+            chart: { renderTo: 'readings_chart', zoomType: 'x', defaultSeriesType: 'spline'},
+            subtitle: {
+                text: document.ontouchstart === undefined ?
+                        'Click and drag in the plot area to zoom in' :
+                        'Drag your finger over the plot to zoom in'
+            },
+            title: { text: 'Power Readings History' },
+            xAxis: { type: 'datetime' },
+            yAxis: {
+                title: { text: 'Measured Reading' }
+            },
+            plotOptions: {
+                spline: {
+                    lineWidth: 4,
+                    states: {
+                        hover: {
+                            lineWidth: 5
+                        }
+                    },
+                    marker: {
+                        enabled: false,
+                        states: {
+                            hover: {
+                                enabled: true,
+                                symbol: 'circle',
+                                radius: 5,
+                                lineWidth: 1
+                            }
+                        }
+                    }
+                }
+            },
+            series: [
+                {
+                    name: 'Power Readings',
+                    data: []
+                }
+            ]
+        });
+    });
+</script>
+</head>
+<body>
+
+<div id="readings_chart" style="width: 600px; height: 300px;">snbh</div>
+
+</body>
+</html>
