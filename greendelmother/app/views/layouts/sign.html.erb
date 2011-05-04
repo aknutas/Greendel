@@ -1,17 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US" xml:lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <!--
-  Created by Artisteer v2.2.0.17376
-  Base template (without user's data) checked by http://validator.w3.org : "This page is valid XHTML 1.0 Transitional"
-  -->
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
-  <title>Greendel - Login </title>
-
-  <%= javascript_include_tag :defaults %>
-  <%= stylesheet_link_tag 'style' %>
-
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+  <title>Greendel: <%= controller.action_name + " " + controller.class.to_s.downcase %></title>
+  <%= javascript_include_tag :defaults, 'jquery-1.5.2.min', "jquery-ui-1.8.12.custom.min", 'highcharts', 'themes/dark-green' %>
+  <%= stylesheet_link_tag 'style', 'jquery-ui-1.8.12.custom' %>
+  <script type="text/javascript">
+  jQuery.noConflict();
+  </script>
 </head>
 <body>
 <div id="art-main">
@@ -27,20 +25,12 @@
     <div class="art-Sheet-cc"></div>
     <div class="art-Sheet-body">
       <div class="art-nav">
-        <!--          <div class="l"></div>
+        <div class="l"></div>
         <div class="r"></div>
         <div class="art-nav-center">
-        <ul class="art-menu">
-            <li><a href="#" class=" active"><span class="l"></span><span class="r"></span><span class="t">Home</span></a></li>
-            <li><a href="#">
-            <span class="l" style="left: 0; right: 4px; top: 1px"></span><span class="r"></span><span class="t">About</span></a>
-            </li>
-            <li><a href="#"><span class="l"></span><span class="r"></span><span class="t">Services</span></a></li>
-            <li><a href="#"><span class="l"></span><span class="r"></span><span class="t">Solutions</span></a>
-            </li>
-            <li><a href="#"><span class="l"></span><span class="r"></span><span class="t">Contact</span></a></li>
-        </ul>
-        </div>-->
+          <ul class="art-menu">
+          </ul>
+        </div>
       </div>
       <div class="flash">
         <% flash.each do |type, message| -%>
@@ -62,13 +52,13 @@
             </p>Copyright © 20<span lang="fi">11</span> Team Clover. All Rights Reserved.</p>
           </div>
         </div>
+
       </div>
+
     </div>
   </div>
   <div class="cleared"></div>
-  <p class="art-page-footer">
-    <img src="/images/TeamClover_logo.png" width="250" height="25" alt="Team Clover logo "><img src="/images/facebook_logo_follow.png" width="250" height="25" alt="Facebook - Follow us!"><img src="/images/twitter_logo.png" width="250" height="25" alt="Twitter - See our tweets!">
-  </p>
+  <p class="art-page-footer"></p>
 </div>
 
 </body>
