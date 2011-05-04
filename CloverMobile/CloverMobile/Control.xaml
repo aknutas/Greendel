@@ -148,7 +148,6 @@
 				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
-
         <Color x:Key="Socket_Color_ON">#7FFF0000</Color>
         <Color x:Key="Socket_Color_OFF">#7F00FF00</Color>
     </phone:PhoneApplicationPage.Resources>
@@ -209,7 +208,6 @@
         		<TextBlock x:Name="forecastTextBlock" Margin="0,7,0,0" TextWrapping="Wrap" Text="Forecast for tomorrow:" FontSize="29.333" HorizontalAlignment="Center" Height="44" VerticalAlignment="Top"/>
             </Grid>
         </Grid>
-
         <!--ContentPanel - place additional content here-->
     </Grid>
  

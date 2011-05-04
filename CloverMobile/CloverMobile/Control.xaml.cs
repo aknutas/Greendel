@@ -84,7 +84,6 @@ namespace CloverMobile
         // ** this is called by the controller when the outuputs are received!
         public void OutputsReceived()
         {
-  
             System.Diagnostics.Debug.WriteLine("ui.control: outputs received.");
             // ** when outputs received, set the current value for outputs
             foreach (Output o in model.currentOutputs)
@@ -103,7 +102,7 @@ namespace CloverMobile
                     }
                     Socket_FadeOut.Begin();
                 }
-            }     
+            }
         }
 
         private void Socket_FadeOut_Completed(object sender, EventArgs e)
@@ -111,7 +110,7 @@ namespace CloverMobile
             if (Socket_Toggle == true)
             {
                 Socket.Content = "ON";
-                Socket.Background = Resources["Socket_Color_ON"] as Brush;
+                //Socket.Background = Resources["Socket_Color_ON"] as Brush;
 
             
 
@@ -119,7 +118,7 @@ namespace CloverMobile
             else
             {
                 Socket.Content = "OFF";
-                Socket.Background = Resources["Socket_Color_OFF"] as Brush;
+                //Socket.Background = Resources["Socket_Color_OFF"] as Brush;
                 
             }
             Socket_FadeIn.Begin();

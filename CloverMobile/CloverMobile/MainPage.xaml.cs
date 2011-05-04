@@ -40,6 +40,7 @@ namespace CloverMobile
             //background.SetBinding(Image.SourceProperty, controller.setImageSource(this));
             // ** disable the ui-elements on the background        
             hideMainScreenElements();
+            errorMessageTextBlock.Text = "";
 
             // ** check if the settings file exists
             var appStorage = IsolatedStorageFile.GetUserStoreForApplication();
