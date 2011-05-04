@@ -21,6 +21,7 @@ namespace CloverMobile
         public Settings()
         {
             InitializeComponent();
+            //ppGrid.Visibility = Visibility.Visible;
             controller = Controller.getInstance;
             //controller.setActivePage(this);
             controller.setImageSource(this);
@@ -30,12 +31,13 @@ namespace CloverMobile
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
+            
             settingsScreenAnimation.Begin();
-            ppTextBox.Text = currentpowerPrice.powerPrice.ToString() + " €";
-            monthlyUseTextBox.Text = currentpowerPrice.lmuse.ToString() + " kW/h";
-            monthlyPriceTextBox.Text = currentpowerPrice.lmprice.ToString() + " €";
-            weeklyUseTextBox.Text = currentpowerPrice.lwuse.ToString() + " kW/h";
-            weeklyPriceTextBox.Text = currentpowerPrice.lmprice.ToString() + " €";
+            ppTextBox.Text = (String.Format("{0:0.###}", currentpowerPrice.powerPrice)) + " €";
+            monthlyUseTextBox.Text = (String.Format("{0:0.###}", currentpowerPrice.lmuse)) + " kW/h";
+            monthlyPriceTextBox.Text = (String.Format("{0:0.###}", currentpowerPrice.lmprice)) + " €";
+            weeklyUseTextBox.Text = (String.Format("{0:0.###}", currentpowerPrice.lwuse)) + " kW/h";
+            weeklyPriceTextBox.Text = (String.Format("{0:0.###}", currentpowerPrice.lwprice)) + " €";
 
 
         }

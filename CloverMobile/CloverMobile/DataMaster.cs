@@ -149,7 +149,7 @@ namespace CloverMobile
             {
                 powerPrice = float.Parse(powerPriseValue.Element("powerprice").Value),
                 lwuse = float.Parse(powerPriseValue.Element("lwuse").Value),
-                lwprice = float.Parse(powerPriseValue.Element("lmprice").Value),
+                lwprice = float.Parse(powerPriseValue.Element("lwprice").Value),
                 lmuse = float.Parse(powerPriseValue.Element("lmuse").Value),
                 lmprice = float.Parse(powerPriseValue.Element("lmprice").Value),
             };
