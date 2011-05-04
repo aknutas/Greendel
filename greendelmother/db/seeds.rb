@@ -9,7 +9,7 @@
 #   Major.create(:name => 'Daley', :city => cities.first)
 
 #Creating first test user
-user = User.create(:name => 'veliejarvinen@hotmail.fi', :realname => 'Veli-Ensiö Järvinen', :email => 'velipoika@example.com', :password => 'testi')
+user = User.create(:name => 'veliejarvinen', :realname => 'Veli-Ensiö Järvinen', :email => 'velipoika@example.com', :password => 'testi')
 
 cloverpower = Device.create(:name => 'GRN01')
 user.device = cloverpower

@@ -98,7 +98,7 @@ class UsersController < ApplicationController
 
   # AJAX update method for Highcharts
   def current_consumption_chart
-    @user = current_user()
+    @user = User.find(params[:id], :include => :device)
     @csensor = @user.device.sensors.find(:first, :conditions => {:name => "poweruse"})
 
     value = @csensor.readings.last.value
