@@ -156,19 +156,19 @@
         			<CompositeTransform/>
         		</Rectangle.RenderTransform>
         	</Rectangle>
-        	<TextBlock x:Name="textBlock" Margin="112,0,110,196" TextWrapping="Wrap" Text="Share in Facebook! " FontSize="26.667" Height="54" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
+        	<TextBlock x:Name="textBlock" Margin="112,0,110,196" TextWrapping="Wrap" Text="Share in Facebook! " FontSize="26.667" Height="54" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center">
         		<TextBlock.RenderTransform>
         			<CompositeTransform/>
         		</TextBlock.RenderTransform>
         	</TextBlock>
-            <Button Content="" Height="128" HorizontalAlignment="Left" Margin="160,229,160,0" Name="button1" VerticalAlignment="Top" Width="128" Click="button1_Click" BorderBrush="{x:Null}" >
+            <Button Content="" Height="128" HorizontalAlignment="Center" Margin="160,229,160,0" Name="button1" VerticalAlignment="Top" Width="128" Click="button1_Click" BorderBrush="{x:Null}" >
             	<Button.Background>
             		<ImageBrush Stretch="Fill" ImageSource="Graphics/FACEBOOK ICON.png"/>
             	</Button.Background>
             </Button>
-            <CheckBox Height="72" HorizontalAlignment="Left" Margin="32,60,0,0" VerticalAlignment="Top" Name="sensor1CheckBox" Click="sensor1CheckBox_Click" />
-            <CheckBox Height="72" HorizontalAlignment="Left" Margin="33,150,0,0" Name="sensor2CheckBox" VerticalAlignment="Top" Click="sensor2CheckBox_Click" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="106,213,0,0" Name="statusMessageTextBlock" Text="" VerticalAlignment="Top" Width="244" Foreground="#FF77FF00" />
+            <CheckBox Height="72" HorizontalAlignment="Left" Margin="32,60,0,0" VerticalAlignment="Top" Name="sensor1CheckBox" Click="sensor1CheckBox_Click" FontSize="18.667" />
+            <CheckBox Height="72" HorizontalAlignment="Left" Margin="33,150,0,0" Name="sensor2CheckBox" VerticalAlignment="Top" Click="sensor2CheckBox_Click" FontSize="18.667" />
+            <TextBlock Height="30" Margin="74,211,79,0" Name="statusMessageTextBlock" Text="" VerticalAlignment="Top" Foreground="#FF77FF00" HorizontalAlignment="Center" />
         </Grid>
     </Grid>
 

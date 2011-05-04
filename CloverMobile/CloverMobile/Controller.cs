@@ -367,7 +367,7 @@ namespace CloverMobile
         {
             if (socialRef != null)
             {
-                socialRef.statusMessageTextBlock.Text = "Selected values successfully posted to facebook!";
+                socialRef.statusMessageTextBlock.Text = "Values posted successfully!";
 
             }
         

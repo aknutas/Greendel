@@ -135,18 +135,18 @@
         	<Grid.RenderTransform>
         		<CompositeTransform/>
         	</Grid.RenderTransform>
-            <Rectangle Fill="Black" Margin="18,10,20,257" Opacity="0.58" Stroke="Black" />
-            <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="5" Margin="55,112,0,0" Stroke="Black" VerticalAlignment="Top" Width="5"/>
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="39,24,0,0" x:Name="currentPowerPriseTextBlock" Text="Current power price is: " VerticalAlignment="Top" Width="197" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="88,87,0,0" x:Name="monthlyUseTextBlock" Text="Monthly Use:" VerticalAlignment="Top" Width="166" />
-            <TextBox Height="72" HorizontalAlignment="Left" Margin="248,10,0,0" x:Name="ppTextBox" Text="" VerticalAlignment="Top" Width="185" />
-            <TextBox Height="72" HorizontalAlignment="Right" Margin="0,74,23,0" x:Name="monthlyUseTextBox" Text="" VerticalAlignment="Top" Width="185" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="88,156,0,0" x:Name="textBlock1" Text="Monthly Price" VerticalAlignment="Top" />
-            <TextBox Height="72" HorizontalAlignment="Left" Margin="248,137,0,0" x:Name="monthlyPriceTextBox" Text="" VerticalAlignment="Top" Width="188" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="88,225,0,0" x:Name="textBlock5" Text="Weekly Use:" VerticalAlignment="Top" Width="130" />
-            <TextBox Height="72" HorizontalAlignment="Left" Margin="248,205,0,0" x:Name="weeklyUseTextBox" Text="" VerticalAlignment="Top" Width="188" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="88,289,0,0" x:Name="weeklyPriceTextBlock" Text="Weekly Price:" VerticalAlignment="Top" RenderTransformOrigin="0.838,1.133" />
-            <TextBox Height="72" HorizontalAlignment="Left" Margin="248,276,0,0" Name="weeklyPriceTextBox" Text="" VerticalAlignment="Top" Width="185" />
+        	<Grid Margin="18,10,20,257" Background="#88000000" Name="ppGrid" Visibility="Visible">
+        		<TextBlock Height="30" HorizontalAlignment="Left" Margin="21,14,0,0" x:Name="currentPowerPriseTextBlock" Text="Current power price is: " VerticalAlignment="Top" Width="197" />
+        		<TextBlock Height="30" HorizontalAlignment="Left" Margin="70,77,0,0" x:Name="monthlyUseTextBlock" Text="Monthly Use:" VerticalAlignment="Top" Width="166" />
+        		<TextBox Height="72" HorizontalAlignment="Left" Margin="230,0,0,0" x:Name="ppTextBox" Text="" VerticalAlignment="Top" Width="185" />
+        		<TextBox Height="72" HorizontalAlignment="Right" Margin="0,64,3,0" x:Name="monthlyUseTextBox" Text="" VerticalAlignment="Top" Width="185" />
+        		<TextBlock HorizontalAlignment="Left" Margin="70,146,0,164" x:Name="textBlock1" Text="Monthly Price" />
+        		<TextBox HorizontalAlignment="Left" Margin="230,127,0,141" x:Name="monthlyPriceTextBox" Text="" Width="188" />
+        		<TextBlock Height="30" HorizontalAlignment="Left" Margin="70,0,0,95" x:Name="textBlock5" Text="Weekly Use:" VerticalAlignment="Bottom" Width="130" />
+        		<TextBox Height="72" HorizontalAlignment="Left" Margin="230,0,0,73" x:Name="weeklyUseTextBox" Text="" VerticalAlignment="Bottom" Width="188" />
+        		<TextBlock Height="30" HorizontalAlignment="Left" Margin="70,279,0,0" x:Name="weeklyPriceTextBlock" Text="Weekly Price:" VerticalAlignment="Top" RenderTransformOrigin="0.838,1.133" />
+        		<TextBox Height="72" HorizontalAlignment="Left" Margin="230,266,0,0" x:Name="weeklyPriceTextBox" Text="" VerticalAlignment="Top" Width="185" />
+        	</Grid>
         </Grid>
     </Grid>
  

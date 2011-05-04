@@ -33,7 +33,7 @@ namespace CloverMobile
                 if (s.sensorName == "poweruse")
                 {
 
-                    sensor1CheckBox.Content = s.longName + " : " + String.Format("{0:0.#}", double.Parse(s.latestReading)) + " : " + s.unit;
+                    sensor1CheckBox.Content = "Current " + s.longName + " : " + String.Format("{0:0.#}", double.Parse(s.latestReading)) + " " +  s.unit;
                     sensor1Id = s.sensorId;
                     
                     //currentSensorId = s.sensorId;
@@ -42,7 +42,7 @@ namespace CloverMobile
                 }
                 else if (s.sensorName == "powerconsumed")
                 {
-                    sensor2CheckBox.Content = s.longName + " : " + String.Format("{0:0.#}", double.Parse(s.latestReading)) +" : " + s.unit;
+                    sensor2CheckBox.Content = s.longName + " history"; // " : " + String.Format("{0:0.#}", double.Parse(s.latestReading)) +" : " + s.unit;
                     sensor2Id = s.sensorId;
                 }
             }
