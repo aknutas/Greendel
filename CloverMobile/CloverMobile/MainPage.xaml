@@ -297,7 +297,7 @@
             	<Canvas.RenderTransform>
             		<CompositeTransform/>
             	</Canvas.RenderTransform>
-            	<TextBox x:Name="userNameTextBox" Text="testipaavo" Canvas.Top="68" Height="72" Width="400" HorizontalAlignment="Left" Margin="35,0,0,0"  />
+                <TextBox x:Name="userNameTextBox" Text="veliejarvinen@hotmail.fi" Canvas.Top="68" Height="72" Width="400" HorizontalAlignment="Left" Margin="35,0,0,0"  />
             	<TextBlock Height="30" HorizontalAlignment="Left" x:Name="userNameTextBlock" Text="User Name" VerticalAlignment="Top" Canvas.Top="19" Canvas.Left="55" />
             	<TextBlock Height="30" HorizontalAlignment="Left" x:Name="passwordTextBlock" Text="Password" VerticalAlignment="Top" Canvas.Top="153" Canvas.Left="55" />
             	<PasswordBox Canvas.Top="196" x:Name="passwordTextBox" Password="testi" Height="72" Width="400" HorizontalAlignment="Left" Margin="35,0,0,0" />
