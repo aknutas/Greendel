@@ -2,7 +2,7 @@
     x:Class="CloverMobile.MainPage"
     d:DesignWidth="480" d:DesignHeight="696"
     mc:Ignorable="d"
-    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
+    SupportedOrientations="Portrait" Orientation="Portrait"
     DataContext="{Binding}"
     shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded" Unloaded="PhoneApplicationPage_Unloaded">
     <phone:PhoneApplicationPage.Resources>
