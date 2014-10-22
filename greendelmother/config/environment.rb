@@ -4,14 +4,14 @@
 RAILS_GEM_VERSION = '2.3.8' unless defined? RAILS_GEM_VERSION
 
 # Load FB info
-FB_API_KEY = "***REMOVED***"
-FB_SECRET = "***REMOVED***"
-FB_APP_ID = "***REMOVED***"
+FB_API_KEY = ""
+FB_SECRET = ""
+FB_APP_ID = ""
 HOST = "http://localhost:3000/"
 
 # Load Twitter info
-#CONSUMER_SECRET = "***REMOVED***"
-#CONSUMER_TOKEN = "***REMOVED***"
+#CONSUMER_SECRET = ""
+#CONSUMER_TOKEN = ""
 #DEVELOPMENT_URL = "http://dev.twipler.com:3000/twitter/auth"
 
 # Bootstrap the Rails environment, frameworks, and default configuration
